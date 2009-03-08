@@ -1,0 +1,7 @@
+<Configuration>
+  <NamespaceFolders>
+    <SkipFolder>04A43B1C-8D47-4837-9C3E-72811579F3B7/d:Core/d:Resources</SkipFolder>
+    <SkipFolder>04A43B1C-8D47-4837-9C3E-72811579F3B7/d:Core</SkipFolder>
+    <SkipFolder>04A43B1C-8D47-4837-9C3E-72811579F3B7/d:Shared</SkipFolder>
+  </NamespaceFolders>
+</Configuration>

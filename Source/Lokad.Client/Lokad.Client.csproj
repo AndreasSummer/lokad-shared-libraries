@@ -1,0 +1,150 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="3.5" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{04A43B1C-8D47-4837-9C3E-72811579F3B7}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Lokad.Client</RootNamespace>
+    <AssemblyName>Lokad.Client</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>..\..\SharedKey.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <DocumentationFile>bin\Debug\Lokad.Client.xml</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Release\Lokad.Client.xml</DocumentationFile>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Lokad.Api.Interface, Version=2.0.2.0, Culture=neutral, PublicKeyToken=43f0664b2b4db1fc, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Resource\Library\Lokad.Api.Interface.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\GlobalAssemblyInfo.cs">
+      <Link>Properties\GlobalAssemblyInfo.cs</Link>
+    </Compile>
+    <Compile Include="..\VersionAssemblyInfo.cs">
+      <Link>Properties\VersionAssemblyInfo.cs</Link>
+    </Compile>
+    <Compile Include="Core\IForecastModelExtensions.cs" />
+    <Compile Include="Core\Resources\CallCenter.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CallCenter.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Core\EditEventController.cs" />
+    <Compile Include="Core\ManageEventsController.cs" />
+    <Compile Include="Core\Forms\EditEventView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Core\Forms\EditEventView.Designer.cs">
+      <DependentUpon>EditEventView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Core\Forms\DisplayEventsView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Core\Forms\DisplayEventsView.Designer.cs">
+      <DependentUpon>DisplayEventsView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Core\Forms\ManageEventsView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Core\Forms\ManageEventsView.Designer.cs">
+      <DependentUpon>ManageEventsView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Core\IForecastModels.cs" />
+    <Compile Include="Core\IForecastModel.cs" />
+    <Compile Include="Core\IManageEventsView.cs" />
+    <Compile Include="Core\Resources\SafetyStock.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SafetyStock.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Core\Resources\Specifics.cs" />
+    <Compile Include="Shared\EditRequest.cs" />
+    <Compile Include="Shared\EditorFor.cs" />
+    <Compile Include="Shared\Forms\ControlExtensions.cs" />
+    <Compile Include="Shared\Forms\Workspace.cs" />
+    <Compile Include="Shared\IDisplayView.cs" />
+    <Compile Include="Shared\IEditView.cs" />
+    <Compile Include="Core\EventModel.cs" />
+    <Compile Include="Shared\Forms\ScopePending.cs" />
+    <Compile Include="Shared\Forms\Validator.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Lokad.Api.Core\Lokad.Api.Core.csproj">
+      <Project>{591ED95A-1C74-4DE0-A830-FA8AC2F103F8}</Project>
+      <Name>Lokad.Api.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lokad.Shared\Lokad.Shared.csproj">
+      <Project>{9C285BAA-786F-41E9-8CFB-C1FDDB3E6FE1}</Project>
+      <Name>Lokad.Shared</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Core\Resources\CallCenter.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>CallCenter.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Core\Forms\EditEventView.resx">
+      <DependentUpon>EditEventView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Core\Forms\DisplayEventsView.resx">
+      <DependentUpon>DisplayEventsView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Core\Forms\ManageEventsView.resx">
+      <DependentUpon>ManageEventsView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Core\Resources\SafetyStock.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>SafetyStock.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\SharedKey.snk">
+      <Link>SharedKey.snk</Link>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Core\Resources\_ReadMe.txt" />
+    <Content Include="ReadMe.txt" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

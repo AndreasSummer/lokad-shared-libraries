@@ -1,0 +1,205 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="3.5" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{9C285BAA-786F-41E9-8CFB-C1FDDB3E6FE1}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>System</RootNamespace>
+    <AssemblyName>Lokad.Shared</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkSubset>Full</TargetFrameworkSubset>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>..\..\SharedKey.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;$(BuildConstants)</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Debug\Lokad.Shared.XML</DocumentationFile>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <NoStdLib>true</NoStdLib>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE;$(BuildConstants)</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Release\Lokad.Shared.XML</DocumentationFile>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <NoStdLib>true</NoStdLib>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="mscorlib" />
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.XML" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\GlobalAssemblyInfo.cs">
+      <Link>Properties\GlobalAssemblyInfo.cs</Link>
+    </Compile>
+    <Compile Include="..\VersionAssemblyInfo.cs">
+      <Link>Properties\VersionAssemblyInfo.cs</Link>
+    </Compile>
+    <Compile Include="ActionExtensions.cs" />
+    <Compile Include="ActionPolicy.cs" />
+    <Compile Include="ActionPolicyWithState.cs" />
+    <Compile Include="ArrayExtensions.cs" />
+    <Compile Include="Collections\Generic\ProjectionComparer.cs" />
+    <Compile Include="Diagnostics\CodeAnalysis\ReSharper\CanBeNullAttribute.cs" />
+    <Compile Include="Diagnostics\CodeAnalysis\ReSharper\CannotApplyEqualityOperatorAttribute.cs" />
+    <Compile Include="Diagnostics\CodeAnalysis\ReSharper\ImplicitUseFlags.cs" />
+    <Compile Include="Diagnostics\CodeAnalysis\ReSharper\MeansImplicitUseAttribute.cs" />
+    <Compile Include="Diagnostics\CodeAnalysis\ReSharper\NotNullAttribute.cs" />
+    <Compile Include="Diagnostics\CodeAnalysis\ReSharper\TerminatesProgramAttribute.cs" />
+    <Compile Include="Diagnostics\CodeAnalysis\ReSharper\UsedImplicitlyAttribute.cs" />
+    <Compile Include="Diagnostics\DebugLog.cs" />
+    <Compile Include="Diagnostics\ExceptionStatistics.cs" />
+    <Compile Include="Linq\ArrayExtensionsForLinq.cs" />
+    <Compile Include="Linq\Indexer.cs" />
+    <Compile Include="Maybe.cs" />
+    <Compile Include="Reflection\Express.cs" />
+    <Compile Include="Rules\RuleResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RuleResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Rules\RuleAssert.cs" />
+    <Compile Include="Rules\Scopes\ModifierScope.cs" />
+    <Compile Include="Rules\Scopes\DelayedScope.cs" />
+    <Compile Include="Rules\Scopes\SimpleScope.cs" />
+    <Compile Include="Silverlight\AllowPartiallyTrustedCallerAttribute.cs" />
+    <Compile Include="Silverlight\SerializableAttribute.cs" />
+    <Compile Include="Tuples\TupleExtensions.cs" />
+    <Compile Include="Utils\ArrayUtil.cs" />
+    <Compile Include="Utils\AssemblyUtil.cs" />
+    <Compile Include="Container\ComponentAttribute.cs" />
+    <Compile Include="Container\DecoratorAttribute.cs" />
+    <Compile Include="Container\DecoratorInfo.cs" />
+    <Compile Include="Container\RegistrationScope.cs" />
+    <Compile Include="Diagnostics\CodeAnalysis\ReSharper\AssertionConditionAttribute.cs" />
+    <Compile Include="Diagnostics\CodeAnalysis\ReSharper\AssertionConditionType.cs" />
+    <Compile Include="Diagnostics\CodeAnalysis\ReSharper\AssertionMethodAttribute.cs" />
+    <Compile Include="Diagnostics\CodeAnalysis\ImmutableAttribute.cs" />
+    <Compile Include="Diagnostics\CodeAnalysis\ReSharper\InvokerParameterNameAttribute.cs" />
+    <Compile Include="Diagnostics\CodeAnalysis\NoCodeCoverageAttribute.cs" />
+    <Compile Include="Diagnostics\CodeAnalysis\ReSharper\StringFormatMethodAttribute.cs" />
+    <Compile Include="Diagnostics\ExceptionCounter.cs" />
+    <Compile Include="Diagnostics\ExecutionCounters.cs" />
+    <Compile Include="DoubleExtensions.cs" />
+    <Compile Include="Errors.cs" />
+    <Compile Include="ExceptionHandler.cs" />
+    <Compile Include="Exceptions\CircuitBreakerPolicy.cs" />
+    <Compile Include="Exceptions\CircuitBreakerState.cs" />
+    <Compile Include="ExceptionHandlerSyntax.cs" />
+    <Compile Include="Exceptions\CircuitBreakerStateLock.cs" />
+    <Compile Include="Exceptions\ICircuitBreakerState.cs" />
+    <Compile Include="Exceptions\IRetryState.cs" />
+    <Compile Include="Exceptions\RetryState.cs" />
+    <Compile Include="Exceptions\RetryPolicy.cs" />
+    <Compile Include="Exceptions\RetryStateWithCount.cs" />
+    <Compile Include="Exceptions\RetryStateWithSleep.cs" />
+    <Compile Include="IDictionaryExtensions.cs" />
+    <Compile Include="Diagnostics\ExceptionLogDecorator.cs" />
+    <Compile Include="Diagnostics\TraceLog.cs" />
+    <Compile Include="KeyInvalidException.cs" />
+    <Compile Include="DisposableAction.cs" />
+    <Compile Include="Utils\EnumUtil.cs" />
+    <Compile Include="Int32Extensions.cs" />
+    <Compile Include="IProvider.cs" />
+    <Compile Include="IResolver.cs" />
+    <Compile Include="Lambda.cs" />
+    <Compile Include="NamedProvider.cs" />
+    <Compile Include="Provider.cs" />
+    <Compile Include="Tuples\Quad.cs" />
+    <Compile Include="Rand.cs" />
+    <Compile Include="Range.cs" />
+    <Compile Include="Reflection\ILHelper.cs" />
+    <Compile Include="ResolutionException.cs" />
+    <Compile Include="Resolver.cs" />
+    <Compile Include="Utils\ResourceUtil.cs" />
+    <Compile Include="Data\SqlClient\SqlServerGuidComparer.cs" />
+    <Compile Include="Result.cs" />
+    <Compile Include="Rules\Common\DoubleIs.cs" />
+    <Compile Include="Rules\RuleMessages.cs" />
+    <Compile Include="Rules\IScope.cs" />
+    <Compile Include="Rules\Rule.cs" />
+    <Compile Include="Rules\RuleException.cs" />
+    <Compile Include="Rules\Common\DateIs.cs" />
+    <Compile Include="Rules\Common\Is.cs" />
+    <Compile Include="Rules\RuleLevel.cs" />
+    <Compile Include="Rules\RuleMessage.cs" />
+    <Compile Include="Rules\Common\StringIs.cs" />
+    <Compile Include="Rules\Scope.cs" />
+    <Compile Include="Rules\IScopeExtensions.cs" />
+    <Compile Include="Rules\Scopes\TrackScope.cs" />
+    <Compile Include="Utils\StringUtil.cs" />
+    <Compile Include="Syntax.cs" />
+    <Compile Include="Threading\ReaderWriterLockSlimExtensions.cs" />
+    <Compile Include="Tuples\Pair.cs" />
+    <Compile Include="Reflection\Reflect.cs" />
+    <Compile Include="Tuples\Triple.cs" />
+    <Compile Include="Tuples\Tuple.cs" />
+    <Compile Include="TypeExtensions.cs" />
+    <Compile Include="Diagnostics\ExecutionCounterGroup.cs" />
+    <Compile Include="Diagnostics\ExceptionCounters.cs" />
+    <Compile Include="Diagnostics\SystemDescriptor.cs" />
+    <Compile Include="Enforce.cs" />
+    <Compile Include="ICollectionExtensions.cs" />
+    <Compile Include="ICommand.cs" />
+    <Compile Include="Linq\IEnumerableExtensions.cs" />
+    <Compile Include="Diagnostics\ExecutionCounter.cs" />
+    <Compile Include="INamedProvider.cs" />
+    <Compile Include="ILog.cs" />
+    <Compile Include="ILogExtensions.cs" />
+    <Compile Include="ILogProviderExtensions.cs" />
+    <Compile Include="LogLevel.cs" />
+    <Compile Include="Diagnostics\NullLog.cs" />
+    <Compile Include="Diagnostics\ExecutionStatistics.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Container\RegistrationType.cs" />
+    <Compile Include="HandlingProvider.cs" />
+    <Compile Include="StreamExtensions.cs" />
+    <Compile Include="Utils\SystemUtil.cs" />
+    <Compile Include="Utils\VersionUtil.cs" />
+    <Compile Include="Utils\XmlUtil.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\SharedKey.snk">
+      <Link>SharedKey.snk</Link>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Diagnostics\CodeAnalysis\ReSharper\_ReadMe.txt" />
+    <Content Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Rules\RuleResources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>RuleResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" Condition="($(MSBuildTargets) == '') Or ($(MSBuildTargets) == 'CSharp')" />
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\Silverlight\v2.0\Microsoft.Silverlight.CSharp.targets" Condition="$(MSBuildTargets) == 'Silverlight 2.0'" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

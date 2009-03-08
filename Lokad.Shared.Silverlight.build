@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Project DefaultTargets="integrate" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+	<Import Project="Resource\Build\MSBuild.Community.Tasks.targets" />
+	<Import Project="Resource\Build\NCoverExplorer.MSBuildTasks.targets"/>
+	<!-- Main build entry file (extends development builds)-->
+	<PropertyGroup>
+		<!--
+			 Primary configuration properties (override them via command line
+			 if needed
+		-->
+		<BuildPath Condition="$(BuildPath)==''">$(MSBuildProjectDirectory)\Build</BuildPath>
+		<Configuration Condition="$(Configuration)==''">Release</Configuration>
+		<ArtifactDirectory Condition="$(ArtifactDirectory)==''">$(BuildPath)\Artifact</ArtifactDirectory>
+
+		<PackageDirectory Condition="$(PackageDirectory)==''">$(BuildPath)\_Package</PackageDirectory>
+		<Version Condition="$(Version)==''">0.0.0.0</Version>
+		<!--
+			Derived configuration properties
+				 -->
+		<TestPath>$(BuildPath)\Test</TestPath>
+		<LibraryPath>$(BuildPath)\Library</LibraryPath>
+		<StackPath>$(BuildPath)\Stack</StackPath>
+		
+		<LibrarySource>Source\Lokad.Shared\bin\$(Configuration)</LibrarySource>
+		<QualitySource>Source\Lokad.Quality\bin\$(Configuration)</QualitySource>
+
+		<StackSource>Source\Lokad.Stack\bin\$(Configuration)</StackSource>
+		<ApiSource>Source\Lokad.Api.Core\bin\$(Configuration)</ApiSource>
+    <BaseName>$(MSBuildProjectName)</BaseName>
+    <MSBuildTargets>Silverlight 2.0</MSBuildTargets>
+	</PropertyGroup>
+
+	<!-- 
+	 Solution redirects. Every VS project normally knows how to support these targets
+		-->
+	<Target Name="Build">
+		<MSBuild Projects="$(BaseName).sln" Targets="Build" Properties="Configuration=$(Configuration);MSBuildTargets=$(MSBuildTargets);BuildConstants=SILVERLIGHT2"/>
+	</Target>
+
+	<Target Name="Clean">
+		<MSBuild Projects="$(BaseName).sln" Targets="Clean" Properties="Configuration=$(Configuration)"/>
+
+		<CreateItem Include="**/Debug/**/*.*;**/Release/**/*.*">
+			<Output ItemName="_binaryFiles" TaskParameter="Include"/>
+		</CreateItem>
+		<Delete Files="@(_binaryFiles)" TreatErrorsAsWarnings="true"/>
+		<RemoveDir Directories="$(BuildPath)" />
+	</Target>
+
+	<Target Name="Rebuild" DependsOnTargets="Clean;Build;" />
+	
+	<Target Name="Integrate" DependsOnTargets="Clean;Test;Report" />
+	<Target Name="Release" DependsOnTargets="Clean;_Version;Build;Test;Report;Distrib" />
+
+	<Target Name="Report" DependsOnTargets="Clean;Build;Copy">
+		<MakeDir Directories="$(ArtifactDirectory)" />
+		
+	</Target>
+
+	<!--
+	 Copies built items to the distrib directory
+	 -->
+	<Target Name="Copy" DependsOnTargets="Build">
+		<MakeDir Directories="$(BuildPath)"/>
+
+		<!--Library-->
+		<CreateItem Include="$(LibrarySource)\*.*;$(QualitySource)\*.*">
+			<Output ItemName="libraryFiles" TaskParameter="Include"/>
+		</CreateItem>
+		<Copy SourceFiles="@(libraryFiles)" DestinationFolder="$(LibraryPath)" />
+		
+		<!--Stack-->
+		<CreateItem Include="$(StackSource)\*.*;$(ApiSource)\*.*;$(QualitySource)\*.*">
+			<Output ItemName="stackFiles" TaskParameter="Include"/>
+		</CreateItem>
+		<Copy SourceFiles="@(stackFiles)" DestinationFolder="$(StackPath)" />
+
+		<!--All Tests-->
+		<CreateItem Include="Test\**\bin\$(Configuration)\*.*" Exclude="Test\**\bin\$(Configuration)\*.xml;Test\**\bin\$(Configuration)\*.pdb;">
+			<Output ItemName="TestFiles" TaskParameter="Include"/>
+		</CreateItem>
+		<Copy SourceFiles="@(TestFiles)" DestinationFolder="$(TestPath)" />
+	</Target>
+
+	<Target Name="Config">
+		<Message Text="This sub-solution does not need configuration" />
+	</Target>
+	
+	<Target Name="Test" DependsOnTargets="Build;Copy">
+		<MakeDir Directories="$(ArtifactDirectory)" />
+
+		<CreateItem Include="$(TestPath)\*.Test.dll;$(TestPath)\*.Tests.dll">
+			<Output ItemName="_testFiles" TaskParameter="Include"/>
+		</CreateItem>
+
+		<CreateItem Include="$(TestPath)\Lokad.*.dll" Exclude="$(TestPath)\*.Test.dll;$(TestPath)\*.Tests.dll">
+			<Output ItemName="_coverageFiles" TaskParameter="Include"/>
+		</CreateItem>
+
+		<Exec Command="nunit-console.exe @(_testFiles->'&quot;%(FullPath)&quot;', ' ') /nologo /noshadow /xml=&quot;$(ArtifactDirectory)\$(MSBuildProjectName).Tests-result.xml&quot;" WorkingDirectory="Resource/Tool/NUnit" />
+		<!---->
+		<!--@(_testFiles->'&quot;%(FullPath)&quot;', ' ')-->
+	</Target>
+
+	<Target Name="_Version">
+		<CreateItem Include="**\GlobalAssemblyInfo.cs">
+			<Output ItemName="_VersionPaths" TaskParameter="Include"/>
+		</CreateItem>
+		<CreateItem Include="@(_VersionPaths->'%(SubFolder)%(RecursiveDir)VersionAssemblyInfo.cs')">
+			<Output ItemName="_VersionFiles" TaskParameter="Include"/>
+		</CreateItem>
+		<Time Format="yyyy-MM-dd HH:mm">
+			<Output TaskParameter="FormattedTime" PropertyName="BuildTime" />
+		</Time>
+		<AssemblyInfo OutputFile="%(_VersionFiles.FullPath)" CodeLanguage="CS"
+									AssemblyVersion="$(Version)"
+									AssemblyFileVersion="$(Version)"
+									AssemblyConfiguration="$(Configuration) built on $(BuildTime)" />
+	</Target>
+
+
+	<Target Name="WipeResources">
+		<!--Wipe old version files-->
+		<CreateItem Include="**\VersionAssemblyInfo.cs">
+			<Output ItemName="_VersionPaths" TaskParameter="Include"/>
+		</CreateItem>
+		<Delete Files="@(_VersionPaths)" />
+	</Target>
+
+
+	<Target Name="GenerateHelp" DependsOnTargets="Build;Copy">
+		<!--<Exec Command="Resource\Tool\SHFB\SandcastleBuilderConsole.exe $(BaseName).shfb" />-->
+	</Target>
+
+	<Target Name="Distrib" DependsOnTargets="Clean;Build;Copy;Config;GenerateHelp">
+		<MakeDir Directories="$(PackageDirectory)" />	
+
+		<CreateItem Include="**\*.*" Exclude="**\.svn\**\*.*;**\_svn\**\*.*;*.user;*.suo;*.db;**\bin\**\*.*;**\obj\**\*.*;Resource\Tool\**\*.*;Build\**\*.*;Resource\Build\Profile.Local\*.*">
+			<Output ItemName="_SourceFiles" TaskParameter="Include" />
+		</CreateItem>
+
+		<Zip Files="@(_SourceFiles)" ZipFileName="$(PackageDirectory)\$(BaseName)-Source-$(Version).zip" Flatten="false" />
+
+		<CreateItem Include="$(LibraryPath)\*.*">
+			<Output ItemName="_libFiles" TaskParameter="Include" />
+		</CreateItem>
+		<Zip Files="@(_libFiles)" ZipFileName="$(PackageDirectory)\$(BaseName)-Lib-$(Version).zip" Flatten="true" />
+
+		<CreateItem Include="$(StackPath)\*.*">
+			<Output ItemName="_stackFiles" TaskParameter="Include" />
+		</CreateItem>
+		<Zip Files="@(_stackFiles)" ZipFileName="$(PackageDirectory)\$(BaseName)-Stack-$(Version).zip" Flatten="true" />
+	</Target>
+</Project>

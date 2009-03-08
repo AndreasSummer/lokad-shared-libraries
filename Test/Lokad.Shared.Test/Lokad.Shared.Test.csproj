@@ -1,0 +1,148 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="3.5" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{76BE68DD-B0AB-4CF6-B119-3C493F11B06D}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>System</RootNamespace>
+    <AssemblyName>Lokad.Shared.Test</AssemblyName>
+    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>..\..\SharedKey.snk</AssemblyOriginatorKeyFile>
+    <TargetFrameworkSubset>
+    </TargetFrameworkSubset>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;$(BuildConstants)</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE;$(BuildConstants)</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Mono.Cecil, Version=0.6.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Resource\Library\Mono.Cecil.dll</HintPath>
+    </Reference>
+    <Reference Include="nunit.framework, Version=2.4.6.0, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Resource\Library\nunit.framework.dll</HintPath>
+    </Reference>
+    <Reference Include="System">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Data">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Core">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Xml">
+      <Private>True</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ActionExtensionsTests.cs" />
+    <Compile Include="ActionPolicyTests.cs" />
+    <Compile Include="IDictionaryExtensionsTests.cs" />
+    <Compile Include="ILogExtensionsTests.cs" />
+    <Compile Include="Linq\ArrayExtensionsTests.cs" />
+    <Compile Include="MaybeTests.cs" />
+    <Compile Include="NumericExtensionsTests.cs" />
+    <Compile Include="Reflection\ExpressTests.cs" />
+    <Compile Include="Rules\Common\DateIsTests.cs" />
+    <Compile Include="Rules\Common\RuleAssertTests.cs" />
+    <Compile Include="Rules\Scopes\DelayedScopeTests.cs" />
+    <Compile Include="Rules\Scopes\ModifierScopeTests.cs" />
+    <Compile Include="Rules\Scopes\SimpleScopeTests.cs" />
+    <Compile Include="Rules\ScopeTests.cs" />
+    <Compile Include="Utils\ArrayUtilTests.cs" />
+    <Compile Include="Utils\AssemblyUtilTests.cs" />
+    <Compile Include="Container\ComponentAttributeTests.cs" />
+    <Compile Include="Diagnostics\ExceptionCounterTests.cs" />
+    <Compile Include="Diagnostics\SystemDescriptorTests.cs" />
+    <Compile Include="Utils\EnumUtilTests.cs" />
+    <Compile Include="Expects.cs" />
+    <Compile Include="CodeQualityTests.cs" />
+    <Compile Include="HandlingProviderTests.cs" />
+    <Compile Include="ICollectionExtensionsTests.cs" />
+    <Compile Include="Linq\IEnumerableExtensionsTests.cs" />
+    <Compile Include="NamedProviderTests.cs" />
+    <Compile Include="Tuples\PairTests.cs" />
+    <Compile Include="ProviderTests.cs" />
+    <Compile Include="Tuples\QuadTests.cs" />
+    <Compile Include="RandTests.cs" />
+    <Compile Include="RangeTests.cs" />
+    <Compile Include="Reflection\ReflectTests.cs" />
+    <Compile Include="ResolverTests.cs" />
+    <Compile Include="Utils\ResourceUtilTests.cs" />
+    <Compile Include="Data\SqlClient\SqlServerGuidComparerTest.cs" />
+    <Compile Include="ResultTests.cs" />
+    <Compile Include="Rules\Case1\BusinessRules.cs" />
+    <Compile Include="Rules\Case1\Program.cs" />
+    <Compile Include="Rules\Case1\Visitor.cs" />
+    <Compile Include="Rules\Common\DoubleIsTests.cs" />
+    <Compile Include="Rules\EnforceTests.cs" />
+    <Compile Include="Rules\Scopes\EnforceArgumentScopeTests.cs" />
+    <Compile Include="Rules\Scopes\EnforceScopeTests.cs" />
+    <Compile Include="Rules\Scopes\MessageScopeTests.cs" />
+    <Compile Include="Rules\Common\IsTests.cs" />
+    <Compile Include="Rules\RuleExtensionsTests.cs" />
+    <Compile Include="Rules\Scopes\TrackScopeTests.cs" />
+    <Compile Include="Rules\Scopes\ValidationScopeTests.cs" />
+    <Compile Include="Rules\Common\StringIsTests.cs" />
+    <Compile Include="Rules\Scopes\ScopeTestHelper.cs" />
+    <Compile Include="StreamExtensionsTests.cs" />
+    <Compile Include="Threading\ReaderWriterLockSlimExtensionsTests.cs" />
+    <Compile Include="Utils\StringUtilTests.cs" />
+    <Compile Include="Utils\SystemUtilTests.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Tuples\TripleTests.cs" />
+    <Compile Include="Tuples\TupleTests.cs" />
+    <Compile Include="Utils\TypeUtilTests.cs" />
+    <Compile Include="Utils\VersionUtilTests.cs" />
+    <Compile Include="Utils\XmlUtilTests.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Source\Lokad.Quality\Lokad.Quality.csproj">
+      <Project>{855AE75B-E675-4F90-873F-CC3D3F9879BD}</Project>
+      <Name>Lokad.Quality</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Source\Lokad.Shared\Lokad.Shared.csproj">
+      <Project>{9C285BAA-786F-41E9-8CFB-C1FDDB3E6FE1}</Project>
+      <Name>Lokad.Shared</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\SharedKey.snk">
+      <Link>SharedKey.snk</Link>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Hello.txt" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" Condition="($(MSBuildTargets) == '') Or ($(MSBuildTargets) == 'CSharp')" />
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\Silverlight\v2.0\Microsoft.Silverlight.CSharp.targets" Condition="$(MSBuildTargets) == 'Silverlight 2.0'" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,6 @@
+<Configuration>
+  <NamespaceFolders>
+    <SkipFolder>8018CD6D-0E1B-4681-B8ED-EF76F3E424EB/d:Interfaces</SkipFolder>
+    <SkipFolder>8018CD6D-0E1B-4681-B8ED-EF76F3E424EB/d:Objects</SkipFolder>
+  </NamespaceFolders>
+</Configuration>

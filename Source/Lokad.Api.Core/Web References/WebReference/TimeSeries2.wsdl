@@ -1,0 +1,1014 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://lokad.com/ws_2/" xmlns:s1="http://microsoft.com/wsdl/types/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" targetNamespace="http://lokad.com/ws_2/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">&lt;h1&gt;Lokad API version 2&lt;/h1&gt;
+&lt;h2&gt;Important&lt;/h2&gt;
+&lt;p&gt;This page is not intended to be an introduction to web-services technologies
+but a technical reference documentation. For an introduction, please refer to 
+&lt;a href="http://en.wikipedia.org/wiki/SOAP"&gt;SOAP article on Wikipedia&lt;/a&gt;. 
+For the API documentation and tutorials, you can check the 
+&lt;a href="http://www.lokad.com/web-services-time-series-forecasting.ashx"&gt;Lokad API product page&lt;/a&gt;.&lt;/p&gt;
+&lt;h2&gt;Development&lt;/h2&gt;
+
+&lt;h3&gt;.NET development&lt;/h3&gt;
+&lt;p&gt;.NET developers do not have to use this service endpoint directly. There is a Lokad Software Development for .NET 2.0 that provides .NET-friendly wrappers for the API methods along with reliability and request validation logics.&lt;/p&gt;
+&lt;p&gt;Please check &lt;a href="http://www.lokad.com/web-services-time-series-forecasting.ashx"&gt;Lokad API page&lt;/a&gt; for additional details on obtaining this SDK.&lt;/p&gt;
+&lt;h3&gt;Cross-platform development&lt;/h3&gt;
+&lt;p&gt;The following links provide information to aid in cross-platform development with the Lokad API.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="http://www.lokad.com/web-services-time-series-forecasting.ashx"&gt;Lokad API Product Page&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://build.lokad.com/doc/shared/html/EE64A8F8.htm"&gt;Latest technical documentation&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://build.lokad.com/doc/shared/html/2CE41165.htm"&gt;Request size constraints&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Methods&lt;/h2&gt;</wsdl:documentation>
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://lokad.com/ws_2/">
+      <s:import namespace="http://microsoft.com/wsdl/types/" />
+      <s:element name="GetSeriesByPrefix">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="identity" type="tns:Identity" />
+            <s:element minOccurs="0" maxOccurs="1" name="prefix" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="cursor" type="s1:guid" />
+            <s:element minOccurs="1" maxOccurs="1" name="pageSize" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="Identity">
+        <s:attribute name="Username" type="s:string" />
+        <s:attribute name="Password" type="s:string" />
+      </s:complexType>
+      <s:element name="GetSeriesByPrefixResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetSeriesByPrefixResult" type="tns:SerieInfoPage" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="SerieInfoPage">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Series" type="tns:ArrayOfSerieInfo" />
+        </s:sequence>
+        <s:attribute name="Cursor" type="s1:guid" use="required" />
+        <s:attribute name="ThereAreMorePages" type="s:boolean" use="required" />
+      </s:complexType>
+      <s:complexType name="ArrayOfSerieInfo">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="SerieInfo" nillable="true" type="tns:SerieInfo" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="SerieInfo">
+        <s:attribute name="SerieID" type="s1:guid" use="required" />
+        <s:attribute name="Name" type="s:string" />
+      </s:complexType>
+      <s:element name="GetTasksBySerieIDs">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="identity" type="tns:Identity" />
+            <s:element minOccurs="0" maxOccurs="1" name="serieIDs" type="tns:ArrayOfGuid" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfGuid">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="guid" type="s1:guid" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetTasksBySerieIDsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetTasksBySerieIDsResult" type="tns:ArrayOfTaskInfo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfTaskInfo">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="TaskInfo" nillable="true" type="tns:TaskInfo" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="TaskInfo">
+        <s:attribute name="TaskID" type="s1:guid" use="required" />
+        <s:attribute name="SerieID" type="s1:guid" use="required" />
+        <s:attribute name="Period" type="tns:Period" use="required" />
+        <s:attribute name="PeriodStart" type="s:dateTime" use="required" />
+        <s:attribute name="FuturePeriods" type="s:int" use="required" />
+      </s:complexType>
+      <s:simpleType name="Period">
+        <s:restriction base="s:string">
+          <s:enumeration value="None" />
+          <s:enumeration value="QuarterHour" />
+          <s:enumeration value="HalfHour" />
+          <s:enumeration value="Hour" />
+          <s:enumeration value="Day" />
+          <s:enumeration value="Week" />
+          <s:enumeration value="Month" />
+          <s:enumeration value="Quarter" />
+          <s:enumeration value="Semester" />
+          <s:enumeration value="Year" />
+        </s:restriction>
+      </s:simpleType>
+      <s:element name="AddReport">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="identity" type="tns:Identity" />
+            <s:element minOccurs="0" maxOccurs="1" name="report" type="tns:Report" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="Report">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Message" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Information" type="s:string" />
+        </s:sequence>
+        <s:attribute name="Subject" type="s:string" />
+      </s:complexType>
+      <s:element name="AddReportResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="AddReportResult" type="s1:guid" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AddSeries">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="identity" type="tns:Identity" />
+            <s:element minOccurs="0" maxOccurs="1" name="series" type="tns:ArrayOfSerieInfo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AddSeriesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AddSeriesResult" type="tns:ArrayOfGuid" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DeleteSeries">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="identity" type="tns:Identity" />
+            <s:element minOccurs="0" maxOccurs="1" name="serieIDs" type="tns:ArrayOfGuid" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DeleteSeriesResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetSeries">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="identity" type="tns:Identity" />
+            <s:element minOccurs="1" maxOccurs="1" name="cursor" type="s1:guid" />
+            <s:element minOccurs="1" maxOccurs="1" name="pageSize" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetSeriesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetSeriesResult" type="tns:SerieInfoPage" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateSerieSegments">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="identity" type="tns:Identity" />
+            <s:element minOccurs="0" maxOccurs="1" name="segments" type="tns:ArrayOfSegmentForSerie" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfSegmentForSerie">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="SegmentForSerie" nillable="true" type="tns:SegmentForSerie" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="SegmentForSerie">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Values" type="tns:ArrayOfTimeValue" />
+        </s:sequence>
+        <s:attribute name="SerieID" type="s1:guid" use="required" />
+      </s:complexType>
+      <s:complexType name="ArrayOfTimeValue">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="TimeValue" type="tns:TimeValue" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="TimeValue">
+        <s:attribute name="Time" type="s:dateTime" use="required" />
+        <s:attribute name="Value" type="s:double" use="required" />
+      </s:complexType>
+      <s:element name="UpdateSerieSegmentsResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetSerieSegments">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="identity" type="tns:Identity" />
+            <s:element minOccurs="0" maxOccurs="1" name="serieIDs" type="tns:ArrayOfGuid" />
+            <s:element minOccurs="0" maxOccurs="1" name="cursor" type="tns:SegmentCursor" />
+            <s:element minOccurs="1" maxOccurs="1" name="pageSize" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="SegmentCursor">
+        <s:attribute name="Cursor1" type="s1:guid" use="required" />
+        <s:attribute name="Cursor2" type="s:dateTime" use="required" />
+      </s:complexType>
+      <s:element name="GetSerieSegmentsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetSerieSegmentsResult" type="tns:SerieSegmentPage" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="SerieSegmentPage">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Cursor" type="tns:SegmentCursor" />
+          <s:element minOccurs="0" maxOccurs="1" name="Segments" type="tns:ArrayOfSegmentForSerie" />
+        </s:sequence>
+        <s:attribute name="ThereAreMorePages" type="s:boolean" use="required" />
+      </s:complexType>
+      <s:element name="SetTags">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="identity" type="tns:Identity" />
+            <s:element minOccurs="0" maxOccurs="1" name="tagsForSerie" type="tns:ArrayOfTagsForSerie" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfTagsForSerie">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="TagsForSerie" nillable="true" type="tns:TagsForSerie" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="TagsForSerie">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Tags" type="tns:ArrayOfString" />
+        </s:sequence>
+        <s:attribute name="SerieID" type="s1:guid" use="required" />
+      </s:complexType>
+      <s:complexType name="ArrayOfString">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="string" nillable="true" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="SetTagsResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="SetEvents">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="identity" type="tns:Identity" />
+            <s:element minOccurs="0" maxOccurs="1" name="eventsForSerie" type="tns:ArrayOfEventsForSerie" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfEventsForSerie">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="EventsForSerie" nillable="true" type="tns:EventsForSerie" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="EventsForSerie">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Events" type="tns:ArrayOfSerieEvent" />
+        </s:sequence>
+        <s:attribute name="SerieID" type="s1:guid" use="required" />
+      </s:complexType>
+      <s:complexType name="ArrayOfSerieEvent">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="SerieEvent" nillable="true" type="tns:SerieEvent" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="SerieEvent">
+        <s:attribute name="Time" type="s:dateTime" use="required" />
+        <s:attribute name="DurationDays" type="s:double" use="required" />
+        <s:attribute name="Name" type="s:string" />
+      </s:complexType>
+      <s:element name="SetEventsResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetTags">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="identity" type="tns:Identity" />
+            <s:element minOccurs="0" maxOccurs="1" name="serieIDs" type="tns:ArrayOfGuid" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetTagsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetTagsResult" type="tns:ArrayOfTagsForSerie" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetEvents">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="identity" type="tns:Identity" />
+            <s:element minOccurs="0" maxOccurs="1" name="serieIDs" type="tns:ArrayOfGuid" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetEventsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetEventsResult" type="tns:ArrayOfEventsForSerie" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AddTasks">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="identity" type="tns:Identity" />
+            <s:element minOccurs="0" maxOccurs="1" name="tasks" type="tns:ArrayOfTaskInfo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AddTasksResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AddTasksResult" type="tns:ArrayOfGuid" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetTasks">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="identity" type="tns:Identity" />
+            <s:element minOccurs="1" maxOccurs="1" name="cursor" type="s1:guid" />
+            <s:element minOccurs="1" maxOccurs="1" name="pageSize" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetTasksResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetTasksResult" type="tns:TaskInfoPage" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="TaskInfoPage">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Tasks" type="tns:ArrayOfTaskInfo" />
+        </s:sequence>
+        <s:attribute name="Cursor" type="s1:guid" use="required" />
+        <s:attribute name="ThereAreMorePages" type="s:boolean" use="required" />
+      </s:complexType>
+      <s:element name="UpdateTasks">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="identity" type="tns:Identity" />
+            <s:element minOccurs="0" maxOccurs="1" name="tasks" type="tns:ArrayOfTaskInfo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateTasksResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="DeleteTasks">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="identity" type="tns:Identity" />
+            <s:element minOccurs="0" maxOccurs="1" name="taskIDs" type="tns:ArrayOfGuid" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DeleteTasksResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetForecasts">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="identity" type="tns:Identity" />
+            <s:element minOccurs="0" maxOccurs="1" name="taskIDs" type="tns:ArrayOfGuid" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetForecastsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetForecastsResult" type="tns:ArrayOfForecast" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfForecast">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Forecast" nillable="true" type="tns:Forecast" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Forecast">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Values" type="tns:ArrayOfTimeValue" />
+        </s:sequence>
+        <s:attribute name="TaskID" type="s1:guid" use="required" />
+        <s:attribute name="Error" type="s:double" use="required" />
+      </s:complexType>
+      <s:element name="GetAccountInfo">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="identity" type="tns:Identity" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAccountInfoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetAccountInfoResult" type="tns:AccountInfo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="AccountInfo">
+        <s:attribute name="AccountID" type="s1:guid" use="required" />
+        <s:attribute name="AccountHRID" type="s:long" use="required" />
+      </s:complexType>
+      <s:element name="SetPartner">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="identity" type="tns:Identity" />
+            <s:element minOccurs="1" maxOccurs="1" name="partnerId" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SetPartnerResponse">
+        <s:complexType />
+      </s:element>
+    </s:schema>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://microsoft.com/wsdl/types/">
+      <s:simpleType name="guid">
+        <s:restriction base="s:string">
+          <s:pattern value="[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}" />
+        </s:restriction>
+      </s:simpleType>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="GetSeriesByPrefixSoapIn">
+    <wsdl:part name="parameters" element="tns:GetSeriesByPrefix" />
+  </wsdl:message>
+  <wsdl:message name="GetSeriesByPrefixSoapOut">
+    <wsdl:part name="parameters" element="tns:GetSeriesByPrefixResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetTasksBySerieIDsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetTasksBySerieIDs" />
+  </wsdl:message>
+  <wsdl:message name="GetTasksBySerieIDsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetTasksBySerieIDsResponse" />
+  </wsdl:message>
+  <wsdl:message name="AddReportSoapIn">
+    <wsdl:part name="parameters" element="tns:AddReport" />
+  </wsdl:message>
+  <wsdl:message name="AddReportSoapOut">
+    <wsdl:part name="parameters" element="tns:AddReportResponse" />
+  </wsdl:message>
+  <wsdl:message name="AddSeriesSoapIn">
+    <wsdl:part name="parameters" element="tns:AddSeries" />
+  </wsdl:message>
+  <wsdl:message name="AddSeriesSoapOut">
+    <wsdl:part name="parameters" element="tns:AddSeriesResponse" />
+  </wsdl:message>
+  <wsdl:message name="DeleteSeriesSoapIn">
+    <wsdl:part name="parameters" element="tns:DeleteSeries" />
+  </wsdl:message>
+  <wsdl:message name="DeleteSeriesSoapOut">
+    <wsdl:part name="parameters" element="tns:DeleteSeriesResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetSeriesSoapIn">
+    <wsdl:part name="parameters" element="tns:GetSeries" />
+  </wsdl:message>
+  <wsdl:message name="GetSeriesSoapOut">
+    <wsdl:part name="parameters" element="tns:GetSeriesResponse" />
+  </wsdl:message>
+  <wsdl:message name="UpdateSerieSegmentsSoapIn">
+    <wsdl:part name="parameters" element="tns:UpdateSerieSegments" />
+  </wsdl:message>
+  <wsdl:message name="UpdateSerieSegmentsSoapOut">
+    <wsdl:part name="parameters" element="tns:UpdateSerieSegmentsResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetSerieSegmentsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetSerieSegments" />
+  </wsdl:message>
+  <wsdl:message name="GetSerieSegmentsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetSerieSegmentsResponse" />
+  </wsdl:message>
+  <wsdl:message name="SetTagsSoapIn">
+    <wsdl:part name="parameters" element="tns:SetTags" />
+  </wsdl:message>
+  <wsdl:message name="SetTagsSoapOut">
+    <wsdl:part name="parameters" element="tns:SetTagsResponse" />
+  </wsdl:message>
+  <wsdl:message name="SetEventsSoapIn">
+    <wsdl:part name="parameters" element="tns:SetEvents" />
+  </wsdl:message>
+  <wsdl:message name="SetEventsSoapOut">
+    <wsdl:part name="parameters" element="tns:SetEventsResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetTagsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetTags" />
+  </wsdl:message>
+  <wsdl:message name="GetTagsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetTagsResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetEventsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetEvents" />
+  </wsdl:message>
+  <wsdl:message name="GetEventsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetEventsResponse" />
+  </wsdl:message>
+  <wsdl:message name="AddTasksSoapIn">
+    <wsdl:part name="parameters" element="tns:AddTasks" />
+  </wsdl:message>
+  <wsdl:message name="AddTasksSoapOut">
+    <wsdl:part name="parameters" element="tns:AddTasksResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetTasksSoapIn">
+    <wsdl:part name="parameters" element="tns:GetTasks" />
+  </wsdl:message>
+  <wsdl:message name="GetTasksSoapOut">
+    <wsdl:part name="parameters" element="tns:GetTasksResponse" />
+  </wsdl:message>
+  <wsdl:message name="UpdateTasksSoapIn">
+    <wsdl:part name="parameters" element="tns:UpdateTasks" />
+  </wsdl:message>
+  <wsdl:message name="UpdateTasksSoapOut">
+    <wsdl:part name="parameters" element="tns:UpdateTasksResponse" />
+  </wsdl:message>
+  <wsdl:message name="DeleteTasksSoapIn">
+    <wsdl:part name="parameters" element="tns:DeleteTasks" />
+  </wsdl:message>
+  <wsdl:message name="DeleteTasksSoapOut">
+    <wsdl:part name="parameters" element="tns:DeleteTasksResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetForecastsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetForecasts" />
+  </wsdl:message>
+  <wsdl:message name="GetForecastsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetForecastsResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetAccountInfoSoapIn">
+    <wsdl:part name="parameters" element="tns:GetAccountInfo" />
+  </wsdl:message>
+  <wsdl:message name="GetAccountInfoSoapOut">
+    <wsdl:part name="parameters" element="tns:GetAccountInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="SetPartnerSoapIn">
+    <wsdl:part name="parameters" element="tns:SetPartner" />
+  </wsdl:message>
+  <wsdl:message name="SetPartnerSoapOut">
+    <wsdl:part name="parameters" element="tns:SetPartnerResponse" />
+  </wsdl:message>
+  <wsdl:portType name="TimeSeries2Soap">
+    <wsdl:operation name="GetSeriesByPrefix">
+      <wsdl:input message="tns:GetSeriesByPrefixSoapIn" />
+      <wsdl:output message="tns:GetSeriesByPrefixSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetTasksBySerieIDs">
+      <wsdl:input message="tns:GetTasksBySerieIDsSoapIn" />
+      <wsdl:output message="tns:GetTasksBySerieIDsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AddReport">
+      <wsdl:input message="tns:AddReportSoapIn" />
+      <wsdl:output message="tns:AddReportSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AddSeries">
+      <wsdl:input message="tns:AddSeriesSoapIn" />
+      <wsdl:output message="tns:AddSeriesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteSeries">
+      <wsdl:input message="tns:DeleteSeriesSoapIn" />
+      <wsdl:output message="tns:DeleteSeriesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSeries">
+      <wsdl:input message="tns:GetSeriesSoapIn" />
+      <wsdl:output message="tns:GetSeriesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateSerieSegments">
+      <wsdl:input message="tns:UpdateSerieSegmentsSoapIn" />
+      <wsdl:output message="tns:UpdateSerieSegmentsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSerieSegments">
+      <wsdl:input message="tns:GetSerieSegmentsSoapIn" />
+      <wsdl:output message="tns:GetSerieSegmentsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SetTags">
+      <wsdl:input message="tns:SetTagsSoapIn" />
+      <wsdl:output message="tns:SetTagsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SetEvents">
+      <wsdl:input message="tns:SetEventsSoapIn" />
+      <wsdl:output message="tns:SetEventsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetTags">
+      <wsdl:input message="tns:GetTagsSoapIn" />
+      <wsdl:output message="tns:GetTagsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetEvents">
+      <wsdl:input message="tns:GetEventsSoapIn" />
+      <wsdl:output message="tns:GetEventsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AddTasks">
+      <wsdl:input message="tns:AddTasksSoapIn" />
+      <wsdl:output message="tns:AddTasksSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetTasks">
+      <wsdl:input message="tns:GetTasksSoapIn" />
+      <wsdl:output message="tns:GetTasksSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateTasks">
+      <wsdl:input message="tns:UpdateTasksSoapIn" />
+      <wsdl:output message="tns:UpdateTasksSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteTasks">
+      <wsdl:input message="tns:DeleteTasksSoapIn" />
+      <wsdl:output message="tns:DeleteTasksSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetForecasts">
+      <wsdl:input message="tns:GetForecastsSoapIn" />
+      <wsdl:output message="tns:GetForecastsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAccountInfo">
+      <wsdl:input message="tns:GetAccountInfoSoapIn" />
+      <wsdl:output message="tns:GetAccountInfoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SetPartner">
+      <wsdl:input message="tns:SetPartnerSoapIn" />
+      <wsdl:output message="tns:SetPartnerSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="TimeSeries2Soap" type="tns:TimeSeries2Soap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetSeriesByPrefix">
+      <soap:operation soapAction="http://lokad.com/ws_2/GetSeriesByPrefix" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTasksBySerieIDs">
+      <soap:operation soapAction="http://lokad.com/ws_2/GetTasksBySerieIDs" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddReport">
+      <soap:operation soapAction="http://lokad.com/ws_2/AddReport" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddSeries">
+      <soap:operation soapAction="http://lokad.com/ws_2/AddSeries" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteSeries">
+      <soap:operation soapAction="http://lokad.com/ws_2/DeleteSeries" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSeries">
+      <soap:operation soapAction="http://lokad.com/ws_2/GetSeries" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateSerieSegments">
+      <soap:operation soapAction="http://lokad.com/ws_2/UpdateSerieSegments" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSerieSegments">
+      <soap:operation soapAction="http://lokad.com/ws_2/GetSerieSegments" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetTags">
+      <soap:operation soapAction="http://lokad.com/ws_2/SetTags" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetEvents">
+      <soap:operation soapAction="http://lokad.com/ws_2/SetEvents" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTags">
+      <soap:operation soapAction="http://lokad.com/ws_2/GetTags" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetEvents">
+      <soap:operation soapAction="http://lokad.com/ws_2/GetEvents" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddTasks">
+      <soap:operation soapAction="http://lokad.com/ws_2/AddTasks" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTasks">
+      <soap:operation soapAction="http://lokad.com/ws_2/GetTasks" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateTasks">
+      <soap:operation soapAction="http://lokad.com/ws_2/UpdateTasks" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteTasks">
+      <soap:operation soapAction="http://lokad.com/ws_2/DeleteTasks" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetForecasts">
+      <soap:operation soapAction="http://lokad.com/ws_2/GetForecasts" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAccountInfo">
+      <soap:operation soapAction="http://lokad.com/ws_2/GetAccountInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetPartner">
+      <soap:operation soapAction="http://lokad.com/ws_2/SetPartner" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="TimeSeries2Soap12" type="tns:TimeSeries2Soap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetSeriesByPrefix">
+      <soap12:operation soapAction="http://lokad.com/ws_2/GetSeriesByPrefix" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTasksBySerieIDs">
+      <soap12:operation soapAction="http://lokad.com/ws_2/GetTasksBySerieIDs" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddReport">
+      <soap12:operation soapAction="http://lokad.com/ws_2/AddReport" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddSeries">
+      <soap12:operation soapAction="http://lokad.com/ws_2/AddSeries" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteSeries">
+      <soap12:operation soapAction="http://lokad.com/ws_2/DeleteSeries" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSeries">
+      <soap12:operation soapAction="http://lokad.com/ws_2/GetSeries" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateSerieSegments">
+      <soap12:operation soapAction="http://lokad.com/ws_2/UpdateSerieSegments" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSerieSegments">
+      <soap12:operation soapAction="http://lokad.com/ws_2/GetSerieSegments" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetTags">
+      <soap12:operation soapAction="http://lokad.com/ws_2/SetTags" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetEvents">
+      <soap12:operation soapAction="http://lokad.com/ws_2/SetEvents" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTags">
+      <soap12:operation soapAction="http://lokad.com/ws_2/GetTags" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetEvents">
+      <soap12:operation soapAction="http://lokad.com/ws_2/GetEvents" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddTasks">
+      <soap12:operation soapAction="http://lokad.com/ws_2/AddTasks" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTasks">
+      <soap12:operation soapAction="http://lokad.com/ws_2/GetTasks" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateTasks">
+      <soap12:operation soapAction="http://lokad.com/ws_2/UpdateTasks" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteTasks">
+      <soap12:operation soapAction="http://lokad.com/ws_2/DeleteTasks" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetForecasts">
+      <soap12:operation soapAction="http://lokad.com/ws_2/GetForecasts" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAccountInfo">
+      <soap12:operation soapAction="http://lokad.com/ws_2/GetAccountInfo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetPartner">
+      <soap12:operation soapAction="http://lokad.com/ws_2/SetPartner" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="TimeSeries2">
+    <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">&lt;h1&gt;Lokad API version 2&lt;/h1&gt;
+&lt;h2&gt;Important&lt;/h2&gt;
+&lt;p&gt;This page is not intended to be an introduction to web-services technologies
+but a technical reference documentation. For an introduction, please refer to 
+&lt;a href="http://en.wikipedia.org/wiki/SOAP"&gt;SOAP article on Wikipedia&lt;/a&gt;. 
+For the API documentation and tutorials, you can check the 
+&lt;a href="http://www.lokad.com/web-services-time-series-forecasting.ashx"&gt;Lokad API product page&lt;/a&gt;.&lt;/p&gt;
+&lt;h2&gt;Development&lt;/h2&gt;
+
+&lt;h3&gt;.NET development&lt;/h3&gt;
+&lt;p&gt;.NET developers do not have to use this service endpoint directly. There is a Lokad Software Development for .NET 2.0 that provides .NET-friendly wrappers for the API methods along with reliability and request validation logics.&lt;/p&gt;
+&lt;p&gt;Please check &lt;a href="http://www.lokad.com/web-services-time-series-forecasting.ashx"&gt;Lokad API page&lt;/a&gt; for additional details on obtaining this SDK.&lt;/p&gt;
+&lt;h3&gt;Cross-platform development&lt;/h3&gt;
+&lt;p&gt;The following links provide information to aid in cross-platform development with the Lokad API.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="http://www.lokad.com/web-services-time-series-forecasting.ashx"&gt;Lokad API Product Page&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://build.lokad.com/doc/shared/html/EE64A8F8.htm"&gt;Latest technical documentation&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://build.lokad.com/doc/shared/html/2CE41165.htm"&gt;Request size constraints&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Methods&lt;/h2&gt;</wsdl:documentation>
+    <wsdl:port name="TimeSeries2Soap" binding="tns:TimeSeries2Soap">
+      <soap:address location="http://localhost:52559/TimeSeries2.asmx" />
+    </wsdl:port>
+    <wsdl:port name="TimeSeries2Soap12" binding="tns:TimeSeries2Soap12">
+      <soap12:address location="http://localhost:52559/TimeSeries2.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

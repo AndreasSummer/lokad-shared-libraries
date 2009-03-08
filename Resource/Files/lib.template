@@ -1,0 +1,24 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>Lokad Shared Libraries</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="description" content="Download Lokad Shared Libraries"/>
+</head>
+<body>
+<h1>Lokad Shared Libraries</h1>
+
+<p><strong>Featured: </strong> <a href="${LibPackage}">Download version ${version}</a></p>
+
+<br />
+<p>Links:</p>
+<ul>
+<li><a href="http://abdullin.com/shared-libraries/">Information on Lokad Shared Libraries</a></li>
+<li><a href="http://lokad.com">Lokad</a></li>
+<li><a href="${Lib2Package}">Download version ${version}</a> (Lokad namespace)</li>
+</ul>
+</body>
+</html>
+
+

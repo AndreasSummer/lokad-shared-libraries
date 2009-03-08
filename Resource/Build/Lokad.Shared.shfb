@@ -1,0 +1,73 @@
+﻿<project schemaVersion="1.6.0.2">
+    <assemblies>
+        <assembly assemblyPath="..\..\Build\Windows\log4net.dll" xmlCommentsPath="..\..\Build\Windows\log4net.xml" commentsOnly="False" />
+        <assembly assemblyPath="..\..\Build\Windows\Lokad.SafetyStock.BusinessLogic.dll" xmlCommentsPath="..\..\Build\Windows\Lokad.SafetyStock.BusinessLogic.xml" commentsOnly="False" />
+        <assembly assemblyPath="..\..\Build\Windows\Lokad.SafetyStock.Common.dll" xmlCommentsPath="..\..\Build\Windows\Lokad.SafetyStock.Common.xml" commentsOnly="False" />
+        <assembly assemblyPath="..\..\Build\Windows\Lokad.SafetyStock.InventoryAdapter.dll" xmlCommentsPath="..\..\Build\Windows\Lokad.SafetyStock.InventoryAdapter.xml" commentsOnly="False" />
+        <assembly assemblyPath="..\..\Build\Windows\Lokad.Web.Services.dll" xmlCommentsPath="..\..\Build\Windows\Lokad.Web.Services.xml" commentsOnly="False" />
+    </assemblies>
+    <namespaceSummaries>
+        <namespaceSummaryItem name="" isDocumented="False" />
+        <namespaceSummaryItem name="log4net" isDocumented="False" />
+        <namespaceSummaryItem name="log4net.Appender" isDocumented="False" />
+        <namespaceSummaryItem name="log4net.Config" isDocumented="False" />
+        <namespaceSummaryItem name="log4net.Core" isDocumented="False" />
+        <namespaceSummaryItem name="log4net.DateFormatter" isDocumented="False" />
+        <namespaceSummaryItem name="log4net.Filter" isDocumented="False" />
+        <namespaceSummaryItem name="log4net.Layout" isDocumented="False" />
+        <namespaceSummaryItem name="log4net.Layout.Pattern" isDocumented="False" />
+        <namespaceSummaryItem name="log4net.ObjectRenderer" isDocumented="False" />
+        <namespaceSummaryItem name="log4net.Plugin" isDocumented="False" />
+        <namespaceSummaryItem name="log4net.Repository" isDocumented="False" />
+        <namespaceSummaryItem name="log4net.Repository.Hierarchy" isDocumented="False" />
+        <namespaceSummaryItem name="log4net.Util" isDocumented="False" />
+        <namespaceSummaryItem name="log4net.Util.PatternStringConverters" isDocumented="False" />
+        <namespaceSummaryItem name="log4net.Util.TypeConverters" isDocumented="False" />
+        <namespaceSummaryItem name="Lokad.SafetyStock" isDocumented="True">Contains most of the business logic of the Lokad Safety Stock Calculator.</namespaceSummaryItem>
+        <namespaceSummaryItem name="Lokad.SafetyStock.Common" isDocumented="True">Common types and helpers.</namespaceSummaryItem>
+        <namespaceSummaryItem name="Lokad.SafetyStock.Common.Properties" isDocumented="True">Localized resources.</namespaceSummaryItem>
+        <namespaceSummaryItem name="Lokad.SafetyStock.Common.Serialization" isDocumented="True">Small serialization framework.</namespaceSummaryItem>
+        <namespaceSummaryItem name="Lokad.SafetyStock.DataSource" isDocumented="True">Contains the data presenter layer for Lokad Safety Stock Calculator.</namespaceSummaryItem>
+        <namespaceSummaryItem name="Lokad.SafetyStock.Properties" isDocumented="True">Localized resources.</namespaceSummaryItem>
+        <namespaceSummaryItem name="Lokad.SafetyStock.Serialization" isDocumented="True">Custom serializers used for Lokad Safety Stock Calculator model persistence (current implementation relies on XML).</namespaceSummaryItem>
+        <namespaceSummaryItem name="Lokad.SafetyStock.Validators" isDocumented="True">Contains the inventory data validators.</namespaceSummaryItem>
+        <namespaceSummaryItem name="Lokad.Web.Services" isDocumented="True">Contains the proxy classes and the helpers required to communicate with the SOAP forecasting services of Lokad.</namespaceSummaryItem>
+    </namespaceSummaries>
+    <ProjectSummary />
+    <MissingTags>Summary, Parameter, Returns, AutoDocumentCtors, Namespace</MissingTags>
+    <VisibleItems>InheritedMembers, InheritedFrameworkMembers, Protected, SealedProtected</VisibleItems>
+    <HtmlHelp1xCompilerPath path="" />
+    <HtmlHelp2xCompilerPath path="" />
+    <OutputPath>..\..\Build\Help\</OutputPath>
+    <SandcastlePath path="" />
+    <WorkingPath path="" />
+    <CleanIntermediates>True</CleanIntermediates>
+    <KeepLogFile>True</KeepLogFile>
+    <HelpFileFormat>Website</HelpFileFormat>
+    <PurgeDuplicateTopics>True</PurgeDuplicateTopics>
+    <CppCommentsFixup>False</CppCommentsFixup>
+    <FrameworkVersion>2.0.50727</FrameworkVersion>
+    <BinaryTOC>True</BinaryTOC>
+    <IncludeFavorites>False</IncludeFavorites>
+    <Preliminary>False</Preliminary>
+    <RootNamespaceContainer>False</RootNamespaceContainer>
+    <RootNamespaceTitle />
+    <HelpTitle>Lokad Safety Stock Calculator - Library Documentation</HelpTitle>
+    <HtmlHelpName>Documentation</HtmlHelpName>
+    <Language>en-US</Language>
+    <CopyrightHref>http://www.lokad.com</CopyrightHref>
+    <CopyrightText>Lokad.com - Forecasting for Business - All rights reserved</CopyrightText>
+    <FeedbackEMailAddress>support@lokad.com</FeedbackEMailAddress>
+    <HeaderText />
+    <FooterText />
+    <ProjectLinkType>Local</ProjectLinkType>
+    <SdkLinkType>Msdn</SdkLinkType>
+    <SdkLinkTarget>Blank</SdkLinkTarget>
+    <PresentationStyle>Prototype</PresentationStyle>
+    <NamingMethod>Guid</NamingMethod>
+    <SyntaxFilters>Standard</SyntaxFilters>
+    <ShowFeedbackControl>False</ShowFeedbackControl>
+    <ContentPlacement>AboveNamespaces</ContentPlacement>
+    <ContentSiteMap path="" />
+    <TopicFileTransform path="" />
+</project>

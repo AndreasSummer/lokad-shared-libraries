@@ -1,0 +1,1 @@
+﻿Attributes for ReSharper 4.1

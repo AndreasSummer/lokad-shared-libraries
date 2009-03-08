@@ -1,0 +1,6 @@
+<Configuration>
+  <NamespaceFolders>
+    <SkipFolder>E501560F-CECC-4E30-8A78-1EF7D4E6A4FD/d:Core</SkipFolder>
+    <SkipFolder>E501560F-CECC-4E30-8A78-1EF7D4E6A4FD/d:Shared</SkipFolder>
+  </NamespaceFolders>
+</Configuration>

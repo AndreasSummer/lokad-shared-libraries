@@ -1,0 +1,75 @@
+﻿<project schemaVersion="1.6.0.7">
+    <assemblies>
+			<assembly assemblyPath=".\Build\Stack\Lokad.Shared.dll" xmlCommentsPath=".\Build\Stack\Lokad.Shared.xml" commentsOnly="False" />
+			<assembly assemblyPath=".\Build\Stack\Lokad.Quality.dll" xmlCommentsPath=".\Build\Stack\Lokad.Quality.xml" commentsOnly="False" />
+			<assembly assemblyPath=".\Build\Stack\Lokad.Stack.dll" xmlCommentsPath=".\Build\Stack\Lokad.Stack.xml" commentsOnly="False" />
+			<assembly assemblyPath=".\Build\Stack\Lokad.Api.dll" xmlCommentsPath=".\Build\Stack\Lokad.Api.xml" commentsOnly="False" />
+    </assemblies>
+    <namespaceSummaries>
+      <namespaceSummaryItem name="System" isDocumented="True">Generic interfaces and helper classes.</namespaceSummaryItem>
+      <namespaceSummaryItem name="System.Container" isDocumented="True">Interfaces and classes used for the Dependency Injection</namespaceSummaryItem>
+      <namespaceSummaryItem name="System.Diagnostics" isDocumented="True">Interfaces and helper classes to aid in diagnosing, monitoring and debugging the applications</namespaceSummaryItem>
+      <namespaceSummaryItem name="System.Diagnostics.CodeAnalysis" isDocumented="True">Attributes for decorating code and providing hints for various code quality tools including Lokad.Quality</namespaceSummaryItem>
+      <namespaceSummaryItem name="System.Exceptions" isDocumented="True">Exception Handling Application Block - for decorating classes with reliability and exception handling functionality without tight coupling to the specific exception policy implementation.</namespaceSummaryItem>
+      <namespaceSummaryItem name="System.Logging" isDocumented="True">Interfaces and helper class for injecting logging functionality without tight coupling to the specific logging implementation</namespaceSummaryItem>
+      <namespaceSummaryItem name="System.Rules" isDocumented="True">Rule Application Block - for declaring and leveraging validation and business rules.</namespaceSummaryItem>      
+      <namespaceSummaryItem name="System.Threading" isDocumented="True">Generic thread helpers</namespaceSummaryItem>
+
+      <namespaceSummaryItem name="" isDocumented="True" />
+      <namespaceSummaryItem name="Lokad" isDocumented="True">Lokad-specific code</namespaceSummaryItem>
+      <namespaceSummaryItem name="Lokad.Api" isDocumented="True">Classes and methods that define the Lokad API</namespaceSummaryItem>
+			<namespaceSummaryItem name="Lokad.Client" isDocumented="True">Platform-independent classes and methods for reuse in Client applications accessing Lokad API</namespaceSummaryItem>
+			<namespaceSummaryItem name="Lokad.Client.Forms" isDocumented="True">Functionality for Lokad Clients that use Windows.Forms UI platform</namespaceSummaryItem>
+      <namespaceSummaryItem name="Lokad.Api.WebReference" isDocumented="False" />
+      <namespaceSummaryItem name="Lokad.Api.Interface" isDocumented="True" >Interfaces implemented by the Lokad API</namespaceSummaryItem>
+      <namespaceSummaryItem name="Lokad.Container" isDocumented="False" />
+      <namespaceSummaryItem name="Lokad.Diagnostics" isDocumented="False" />
+      <namespaceSummaryItem name="Lokad.Handling" isDocumented="False" />
+      <namespaceSummaryItem name="Lokad.Logging" isDocumented="False" />
+      <namespaceSummaryItem name="Lokad.Quality" isDocumented="True" >Reusable code quality rules for the Lokad codebase along with the helper classes to easily define new ones.</namespaceSummaryItem>
+    </namespaceSummaries>
+    <dependencies>
+        <dependencyItem depPath=".\Resource\Library\*.*" />
+    </dependencies>
+    <ProjectSummary />
+    <MissingTags>Summary, Parameter, Returns, AutoDocumentCtors, Namespace, TypeParameter</MissingTags>
+    <VisibleItems>InheritedMembers, InheritedFrameworkMembers, Protected, SealedProtected</VisibleItems>
+    <HtmlHelp1xCompilerPath path="" />
+    <HtmlHelp2xCompilerPath path="" />
+    <OutputPath>Build\Help\</OutputPath>
+    <SandcastlePath path="" />
+    <WorkingPath path="" />
+    <CleanIntermediates>True</CleanIntermediates>
+    <KeepLogFile>False</KeepLogFile>
+    <BuildLogFile path="" />
+    <HelpFileFormat>Website</HelpFileFormat>
+    <CppCommentsFixup>False</CppCommentsFixup>
+    <FrameworkVersion>2.0.50727</FrameworkVersion>
+    <IndentHtml>False</IndentHtml>
+    <Preliminary>False</Preliminary>
+    <RootNamespaceContainer>False</RootNamespaceContainer>
+    <RootNamespaceTitle />
+    <HelpTitle>Lokad Shared Libraries - Documentation</HelpTitle>
+    <HtmlHelpName>Documentation</HtmlHelpName>
+    <Language>en-US</Language>
+    <CopyrightHref>http://www.lokad.com</CopyrightHref>
+    <CopyrightText>Lokad.com - Forecasting for Business - All rights reserved</CopyrightText>
+    <FeedbackEMailAddress>support@lokad.com</FeedbackEMailAddress>
+    <FeedbackEMailLinkText />
+    <HeaderText />
+    <FooterText />
+    <ProjectLinkType>Local</ProjectLinkType>
+    <SdkLinkType>Msdn</SdkLinkType>
+    <SdkLinkTarget>Blank</SdkLinkTarget>
+    <PresentationStyle>Prototype</PresentationStyle>
+    <NamingMethod>HashedMemberName</NamingMethod>
+    <SyntaxFilters>Standard</SyntaxFilters>
+    <ShowFeedbackControl>False</ShowFeedbackControl>
+    <BinaryTOC>True</BinaryTOC>
+    <IncludeFavorites>False</IncludeFavorites>
+    <CollectionTocStyle>Hierarchical</CollectionTocStyle>
+    <IncludeStopWordList>True</IncludeStopWordList>
+    <PlugInNamespaces>ms.vsipcc+, ms.vsexpresscc+</PlugInNamespaces>
+    <HelpFileVersion>1.0.0.0</HelpFileVersion>
+    <ContentPlacement>AboveNamespaces</ContentPlacement>
+</project>
