@@ -6,6 +6,7 @@
 
 #endregion
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Mono.Cecil;
@@ -41,11 +42,48 @@ namespace Lokad.Quality
 		/// Gets the methods found on this <see cref="TypeDefinition"/>.
 		/// Inheritance is not considered.
 		/// </summary>
-		/// <param name="self">The self.</param>
+		/// <param name="definition">The definition.</param>
 		/// <returns>lazy collection of methods</returns>
-		public static IEnumerable<MethodDefinition> GetMethods(this TypeDefinition self)
+		public static IEnumerable<MethodDefinition> GetMethods(this TypeDefinition definition)
 		{
-			return self.Methods.Cast<MethodDefinition>();
+			return definition.Methods.Cast<MethodDefinition>();
+		}
+
+		/// <summary>
+		/// Gets the constructors found on this <see cref="TypeDefinition"/>.
+		/// Inheritance is not considered.
+		/// </summary>
+		/// <param name="definition">The definition.</param>
+		/// <returns>lazy collection of methods</returns>
+		public static IEnumerable<MethodDefinition> GetConstructors(this TypeDefinition definition)
+		{
+			return definition.Constructors.Cast<MethodDefinition>();
+		}
+
+
+		/// <summary>
+		/// Resolves the specified definition to <see cref="Type"/>.
+		/// </summary>
+		/// <param name="definition">The definition.</param>
+		/// <returns>.NET Type</returns>
+		public static Type Resolve(this TypeDefinition definition)
+		{
+			var name = string.Format("{0}, {1}", definition.FullName, definition.Module.Assembly.Name);
+			return Type.GetType(name, true);
+		}
+
+
+		/// <summary>
+		/// Verifies that the specified <paramref name="check"/> is satisfied
+		/// </summary>
+		/// <param name="definitions">The definitions.</param>
+		/// <param name="check">The check.</param>
+		/// <returns>the same enumerable</returns>
+		/// <exception cref="QualityException">if any definitions do not pass the check</exception>
+		public static IEnumerable<TypeDefinition> Should(this IEnumerable<TypeDefinition> definitions, Predicate<TypeDefinition> check)
+		{
+			QualityAssert.TypesPass(definitions, check);
+			return definitions;
 		}
 	}
 }

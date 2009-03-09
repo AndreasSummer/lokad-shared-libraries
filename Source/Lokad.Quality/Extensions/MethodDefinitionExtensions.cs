@@ -32,7 +32,15 @@ namespace Lokad.Quality
 			return method.Body.Instructions.Cast<Instruction>();
 		}
 
-
+		/// <summary>
+		/// Gets the parameters from the specified <paramref name="definition"/>.
+		/// </summary>
+		/// <param name="definition">The definition to explore.</param>
+		/// <returns>enumerator over the parameters</returns>
+		public static IEnumerable<ParameterDefinition> GetParameters(this MethodDefinition definition)
+		{
+			return definition.Parameters.Cast<ParameterDefinition>();
+		}
 
 		/// <summary>
 		/// Determines whether the provided <see cref="MethodDefinition"/> 
@@ -52,6 +60,20 @@ namespace Lokad.Quality
 			}
 
 			return false;
+		}
+
+
+		/// <summary>
+		/// Verifies that the specified <paramref name="check"/> is satisfied
+		/// </summary>
+		/// <param name="definitions">The definitions.</param>
+		/// <param name="check">The check.</param>
+		/// <returns>the same enumerable</returns>
+		/// <exception cref="QualityException">if any definitions do not pass the check</exception>
+		public static IEnumerable<MethodDefinition> Should(this IEnumerable<MethodDefinition> definitions, Predicate<MethodDefinition> check)
+		{
+			QualityAssert.MethodsPass(definitions, check);
+			return definitions;
 		}
 	}
 }
