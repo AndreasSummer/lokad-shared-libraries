@@ -22,8 +22,7 @@
 		<LibraryPath>$(BuildPath)\Library</LibraryPath>
 		<LibraryNSPath>$(BuildPath)\LibraryNS</LibraryNSPath>
 		<StackPath>$(BuildPath)\Stack</StackPath>
-		<SdkPath>$(BuildPath)\Sdk</SdkPath>
-		<ClientPath>$(BuildPath)\Client</ClientPath>
+
 		<TempPath>$(BuildPath)\Temp</TempPath>
 
 		<ReadMe>ReadMe.txt</ReadMe>
@@ -31,9 +30,6 @@
 		<LibrarySource>Source\Lokad.Shared\bin\$(Configuration)</LibrarySource>
 		<QualitySource>Source\Lokad.Quality\bin\$(Configuration)</QualitySource>
 		<StackSource>Source\Lokad.Stack\bin\$(Configuration)</StackSource>
-		<ApiSource>Source\Lokad.Api.Core\bin\$(Configuration)</ApiSource>
-		<ClientSource>Source\Lokad.Client\bin\$(Configuration)</ClientSource>
-
 		<Converter>Helpers\Lokad.ReNamespace\bin\$(Configuration)\Lokad.ReNamespace.exe</Converter>
 		
 		<SampleSource>Sample</SampleSource>
@@ -42,8 +38,7 @@
 	</PropertyGroup>
 
 
-	<ItemGroup>
-		<Tokens Include="SdkPackage"><ReplacementValue>$(MSBuildProjectName)-Sdk-$(Version).zip</ReplacementValue></Tokens>
+	<ItemGroup>		
 		<Tokens Include="LibPackage"><ReplacementValue>$(MSBuildProjectName)-Lib-$(Version).zip</ReplacementValue></Tokens>
 		<Tokens Include="Lib2Package"><ReplacementValue>$(MSBuildProjectName)-Lib-LokadNS-$(Version).zip</ReplacementValue></Tokens>
 		<Tokens Include="SourcePackage"><ReplacementValue>$(MSBuildProjectName)-Source-$(Version).zip</ReplacementValue></Tokens>
@@ -91,11 +86,7 @@
 		
 		<Exec Command="Resource\Tool\ILMerge\ILMerge.exe &quot;$(QualitySource)\Lokad.Quality.dll&quot; &quot;$(QualitySource)/Mono.Cecil.dll&quot; /out:&quot;$(StackPath)/Lokad.Quality.dll&quot; /keyfile:SharedKey.snk /xmldocs=true /ver:$(Version) /attr:&quot;$(QualitySource)/Lokad.Quality.dll&quot;" />
 		<Exec Command="Resource\Tool\ILMerge\ILMerge.exe &quot;$(StackSource)\Lokad.Stack.dll&quot; &quot;$(StackSource)/Autofac.dll&quot; &quot;$(StackSource)/log4net.dll&quot; /out:&quot;$(StackPath)/Lokad.Stack.dll&quot; /keyfile:SharedKey.snk /xmldocs=true /ver:$(Version)  /attr:&quot;$(StackSource)/Lokad.Stack.dll&quot;" />
-		<Exec Command="Resource\Tool\ILMerge\ILMerge.exe &quot;$(ApiSource)\Lokad.Api.Core.dll&quot; &quot;$(ApiSource)/Lokad.Api.Interface.dll&quot; /out:&quot;$(StackPath)/Lokad.Api.dll&quot; /keyfile:SharedKey.snk /xmldocs=true /attr:&quot;$(ApiSource)/Lokad.Api.Core.dll&quot; /ver:$(Version)" />
-		<Exec Command="Resource\Tool\ILMerge\ILMerge.exe &quot;$(ClientSource)\Lokad.Api.Core.dll&quot; &quot;$(ClientSource)/Lokad.Api.Interface.dll&quot; &quot;$(ClientSource)/Lokad.Client.dll&quot; /out:&quot;$(StackPath)/Lokad.Client.dll&quot; /keyfile:SharedKey.snk /xmldocs=true /attr:&quot;$(ClientSource)/Lokad.Client.dll&quot; /ver:$(Version)" />
 		
-		<!--Merged SDK-->
-		<Exec Command="Resource\Tool\ILMerge\ILMerge.exe &quot;$(ApiSource)/Lokad.Api.Core.dll&quot; &quot;$(ApiSource)/Lokad.Api.Interface.dll&quot; &quot;$(ApiSource)/Lokad.Shared.dll&quot; /out:&quot;$(SdkPath)/Lokad.Sdk.dll&quot; /keyfile:SharedKey.snk /xmldocs=true /attr:&quot;$(ApiSource)/Lokad.Api.Core.dll&quot; /ver:$(Version)" />
 		
 		<!--Library-->
 		<CreateItem Include="$(StackPath)\Lokad.Shared.*;$(StackPath)\Lokad.Quality.*;$(StackPath)\Lokad.Stack.*;">
@@ -226,24 +217,12 @@
 		</CreateItem>
 		<Zip Files="@(_stackFiles)" ZipFileName="$(PackageDirectory)\$(MSBuildProjectName)-Dev-$(Version).zip" Flatten="true" />
 		
-		<!--SDK - Samples Archive-->
-		<CreateItem Include="$(SampleSource)\Sdk\**\*.*" Exclude="$(SourceExclusions)">
-			<Output ItemName="_sampleFiles" TaskParameter="Include" />
-		</CreateItem>
-		<Zip Files="@(_sampleFiles)" ZipFileName="$(SdkPath)\Samples.zip" Flatten="false" WorkingDirectory="$(SampleSource)\Sdk" />
-		<!--SDK - Archive-->
-		<CreateItem Include="$(SdkPath)\*.*;$(ReadMe);">
-			<Output ItemName="_sdkFiles" TaskParameter="Include" />
-		</CreateItem>
-		<Zip Files="@(_sdkFiles)" ZipFileName="$(PackageDirectory)\$(MSBuildProjectName)-Sdk-$(Version).zip" Flatten="true" />
 
 		<!--Indexes-->
 		<MakeDir Directories="$(TempPath)" />
-		<Copy SourceFiles="Resource\Files\sdk.template;Resource\Files\lib.template;Resource\Files\source.template" DestinationFolder="$(TempPath)" />
-		<TemplateFile Template="$(TempPath)\sdk.template" OutputFile="sdk.out" Tokens="@(Tokens)" />
+		<Copy SourceFiles="Resource\Files\lib.template;Resource\Files\source.template" DestinationFolder="$(TempPath)" />	
 		<TemplateFile Template="$(TempPath)\lib.template" OutputFile="lib.out" Tokens="@(Tokens)" />
 		<TemplateFile Template="$(TempPath)\source.template" OutputFile="source.out" Tokens="@(Tokens)" />
-		<Copy SourceFiles="$(TempPath)\sdk.out" DestinationFiles="$(PackageDirectory)\download-sdk.htm" />
 		<Copy SourceFiles="$(TempPath)\lib.out" DestinationFiles="$(PackageDirectory)\download-lib.htm" />
 		<Copy SourceFiles="$(TempPath)\source.out" DestinationFiles="$(PackageDirectory)\download-source.htm" />
 

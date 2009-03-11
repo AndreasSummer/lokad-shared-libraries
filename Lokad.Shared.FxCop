@@ -23,8 +23,7 @@
  <Targets>
 		<Target Name="$(ProjectDir)/Build/Stack/Lokad.Quality.dll" Analyze="True" AnalyzeAllChildren="True" />
 		<Target Name="$(ProjectDir)/Build/Stack/Lokad.Shared.dll" Analyze="True" AnalyzeAllChildren="True" />
-		<Target Name="$(ProjectDir)/Build/Stack/Lokad.Stack.dll" Analyze="True" AnalyzeAllChildren="True" />
-		<Target Name="$(ProjectDir)/Build/Stack/Lokad.Api.dll" Analyze="True" AnalyzeAllChildren="True" />   
+		<Target Name="$(ProjectDir)/Build/Stack/Lokad.Stack.dll" Analyze="True" AnalyzeAllChildren="True" />		
  </Targets>
  <Rules>
   <RuleFiles>

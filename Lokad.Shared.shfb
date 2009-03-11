@@ -2,8 +2,7 @@
     <assemblies>
 			<assembly assemblyPath=".\Build\Stack\Lokad.Shared.dll" xmlCommentsPath=".\Build\Stack\Lokad.Shared.xml" commentsOnly="False" />
 			<assembly assemblyPath=".\Build\Stack\Lokad.Quality.dll" xmlCommentsPath=".\Build\Stack\Lokad.Quality.xml" commentsOnly="False" />
-			<assembly assemblyPath=".\Build\Stack\Lokad.Stack.dll" xmlCommentsPath=".\Build\Stack\Lokad.Stack.xml" commentsOnly="False" />
-			<assembly assemblyPath=".\Build\Stack\Lokad.Api.dll" xmlCommentsPath=".\Build\Stack\Lokad.Api.xml" commentsOnly="False" />
+			<assembly assemblyPath=".\Build\Stack\Lokad.Stack.dll" xmlCommentsPath=".\Build\Stack\Lokad.Stack.xml" commentsOnly="False" />			
     </assemblies>
     <namespaceSummaries>
       <namespaceSummaryItem name="System" isDocumented="True">Generic interfaces and helper classes.</namespaceSummaryItem>
@@ -17,11 +16,6 @@
 
       <namespaceSummaryItem name="" isDocumented="True" />
       <namespaceSummaryItem name="Lokad" isDocumented="True">Lokad-specific code</namespaceSummaryItem>
-      <namespaceSummaryItem name="Lokad.Api" isDocumented="True">Classes and methods that define the Lokad API</namespaceSummaryItem>
-			<namespaceSummaryItem name="Lokad.Client" isDocumented="True">Platform-independent classes and methods for reuse in Client applications accessing Lokad API</namespaceSummaryItem>
-			<namespaceSummaryItem name="Lokad.Client.Forms" isDocumented="True">Functionality for Lokad Clients that use Windows.Forms UI platform</namespaceSummaryItem>
-      <namespaceSummaryItem name="Lokad.Api.WebReference" isDocumented="False" />
-      <namespaceSummaryItem name="Lokad.Api.Interface" isDocumented="True" >Interfaces implemented by the Lokad API</namespaceSummaryItem>
       <namespaceSummaryItem name="Lokad.Container" isDocumented="False" />
       <namespaceSummaryItem name="Lokad.Diagnostics" isDocumented="False" />
       <namespaceSummaryItem name="Lokad.Handling" isDocumented="False" />

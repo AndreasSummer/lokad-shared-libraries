@@ -68,10 +68,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Source\Lokad.Api.Core\Lokad.Api.Core.csproj">
-      <Project>{591ED95A-1C74-4DE0-A830-FA8AC2F103F8}</Project>
-      <Name>Lokad.Api.Core</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Source\Lokad.Shared\Lokad.Shared.csproj">
       <Project>{9C285BAA-786F-41E9-8CFB-C1FDDB3E6FE1}</Project>
       <Name>Lokad.Shared</Name>

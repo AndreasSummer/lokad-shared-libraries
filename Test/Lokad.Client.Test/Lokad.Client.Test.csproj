@@ -54,10 +54,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Source\Lokad.Client\Lokad.Client.csproj">
-      <Project>{04A43B1C-8D47-4837-9C3E-72811579F3B7}</Project>
-      <Name>Lokad.Client</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Source\Lokad.Shared\Lokad.Shared.csproj">
       <Project>{9C285BAA-786F-41E9-8CFB-C1FDDB3E6FE1}</Project>
       <Name>Lokad.Shared</Name>
