@@ -33,6 +33,24 @@ namespace Lokad.Quality
 		}
 
 		/// <summary>
+		/// Gets the methods referenced from this <paramref name="definition"/>.
+		/// </summary>
+		/// <param name="definition">The definition.</param>
+		/// <returns>enumerator over the method references</returns>
+		public static IEnumerable<MethodReference> GetReferencedMethods(this MethodDefinition definition)
+		{
+			return definition
+				.GetInstructions()
+				.Select(i => i.Operand as MethodReference)
+				.Where(r => r != null);
+		}
+
+		//public static bool Exists(this MethodDefinition method, Predicate<Instruction> instructionCheck)
+		//{
+		//    return method.GetInstructions().Exists(instructionCheck);
+		//}
+
+		/// <summary>
 		/// Gets the parameters from the specified <paramref name="definition"/>.
 		/// </summary>
 		/// <param name="definition">The definition to explore.</param>
