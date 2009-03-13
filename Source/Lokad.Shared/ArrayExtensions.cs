@@ -117,5 +117,35 @@ namespace System
 
 			return result;
 		}
+
+		/// <summary>
+		/// Converts this array to a jagged array, while bringing indexing to zero-based.
+		/// </summary>
+		/// <typeparam name="TValue">The type of the value.</typeparam>
+		/// <param name="array">The array.</param>
+		/// <returns>jagged array</returns>
+		public static TValue[][] ToJaggedArray<TValue>([NotNull] this TValue[,] array)
+		{
+			if (array == null) throw new ArgumentNullException("array");
+			var aMin = array.GetLowerBound(0);
+			var aMax = array.GetUpperBound(0);
+			var rows = aMax - aMin + 1;
+
+			var bMin = array.GetLowerBound(1);
+			var bMax = array.GetUpperBound(1);
+			var cols = bMax - bMin + 1;
+
+			var result = new TValue[rows][];
+
+			for (int row = 0; row < rows; row++)
+			{
+				result[row] = new TValue[cols];
+				for (int col = 0; col < cols; col++)
+				{
+					result[row][col] = array[row + aMin, col + bMin];
+				}
+			}
+			return result;
+		}
 	}
 }

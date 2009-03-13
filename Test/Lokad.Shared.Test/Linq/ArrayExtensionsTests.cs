@@ -90,5 +90,37 @@ namespace System.Linq
 				Assert.AreEqual(0, i);
 			}
 		}
+
+		[Test]
+		public void Empty_jagged_array2()
+		{
+			var obj = new object[0,0];
+			object[][] objects = obj.ToJaggedArray();
+			Assert.AreEqual(0,objects.Length);
+		}
+
+		[Test]
+		public void Non_empty_jagger_array2()
+		{
+			var obj = new[,] {{1, 2}, {3, 4}};
+			int[][] actual = obj.ToJaggedArray();
+
+			var expected = new [] {new [] {1,2},new[]{3,4}};
+			CollectionAssert.AreEqual(expected, actual);
+		}
+
+		[Test]
+		public void Shifted_jagged_array2()
+		{
+			var instance = Array.CreateInstance(typeof (int), new[] {2, 2}, new[] {1, 1});
+			var array = (int[,]) instance;
+
+			array[1, 1] = 1;
+			array[1, 2] = 2;
+			array[2, 1] = 3;
+			array[2, 2] = 4;
+			var expected = new[] { new[] { 1, 2 }, new[] { 3, 4 } };
+			CollectionAssert.AreEqual(expected, array.ToJaggedArray());
+		}
 	}
 }
