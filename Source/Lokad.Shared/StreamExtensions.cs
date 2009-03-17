@@ -11,7 +11,7 @@
 using System;
 using System.IO;
 using System.IO.Compression;
-using Lokad.Diagnostics.CodeAnalysis;
+using Lokad.Quality;
 
 namespace Lokad
 {

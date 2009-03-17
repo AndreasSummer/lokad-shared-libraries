@@ -8,7 +8,7 @@
 
 using System;
 using System.ComponentModel;
-using Lokad.Diagnostics.CodeAnalysis;
+using Lokad.Quality;
 
 namespace Lokad
 {

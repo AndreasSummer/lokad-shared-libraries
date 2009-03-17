@@ -126,7 +126,7 @@
 			AssemblyList="@(_coverageFiles)"
 			CoverageFile="$(ArtifactDirectory)\$(MSBuildProjectName)-coverage.xml"
 			LogFile="$(ArtifactDirectory)\$(MSBuildProjectName)-coverage.log"
-			ExcludeAttributes="Lokad.Diagnostics.CodeAnalysis.NoCodeCoverageAttribute;System.Runtime.CompilerServices.CompilerGeneratedAttribute;System.CodeDom.Compiler.GeneratedCodeAttribute"
+			ExcludeAttributes="Lokad.Quality.NoCodeCoverageAttribute;System.Runtime.CompilerServices.CompilerGeneratedAttribute;System.CodeDom.Compiler.GeneratedCodeAttribute"
 			ContinueOnError="false"
 		/>
 

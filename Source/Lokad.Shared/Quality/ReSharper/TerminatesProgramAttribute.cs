@@ -8,7 +8,7 @@
 
 using System;
 
-namespace Lokad.Diagnostics.CodeAnalysis
+namespace Lokad.Quality
 {
 	/// <summary>
 	/// Indicates that the marked method unconditionally terminates control flow execution.

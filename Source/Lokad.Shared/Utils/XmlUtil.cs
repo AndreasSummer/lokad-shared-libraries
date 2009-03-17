@@ -10,7 +10,7 @@
 using System;
 using System.IO;
 using System.Xml.Serialization;
-using Lokad.Diagnostics.CodeAnalysis;
+using Lokad.Quality;
 
 namespace Lokad
 {

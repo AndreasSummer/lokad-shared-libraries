@@ -8,7 +8,7 @@
 
 using System;
 using System.Collections.Generic;
-using Lokad.Diagnostics.CodeAnalysis;
+using Lokad.Quality;
 
 namespace Lokad.Data.SqlClient
 {

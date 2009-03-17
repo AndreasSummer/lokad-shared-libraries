@@ -8,7 +8,7 @@
 
 using System;
 using System.Globalization;
-using Lokad.Diagnostics.CodeAnalysis;
+using Lokad.Quality;
 using Lokad.Reflection;
 
 namespace Lokad

@@ -8,7 +8,7 @@
 
 using System;
 
-namespace Lokad.Diagnostics.CodeAnalysis
+namespace Lokad.Quality
 {
 	/// <summary>
 	/// Indicates the condition parameter of the assertion method. 

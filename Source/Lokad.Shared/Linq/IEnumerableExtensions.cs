@@ -9,7 +9,7 @@
 using System.Collections.Generic;
 using Lokad;
 using Lokad.Collections.Generic;
-using Lokad.Diagnostics.CodeAnalysis;
+using Lokad.Quality;
 
 namespace System.Linq
 {

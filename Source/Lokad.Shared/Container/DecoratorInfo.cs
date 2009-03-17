@@ -7,7 +7,7 @@
 #endregion
 
 using System;
-using Lokad.Diagnostics.CodeAnalysis;
+using Lokad.Quality;
 
 namespace Lokad.Container
 {

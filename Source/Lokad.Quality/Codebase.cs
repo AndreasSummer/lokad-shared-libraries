@@ -9,7 +9,6 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using Lokad.Diagnostics.CodeAnalysis;
 using Mono.Cecil;
 
 namespace Lokad.Quality

@@ -60,18 +60,25 @@
     <Compile Include="ActionPolicyWithState.cs" />
     <Compile Include="ArrayExtensions.cs" />
     <Compile Include="Collections\Generic\ProjectionComparer.cs" />
-    <Compile Include="Diagnostics\CodeAnalysis\ReSharper\CanBeNullAttribute.cs" />
-    <Compile Include="Diagnostics\CodeAnalysis\ReSharper\CannotApplyEqualityOperatorAttribute.cs" />
-    <Compile Include="Diagnostics\CodeAnalysis\ReSharper\ImplicitUseFlags.cs" />
-    <Compile Include="Diagnostics\CodeAnalysis\ReSharper\MeansImplicitUseAttribute.cs" />
-    <Compile Include="Diagnostics\CodeAnalysis\ReSharper\NotNullAttribute.cs" />
-    <Compile Include="Diagnostics\CodeAnalysis\ReSharper\TerminatesProgramAttribute.cs" />
-    <Compile Include="Diagnostics\CodeAnalysis\ReSharper\UsedImplicitlyAttribute.cs" />
     <Compile Include="Diagnostics\DebugLog.cs" />
     <Compile Include="Diagnostics\ExceptionStatistics.cs" />
     <Compile Include="Linq\ArrayExtensionsForLinq.cs" />
     <Compile Include="Linq\Indexer.cs" />
     <Compile Include="Maybe.cs" />
+    <Compile Include="Quality\ImmutableAttribute.cs" />
+    <Compile Include="Quality\NoCodeCoverageAttribute.cs" />
+    <Compile Include="Quality\ReSharper\AssertionConditionAttribute.cs" />
+    <Compile Include="Quality\ReSharper\AssertionConditionType.cs" />
+    <Compile Include="Quality\ReSharper\AssertionMethodAttribute.cs" />
+    <Compile Include="Quality\ReSharper\CanBeNullAttribute.cs" />
+    <Compile Include="Quality\ReSharper\CannotApplyEqualityOperatorAttribute.cs" />
+    <Compile Include="Quality\ReSharper\ImplicitUseFlags.cs" />
+    <Compile Include="Quality\ReSharper\InvokerParameterNameAttribute.cs" />
+    <Compile Include="Quality\ReSharper\MeansImplicitUseAttribute.cs" />
+    <Compile Include="Quality\ReSharper\NotNullAttribute.cs" />
+    <Compile Include="Quality\ReSharper\StringFormatMethodAttribute.cs" />
+    <Compile Include="Quality\ReSharper\TerminatesProgramAttribute.cs" />
+    <Compile Include="Quality\ReSharper\UsedImplicitlyAttribute.cs" />
     <Compile Include="Reflection\Express.cs" />
     <Compile Include="Rules\RuleResources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -91,13 +98,6 @@
     <Compile Include="Container\DecoratorAttribute.cs" />
     <Compile Include="Container\DecoratorInfo.cs" />
     <Compile Include="Container\RegistrationScope.cs" />
-    <Compile Include="Diagnostics\CodeAnalysis\ReSharper\AssertionConditionAttribute.cs" />
-    <Compile Include="Diagnostics\CodeAnalysis\ReSharper\AssertionConditionType.cs" />
-    <Compile Include="Diagnostics\CodeAnalysis\ReSharper\AssertionMethodAttribute.cs" />
-    <Compile Include="Diagnostics\CodeAnalysis\ImmutableAttribute.cs" />
-    <Compile Include="Diagnostics\CodeAnalysis\ReSharper\InvokerParameterNameAttribute.cs" />
-    <Compile Include="Diagnostics\CodeAnalysis\NoCodeCoverageAttribute.cs" />
-    <Compile Include="Diagnostics\CodeAnalysis\ReSharper\StringFormatMethodAttribute.cs" />
     <Compile Include="Diagnostics\ExceptionCounter.cs" />
     <Compile Include="Diagnostics\ExecutionCounters.cs" />
     <Compile Include="DoubleExtensions.cs" />
@@ -184,7 +184,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Diagnostics\CodeAnalysis\ReSharper\_ReadMe.txt" />
+    <Content Include="Quality\ReSharper\_ReadMe.txt" />
     <Content Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>

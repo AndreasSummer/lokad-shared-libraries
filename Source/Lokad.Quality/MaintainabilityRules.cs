@@ -7,7 +7,7 @@
 #endregion
 
 using System.Linq;
-using Lokad.Diagnostics.CodeAnalysis;
+using Lokad.Quality;
 using Lokad.Rules;
 
 namespace Lokad.Quality

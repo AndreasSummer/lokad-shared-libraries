@@ -9,7 +9,7 @@
 using System;
 using System.Collections.Generic;
 using System.Globalization;
-using Lokad.Diagnostics.CodeAnalysis;
+using Lokad.Quality;
 using Lokad.Reflection;
 
 namespace Lokad.Rules

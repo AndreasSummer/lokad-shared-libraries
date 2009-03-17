@@ -8,7 +8,7 @@
 
 using System;
 
-namespace Lokad.Diagnostics.CodeAnalysis
+namespace Lokad.Quality
 {
 	/// <summary>
 	/// Indicates that the value of marked type (or its derivatives) cannot be compared using '==' or '!=' operators.

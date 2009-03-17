@@ -8,7 +8,7 @@
 
 using System;
 using System.Threading;
-using Lokad.Diagnostics.CodeAnalysis;
+using Lokad.Quality;
 using Lokad.Threading;
 
 #if !SILVERLIGHT2

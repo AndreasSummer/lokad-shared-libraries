@@ -10,7 +10,7 @@
 
 using System;
 using System.Diagnostics;
-using Lokad.Diagnostics.CodeAnalysis;
+using Lokad.Quality;
 
 namespace Lokad.Diagnostics
 {

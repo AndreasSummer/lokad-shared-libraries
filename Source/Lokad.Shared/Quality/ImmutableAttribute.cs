@@ -7,8 +7,9 @@
 #endregion
 
 using System;
+using Lokad.Quality;
 
-namespace Lokad.Diagnostics.CodeAnalysis
+namespace Lokad.Quality
 {
 	/// <summary>
 	/// <para>Class is considered to be immutable, when all fields are read-only.

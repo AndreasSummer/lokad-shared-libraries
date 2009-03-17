@@ -9,7 +9,6 @@
 using System;
 using System.Linq;
 using Lokad.Container;
-using Lokad.Diagnostics.CodeAnalysis;
 using Mono.Cecil;
 using NUnit.Framework;
 

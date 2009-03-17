@@ -10,7 +10,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
-using Lokad.Diagnostics.CodeAnalysis;
+using Lokad.Quality;
 using Lokad.Reflection;
 
 namespace Lokad.Diagnostics
