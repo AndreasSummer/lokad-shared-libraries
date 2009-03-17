@@ -6,12 +6,13 @@
 
 #endregion
 
+using System;
 using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
 using System.Linq.Expressions;
 using System.Text;
+using Lokad.Diagnostics.CodeAnalysis;
 
-namespace System.Rules
+namespace Lokad.Rules
 {
 	/// <summary>
 	/// Helper class to simplify testing of rules.
@@ -161,7 +162,7 @@ namespace System.Rules
 		/// <param name="argumentReference">The argument reference.</param>
 		/// <param name="expressions">The expressions to check against.</param>
 		/// <exception cref="RuleException">If the check fails</exception>
-		public static void That<TTarget>(Func<TTarget> argumentReference, 
+		public static void That<TTarget>(Func<TTarget> argumentReference,
 			params Expression<Predicate<TTarget>>[] expressions)
 		{
 			Enforce.That(argumentReference, expressions.Convert(e => Is.True(e)));

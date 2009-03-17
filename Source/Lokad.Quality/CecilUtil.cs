@@ -14,8 +14,7 @@ namespace Lokad.Quality
 
 		public static string GetMonoName()
 		{
-			return (typeof(T).FullName).Replace('+', '/');
+			return (typeof (T).FullName).Replace('+', '/');
 		}
-
 	}
 }

@@ -6,7 +6,9 @@
 
 #endregion
 
-namespace System.Rules
+using System;
+
+namespace Lokad.Rules
 {
 	/// <summary>
 	/// Simple <see cref="IScope"/> implementation that allows to 
@@ -78,8 +80,5 @@ namespace System.Rules
 					throw new ArgumentOutOfRangeException("level");
 			}
 		}
-
-		
-
 	}
 }

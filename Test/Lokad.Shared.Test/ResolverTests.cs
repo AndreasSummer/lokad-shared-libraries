@@ -6,9 +6,10 @@
 
 #endregion
 
+using System;
 using NUnit.Framework;
 
-namespace System
+namespace Lokad
 {
 	[TestFixture]
 	public sealed class ResolverTests

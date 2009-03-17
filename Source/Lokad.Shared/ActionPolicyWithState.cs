@@ -6,9 +6,10 @@
 
 #endregion
 
-using System.Diagnostics.CodeAnalysis;
+using System;
+using Lokad.Diagnostics.CodeAnalysis;
 
-namespace System
+namespace Lokad
 {
 	/// <summary>
 	/// Same as <see cref="ActionPolicy"/>, but indicates that this policy

@@ -6,11 +6,10 @@
 
 #endregion
 
-using System;
 using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
+using Lokad.Diagnostics.CodeAnalysis;
 using Mono.Cecil;
 
 namespace Lokad.Quality
@@ -44,7 +43,7 @@ namespace Lokad.Quality
 		readonly MethodDefinition[] _methods;
 
 		readonly IDictionary<string, TypeDefinition> _typeDictionary;
-		
+
 		readonly AssemblyDefinition[] _refs;
 		readonly Pair<string, AssemblyDefinition>[] _defs;
 
@@ -71,7 +70,7 @@ namespace Lokad.Quality
 		{
 			_defs = assembliesToAnalyze
 				.Convert(n => Tuple.From(Path.GetFileName(n), AssemblyFactory.GetAssembly(n)));
-			
+
 			var defs = _defs.Convert(p => p.Value);
 
 			_types = defs

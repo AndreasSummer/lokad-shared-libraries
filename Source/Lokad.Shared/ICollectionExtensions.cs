@@ -1,14 +1,15 @@
-#region (c)2008 Lokad - New BSD license
+#region (c)2009 Lokad - New BSD license
 
-// Copyright (c) Lokad 2008 
+// Copyright (c) Lokad 2009 
 // Company: http://www.lokad.com
 // This code is released under the terms of the new BSD licence
 
 #endregion
 
+using System;
 using System.Collections.Generic;
 
-namespace System
+namespace Lokad
 {
 	/// <summary>
 	/// Simple helper extensions for <see cref="ICollection{T}"/>
@@ -65,7 +66,7 @@ namespace System
 		public static bool IsEmpty<T>(this ICollection<T> self)
 		{
 			if (self == null) throw new ArgumentNullException("self");
-			
+
 			return self.Count == 0;
 		}
 	}

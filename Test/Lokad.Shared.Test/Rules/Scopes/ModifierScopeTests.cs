@@ -9,7 +9,7 @@
 using System.Collections.Generic;
 using NUnit.Framework;
 
-namespace System.Rules
+namespace Lokad.Rules
 {
 	[TestFixture]
 	public sealed class ModifierScopeTests
@@ -21,7 +21,7 @@ namespace System.Rules
 		{
 			var levels = new List<RuleLevel>();
 			var scope = new SimpleScope("T", (path, level, message) => levels.Add(level)).Lower();
-			
+
 			_levels.ForEach(l => scope.Write(l, "test"));
 			Assert.AreEqual(RuleLevel.Warn, scope.Level);
 			Assert.AreEqual(levels.Count, 2);

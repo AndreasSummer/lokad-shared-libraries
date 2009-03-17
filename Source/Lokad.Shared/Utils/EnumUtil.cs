@@ -1,16 +1,15 @@
-#region (c)2008 Lokad - New BSD license
+#region (c)2009 Lokad - New BSD license
 
-// Copyright (c) Lokad 2008 
+// Copyright (c) Lokad 2009 
 // Company: http://www.lokad.com
 // This code is released under the terms of the new BSD licence
 
 #endregion
 
-using System.Collections.Generic;
+using System;
 using System.Linq;
-using System.Reflection;
 
-namespace System
+namespace Lokad
 {
 	/// <summary>
 	/// Enum helper class from xLim
@@ -49,7 +48,7 @@ namespace System
 
 		static TEnum[] GetValues()
 		{
-			Type enumType = typeof(TEnum);
+			Type enumType = typeof (TEnum);
 
 			if (!enumType.IsEnum)
 			{
@@ -69,6 +68,5 @@ namespace System
 				.ToArray(f => (TEnum) f.GetValue(enumType));
 #endif
 		}
-
 	}
 }

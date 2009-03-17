@@ -8,9 +8,11 @@
 
 #if !SILVERLIGHT2
 
-using System.Diagnostics.CodeAnalysis;
+using System;
+using System.Diagnostics;
+using Lokad.Diagnostics.CodeAnalysis;
 
-namespace System.Diagnostics
+namespace Lokad.Diagnostics
 {
 	/// <summary>
 	/// <see cref="ILog"/> that writes to the <see cref="Debug.Listeners"/>

@@ -7,9 +7,9 @@
 #endregion
 
 using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
+using Lokad.Diagnostics.CodeAnalysis;
 
-namespace System
+namespace Lokad
 {
 	/// <summary>
 	/// Helper extensions for tuples

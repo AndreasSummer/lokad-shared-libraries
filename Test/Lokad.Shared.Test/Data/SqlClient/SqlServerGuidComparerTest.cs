@@ -1,16 +1,17 @@
-#region (c)2008 Lokad - New BSD license
+#region (c)2009 Lokad - New BSD license
 
-// Copyright (c) Lokad 2008 
+// Copyright (c) Lokad 2009 
 // Company: http://www.lokad.com
 // This code is released under the terms of the new BSD licence
 
 #endregion
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using NUnit.Framework;
 
-namespace System.Data.SqlClient
+namespace Lokad.Data.SqlClient
 {
 	[TestFixture]
 	public sealed class SqlServerGuidComparerTest
@@ -41,7 +42,6 @@ namespace System.Data.SqlClient
 			Assert.AreEqual(0, _comparer.Compare(Guid.Empty, Guid.Empty));
 			var guid = Guid.NewGuid();
 			Assert.AreEqual(0, _comparer.Compare(guid, guid));
-			
 		}
 
 		static readonly IComparer<Guid> _comparer = new SqlServerGuidComparer();

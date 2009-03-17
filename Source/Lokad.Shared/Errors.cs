@@ -6,11 +6,12 @@
 
 #endregion
 
-using System.Diagnostics.CodeAnalysis;
+using System;
 using System.Globalization;
-using System.Reflection;
+using Lokad.Diagnostics.CodeAnalysis;
+using Lokad.Reflection;
 
-namespace System
+namespace Lokad
 {
 	/// <summary>
 	/// Helper class for generating exceptions
@@ -110,7 +111,7 @@ namespace System
 		[NotNull]
 		internal static Exception ArgumentNull<T>([NotNull] Func<T> argumentReference)
 		{
-			var message = StringUtil.FormatInvariant("Parameter of type '{0}' can't be null", typeof(T));
+			var message = StringUtil.FormatInvariant("Parameter of type '{0}' can't be null", typeof (T));
 			var paramName = Reflect.VariableName(argumentReference);
 			return new ArgumentNullException(paramName, message);
 		}

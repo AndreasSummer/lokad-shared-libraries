@@ -1,15 +1,15 @@
-#region (c)2008 Lokad - New BSD license
+#region (c)2009 Lokad - New BSD license
 
-// Copyright (c) Lokad 2008 
+// Copyright (c) Lokad 2009 
 // Company: http://www.lokad.com
 // This code is released under the terms of the new BSD licence
 
 #endregion
 
-using System.Text.RegularExpressions;
 using System.Linq;
+using System.Text.RegularExpressions;
 
-namespace System.Rules
+namespace Lokad.Rules
 {
 	/// <summary>
 	/// Common string rules
@@ -25,9 +25,9 @@ namespace System.Rules
 				@"@(([a-z0-9]{1,64})(([\.\-][a-z0-9]{1,64})*)\.([a-z]{2,})" +
 					@"|(\d{1,3}(\.\d{1,3}){3}))$",
 #if !SILVERLIGHT2
-			RegexOptions.Compiled | 
+			RegexOptions.Compiled |
 #endif
-			RegexOptions.Singleline | RegexOptions.IgnoreCase);
+				RegexOptions.Singleline | RegexOptions.IgnoreCase);
 
 		/// <summary>
 		/// Determines whether the string is valid email address
@@ -72,10 +72,10 @@ namespace System.Rules
 			Enforce.Argument(() => maxLength, Is.GreaterThan(0));
 
 			return (s, scope) =>
-			{
-				if (s.Length > maxLength)
-					scope.Error(RuleResources.String_cant_be_longer_than_X, maxLength);
-			};
+				{
+					if (s.Length > maxLength)
+						scope.Error(RuleResources.String_cant_be_longer_than_X, maxLength);
+				};
 		}
 
 		/// <summary>
@@ -94,7 +94,7 @@ namespace System.Rules
 		/// <returns>new validator instance</returns>
 		public static Rule<string> Without(params char[] illegalCharacters)
 		{
-			var joined = illegalCharacters.Select(c => "'"+ c+"'").Join(",");
+			var joined = illegalCharacters.Select(c => "'" + c + "'").Join(",");
 			return (s, scope) =>
 				{
 					if (s.IndexOfAny(illegalCharacters) >= 0)
@@ -122,6 +122,7 @@ namespace System.Rules
 				if (s.Length > 0 && char.IsWhiteSpace(s[0]))
 					scope.Error(RuleResources.String_cant_start_with_whitespace);
 			};
+
 		/// <summary> String validator checking for presence of 
 		/// white-space characters in the end of string </summary>
 		public static Rule<string> WithoutTrailingWhiteSpace = (s, scope) =>

@@ -1,14 +1,15 @@
-#region (c)2008 Lokad - New BSD license
+#region (c)2009 Lokad - New BSD license
 
-// Copyright (c) Lokad 2008 
+// Copyright (c) Lokad 2009 
 // Company: http://www.lokad.com
 // This code is released under the terms of the new BSD licence
 
 #endregion
 
-using System.Diagnostics.CodeAnalysis;
+using System;
+using Lokad.Diagnostics.CodeAnalysis;
 
-namespace System
+namespace Lokad
 {
 	/// <summary>
 	/// This class provides short-cut for creating providers
@@ -20,7 +21,7 @@ namespace System
 	[Immutable]
 	public class Provider<TKey, TValue> : IProvider<TKey, TValue>
 	{
-		private readonly Func<TKey, TValue> _resolver;
+		readonly Func<TKey, TValue> _resolver;
 
 		/// <summary>
 		/// Initializes a new instance of the <see cref="Provider{TKey, TValue}"/> class.
@@ -31,7 +32,7 @@ namespace System
 		public Provider(Func<TKey, TValue> resolver)
 		{
 			if (resolver == null) throw new ArgumentNullException("resolver");
-			
+
 			_resolver = resolver;
 		}
 
@@ -50,7 +51,7 @@ namespace System
 			}
 			catch (Exception ex)
 			{
-				throw Errors.Resolution(typeof(TValue), key, ex);
+				throw Errors.Resolution(typeof (TValue), key, ex);
 			}
 		}
 	}

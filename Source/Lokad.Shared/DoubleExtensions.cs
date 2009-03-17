@@ -6,7 +6,9 @@
 
 #endregion
 
-namespace System
+using System;
+
+namespace Lokad
 {
 	/// <summary>
 	/// Some helper shortcuts for the <see cref="double"/>

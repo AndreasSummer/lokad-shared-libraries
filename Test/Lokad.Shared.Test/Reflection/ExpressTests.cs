@@ -1,15 +1,17 @@
-#region (c)2008 Lokad - New BSD license
+#region (c)2009 Lokad - New BSD license
 
-// Copyright (c) Lokad 2008 
+// Copyright (c) Lokad 2009 
 // Company: http://www.lokad.com
 // This code is released under the terms of the new BSD licence
 
 #endregion
 
-using System.Rules;
+using System;
+using System.Reflection;
+using Lokad.Rules;
 using NUnit.Framework;
 
-namespace System.Reflection
+namespace Lokad.Reflection
 {
 	[TestFixture]
 	public sealed class ExpressTests
@@ -46,7 +48,10 @@ namespace System.Reflection
 		}
 
 
-		int IntProperty { get { return _intField; } }
+		int IntProperty
+		{
+			get { return _intField; }
+		}
 
 		[Test]
 		public void Property()
@@ -62,7 +67,10 @@ namespace System.Reflection
 		static readonly int _staticField = 4;
 		// ReSharper restore ConvertToConstant
 
-		static int StaticProperty { get { return _staticField; } }
+		static int StaticProperty
+		{
+			get { return _staticField; }
+		}
 
 		[Test]
 		public void Static_Property()
@@ -71,7 +79,6 @@ namespace System.Reflection
 			Enforce.That(property, Represents<ExpressTests>("StaticProperty"));
 		}
 
-		
 
 		[Test]
 		public void Field()

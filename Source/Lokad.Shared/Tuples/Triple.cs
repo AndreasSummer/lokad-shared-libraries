@@ -1,14 +1,15 @@
-#region (c)2008 Lokad - New BSD license
+#region (c)2009 Lokad - New BSD license
 
-// Copyright (c) Lokad 2008 
+// Copyright (c) Lokad 2009 
 // Company: http://www.lokad.com
 // This code is released under the terms of the new BSD licence
 
 #endregion
 
-using System.Diagnostics.CodeAnalysis;
+using System;
+using Lokad.Diagnostics.CodeAnalysis;
 
-namespace System
+namespace Lokad
 {
 	/// <summary>
 	/// Tuple class with 3 items
@@ -18,7 +19,7 @@ namespace System
 	/// <typeparam name="T3">The type of the third item.</typeparam>
 	[Serializable]
 	[Immutable]
-	public sealed class Triple<T1,T2,T3> : Tuple<T1,T2, T3>
+	public sealed class Triple<T1, T2, T3> : Tuple<T1, T2, T3>
 	{
 		/// <summary>
 		/// Initializes a new instance of the <see cref="Triple{T1, T2, T3}"/> class.
@@ -30,5 +31,4 @@ namespace System
 		{
 		}
 	}
-
 }

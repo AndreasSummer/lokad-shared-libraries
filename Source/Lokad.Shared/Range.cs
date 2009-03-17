@@ -1,16 +1,17 @@
-#region (c)2008 Lokad - New BSD license
+#region (c)2009 Lokad - New BSD license
 
-// Copyright (c) Lokad 2008 
+// Copyright (c) Lokad 2009 
 // Company: http://www.lokad.com
 // This code is released under the terms of the new BSD licence
 
 #endregion
 
+using System;
 using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using Lokad.Diagnostics.CodeAnalysis;
 
-namespace System
+namespace Lokad
 {
 	/// <summary>
 	/// Helper class with shortcut methods for managing enumerations.
@@ -37,7 +38,7 @@ namespace System
 			return Enumerable.Range(0, count);
 		}
 
-		
+
 		/// <summary>
 		/// Creates sequence of the integral numbers within the specified range
 		/// </summary>
@@ -63,7 +64,6 @@ namespace System
 			return Enumerable.Repeat(item, count);
 		}
 
-		
 
 		/// <summary>
 		/// Creates the generator to iterate from 1 to <see cref="int.MaxValue"/>.
@@ -71,7 +71,7 @@ namespace System
 		/// <typeparam name="T">type of the item to generate</typeparam>
 		/// <param name="generator">The generator.</param>
 		/// <returns>new enumerator</returns>
-		public static IEnumerable<T> Create<T>(Func<int,T> generator)
+		public static IEnumerable<T> Create<T>(Func<int, T> generator)
 		{
 			for (int i = 0; i < int.MaxValue; i++)
 			{
@@ -87,7 +87,7 @@ namespace System
 		/// <param name="count">The count.</param>
 		/// <param name="generator">The generator.</param>
 		/// <returns>enumerable instance</returns>
-		public static IEnumerable<T> Create<T>(int count, Func<int,T> generator)
+		public static IEnumerable<T> Create<T>(int count, Func<int, T> generator)
 		{
 			for (int i = 0; i < count; i++)
 			{
@@ -117,7 +117,7 @@ namespace System
 		/// <param name="count">The count.</param>
 		/// <param name="generator">The generator.</param>
 		/// <returns>array</returns>
-		public static T[] Array<T>(int count, Func<int,T> generator)
+		public static T[] Array<T>(int count, Func<int, T> generator)
 		{
 			var array = new T[count];
 			for (int i = 0; i < array.Length; i++)

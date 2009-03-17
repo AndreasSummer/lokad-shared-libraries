@@ -1,6 +1,6 @@
-#region (c)2008 Lokad - New BSD license
+#region (c)2009 Lokad - New BSD license
 
-// Copyright (c) Lokad 2008 
+// Copyright (c) Lokad 2009 
 // Company: http://www.lokad.com
 // This code is released under the terms of the new BSD licence
 
@@ -8,7 +8,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
 using Autofac;
 using Autofac.Builder;
@@ -21,7 +20,7 @@ namespace Lokad.Container
 	/// </summary>
 	public sealed class AutoRegistrationModule : IModule
 	{
-		private readonly List<Assembly> _references = new List<Assembly>();
+		readonly List<Assembly> _references = new List<Assembly>();
 
 		/// <summary>
 		/// Same as <see cref="AddAssembly"/> but for the XML configs
@@ -33,7 +32,6 @@ namespace Lokad.Container
 				value
 					.Split(new[] {';'}, StringSplitOptions.RemoveEmptyEntries)
 					.ForEach(s => _references.Add(Assembly.LoadFrom(s)));
-				
 			}
 			get { return null; }
 		}
@@ -46,7 +44,7 @@ namespace Lokad.Container
 		public void AddAssembly(Assembly assembly)
 		{
 			if (assembly == null) throw new ArgumentNullException("assembly");
-			
+
 			_references.Add(assembly);
 		}
 

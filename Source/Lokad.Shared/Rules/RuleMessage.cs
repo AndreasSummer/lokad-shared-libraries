@@ -6,10 +6,11 @@
 
 #endregion
 
-using System.Diagnostics.CodeAnalysis;
+using System;
 using System.Globalization;
+using Lokad.Diagnostics.CodeAnalysis;
 
-namespace System.Rules
+namespace Lokad.Rules
 {
 	/// <summary> Rule message </summary>
 	[Immutable]

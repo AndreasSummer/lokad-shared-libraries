@@ -6,10 +6,11 @@
 
 #endregion
 
+using System;
 using System.Diagnostics;
-using System.Diagnostics.CodeAnalysis;
+using Lokad.Diagnostics.CodeAnalysis;
 
-namespace System
+namespace Lokad
 {
 	/// <summary>
 	/// Policy that could be applied to delegates to

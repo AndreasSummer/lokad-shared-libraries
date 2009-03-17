@@ -1,14 +1,15 @@
-#region (c)2008 Lokad - New BSD license
+#region (c)2009 Lokad - New BSD license
 
-// Copyright (c) Lokad 2008 
+// Copyright (c) Lokad 2009 
 // Company: http://www.lokad.com
 // This code is released under the terms of the new BSD licence
 
 #endregion
 
+using System;
 using System.Threading;
 
-namespace System
+namespace Lokad
 {
 	/// <summary>
 	/// System utils to improve testability of the code
@@ -18,12 +19,12 @@ namespace System
 		/// <summary>
 		/// <see cref="Thread.Sleep(TimeSpan)"/>
 		/// </summary>
-		private static Action<TimeSpan> _sleep;
+		static Action<TimeSpan> _sleep;
 
 		/// <summary>
 		/// Allows to set custom date time implementation for the testing purposes.
 		/// </summary>
-		private static Func<DateTime> _dateTimeProvider;
+		static Func<DateTime> _dateTimeProvider;
 
 		/// <summary>
 		/// <see cref="DateTime.Now"/>
@@ -92,7 +93,7 @@ namespace System
 				int result = 0;
 				foreach (var o in args)
 				{
-					result = (result * 397) ^ o.GetHashCode();
+					result = (result*397) ^ o.GetHashCode();
 				}
 				return result;
 			}

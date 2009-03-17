@@ -1,7 +1,15 @@
-using System.IO;
-using System.Rules;
-using NUnit.Framework;
+#region (c)2009 Lokad - New BSD license
+
+// Copyright (c) Lokad 2009 
+// Company: http://www.lokad.com
+// This code is released under the terms of the new BSD licence
+
+#endregion
+
 using System;
+using System.IO;
+using Lokad.Rules;
+using NUnit.Framework;
 
 namespace Lokad.Logging
 {
@@ -58,7 +66,7 @@ namespace Lokad.Logging
 			LoggingStack.Reset();
 			if (Directory.Exists(TestPath))
 				Directory.Delete(TestPath, true);
-			
+
 			Console.SetOut(_out);
 		}
 	}

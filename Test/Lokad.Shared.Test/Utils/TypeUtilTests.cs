@@ -6,10 +6,10 @@
 
 #endregion
 
-using System.Container;
+using Lokad.Container;
 using NUnit.Framework;
 
-namespace System
+namespace Lokad
 {
 	[TestFixture]
 	public sealed class TypeUtilTests

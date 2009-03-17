@@ -1,22 +1,22 @@
-#region (c)2008 Lokad - New BSD license
+#region (c)2009 Lokad - New BSD license
 
-// Copyright (c) Lokad 2008 
+// Copyright (c) Lokad 2009 
 // Company: http://www.lokad.com
 // This code is released under the terms of the new BSD licence
 
 #endregion
 
+using System;
 using System.Collections.Generic;
-using System.Exceptions;
-using System.Rules;
+using Lokad.Exceptions;
+using Lokad.Rules;
 
-namespace System
+namespace Lokad
 {
 	/// <summary> Fluent API for defining <see cref="ActionPolicy"/> 
 	/// that allows to handle exceptions. </summary>
 	public static class ExceptionHandlerSyntax
 	{
-		
 		/* Development notes
 		 * =================
 		 * If a stateful policy is returned by the syntax, 
@@ -25,12 +25,12 @@ namespace System
 
 		static void DoNothing2(Exception ex, int count)
 		{
-
 		}
+
 		static void DoNothing2(Exception ex, TimeSpan sleep)
 		{
-
 		}
+
 		/// <summary>
 		/// Builds <see cref="ActionPolicy"/> that will retry exception handling
 		/// for a couple of times before giving up.
@@ -87,7 +87,8 @@ namespace System
 		/// <param name="onRetry">The action to perform on retry (i.e.: write to log).
 		/// First parameter is the exception and second one is the planned sleep duration. </param>
 		/// <returns>new policy instance</returns>
-		public static ActionPolicy WaitAndRetry(this Syntax<ExceptionHandler> syntax, IEnumerable<TimeSpan> sleepDurations, Action<Exception, TimeSpan> onRetry)
+		public static ActionPolicy WaitAndRetry(this Syntax<ExceptionHandler> syntax, IEnumerable<TimeSpan> sleepDurations,
+			Action<Exception, TimeSpan> onRetry)
 		{
 			Enforce.Arguments(() => syntax, () => onRetry, () => sleepDurations);
 
@@ -129,7 +130,8 @@ namespace System
 		/// <param name="countBeforeBreaking">How many exceptions are needed to break the circuit</param>
 		/// <returns>shared policy instance</returns>
 		/// <remarks>(see "ReleaseIT!" for the details)</remarks>
-		public static ActionPolicyWithState CircuitBreaker(this Syntax<ExceptionHandler> syntax, TimeSpan duration, int countBeforeBreaking)
+		public static ActionPolicyWithState CircuitBreaker(this Syntax<ExceptionHandler> syntax, TimeSpan duration,
+			int countBeforeBreaking)
 		{
 			Enforce.Argument(() => syntax);
 			Enforce.Argument(() => countBeforeBreaking, Is.GreaterThan(0));
@@ -140,6 +142,5 @@ namespace System
 			return new ActionPolicyWithState(action => CircuitBreakerPolicy.Implementation(action, syntax.Target, syncLock));
 		}
 #endif
-
 	}
 }

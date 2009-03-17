@@ -1,14 +1,17 @@
-#region (c)2008 Lokad - New BSD license
+#region (c)2009 Lokad - New BSD license
 
-// Copyright (c) Lokad 2008 
+// Copyright (c) Lokad 2009 
 // Company: http://www.lokad.com
 // This code is released under the terms of the new BSD licence
 
 #endregion
-#if !SILVERLIGHT2
-using System.Diagnostics.CodeAnalysis;
 
-namespace System.Diagnostics
+#if !SILVERLIGHT2
+using System;
+using System.Diagnostics;
+using Lokad.Diagnostics.CodeAnalysis;
+
+namespace Lokad.Diagnostics
 {
 	/// <summary>
 	/// <see cref="ILog"/> that writes to the <see cref="Trace.Listeners"/>
@@ -24,7 +27,7 @@ namespace System.Diagnostics
 		/// <summary>
 		/// Named provider for the <see cref="TraceLog"/>
 		/// </summary>
-		public static readonly INamedProvider<ILog> Provider = 
+		public static readonly INamedProvider<ILog> Provider =
 			new NamedProvider<ILog>(s => Instance);
 
 		TraceLog()

@@ -1,17 +1,18 @@
-#region (c)2008 Lokad - New BSD license
+#region (c)2009 Lokad - New BSD license
 
-// Copyright (c) Lokad 2008 
+// Copyright (c) Lokad 2009 
 // Company: http://www.lokad.com
 // This code is released under the terms of the new BSD licence
 
 #endregion
 
+using System;
 using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
-using System.Reflection;
+using Lokad.Diagnostics.CodeAnalysis;
+using Lokad.Reflection;
 
-namespace System.Rules
+namespace Lokad.Rules
 {
 	///<summary> /// <para>Extensions that encapsulate some repetitive tasks
 	/// of setting scopes, and calling validation rules.</para>
@@ -164,7 +165,6 @@ namespace System.Rules
 		}
 
 
-
 		/// <summary>
 		/// Validates some member using the provided <paramref name="parentScope"/>.
 		/// </summary>
@@ -194,7 +194,8 @@ namespace System.Rules
 		/// <param name="parentScope">The parent scope.</param>
 		/// <param name="propertyReference">Reference to collection property to validate.</param>
 		/// <param name="rules">The rules to run.</param>
-		public static void ValidateMany<T>(this IScope parentScope, Func<IEnumerable<T>> propertyReference, params Rule<T>[] rules)
+		public static void ValidateMany<T>(this IScope parentScope, Func<IEnumerable<T>> propertyReference,
+			params Rule<T>[] rules)
 		{
 			if (parentScope == null) throw new ArgumentNullException("parentScope");
 			if (propertyReference == null) throw new ArgumentNullException("propertyReference");

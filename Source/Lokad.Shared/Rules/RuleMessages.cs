@@ -9,7 +9,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
-namespace System.Rules
+namespace Lokad.Rules
 {
 	/// <summary>
 	/// Collection of messages with the associated highest level

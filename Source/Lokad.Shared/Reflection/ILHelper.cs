@@ -1,19 +1,21 @@
-#region (c)2008 Lokad - New BSD license
+#region (c)2009 Lokad - New BSD license
 
-// Copyright (c) Lokad 2008 
+// Copyright (c) Lokad 2009 
 // Company: http://www.lokad.com
 // This code is released under the terms of the new BSD licence
 
 #endregion
 
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Reflection.Emit;
 
 #if DEBUG && !SILVERLIGHT2
 
-namespace System.Reflection
+namespace Lokad.Reflection
 {
 	static class ILHelper
 	{
@@ -85,7 +87,8 @@ namespace System.Reflection
 		}
 
 
-		static ILInstruction ReadInstruction(BinaryReader il, Module module, Type[] genericTypeArguments, Type[] genericMethodArguments)
+		static ILInstruction ReadInstruction(BinaryReader il, Module module, Type[] genericTypeArguments,
+			Type[] genericMethodArguments)
 		{
 			OpCode code;
 
@@ -164,7 +167,8 @@ namespace System.Reflection
 				var list = new List<ILInstruction>();
 				while (stream.Position < il.Length)
 				{
-					list.Add(ReadInstruction(reader, method.Module,method.DeclaringType.GetGenericArguments(),method.GetGenericArguments()));
+					list.Add(ReadInstruction(reader, method.Module, method.DeclaringType.GetGenericArguments(),
+						method.GetGenericArguments()));
 				}
 				return list.ToArray();
 			}

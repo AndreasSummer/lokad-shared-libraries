@@ -1,14 +1,15 @@
-#region (c)2008 Lokad - New BSD license
+#region (c)2009 Lokad - New BSD license
 
-// Copyright (c) Lokad 2008 
+// Copyright (c) Lokad 2009 
 // Company: http://www.lokad.com
 // This code is released under the terms of the new BSD licence
 
 #endregion
 
+using System;
 using NUnit.Framework;
 
-namespace System.Rules
+namespace Lokad.Rules
 {
 	[TestFixture]
 	public sealed class StringIsTests
@@ -50,13 +51,14 @@ missingTLD@domain.
 ! ""#$%(),/;<>[]`|@invalidCharsInLocal.org
 invalidCharsInDomain@! ""#$%(),/;<>_[]`|.org
 local@SecondLevelDomainNamesAreInvalidIfTheyAreLongerThan64Charactersss.org";
+
 		//TLDDoesntExist@domain.moc
 		[Test]
 		public void ValidEmail_Positives()
 		{
 			var split = validEmails.Split(new[] {Environment.NewLine},
 				StringSplitOptions.RemoveEmptyEntries);
-			
+
 			RuleAssert.For<string>(StringIs.ValidEmail)
 				.ExpectNone(split);
 		}
@@ -76,15 +78,15 @@ local@SecondLevelDomainNamesAreInvalidIfTheyAreLongerThan64Charactersss.org";
 		public void Limited_X_Y()
 		{
 			RuleAssert.For(StringIs.Limited(1, 3))
-				.ExpectNone("A","AA","AAA")
-				.ExpectError(null,"","AAAA");
+				.ExpectNone("A", "AA", "AAA")
+				.ExpectError(null, "", "AAAA");
 		}
 
 		[Test]
 		public void Limited_X()
 		{
 			RuleAssert.For(StringIs.Limited(3))
-				.ExpectNone("","A", "AA", "AAA")
+				.ExpectNone("", "A", "AA", "AAA")
 				.ExpectError(null, "AAAA");
 		}
 

@@ -6,9 +6,11 @@
 
 #endregion
 
+using System;
+using System.Linq;
 using NUnit.Framework;
 
-namespace System.Linq
+namespace Lokad.Linq
 {
 	[TestFixture]
 	public sealed class ArrayExtensionsTests
@@ -96,7 +98,7 @@ namespace System.Linq
 		{
 			var obj = new object[0,0];
 			object[][] objects = obj.ToJaggedArray();
-			Assert.AreEqual(0,objects.Length);
+			Assert.AreEqual(0, objects.Length);
 		}
 
 		[Test]
@@ -105,7 +107,7 @@ namespace System.Linq
 			var obj = new[,] {{1, 2}, {3, 4}};
 			int[][] actual = obj.ToJaggedArray();
 
-			var expected = new [] {new [] {1,2},new[]{3,4}};
+			var expected = new[] {new[] {1, 2}, new[] {3, 4}};
 			CollectionAssert.AreEqual(expected, actual);
 		}
 
@@ -119,7 +121,7 @@ namespace System.Linq
 			array[1, 2] = 2;
 			array[2, 1] = 3;
 			array[2, 2] = 4;
-			var expected = new[] { new[] { 1, 2 }, new[] { 3, 4 } };
+			var expected = new[] {new[] {1, 2}, new[] {3, 4}};
 			CollectionAssert.AreEqual(expected, array.ToJaggedArray());
 		}
 	}

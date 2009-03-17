@@ -6,9 +6,10 @@
 
 #endregion
 
+using System;
 using NUnit.Framework;
 
-namespace System.Rules
+namespace Lokad.Rules
 {
 	[TestFixture]
 	public sealed class DateIsTests

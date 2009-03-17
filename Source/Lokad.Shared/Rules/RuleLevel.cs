@@ -6,7 +6,7 @@
 
 #endregion
 
-namespace System.Rules
+namespace Lokad.Rules
 {
 	/// <summary>
 	/// Levels leveraged by the <see cref="Rule{T}"/> implementations

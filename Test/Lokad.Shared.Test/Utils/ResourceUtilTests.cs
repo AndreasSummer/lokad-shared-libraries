@@ -9,7 +9,7 @@
 using System.IO;
 using NUnit.Framework;
 
-namespace System
+namespace Lokad
 {
 	[TestFixture]
 	public sealed class ResourceUtilTests

@@ -1,6 +1,6 @@
-#region (c)2008 Lokad - New BSD license
+#region (c)2009 Lokad - New BSD license
 
-// Copyright (c) Lokad 2008 
+// Copyright (c) Lokad 2009 
 // Company: http://www.lokad.com
 // This code is released under the terms of the new BSD licence
 
@@ -9,7 +9,7 @@
 using System.Linq;
 using NUnit.Framework;
 
-namespace System
+namespace Lokad
 {
 	[TestFixture]
 	public sealed class RangeTests
@@ -37,7 +37,7 @@ namespace System
 		[Test]
 		public void Test_Simple_Array()
 		{
-			CollectionAssert.AreEqual(Range.Array(5), new [] {0,1,2,3,4});
+			CollectionAssert.AreEqual(Range.Array(5), new[] {0, 1, 2, 3, 4});
 		}
 
 		[Test]

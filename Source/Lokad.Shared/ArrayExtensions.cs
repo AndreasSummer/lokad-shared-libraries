@@ -6,9 +6,10 @@
 
 #endregion
 
-using System.Diagnostics.CodeAnalysis;
+using System;
+using Lokad.Diagnostics.CodeAnalysis;
 
-namespace System
+namespace Lokad
 {
 	/// <summary>
 	/// Shortcuts for some common array operations
@@ -76,7 +77,7 @@ namespace System
 			}
 			return self;
 		}
-	
+
 		/// <summary>
 		/// Slices array into array of arrays of length up to <paramref name="sliceLength"/>
 		/// </summary>

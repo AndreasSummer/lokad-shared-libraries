@@ -1,24 +1,26 @@
-#region (c)2008 Lokad - New BSD license
+#region (c)2009 Lokad - New BSD license
 
-// Copyright (c) Lokad 2008 
+// Copyright (c) Lokad 2009 
 // Company: http://www.lokad.com
 // This code is released under the terms of the new BSD licence
 
 #endregion
 
 #if !SILVERLIGHT2
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
+using Lokad.Threading;
 
-namespace System.Diagnostics
+namespace Lokad.Diagnostics
 {
 	/// <summary>
 	/// Exception counter that persists unique information about exceptions being entered in an internal dictionary. 
 	/// Once it gets filled, exceptions with the least number of occurences are discarded.
 	/// </summary>
 	/// <remarks>The class <see cref="ExceptionCounters"/> is designed as <strong>thread-safe</strong>.</remarks>
-	public sealed class ExceptionCounters 
+	public sealed class ExceptionCounters
 	{
 		/// <summary>
 		/// Singleton instance of this counter
@@ -54,7 +56,6 @@ namespace System.Diagnostics
 		/// </summary>
 		public ExceptionCounters() : this(DefaultCapacity)
 		{
-			
 		}
 
 		/// <summary>

@@ -6,10 +6,10 @@
 
 #endregion
 
+using System;
 using NUnit.Framework;
-using System.Linq;
 
-namespace System.Rules
+namespace Lokad.Rules
 {
 	[TestFixture]
 	public sealed class IsTests

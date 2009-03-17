@@ -40,7 +40,7 @@ namespace Lokad.Quality
 		/// </returns>
 		public static bool Has<TAttribute>(this TypeReference self) where TAttribute : Attribute
 		{
-			if (typeof(TAttribute) == typeof(SerializableAttribute))
+			if (typeof (TAttribute) == typeof (SerializableAttribute))
 			{
 				throw new InvalidOperationException("SerializableAttribute should be checked by inspecting type flags");
 			}

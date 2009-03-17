@@ -9,7 +9,7 @@
 using System.Collections.Generic;
 using NUnit.Framework;
 
-namespace System
+namespace Lokad
 {
 	[TestFixture]
 	public sealed class IDictionaryExtensionsTests

@@ -1,14 +1,15 @@
-#region (c)2008 Lokad - New BSD license
+#region (c)2009 Lokad - New BSD license
 
-// Copyright (c) Lokad 2008 
+// Copyright (c) Lokad 2009 
 // Company: http://www.lokad.com
 // This code is released under the terms of the new BSD licence
 
 #endregion
 
+using System;
 using NUnit.Framework;
 
-namespace System
+namespace Lokad
 {
 	[TestFixture]
 	public sealed class ActionPolicyTests
@@ -34,15 +35,18 @@ namespace System
 			{
 			}
 		}
-		private static void RaiseTimeout()
+
+		static void RaiseTimeout()
 		{
 			throw new TimeoutException();
 		}
-		private static void RaiseArgument()
+
+		static void RaiseArgument()
 		{
 			throw new ArgumentException();
 		}
-		private static void Nothing()
+
+		static void Nothing()
 		{
 		}
 
@@ -72,7 +76,7 @@ namespace System
 
 			var policy = ActionPolicy
 				.Handle<TimeoutException>()
-				.WaitAndRetry(Range.Create(5, i => i.Seconds()), (ex,s) => count += 1);
+				.WaitAndRetry(Range.Create(5, i => i.Seconds()), (ex, s) => count += 1);
 
 			// non-handled
 			Expect<ArgumentException>(() => policy.Do(RaiseArgument));
@@ -88,7 +92,6 @@ namespace System
 			Expect<TimeoutException>(6, policy);
 			Assert.AreEqual(20.Seconds(), slept);
 			Assert.AreEqual(10, count);
-
 		}
 
 		[Test]
@@ -101,7 +104,7 @@ namespace System
 			// non-handled exception
 			Expect<ArgumentException>(() => policy.Do(RaiseArgument));
 			// handled succeeds
-			Raise<TimeoutException>(2,policy);
+			Raise<TimeoutException>(2, policy);
 			// handled fails
 			Expect<TimeoutException>(3, policy);
 		}
@@ -112,7 +115,7 @@ namespace System
 			int counter = 0;
 			var policy = ActionPolicy
 				.Handle<TimeoutException>()
-				.Retry(2, (ex,i) => counter += 1);
+				.Retry(2, (ex, i) => counter += 1);
 
 			// non-handled exception
 			Expect<ArgumentException>(() => policy.Do(RaiseArgument));
@@ -161,7 +164,7 @@ namespace System
 			Expect<ArgumentException>(() => policy.Do(RaiseArgument));
 
 			// handled below
-			
+
 			// Raise 
 			Expect<TimeoutException>(() => policy.Do(RaiseTimeout));
 			Expect<TimeoutException>(() => policy.Do(RaiseTimeout));
@@ -204,13 +207,13 @@ namespace System
 			int counter = 0;
 
 			policy.Do(() =>
-			{
-				if (counter < count)
 				{
-					counter++;
-					throw new TException();
-				}
-			});
+					if (counter < count)
+					{
+						counter++;
+						throw new TException();
+					}
+				});
 		}
 
 		[Test, Expects.TimeoutException]

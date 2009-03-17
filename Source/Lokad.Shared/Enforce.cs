@@ -6,13 +6,14 @@
 
 #endregion
 
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
-using System.Rules;
+using Lokad.Diagnostics.CodeAnalysis;
+using Lokad.Rules;
 
-namespace System
+namespace Lokad
 {
 	/// <summary>
 	/// Helper class allows to follow the principles defined by Microsoft P&amp;P team.
@@ -382,7 +383,7 @@ namespace System
 				scope.ValidateInScope(argumentReference(), rules);
 			}
 		}
-		
+
 		/// <summary> Runs the rules against collection, 
 		/// using scope that fails on <see cref="Scope.WhenError"/> </summary>
 		/// <typeparam name="T">type of the item to validate</typeparam>

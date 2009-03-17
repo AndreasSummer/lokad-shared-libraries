@@ -6,7 +6,9 @@
 
 #endregion
 
-namespace System.Diagnostics.CodeAnalysis
+using System;
+
+namespace Lokad.Diagnostics.CodeAnalysis
 {
 	/// <summary>
 	/// Should be used on attributes and causes ReSharper to not mark symbols marked with such attributes as unused (as well as by other usage inspections)

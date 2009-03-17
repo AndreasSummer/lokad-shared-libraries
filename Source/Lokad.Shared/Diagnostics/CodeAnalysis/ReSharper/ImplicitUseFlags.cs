@@ -6,7 +6,9 @@
 
 #endregion
 
-namespace System.Diagnostics.CodeAnalysis
+using System;
+
+namespace Lokad.Diagnostics.CodeAnalysis
 {
 	/// <summary>
 	/// Used by <see cref="MeansImplicitUseAttribute"/>

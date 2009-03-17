@@ -1,14 +1,16 @@
-#region (c)2008 Lokad - New BSD license
+#region (c)2009 Lokad - New BSD license
 
-// Copyright (c) Lokad 2008 
+// Copyright (c) Lokad 2009 
 // Company: http://www.lokad.com
 // This code is released under the terms of the new BSD licence
 
 #endregion
 
+using System;
+using System.Reflection;
 using System.Reflection.Emit;
 
-namespace System.Reflection
+namespace Lokad.Reflection
 {
 	/// <summary>
 	/// Helper class for the IL-based strongly-typed reflection
@@ -16,7 +18,7 @@ namespace System.Reflection
 	/// <remarks>This class is not supported by Silverlight 2.0, yet</remarks>
 	public static class Reflect
 	{
-		static readonly byte Ldarg_0 = (byte)OpCodes.Ldarg_0.Value;
+		static readonly byte Ldarg_0 = (byte) OpCodes.Ldarg_0.Value;
 		static readonly byte Ldfld = (byte) OpCodes.Ldfld.Value;
 		static readonly byte Ldflda = (byte) OpCodes.Ldflda.Value;
 		static readonly byte Constrained = (byte) OpCodes.Constrained.Value;
@@ -29,7 +31,7 @@ namespace System.Reflection
 #if SILVERLIGHT2
 			return string.Format("Member of type '{0}'", typeof (T).Name);
 #else
-			var member= Member(expression);
+			var member = Member(expression);
 			switch (member.MemberType)
 			{
 				case MemberTypes.Field:
@@ -45,7 +47,7 @@ namespace System.Reflection
 			}
 #endif
 		}
-		
+
 
 		internal static string VariableName<T>(Func<T> expression)
 		{
@@ -93,7 +95,6 @@ namespace System.Reflection
 				return module.ResolveField(fieldHandle, genericTypeArguments, Type.EmptyTypes);
 			}
 			throw new ArgumentException("Expected simple field reference");
-
 		}
 
 		/// <summary>
@@ -126,18 +127,19 @@ namespace System.Reflection
 		{
 			var method = expression.Method;
 			var il = method.GetMethodBody().GetILAsByteArray();
-			
-			if ((il[0] == Ldarg_0) && (il[1] == Ldfld) && (il[6] == CallVirt) && ((il[11] == Stloc_0) ||(il[11] == Ret)))
+
+			if ((il[0] == Ldarg_0) && (il[1] == Ldfld) && (il[6] == CallVirt) && ((il[11] == Stloc_0) || (il[11] == Ret)))
 			{
 				var getHandle = BitConverter.ToInt32(il, 7);
 
-				return (MethodInfo)method.Module.ResolveMethod(getHandle);
+				return (MethodInfo) method.Module.ResolveMethod(getHandle);
 			}
-			if ((il[0] == Ldarg_0) && (il[1] == Ldflda) && (il[6] == 0xfe) && (il[7] == Constrained) && (il[12] == CallVirt) && ((il[17] == Stloc_0) || (il[17] == Ret)))
+			if ((il[0] == Ldarg_0) && (il[1] == Ldflda) && (il[6] == 0xfe) && (il[7] == Constrained) && (il[12] == CallVirt) &&
+				((il[17] == Stloc_0) || (il[17] == Ret)))
 			{
 				var getHandle = BitConverter.ToInt32(il, 13);
 
-				return (MethodInfo)method.Module.ResolveMethod(getHandle);
+				return (MethodInfo) method.Module.ResolveMethod(getHandle);
 			}
 			throw new ArgumentException("Expected simple property reference");
 		}
@@ -147,7 +149,8 @@ namespace System.Reflection
 			var method = expression.Method;
 			var il = method.GetMethodBody().GetILAsByteArray();
 
-			if ((il[0] == Ldarg_0) && (il[1] == Ldfld) && ((il[6] == CallVirt) ||(il[6] == Ldfld)) && ((il[11] == Stloc_0) || (il[11] == Ret)))
+			if ((il[0] == Ldarg_0) && (il[1] == Ldfld) && ((il[6] == CallVirt) || (il[6] == Ldfld)) &&
+				((il[11] == Stloc_0) || (il[11] == Ret)))
 			{
 				var getHandle = BitConverter.ToInt32(il, 7);
 
@@ -158,6 +161,4 @@ namespace System.Reflection
 
 #endif
 	}
-
-	
 }

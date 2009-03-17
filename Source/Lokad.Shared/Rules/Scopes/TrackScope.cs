@@ -6,7 +6,9 @@
 
 #endregion
 
-namespace System.Rules
+using System;
+
+namespace Lokad.Rules
 {
 	/// <summary>
 	/// <see cref="IScope"/> that merely keeps track of the worst level. 

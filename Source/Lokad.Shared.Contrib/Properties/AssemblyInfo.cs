@@ -1,6 +1,6 @@
-﻿#region (c)2008 Lokad - New BSD license
+﻿#region (c)2009 Lokad - New BSD license
 
-// Copyright (c) Lokad 2008 
+// Copyright (c) Lokad 2009 
 // Company: http://www.lokad.com
 // This code is released under the terms of the new BSD licence
 
@@ -14,9 +14,9 @@ using System.Runtime.CompilerServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 
-[assembly: AssemblyTitle("Lokad.Shared.Contrib")]
-[assembly: AssemblyDescription("Contributions for the Loked.Shared")]
-[assembly: AssemblyTrademark("This code is released under the terms of the new BSD licence")]
-[assembly: CLSCompliant(true)]
-[assembly: AssemblyCopyright("Copyright (c) 2009 Lokad Contributors")]
-[assembly: InternalsVisibleTo("Lokad.Shared.Contrib.Test, PublicKey = " + GlobalAssemblyInfo.PublicKey)]
+[assembly : AssemblyTitle("Lokad.Shared.Contrib")]
+[assembly : AssemblyDescription("Contributions for the Loked.Shared")]
+[assembly : AssemblyTrademark("This code is released under the terms of the new BSD licence")]
+[assembly : CLSCompliant(true)]
+[assembly : AssemblyCopyright("Copyright (c) 2009 Lokad Contributors")]
+[assembly : InternalsVisibleTo("Lokad.Shared.Contrib.Test, PublicKey = " + GlobalAssemblyInfo.PublicKey)]

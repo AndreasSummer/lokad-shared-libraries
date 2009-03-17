@@ -1,6 +1,15 @@
-using System.Diagnostics.CodeAnalysis;
+#region (c)2009 Lokad - New BSD license
 
-namespace System.Exceptions
+// Copyright (c) Lokad 2009 
+// Company: http://www.lokad.com
+// This code is released under the terms of the new BSD licence
+
+#endregion
+
+using System;
+using Lokad.Diagnostics.CodeAnalysis;
+
+namespace Lokad.Exceptions
 {
 	[Immutable]
 	sealed class RetryState : IRetryState

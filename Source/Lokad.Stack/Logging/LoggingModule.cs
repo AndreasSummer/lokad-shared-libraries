@@ -1,6 +1,6 @@
-#region (c)2008 Lokad - New BSD license
+#region (c)2009 Lokad - New BSD license
 
-// Copyright (c) Lokad 2008 
+// Copyright (c) Lokad 2009 
 // Company: http://www.lokad.com
 // This code is released under the terms of the new BSD licence
 
@@ -17,7 +17,7 @@ namespace Lokad.Logging
 	/// </summary>
 	public sealed class LoggingModule : IModule
 	{
-		private LoggingMode _mode = LoggingMode.Console;
+		LoggingMode _mode = LoggingMode.Console;
 
 		/// <summary>
 		/// Informs the module to use the config file
@@ -29,7 +29,7 @@ namespace Lokad.Logging
 		}
 
 
-		private string _fileName;
+		string _fileName;
 
 		/// <summary>
 		/// Informs the module to use the provided file
@@ -69,7 +69,7 @@ namespace Lokad.Logging
 			}
 
 			var builder = new ContainerBuilder();
-			
+
 			// register log provider
 			builder.Register(LoggingStack.GetLogProvider());
 			builder.Register(c => c.Resolve<INamedProvider<ILog>>().Get("Default"));

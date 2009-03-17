@@ -1,6 +1,6 @@
-#region (c)2008 Lokad - New BSD license
+#region (c)2009 Lokad - New BSD license
 
-// Copyright (c) Lokad 2008 
+// Copyright (c) Lokad 2009 
 // Company: http://www.lokad.com
 // This code is released under the terms of the new BSD licence
 
@@ -8,7 +8,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Container;
 using System.Linq;
 using System.Reflection;
 using Autofac;
@@ -65,7 +64,7 @@ namespace Lokad.Container
 		/// </summary>
 		/// <param name="type"></param>
 		/// <param name="builder"></param>
-		private static void AutoRegisterType(Type type, ContainerBuilder builder)
+		static void AutoRegisterType(Type type, ContainerBuilder builder)
 		{
 			var attributes = type.GetAttributes<ComponentAttribute>(false);
 
@@ -94,7 +93,7 @@ namespace Lokad.Container
 		/// </summary>
 		/// <param name="scope"></param>
 		/// <returns></returns>
-		private static InstanceScope GetScope(RegistrationScope scope)
+		static InstanceScope GetScope(RegistrationScope scope)
 		{
 			switch (scope)
 			{
@@ -149,7 +148,7 @@ namespace Lokad.Container
 			builder.Build(container);
 		}
 
-		private static void ApplyDecorator(DecoratorInfo info1, IComponentRegistration registration)
+		static void ApplyDecorator(DecoratorInfo info1, IComponentRegistration registration)
 		{
 			registration.Activating += (sender, e) =>
 				{

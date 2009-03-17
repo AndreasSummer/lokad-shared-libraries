@@ -6,11 +6,12 @@
 
 #endregion
 
-using System.Diagnostics;
-using System.Rules;
+using System;
+using Lokad.Diagnostics;
+using Lokad.Rules;
 using NUnit.Framework;
 
-namespace System
+namespace Lokad
 {
 	[TestFixture]
 	public sealed class ResultTests
@@ -81,7 +82,7 @@ namespace System
 
 			Assert.AreEqual(error1s, error1.Combine(fails));
 			Assert.AreEqual(error1s, Result10.Combine(i => error1s));
-			Assert.AreEqual(Result.Success("10"), Result10.Combine(i=> Result.Success(i.ToString())));
+			Assert.AreEqual(Result.Success("10"), Result10.Combine(i => Result.Success(i.ToString())));
 		}
 
 		[Test]

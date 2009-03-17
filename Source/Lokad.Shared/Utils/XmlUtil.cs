@@ -1,25 +1,27 @@
-#region (c)2008 Lokad - New BSD license
+#region (c)2009 Lokad - New BSD license
 
-// Copyright (c) Lokad 2008 
+// Copyright (c) Lokad 2009 
 // Company: http://www.lokad.com
 // This code is released under the terms of the new BSD licence
 
 #endregion
+
 #if !SILVERLIGHT2
-using System.Diagnostics.CodeAnalysis;
+using System;
 using System.IO;
 using System.Xml.Serialization;
+using Lokad.Diagnostics.CodeAnalysis;
 
-namespace System
+namespace Lokad
 {
 	/// <summary>
 	/// Simple static class that caches <see cref="XmlSerializer"/> instances.
 	/// </summary>
 	/// <typeparam name="T"></typeparam>
 	[NoCodeCoverage]
-	public static class XmlUtil<T> 
+	public static class XmlUtil<T>
 	{
-		private static readonly XmlSerializer _serializer = new XmlSerializer(typeof (T));
+		static readonly XmlSerializer _serializer = new XmlSerializer(typeof (T));
 
 		/// <summary> Serializes instance to the provided writer </summary>
 		public static void Serialize(T instance, TextWriter writer)
@@ -83,7 +85,7 @@ namespace System
 		/// </summary>
 		/// <typeparam name="T"></typeparam>
 		/// <param name="item"></param>
-		public static void TestXmlSerialization<T>(T item) 
+		public static void TestXmlSerialization<T>(T item)
 		{
 			var ser = new XmlSerializer(typeof (T));
 
@@ -91,7 +93,7 @@ namespace System
 			{
 				ser.Serialize(stream, item);
 				stream.Seek(0, SeekOrigin.Begin);
-				var deserialize = (T)ser.Deserialize(stream);
+				var deserialize = (T) ser.Deserialize(stream);
 				Enforce.That(!deserialize.Equals(default(T)), "deserialize!=default(T)");
 			}
 		}
@@ -207,4 +209,5 @@ namespace System
 		}
 	}
 }
+
 #endif

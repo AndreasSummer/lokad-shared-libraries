@@ -6,7 +6,9 @@
 
 #endregion
 
-namespace System.Diagnostics.CodeAnalysis
+using System;
+
+namespace Lokad.Diagnostics.CodeAnalysis
 {
 	/// <summary>
 	/// Indicates that marked method builds string by format pattern and (optional) arguments. 

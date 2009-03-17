@@ -1,8 +1,17 @@
-using System.Diagnostics;
-using System.Rules;
+#region (c)2009 Lokad - New BSD license
+
+// Copyright (c) Lokad 2009 
+// Company: http://www.lokad.com
+// This code is released under the terms of the new BSD licence
+
+#endregion
+
+using System;
+using Lokad.Diagnostics;
+using Lokad.Rules;
 using NUnit.Framework;
 
-namespace System
+namespace Lokad
 {
 	[TestFixture]
 	public sealed class ILogExtensionsTests
@@ -45,7 +54,6 @@ namespace System
 			log.FatalFormat("Message #{0}", id);
 			log.FatalFormat(ex, "Message #{0}", id);
 			RuleAssert.IsFalse(() => log.IsFatalEnabled());
-
 		}
 	}
 }

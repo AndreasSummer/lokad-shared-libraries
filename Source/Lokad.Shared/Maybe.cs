@@ -6,9 +6,10 @@
 
 #endregion
 
-using System.Diagnostics.CodeAnalysis;
+using System;
+using Lokad.Diagnostics.CodeAnalysis;
 
-namespace System
+namespace Lokad
 {
 	/// <summary>
 	/// Helper class that indicates nullable value in a good-citizenship code
@@ -266,7 +267,7 @@ namespace System
 		/// <param name="item">The item.</param>
 		/// <returns><see cref="Maybe{T}"/> that matches the provided value</returns>
 		/// <exception cref="ArgumentNullException">if argument is a null reference</exception>
-		public static Maybe<TSource> From<TSource>([NotNull]TSource item)
+		public static Maybe<TSource> From<TSource>([NotNull] TSource item)
 		{
 			// ReSharper disable CompareNonConstrainedGenericWithNull
 			if (null == item) throw new ArgumentNullException("item");

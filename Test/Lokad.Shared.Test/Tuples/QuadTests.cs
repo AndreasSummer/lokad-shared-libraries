@@ -1,19 +1,22 @@
-#region (c)2008 Lokad - New BSD license
+#region (c)2009 Lokad - New BSD license
 
-// Copyright (c) Lokad 2008 
+// Copyright (c) Lokad 2009 
 // Company: http://www.lokad.com
 // This code is released under the terms of the new BSD licence
 
 #endregion
 
+using System;
 using NUnit.Framework;
 
-namespace System
+namespace Lokad
 {
 	[TestFixture]
 	public sealed class QuadTests
 	{
-		static readonly Tuple<DateTime, int, double, long> _t1 = new Tuple<DateTime, int, double, long>(DateTime.MinValue, 1, Math.PI, 1L);
+		static readonly Tuple<DateTime, int, double, long> _t1 = new Tuple<DateTime, int, double, long>(DateTime.MinValue, 1,
+			Math.PI, 1L);
+
 		static readonly Tuple<DateTime, int, double, long> _t2 = Tuple.From(DateTime.MinValue, 1, Math.PI, 1L);
 		static readonly Quad<DateTime, int, double, long> _t3 = Tuple.From(DateTime.MinValue, 1, Math.PI, 0L);
 

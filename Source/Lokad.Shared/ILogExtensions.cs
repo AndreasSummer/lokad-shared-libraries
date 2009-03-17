@@ -1,15 +1,16 @@
-#region (c)2008 Lokad - New BSD license
+#region (c)2009 Lokad - New BSD license
 
-// Copyright (c) Lokad 2008 
+// Copyright (c) Lokad 2009 
 // Company: http://www.lokad.com
 // This code is released under the terms of the new BSD licence
 
 #endregion
 
-using System.Diagnostics.CodeAnalysis;
+using System;
 using System.Globalization;
+using Lokad.Diagnostics.CodeAnalysis;
 
-namespace System
+namespace Lokad
 {
 	/// <summary>
 	/// Helper extensions for any class that implements <see cref="ILog"/>
@@ -17,7 +18,7 @@ namespace System
 	[NoCodeCoverage]
 	public static class ILogExtensions
 	{
-		private static readonly CultureInfo _culture = CultureInfo.InvariantCulture;
+		static readonly CultureInfo _culture = CultureInfo.InvariantCulture;
 
 		/// <summary>
 		/// Determines whether the specified log is recording debug messages.

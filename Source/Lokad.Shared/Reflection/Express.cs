@@ -1,22 +1,23 @@
-#region (c)2008 Lokad - New BSD license
+#region (c)2009 Lokad - New BSD license
 
-// Copyright (c) Lokad 2008 
+// Copyright (c) Lokad 2009 
 // Company: http://www.lokad.com
 // This code is released under the terms of the new BSD licence
 
 #endregion
 
+using System;
 using System.Linq.Expressions;
-using System.Rules;
+using System.Reflection;
+using Lokad.Rules;
 
-namespace System.Reflection
+namespace Lokad.Reflection
 {
 	/// <summary>
 	/// Helper class for the Expression-based strongly-typed reflection
 	/// </summary>
 	public static class Express
 	{
-
 		static Rule<LambdaExpression> LambdaIs(ExpressionType type)
 		{
 			return (expression, scope) =>
@@ -25,8 +26,9 @@ namespace System.Reflection
 						scope.Error("Lambda expression must be of type {0}", type);
 				};
 		}
+
 		/// <summary>
-		/// Gets the <see cref="Reflection.MethodInfo"/> 
+		/// Gets the <see cref="MethodInfo"/> 
 		/// from the provided <paramref name="method"/>.
 		/// </summary>
 		/// <param name="method">The method expression.</param>
@@ -46,7 +48,7 @@ namespace System.Reflection
 		{
 			Enforce.Argument(() => constructor, LambdaIs(ExpressionType.New));
 
-			return ((NewExpression)constructor.Body).Constructor;
+			return ((NewExpression) constructor.Body).Constructor;
 		}
 
 		/// <summary> Gets the <see cref="MemberInfo"/> (field or property) 
@@ -69,7 +71,7 @@ namespace System.Reflection
 			if (value.MemberType != MemberTypes.Property)
 				throw Errors.InvalidOperation("Member must be a property reference");
 
-			return (PropertyInfo)value;
+			return (PropertyInfo) value;
 		}
 
 		/// <summary> Gets the <see cref="FieldInfo"/> from the provided 
@@ -82,10 +84,10 @@ namespace System.Reflection
 			if (value.MemberType != MemberTypes.Field)
 				throw Errors.InvalidOperation("Member must be a field reference");
 
-			return (FieldInfo)value;
+			return (FieldInfo) value;
 		}
 
-		/// <summary> Gets the <see cref="Reflection.MethodInfo"/> 
+		/// <summary> Gets the <see cref="MethodInfo"/> 
 		/// from the provided <paramref name="method"/>.
 		/// </summary>
 		/// <param name="method">The method expression.</param>
@@ -114,6 +116,7 @@ namespace System.Reflection
 		{
 			return PropertyWithLambda(property);
 		}
+
 		/// <summary> Gets the <see cref="FieldInfo"/> from the provided 
 		/// <paramref name="field"/> expression. </summary>
 		/// <param name="field">The field expression.</param>
@@ -145,7 +148,7 @@ namespace System.Reflection
 		/// <returns>property information</returns>
 		/// <seealso cref="Express.MemberWithLambda"/>
 		/// <seealso cref="Express.PropertyWithLambda"/>
-		public static PropertyInfo Property<T>(Expression<Func<TTarget,T>> property)
+		public static PropertyInfo Property<T>(Expression<Func<TTarget, T>> property)
 		{
 			return Express.PropertyWithLambda(property);
 		}

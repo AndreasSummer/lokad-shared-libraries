@@ -8,10 +8,10 @@
 
 #if !SILVERLIGHT2
 
-using System.Rules;
+using System;
 using NUnit.Framework;
 
-namespace System.Reflection
+namespace Lokad.Reflection
 {
 	[TestFixture]
 	public sealed class ReflectTests
@@ -117,7 +117,6 @@ namespace System.Reflection
 			{
 				get { return Field; }
 			}
-			
 		}
 
 		[Test]
@@ -149,9 +148,9 @@ namespace System.Reflection
 		{
 			var i = new Test<string>("Value");
 			var i2 = new
-			{
-				Property = "Value"
-			};
+				{
+					Property = "Value"
+				};
 
 			Assert.AreEqual(Reflect.MemberName(() => i.Property), "Property");
 			Assert.AreEqual(Reflect.MemberName(() => i2.Property), "Property");
@@ -192,6 +191,7 @@ namespace System.Reflection
 		class ClassWithConstraints<T> where T : ClassToReflect, new()
 		{
 			public T Target;
+
 			public string GetNameOfProperty()
 			{
 				return Reflect.Property(() => Target.SomeProperty).Name;

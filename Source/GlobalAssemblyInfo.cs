@@ -1,6 +1,6 @@
-#region (c)2008 Lokad - New BSD license
+#region (c)2009 Lokad - New BSD license
 
-// Copyright (c) Lokad 2008 
+// Copyright (c) Lokad 2009 
 // Company: http://www.lokad.com
 // This code is released under the terms of the new BSD licence
 
@@ -19,7 +19,7 @@ using System.Security;
 ///<summary>
 /// Assembly information class that is shared between all projects
 ///</summary>
-internal static class GlobalAssemblyInfo
+static class GlobalAssemblyInfo
 {
 	internal const string PublicKey =
 		"00240000048000009400000006020000002400005253413100040000010001009df7" +

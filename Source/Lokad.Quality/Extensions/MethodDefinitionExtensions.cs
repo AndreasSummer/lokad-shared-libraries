@@ -88,7 +88,8 @@ namespace Lokad.Quality
 		/// <param name="check">The check.</param>
 		/// <returns>the same enumerable</returns>
 		/// <exception cref="QualityException">if any definitions do not pass the check</exception>
-		public static IEnumerable<MethodDefinition> Should(this IEnumerable<MethodDefinition> definitions, Predicate<MethodDefinition> check)
+		public static IEnumerable<MethodDefinition> Should(this IEnumerable<MethodDefinition> definitions,
+			Predicate<MethodDefinition> check)
 		{
 			QualityAssert.MethodsPass(definitions, check);
 			return definitions;

@@ -20,7 +20,6 @@
 				 -->
 		<TestPath>$(BuildPath)\Test</TestPath>
 		<LibraryPath>$(BuildPath)\Library</LibraryPath>
-		<LibraryNSPath>$(BuildPath)\LibraryNS</LibraryNSPath>
 		<StackPath>$(BuildPath)\Stack</StackPath>
 
 		<TempPath>$(BuildPath)\Temp</TempPath>
@@ -39,8 +38,7 @@
 
 
 	<ItemGroup>		
-		<Tokens Include="LibPackage"><ReplacementValue>$(MSBuildProjectName)-Lib-$(Version).zip</ReplacementValue></Tokens>
-		<Tokens Include="Lib2Package"><ReplacementValue>$(MSBuildProjectName)-Lib-LokadNS-$(Version).zip</ReplacementValue></Tokens>
+		<Tokens Include="LibraryPackage"><ReplacementValue>$(MSBuildProjectName)-Lib-$(Version).zip</ReplacementValue></Tokens>
 		<Tokens Include="SourcePackage"><ReplacementValue>$(MSBuildProjectName)-Source-$(Version).zip</ReplacementValue></Tokens>
 		<Tokens Include="Version"><ReplacementValue>$(Version)</ReplacementValue></Tokens>
 	</ItemGroup>
@@ -88,18 +86,11 @@
 		<Exec Command="Resource\Tool\ILMerge\ILMerge.exe &quot;$(StackSource)\Lokad.Stack.dll&quot; &quot;$(StackSource)/Autofac.dll&quot; &quot;$(StackSource)/log4net.dll&quot; /out:&quot;$(StackPath)/Lokad.Stack.dll&quot; /keyfile:SharedKey.snk /xmldocs=true /ver:$(Version)  /attr:&quot;$(StackSource)/Lokad.Stack.dll&quot;" />
 		
 		
-		<!--Library-->
+		<!--Library -->
 		<CreateItem Include="$(StackPath)\Lokad.Shared.*;$(StackPath)\Lokad.Quality.*;$(StackPath)\Lokad.Stack.*;">
 			<Output ItemName="libraryFiles" TaskParameter="Include"/>
 		</CreateItem>
 		<Copy SourceFiles="@(libraryFiles)" DestinationFolder="$(LibraryPath)" />
-		
-		<!--Library - NS-->
-		<Exec Command="$(Converter) &quot;$(LibraryPath)&quot; &quot;$(LibraryNSPath)&quot;" />
-		<CreateItem Include="$(LibraryNSPath)\Lokad*.dll">
-			<Output ItemName="libraryNSFiles" TaskParameter="Include" />
-		</CreateItem>
-		<Exec Command="sn.exe -Ra &quot;%(libraryNSFiles.FullPath)&quot; SharedKey.snk" />
 
 		<!--All Tests-->
 		<CreateItem Include="Test\**\bin\$(Configuration)\*.*" Exclude="Test\**\bin\$(Configuration)\*.xml;Test\**\bin\$(Configuration)\*.pdb;">
@@ -135,7 +126,7 @@
 			AssemblyList="@(_coverageFiles)"
 			CoverageFile="$(ArtifactDirectory)\$(MSBuildProjectName)-coverage.xml"
 			LogFile="$(ArtifactDirectory)\$(MSBuildProjectName)-coverage.log"
-			ExcludeAttributes="System.Diagnostics.CodeAnalysis.NoCodeCoverageAttribute;System.Runtime.CompilerServices.CompilerGeneratedAttribute;System.CodeDom.Compiler.GeneratedCodeAttribute"
+			ExcludeAttributes="Lokad.Diagnostics.CodeAnalysis.NoCodeCoverageAttribute;System.Runtime.CompilerServices.CompilerGeneratedAttribute;System.CodeDom.Compiler.GeneratedCodeAttribute"
 			ContinueOnError="false"
 		/>
 
@@ -204,12 +195,6 @@
 			<Output ItemName="_libFiles" TaskParameter="Include" />
 		</CreateItem>
 		<Zip Files="@(_libFiles)" ZipFileName="$(PackageDirectory)\$(MSBuildProjectName)-Lib-$(Version).zip" Flatten="true" />
-		
-		<!--Shared - Archive - NS2-->
-		<CreateItem Include="$(LibraryNSPath)\*.*;$(ReadMe);$(LibraryPath)\Samples.zip">
-			<Output ItemName="_lib2Files" TaskParameter="Include" />
-		</CreateItem>
-		<Zip Files="@(_lib2Files)" ZipFileName="$(PackageDirectory)\$(MSBuildProjectName)-Lib-LokadNS-$(Version).zip" Flatten="true" />
 
 		<!--Development Archive-->
 		<CreateItem Include="$(StackPath)\Lokad.*;$(ReadMe)">

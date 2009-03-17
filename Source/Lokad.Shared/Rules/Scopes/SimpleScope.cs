@@ -6,9 +6,10 @@
 
 #endregion
 
+using System;
 using System.Collections.Generic;
 
-namespace System.Rules
+namespace Lokad.Rules
 {
 	/// <summary>
 	/// <see cref="IScope"/> that maintains scope path, executes 

@@ -1,4 +1,14 @@
-namespace System.Diagnostics.CodeAnalysis
+#region (c)2009 Lokad - New BSD license
+
+// Copyright (c) Lokad 2009 
+// Company: http://www.lokad.com
+// This code is released under the terms of the new BSD licence
+
+#endregion
+
+using System;
+
+namespace Lokad.Diagnostics.CodeAnalysis
 {
 	/// <summary>
 	/// Indicates that the marked method is assertion method, i.e. it halts control flow if one of the conditions is satisfied. 

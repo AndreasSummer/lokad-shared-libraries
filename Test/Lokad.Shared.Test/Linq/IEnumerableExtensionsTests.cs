@@ -6,10 +6,12 @@
 
 #endregion
 
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using NUnit.Framework;
 
-namespace System.Linq
+namespace Lokad.Linq
 {
 	[TestFixture]
 	public sealed class IEnumerableExtensionsTests

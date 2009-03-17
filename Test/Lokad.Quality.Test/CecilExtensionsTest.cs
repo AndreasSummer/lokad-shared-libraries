@@ -1,4 +1,4 @@
-﻿#region (c)2009 Lokad - New BSD license
+#region (c)2009 Lokad - New BSD license
 
 // Copyright (c) Lokad 2009 
 // Company: http://www.lokad.com
@@ -7,9 +7,9 @@
 #endregion
 
 using System;
-using System.Container;
-using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using Lokad.Container;
+using Lokad.Diagnostics.CodeAnalysis;
 using Mono.Cecil;
 using NUnit.Framework;
 

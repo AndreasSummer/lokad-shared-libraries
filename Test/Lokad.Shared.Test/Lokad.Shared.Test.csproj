@@ -8,7 +8,7 @@
     <ProjectGuid>{76BE68DD-B0AB-4CF6-B119-3C493F11B06D}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>System</RootNamespace>
+    <RootNamespace>Lokad</RootNamespace>
     <AssemblyName>Lokad.Shared.Test</AssemblyName>
     <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>

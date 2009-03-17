@@ -1,14 +1,15 @@
-#region (c)2008 Lokad - New BSD license
+#region (c)2009 Lokad - New BSD license
 
-// Copyright (c) Lokad 2008 
+// Copyright (c) Lokad 2009 
 // Company: http://www.lokad.com
 // This code is released under the terms of the new BSD licence
 
 #endregion
 
+using System;
 using NUnit.Framework;
 
-namespace System.Rules
+namespace Lokad.Rules
 {
 	static class ScopeTestHelper
 	{
@@ -41,9 +42,9 @@ namespace System.Rules
 		public static void ShouldBeClean(Exception ex)
 		{
 			Assert.IsFalse(
-				ex.Message.Contains("Scope") || 
-				ex.Message.Contains("Dispose") ||
-			 ex.Message.Contains("Write"),
+				ex.Message.Contains("Scope") ||
+					ex.Message.Contains("Dispose") ||
+						ex.Message.Contains("Write"),
 				"Exception {0} should not contain debug info", ex);
 		}
 

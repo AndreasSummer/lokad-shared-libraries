@@ -6,10 +6,11 @@
 
 #endregion
 
+using System;
 using System.Linq;
 using NUnit.Framework;
 
-namespace System.Rules
+namespace Lokad.Rules
 {
 	[TestFixture]
 	public sealed class RuleExtensionsTests
@@ -31,7 +32,7 @@ namespace System.Rules
 		public void Nested_Object_Throws_On_Invalid_Collection()
 		{
 			var v = Visitor.CreateValid();
-			v.Programs = v.Programs.Append(new Program()).ToArray();
+			v.Programs = v.Programs.Append(new Program());
 
 			Enforce.That(v, BusinessRules.VisitorRules);
 		}

@@ -1,16 +1,17 @@
-#region (c)2008 Lokad - New BSD license
+#region (c)2009 Lokad - New BSD license
 
-// Copyright (c) Lokad 2008 
+// Copyright (c) Lokad 2009 
 // Company: http://www.lokad.com
 // This code is released under the terms of the new BSD licence
 
 #endregion
 
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Diagnostics.CodeAnalysis;
+using Lokad.Diagnostics.CodeAnalysis;
 
-namespace System.Rules
+namespace Lokad.Rules
 {
 	/// <summary>
 	/// Helper class that invokes different scopes
@@ -102,7 +103,6 @@ namespace System.Rules
 		{
 			return SimpleScope.ForEnforceArgument(scopeName, predicate);
 		}
-		
 
 
 		/// <summary>  Determines whether the specified item has problems of 
@@ -207,7 +207,8 @@ namespace System.Rules
 		/// <param name="sequenceReference">The sequence reference.</param>
 		/// <param name="rules">The rules to execute.</param>
 		/// <returns> read-only collection of <see cref="RuleMessage"/> </returns>
-		public static RuleMessages GetMessagesForMany<TItem>(Func<IEnumerable<TItem>> sequenceReference, params Rule<TItem>[] rules)
+		public static RuleMessages GetMessagesForMany<TItem>(Func<IEnumerable<TItem>> sequenceReference,
+			params Rule<TItem>[] rules)
 		{
 			if (sequenceReference == null) throw new ArgumentNullException("sequenceReference");
 			return DelayedScope.GetMessages(sequenceReference, scope => scope.ValidateInScope(sequenceReference(), rules));
@@ -239,7 +240,7 @@ namespace System.Rules
 		[DebuggerNonUserCode]
 		public static void Validate<T>(T item, params Rule<T>[] rules)
 		{
-			using (var scope = SimpleScope.ForValidation(typeof(T).Name, WhenAny))
+			using (var scope = SimpleScope.ForValidation(typeof (T).Name, WhenAny))
 			{
 				scope.ValidateInScope(item, rules);
 			}
@@ -255,7 +256,7 @@ namespace System.Rules
 		[DebuggerNonUserCode]
 		public static void ValidateMany<T>(IEnumerable<T> items, params Rule<T>[] rules)
 		{
-			using (var scope = SimpleScope.ForValidation(typeof(T).Name, WhenAny))
+			using (var scope = SimpleScope.ForValidation(typeof (T).Name, WhenAny))
 			{
 				scope.ValidateInScope(items, rules);
 			}

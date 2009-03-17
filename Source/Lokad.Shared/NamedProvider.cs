@@ -1,14 +1,15 @@
-#region (c)2008 Lokad - New BSD license
+#region (c)2009 Lokad - New BSD license
 
-// Copyright (c) Lokad 2008 
+// Copyright (c) Lokad 2009 
 // Company: http://www.lokad.com
 // This code is released under the terms of the new BSD licence
 
 #endregion
 
-using System.Diagnostics.CodeAnalysis;
+using System;
+using Lokad.Diagnostics.CodeAnalysis;
 
-namespace System
+namespace Lokad
 {
 	/// <summary>
 	/// This class provides way to create providers out of lambda shortcuts
@@ -41,9 +42,9 @@ namespace System
 			{
 				return _resolver(key);
 			}
-			catch(Exception ex)
+			catch (Exception ex)
 			{
-				throw Errors.Resolution(typeof(T), key, ex);
+				throw Errors.Resolution(typeof (T), key, ex);
 			}
 		}
 	}
@@ -64,7 +65,7 @@ namespace System
 		public static INamedProvider<T> For<T>(Func<string, T> providerFunction)
 		{
 			if (providerFunction == null) throw new ArgumentNullException("providerFunction");
-			
+
 			return new NamedProvider<T>(providerFunction);
 		}
 	}

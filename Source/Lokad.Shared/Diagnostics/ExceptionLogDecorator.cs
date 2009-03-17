@@ -6,9 +6,11 @@
 
 #endregion
 
+using System;
+
 #if !SILVERLIGHT2
 
-namespace System.Diagnostics
+namespace Lokad.Diagnostics
 {
 	/// <summary>
 	/// Simple decorator for <see cref="ILog"/> that saves 

@@ -1,4 +1,12 @@
-namespace System.Diagnostics.CodeAnalysis
+#region (c)2009 Lokad - New BSD license
+
+// Copyright (c) Lokad 2009 
+// Company: http://www.lokad.com
+// This code is released under the terms of the new BSD licence
+
+#endregion
+
+namespace Lokad.Diagnostics.CodeAnalysis
 {
 	/// <summary>
 	/// Specifies assertion type. If the assertion method argument satisifes the condition, then the execution continues. 

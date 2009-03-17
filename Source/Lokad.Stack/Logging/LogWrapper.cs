@@ -1,6 +1,6 @@
-#region (c)2008 Lokad - New BSD license
+#region (c)2009 Lokad - New BSD license
 
-// Copyright (c) Lokad 2008 
+// Copyright (c) Lokad 2009 
 // Company: http://www.lokad.com
 // This code is released under the terms of the new BSD licence
 
@@ -8,22 +8,21 @@
 
 using System;
 using log4net;
-using ILog=System.ILog;
 
 namespace Lokad.Logging
 {
 	/// <summary>
 	/// Wrapper around <see cref="log4net.ILog"/>
 	/// </summary>
-	internal sealed class LogWrapper : ILog
+	sealed class LogWrapper : ILog
 	{
-		private readonly log4net.ILog _inner;
+		readonly log4net.ILog _inner;
 
 		internal static ILog GetByName(string logName)
 		{
 			return new LogWrapper(LogManager.GetLogger(logName));
 		}
-		
+
 		LogWrapper(log4net.ILog inner)
 		{
 			_inner = inner;

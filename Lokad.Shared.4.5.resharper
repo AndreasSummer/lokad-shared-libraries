@@ -52,45 +52,18 @@ This code is released under the terms of the new BSD licence]]></FileHeader>
       <PredefinedRule Inspect="True" Prefix="_" Suffix="" Style="aaBb" ElementKind="NotPublicInstanceFields" />
       <PredefinedRule Inspect="True" Prefix="" Suffix="" Style="AaBb" ElementKind="NotPublicStaticFields" />
       <PredefinedRule Inspect="True" Prefix="" Suffix="" Style="aaBb" ElementKind="Parameters" />
+      <PredefinedRule Inspect="True" Prefix="" Suffix="" Style="AaBb" ElementKind="MethodPropertyEvent" />
+      <PredefinedRule Inspect="True" Prefix="" Suffix="" Style="AaBb" ElementKind="TypesAndNamespaces" />
+      <PredefinedRule Inspect="True" Prefix="I" Suffix="" Style="AaBb" ElementKind="Interfaces" />
+      <PredefinedRule Inspect="True" Prefix="T" Suffix="" Style="AaBb" ElementKind="TypeParameters" />
+      <PredefinedRule Inspect="True" Prefix="" Suffix="" Style="aaBb" ElementKind="LocalConstants" />
+      <PredefinedRule Inspect="True" Prefix="" Suffix="" Style="AaBb" ElementKind="PublicFields" />
+      <PredefinedRule Inspect="True" Prefix="" Suffix="" Style="AaBb" ElementKind="Constants" />
+      <PredefinedRule Inspect="True" Prefix="" Suffix="" Style="AaBb" ElementKind="StaticReadonly" />
+      <PredefinedRule Inspect="True" Prefix="" Suffix="" Style="AaBb" ElementKind="EnumMember" />
+      <PredefinedRule Inspect="True" Prefix="" Suffix="" Style="AaBb" ElementKind="Other" />
     </Naming2>
   </CodeStyleSettings>
-  <SharedSolutionTemplateManager>
-    <LiveTemplates>
-      <Template uid="58666703-b89b-4d9d-9a6c-caee9104a7a8" shortcut="ntc" description="NUnit Test Case" text="		[NUnit.Framework.TestAttribute]&#xD;&#xA;		public void $Test$()&#xD;&#xA;		{&#xD;&#xA;			$END$&#xD;&#xA;		}" reformat="True" shortenQualifiedReferences="True">
-        <Context>
-          <CSharpContext context="TypeMember" minimumLanguageVersion="2.0" />
-        </Context>
-        <Categories />
-        <Variables>
-          <Variable name="Test" expression="" initialRange="0" />
-        </Variables>
-        <CustomProperties />
-      </Template>
-      <Template uid="b00a07e7-4f19-4189-8c42-3206f8468a54" shortcut="ntf" description="NUnit Test Fixture" text="[NUnit.Framework.TestFixtureAttribute]&#xD;&#xA;public sealed class $TypeToTest$Tests&#xD;&#xA;{&#xD;&#xA;	[NUnit.Framework.TestAttribute]&#xD;&#xA;	public void $Test$()&#xD;&#xA;	{&#xD;&#xA;		var t = new $TypeToTest$()&#xD;&#xA;		$END$&#xD;&#xA;	}&#xD;&#xA;}" reformat="True" shortenQualifiedReferences="True">
-        <Context>
-          <CSharpContext context="TypeMember, TypeAndNamespace" minimumLanguageVersion="2.0" />
-        </Context>
-        <Categories />
-        <Variables>
-          <Variable name="TypeToTest" expression="" initialRange="1" />
-          <Variable name="Test" expression="" initialRange="0" />
-        </Variables>
-        <CustomProperties />
-      </Template>
-      <Template uid="e1854545-5ec7-4031-a0ef-9946c2f801d3" shortcut="eann" description="" text="Enforce.Argument($Argument$, &quot;$Argument$&quot;);$END$" reformat="True" shortenQualifiedReferences="True">
-        <Context>
-          <CSharpContext context="Everywhere" minimumLanguageVersion="2.0" />
-        </Context>
-        <Categories />
-        <Variables>
-          <Variable name="Argument" expression="parameterOfType(&quot;System.object&quot;)" initialRange="0" />
-        </Variables>
-        <CustomProperties />
-      </Template>
-    </LiveTemplates>
-    <Surrounds />
-    <FileTemplates />
-  </SharedSolutionTemplateManager>
   <CodeAnnotations>
     <Namespace>System.Diagnostics.CodeAnalysis</Namespace>
     <DefaultNamespace>System.Diagnostics.CodeAnalysis</DefaultNamespace>

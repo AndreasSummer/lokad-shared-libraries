@@ -1,18 +1,19 @@
-#region (c)2008 Lokad - New BSD license
+#region (c)2009 Lokad - New BSD license
 
-// Copyright (c) Lokad 2008 
+// Copyright (c) Lokad 2009 
 // Company: http://www.lokad.com
 // This code is released under the terms of the new BSD licence
 
 #endregion
 
 #if !SILVERLIGHT2
+using System;
 using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
 using System.Linq.Expressions;
-using System.Reflection;
+using Lokad.Diagnostics.CodeAnalysis;
+using Lokad.Reflection;
 
-namespace System.Diagnostics
+namespace Lokad.Diagnostics
 {
 	/// <summary>
 	/// Helper class to simplify counter creation syntax
@@ -61,7 +62,8 @@ namespace System.Diagnostics
 		/// <param name="openCounterCount">The open counter count.</param>
 		/// <param name="closeCounterCount">The close counter count.</param>
 		/// <returns>instance of the new counter</returns>
-		protected ExecutionCounter CreateCounterForCtor<T>(Expression<Func<T>> expression, int openCounterCount, int closeCounterCount)
+		protected ExecutionCounter CreateCounterForCtor<T>(Expression<Func<T>> expression, int openCounterCount,
+			int closeCounterCount)
 		{
 			var methodInfo = Express.Constructor(expression);
 			string counterName = StringUtil.FormatInvariant("{0}.{1}", methodInfo.DeclaringType.Name, methodInfo.Name);

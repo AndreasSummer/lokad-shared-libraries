@@ -7,7 +7,9 @@
 #endregion
 
 using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
+using Lokad;
+using Lokad.Collections.Generic;
+using Lokad.Diagnostics.CodeAnalysis;
 
 namespace System.Linq
 {
@@ -497,7 +499,8 @@ namespace System.Linq
 		/// <param name="sequence">The source.</param>
 		/// <param name="predicate">The predicate.</param>
 		/// <returns>first value</returns>
-		public static Maybe<TSource> FirstOrEmpty<TSource>(this IEnumerable<TSource> sequence, Func<TSource, bool> predicate) where TSource : class
+		public static Maybe<TSource> FirstOrEmpty<TSource>(this IEnumerable<TSource> sequence, Func<TSource, bool> predicate)
+			where TSource : class
 		{
 			var item = sequence.FirstOrDefault(predicate);
 			if (null == item)
