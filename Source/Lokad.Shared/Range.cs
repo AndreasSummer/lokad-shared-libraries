@@ -113,13 +113,15 @@ namespace Lokad
 		/// <summary>
 		/// Creates the array populated with the provided generator
 		/// </summary>
-		/// <typeparam name="T"></typeparam>
+		/// <typeparam name="TValue">The type of the value.</typeparam>
 		/// <param name="count">The count.</param>
 		/// <param name="generator">The generator.</param>
 		/// <returns>array</returns>
-		public static T[] Array<T>(int count, Func<int, T> generator)
+		public static TValue[] Array<TValue>(int count, Func<int, TValue> generator)
 		{
-			var array = new T[count];
+			if (generator == null) throw new ArgumentNullException("generator");
+
+			var array = new TValue[count];
 			for (int i = 0; i < array.Length; i++)
 			{
 				array[i] = generator(i);

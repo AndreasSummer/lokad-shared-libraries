@@ -83,18 +83,20 @@ namespace Lokad
 		/// <summary>
 		/// Helper method for testing - checks if the object can be serialized
 		/// </summary>
-		/// <typeparam name="T"></typeparam>
-		/// <param name="item"></param>
-		public static void TestXmlSerialization<T>(T item)
+		/// <typeparam name="TData">The type of the data.</typeparam>
+		/// <param name="item">The item.</param>
+		/// <returns>deserialized item</returns>
+		public static TData TestXmlSerialization<TData>(TData item)
 		{
-			var ser = new XmlSerializer(typeof (T));
+			var ser = new XmlSerializer(typeof (TData));
 
 			using (var stream = new MemoryStream())
 			{
 				ser.Serialize(stream, item);
 				stream.Seek(0, SeekOrigin.Begin);
-				var deserialize = (T) ser.Deserialize(stream);
-				Enforce.That(!deserialize.Equals(default(T)), "deserialize!=default(T)");
+				var deserialize = (TData) ser.Deserialize(stream);
+				Enforce.That(!deserialize.Equals(default(TData)), "deserialize!=default(T)");
+				return deserialize;
 			}
 		}
 
