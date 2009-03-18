@@ -124,6 +124,18 @@ namespace Lokad
 			return (double) _nextInt(int.MaxValue)/int.MaxValue;
 		}
 
+		static readonly DateTime _minDate = new DateTime(1700, 1, 1);
+
+		/// <summary>
+		/// Returns a random date between 1700-01-01 and 2100-01-01
+		/// </summary>
+		/// <returns>random value</returns>
+		public static DateTime NextDate()
+		{
+			return _minDate
+				.AddYears(Next(500))
+				.AddDays(NextDouble()*24D*365.25D);
+		}
 
 		static readonly char[] _symbols = "!\"#%&'()*,-./:;?@[\\]_{} ".ToCharArray();
 
