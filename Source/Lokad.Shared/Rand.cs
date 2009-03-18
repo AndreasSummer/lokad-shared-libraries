@@ -108,8 +108,17 @@ namespace Lokad
 			return NextItem(EnumUtil<TEnum>.Values);
 		}
 
+		/// <summary>
+		/// Picks random <see cref="Guid"/>
+		/// </summary>
+		/// <returns>random value</returns>
+		public static Guid NextGuid()
+		{
+			return new Guid(Range.Array(16, i => (byte) Next(byte.MaxValue + 1)));
+		}
+
 		/// <summary> Returns random double value with lowered precision </summary>
-		/// <returns></returns>
+		/// <returns>random double value</returns>
 		public static double NextDouble()
 		{
 			return (double) _nextInt(int.MaxValue)/int.MaxValue;

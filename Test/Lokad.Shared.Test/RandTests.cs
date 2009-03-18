@@ -47,6 +47,7 @@ namespace Lokad
 			Assert.AreEqual(3, Rand.NextItem(new[] {1, 2, 3, 4}));
 			Assert.AreEqual(Option.Yes, Rand.NextEnum<Option>());
 			Assert.AreNotEqual(0, Rand.NextString(1, 5).Length);
+			Assert.AreEqual(new Guid("aefd513f-48a7-b49d-b3f3-172961cc2bcb"), Rand.NextGuid());
 		}
 
 		[Test]
