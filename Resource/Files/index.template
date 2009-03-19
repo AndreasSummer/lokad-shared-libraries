@@ -10,14 +10,14 @@
 <p><em>Development build ${Version}</em></p>
 <h2>Downloads</h2>
 <ul>
-	<li><a href="${Version}/${StackPackage}">Stack</a> - features merged assemblies.</li>
-	<li><a href="${Version}/${StackPackage}">Libraries</a>.</li>
-	<li><a href="${Version}/${SourcePackage}">Sources</a>.</li>
+	<li><a href="${Version}/${StackPackage}">Download merged binaries</a> (DLL, PDB, XML). <strong>Featured!</strong></li>
+	<li><a href="${Version}/${LibraryPackage}">Download binaries</a> (DLL, PDB, XML).</li>
+	<li><a href="${Version}/${SourcePackage}">Download sources</a> (C#, VS2008 solution).</li>
 </ul>
 <h2>Links</h2>
 <ul>
-	<li><a href="http://abdullin.com/shared-libraries/">Information on Lokad Shared Libraries</a></li>
-	<li><a href="http://lokad.com">Lokad</a></li>
+	<li><a href="http://code.google.com/p/lokad-shared-libraries/">Project page on <em>Google Code</em></a></li>
+	<li><a href="http://www.lokad.com">Lokad.com</a></li>
 </ul>
 <p>&copy;2009 Lokad. All rights reserved</p>
 </body>
