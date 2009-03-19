@@ -5,22 +5,16 @@
 			<assembly assemblyPath=".\Build\Stack\Lokad.Stack.dll" xmlCommentsPath=".\Build\Stack\Lokad.Stack.xml" commentsOnly="False" />			
     </assemblies>
     <namespaceSummaries>
-      <namespaceSummaryItem name="System" isDocumented="True">Generic interfaces and helper classes.</namespaceSummaryItem>
-      <namespaceSummaryItem name="System.Container" isDocumented="True">Interfaces and classes used for the Dependency Injection</namespaceSummaryItem>
-      <namespaceSummaryItem name="System.Diagnostics" isDocumented="True">Interfaces and helper classes to aid in diagnosing, monitoring and debugging the applications</namespaceSummaryItem>
-      <namespaceSummaryItem name="System.Diagnostics.CodeAnalysis" isDocumented="True">Attributes for decorating code and providing hints for various code quality tools including Lokad.Quality</namespaceSummaryItem>
-      <namespaceSummaryItem name="System.Exceptions" isDocumented="True">Exception Handling Application Block - for decorating classes with reliability and exception handling functionality without tight coupling to the specific exception policy implementation.</namespaceSummaryItem>
-      <namespaceSummaryItem name="System.Logging" isDocumented="True">Interfaces and helper class for injecting logging functionality without tight coupling to the specific logging implementation</namespaceSummaryItem>
-      <namespaceSummaryItem name="System.Rules" isDocumented="True">Rule Application Block - for declaring and leveraging validation and business rules.</namespaceSummaryItem>      
-      <namespaceSummaryItem name="System.Threading" isDocumented="True">Generic thread helpers</namespaceSummaryItem>
-
-      <namespaceSummaryItem name="" isDocumented="True" />
-      <namespaceSummaryItem name="Lokad" isDocumented="True">Lokad-specific code</namespaceSummaryItem>
-      <namespaceSummaryItem name="Lokad.Container" isDocumented="False" />
-      <namespaceSummaryItem name="Lokad.Diagnostics" isDocumented="False" />
-      <namespaceSummaryItem name="Lokad.Handling" isDocumented="False" />
-      <namespaceSummaryItem name="Lokad.Logging" isDocumented="False" />
+			<namespaceSummaryItem name="" isDocumented="True" />
+			<namespaceSummaryItem name="Lokad" isDocumented="True">Namespace for the Lokad-specific code</namespaceSummaryItem>
+			<namespaceSummaryItem name="Lokad.Threading" isDocumented="True">Helpers for developing multi-threaded applications.</namespaceSummaryItem>
+      <namespaceSummaryItem name="Lokad.Rules" isDocumented="True">Rule Application Block - for declaring and leveraging validation and business rules.</namespaceSummaryItem>
+			<namespaceSummaryItem name="Lokad.Reflection" isDocumented="True" >Classes for efficient reflection based on Expressions and IL parsing</namespaceSummaryItem>
+			<namespaceSummaryItem name="Lokad.Container" isDocumented="True" >Interfaces and classes used for the Dependency Injection</namespaceSummaryItem>
+			<namespaceSummaryItem name="Lokad.Diagnostics" isDocumented="True" >Interfaces and helper classes to aid in diagnosing, monitoring and debugging the applications</namespaceSummaryItem>
+			<namespaceSummaryItem name="Lokad.Logging" isDocumented="True" >Interfaces and helper class for injecting logging functionality without tight coupling to the specific logging implementation</namespaceSummaryItem>
       <namespaceSummaryItem name="Lokad.Quality" isDocumented="True" >Reusable code quality rules for the Lokad codebase along with the helper classes to easily define new ones.</namespaceSummaryItem>
+			<namespaceSummaryItem name="System.Linq" isDocumented="True" >Helpful LINQ extensions.</namespaceSummaryItem>
     </namespaceSummaries>
     <dependencies>
         <dependencyItem depPath=".\Resource\Library\*.*" />
