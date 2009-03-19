@@ -60,7 +60,6 @@
     <Compile Include="ActionPolicyWithState.cs" />
     <Compile Include="ArrayExtensions.cs" />
     <Compile Include="Collections\Generic\ProjectionComparer.cs" />
-    <Compile Include="Diagnostics\DebugLog.cs" />
     <Compile Include="Diagnostics\ExceptionStatistics.cs" />
     <Compile Include="Linq\ArrayExtensionsForLinq.cs" />
     <Compile Include="Linq\Indexer.cs" />
@@ -114,8 +113,6 @@
     <Compile Include="Exceptions\RetryStateWithCount.cs" />
     <Compile Include="Exceptions\RetryStateWithSleep.cs" />
     <Compile Include="IDictionaryExtensions.cs" />
-    <Compile Include="Diagnostics\ExceptionLogDecorator.cs" />
-    <Compile Include="Diagnostics\TraceLog.cs" />
     <Compile Include="KeyInvalidException.cs" />
     <Compile Include="DisposableAction.cs" />
     <Compile Include="Utils\EnumUtil.cs" />
@@ -164,11 +161,6 @@
     <Compile Include="Linq\IEnumerableExtensions.cs" />
     <Compile Include="Diagnostics\ExecutionCounter.cs" />
     <Compile Include="INamedProvider.cs" />
-    <Compile Include="ILog.cs" />
-    <Compile Include="ILogExtensions.cs" />
-    <Compile Include="ILogProviderExtensions.cs" />
-    <Compile Include="LogLevel.cs" />
-    <Compile Include="Diagnostics\NullLog.cs" />
     <Compile Include="Diagnostics\ExecutionStatistics.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Container\RegistrationType.cs" />

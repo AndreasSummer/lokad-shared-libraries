@@ -118,7 +118,7 @@ namespace Lokad.Logging
 		/// Get log provider
 		/// </summary>
 		/// <returns>provider instance</returns>
-		public static INamedProvider<ILog> GetLogProvider()
+		public static ILogProvider GetLogProvider()
 		{
 			return LogProviderWrapper.Instance;
 		}

@@ -9,20 +9,18 @@
 			 if needed
 		-->
 		<BuildPath Condition="$(BuildPath)==''">$(MSBuildProjectDirectory)\Build</BuildPath>
+		<Version Condition="$(Version)==''">0.0.0.0</Version>
 		<Configuration Condition="$(Configuration)==''">Release</Configuration>
 		<ArtifactDirectory Condition="$(ArtifactDirectory)==''">$(BuildPath)\Artifact</ArtifactDirectory>
-
-		<PackageDirectory Condition="$(PackageDirectory)==''">$(BuildPath)\_Package</PackageDirectory>
-		<LatestDirectory Condition="$(LatestDirectory)==''">$(BuildPath)\_Latest</LatestDirectory>
-		<Version Condition="$(Version)==''">0.0.0.0</Version>
+		<PublicationRoot Condition="$(PublicationRoot)==''">$(BuildPath)\_Package</PublicationRoot>
+		<PackageDirectory Condition="$(PackageDirectory)==''">$(BuildPath)\_Package\$(Version)</PackageDirectory>
 		<!--
 			Derived configuration properties
 				 -->
 		<TestPath>$(BuildPath)\Test</TestPath>
-		<LibraryPath>$(BuildPath)\Library</LibraryPath>
 		<StackPath>$(BuildPath)\Stack</StackPath>
-
 		<TempPath>$(BuildPath)\Temp</TempPath>
+		<RawPath>$(BuildPath)\Raw</RawPath>
 
 		<ReadMe>ReadMe.txt</ReadMe>
 		
@@ -34,10 +32,14 @@
 		<SampleSource>Sample</SampleSource>
 
 		<SourceExclusions>**\.svn\**\*.*;**\_svn\**\*.*;**\*.user;**\*.suo;**\*.db;**\bin\**\*.*;**\obj\**\*.*;</SourceExclusions>
+
+		<ILMerge>Resource\Tool\ILMerge\ILMerge.exe</ILMerge>
+		<Linker>Host\Lokad.Linker\bin\$(Configuration)\Lokad.Linker.exe</Linker>
 	</PropertyGroup>
 
 
-	<ItemGroup>		
+	<ItemGroup>
+		<Tokens Include="StackPackage"><ReplacementValue>$(MSBuildProjectName)-Stack-$(Version).zip</ReplacementValue></Tokens>
 		<Tokens Include="LibraryPackage"><ReplacementValue>$(MSBuildProjectName)-Lib-$(Version).zip</ReplacementValue></Tokens>
 		<Tokens Include="SourcePackage"><ReplacementValue>$(MSBuildProjectName)-Source-$(Version).zip</ReplacementValue></Tokens>
 		<Tokens Include="Version"><ReplacementValue>$(Version)</ReplacementValue></Tokens>
@@ -74,24 +76,24 @@
 	 Copies built items to the distrib directory
 	 -->
 	<Target Name="Copy" DependsOnTargets="Build">
-		<MakeDir Directories="$(BuildPath);$(StackPath);$(SdkPath);$(LibraryNSPath)"/>
+		<MakeDir Directories="$(BuildPath);$(StackPath);$(TempPath)"/>
 
-		<!--Merged stack-->
-		<CreateItem Include="$(LibrarySource)\*.*">
-			<Output ItemName="unmergedFiles" TaskParameter="Include"/>
+		<!--Library-->
+		<CreateItem Include="Source\**\bin\$(Configuration)\*.*">
+			<Output ItemName="rawFiles" TaskParameter="Include"/>
 		</CreateItem>
-		<Copy SourceFiles="@(unmergedFiles)" DestinationFolder="$(StackPath)" />
-		
-		<Exec Command="Resource\Tool\ILMerge\ILMerge.exe &quot;$(QualitySource)\Lokad.Quality.dll&quot; &quot;$(QualitySource)/Mono.Cecil.dll&quot; /out:&quot;$(StackPath)/Lokad.Quality.dll&quot; /keyfile:SharedKey.snk /xmldocs=true /ver:$(Version) /attr:&quot;$(QualitySource)/Lokad.Quality.dll&quot;" />
-		<Exec Command="Resource\Tool\ILMerge\ILMerge.exe &quot;$(StackSource)\Lokad.Stack.dll&quot; &quot;$(StackSource)/Autofac.dll&quot; &quot;$(StackSource)/log4net.dll&quot; /out:&quot;$(StackPath)/Lokad.Stack.dll&quot; /keyfile:SharedKey.snk /xmldocs=true /ver:$(Version)  /attr:&quot;$(StackSource)/Lokad.Stack.dll&quot;" />
+		<Copy SourceFiles="@(rawFiles)" DestinationFolder="$(RawPath)" />
 		
 		
-		<!--Library -->
-		<CreateItem Include="$(StackPath)\Lokad.Shared.*;$(StackPath)\Lokad.Quality.*;$(StackPath)\Lokad.Stack.*;">
-			<Output ItemName="libraryFiles" TaskParameter="Include"/>
-		</CreateItem>
-		<Copy SourceFiles="@(libraryFiles)" DestinationFolder="$(LibraryPath)" />
-
+		<!--Stack-->
+		<Exec Command="$(ILMerge) &quot;$(RawPath)\Lokad.Shared.dll&quot; &quot;$(RawPath)/Lokad.Logging.dll&quot; /out:&quot;$(StackPath)/Lokad.Shared.dll&quot; /keyfile:SharedKey.snk /xmldocs=true /ver:$(Version) /attr:&quot;$(RawPath)/Lokad.Shared.dll&quot;" />
+		<Exec Command="$(ILMerge) &quot;$(RawPath)\Lokad.Quality.dll&quot; &quot;$(RawPath)/Mono.Cecil.dll&quot; /out:&quot;$(StackPath)/Lokad.Quality.dll&quot; /keyfile:SharedKey.snk /xmldocs=true /ver:$(Version) /attr:&quot;$(RawPath)/Lokad.Quality.dll&quot;" />
+		<Exec Command="$(ILMerge) &quot;$(RawPath)\Lokad.Stack.dll&quot; &quot;$(RawPath)/Autofac.dll&quot; &quot;$(RawPath)/log4net.dll&quot; /out:&quot;$(StackPath)/Lokad.Stack.dll&quot; /keyfile:SharedKey.snk /xmldocs=true /ver:$(Version)  /attr:&quot;$(RawPath)/Lokad.Stack.dll&quot;" />
+		<!--Update references-->
+		<Exec Command="$(Linker) &quot;$(StackPath)\Lokad.Stack.dll&quot; &quot;$(RawPath)\Lokad.Logging.dll&quot; &quot;$(StackPath)\Lokad.Shared.dll&quot; &quot;$(StackPath)\Lokad.Stack.dll&quot;" />
+		<Exec Command="sn.exe -Ra &quot;$(StackPath)\Lokad.Stack.dll&quot; SharedKey.snk" />
+				
+		
 		<!--All Tests-->
 		<CreateItem Include="Test\**\bin\$(Configuration)\*.*" Exclude="Test\**\bin\$(Configuration)\*.xml;Test\**\bin\$(Configuration)\*.pdb;">
 			<Output ItemName="TestFiles" TaskParameter="Include"/>
@@ -170,58 +172,43 @@
 	</Target>
 
 
-	<Target Name="GenerateHelp" DependsOnTargets="Build;Copy">
+	<Target Name="GenerateHelp" DependsOnTargets="Build;Copy" Condition="$(DisableHelp)==''">
 		<Exec Command="Resource\Tool\SHFB\SandcastleBuilderConsole.exe $(MSBuildProjectName).shfb" />
 	</Target>
 
 	<Target Name="Distrib" DependsOnTargets="Clean;Build;Copy;Config;GenerateHelp">
-		<MakeDir Directories="$(PackageDirectory)" />
+		<MakeDir Directories="$(PackageDirectory);$(TempPath)" />
 
 		<!--Source.zip-->
 		<CreateItem Include="**\*.*" Exclude="Resource\Tool\**\*.*;Build\**\*.*;Resource\Build\Profile.Local\*.*;$(SourceExclusions)">
 			<Output ItemName="_SourceFiles" TaskParameter="Include" />
 		</CreateItem>
 		<Zip Files="@(_SourceFiles)" ZipFileName="$(PackageDirectory)\$(MSBuildProjectName)-Source-$(Version).zip" Flatten="false" />
-
-		<!--Shared Libraries-->
-		<!--Shared - Samples archive -->
+		
+		<!--Samples.zip-->
 		<CreateItem Include="$(SampleSource)\Shared\**\*.*" Exclude="$(SourceExclusions)">
 			<Output ItemName="sharedSamples" TaskParameter="Include" />
 		</CreateItem>
-		<Zip Files="@(sharedSamples)" ZipFileName="$(LibraryPath)\Samples.zip" Flatten="false" WorkingDirectory="$(SampleSource)\Shared" />
+		<Zip Files="@(sharedSamples)" ZipFileName="$(TempPath)\Samples.zip" Flatten="false" WorkingDirectory="$(SampleSource)\Shared" />
 
-		<!--Shared - Archive-->
-		<CreateItem Include="$(LibraryPath)\*.*;$(ReadMe)">
+		<!--Lib-->
+		<CreateItem Include="$(RawPath)\*.*;$(ReadMe);$(TempPath)\Samples.zip">
 			<Output ItemName="_libFiles" TaskParameter="Include" />
 		</CreateItem>
 		<Zip Files="@(_libFiles)" ZipFileName="$(PackageDirectory)\$(MSBuildProjectName)-Lib-$(Version).zip" Flatten="true" />
 
-		<!--Development Archive-->
-		<CreateItem Include="$(StackPath)\Lokad.*;$(ReadMe)">
+		<!--Stack-->
+		<CreateItem Include="$(StackPath)\Lokad.*;$(ReadMe);$(TempPath)\Samples.zip">
 			<Output ItemName="_stackFiles" TaskParameter="Include" />
 		</CreateItem>
-		<Zip Files="@(_stackFiles)" ZipFileName="$(PackageDirectory)\$(MSBuildProjectName)-Dev-$(Version).zip" Flatten="true" />
+		<Zip Files="@(_stackFiles)" ZipFileName="$(PackageDirectory)\$(MSBuildProjectName)-Stack-$(Version).zip" Flatten="true" />
 		
 
 		<!--Indexes-->
 		<MakeDir Directories="$(TempPath)" />
-		<Copy SourceFiles="Resource\Files\lib.template;Resource\Files\source.template" DestinationFolder="$(TempPath)" />	
-		<TemplateFile Template="$(TempPath)\lib.template" OutputFile="lib.out" Tokens="@(Tokens)" />
-		<TemplateFile Template="$(TempPath)\source.template" OutputFile="source.out" Tokens="@(Tokens)" />
-		<Copy SourceFiles="$(TempPath)\lib.out" DestinationFiles="$(PackageDirectory)\download-lib.htm" />
-		<Copy SourceFiles="$(TempPath)\source.out" DestinationFiles="$(PackageDirectory)\download-source.htm" />
-
-		<CallTarget Targets="CopyToLatest" Condition="$(LatestDirectory)!=''" />
-	</Target>
-
-	<Target Name="CopyToLatest" >
-		<RemoveDir Directories="$(LatestDirectory)" ContinueOnError="true" />
-		<MakeDir Directories="$(LatestDirectory)" />
+		<Copy SourceFiles="Resource\Files\index.template;" DestinationFolder="$(TempPath)" />	
+		<TemplateFile Template="$(TempPath)\index.template" OutputFile="index.out" Tokens="@(Tokens)" />
+		<Copy SourceFiles="$(TempPath)\index.out" DestinationFiles="$(PublicationRoot)\index.htm" />
 		
-		<CreateItem Include="$(PackageDirectory)\*.*;$(ReadMe)">
-			<Output ItemName="_latestFiles" TaskParameter="Include" />
-		</CreateItem>
-		
-		<Copy SourceFiles="@(_latestFiles)" DestinationFolder="$(LatestDirectory)" />
 	</Target>
 </Project>

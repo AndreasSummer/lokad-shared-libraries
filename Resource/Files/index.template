@@ -1,0 +1,26 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>Lokad Shared Libraries</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="description" content="Download Lokad Shared Libraries"/>
+</head>
+<body>
+<h1>Lokad Shared Libraries</h1>
+<p><em>Development build ${Version}</em></p>
+<h2>Downloads</h2>
+<ul>
+	<li><a href="${Version}/${StackPackage}">Stack</a> - features merged assemblies.</li>
+	<li><a href="${Version}/${StackPackage}">Libraries</a>.</li>
+	<li><a href="${Version}/${SourcePackage}">Sources</a>.</li>
+</ul>
+<h2>Links</h2>
+<ul>
+	<li><a href="http://abdullin.com/shared-libraries/">Information on Lokad Shared Libraries</a></li>
+	<li><a href="http://lokad.com">Lokad</a></li>
+</ul>
+<p>&copy;2009 Lokad. All rights reserved</p>
+</body>
+</html>
+
+

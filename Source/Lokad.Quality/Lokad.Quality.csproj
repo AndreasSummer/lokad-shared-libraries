@@ -58,6 +58,7 @@
     <Compile Include="Extensions\AssemblyDefinitionExtensions.cs" />
     <Compile Include="Extensions\CustomAttributeExtensions.cs" />
     <Compile Include="Extensions\InstructionExtensions.cs" />
+    <Compile Include="Extensions\ModuleDefinitionExtensions.cs" />
     <Compile Include="Extensions\ParameterDefinitionExtensions.cs" />
     <Compile Include="Extensions\TypeDefinitionExtensions.cs" />
     <Compile Include="MaintainabilityRules.cs" />

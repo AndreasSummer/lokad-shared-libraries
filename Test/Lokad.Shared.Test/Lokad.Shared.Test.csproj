@@ -119,6 +119,10 @@
     <Compile Include="Utils\XmlUtilTests.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Source\Lokad.Logging\Lokad.Logging.csproj">
+      <Project>{F674D061-0355-4617-9A3C-9A4E6E12DEEF}</Project>
+      <Name>Lokad.Logging</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Source\Lokad.Quality\Lokad.Quality.csproj">
       <Project>{855AE75B-E675-4F90-873F-CC3D3F9879BD}</Project>
       <Name>Lokad.Quality</Name>

@@ -6,6 +6,8 @@
 
 #endregion
 
+using System;
+
 namespace Lokad
 {
 	/// <summary>
@@ -17,6 +19,7 @@ namespace Lokad
 	/// things like IDataCache (from the Database layers) or IResolver (from the IoC layers) 
 	/// are just samples of this interface
 	/// </remarks>
+	[CLSCompliant(true)]
 	public interface IProvider<TKey, TValue>
 	{
 		/// <summary>

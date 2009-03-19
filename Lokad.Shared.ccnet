@@ -7,7 +7,7 @@
 		<!--Grab external version if present, default otherwise-->
 		<Version Condition="$(CCNetLabel)!=''">$(CCNetLabel)</Version>
 		<!--Grab external package dir, if forced, default otherwise-->
-		<PackageDirectory Condition="$(CCNetBuildCondition)=='ForceBuild'">$(ExternalPackageDirectory)/$(Version)</PackageDirectory>
-		<LatestDirectory Condition="$(CCNetBuildCondition)=='ForceBuild'">$(ExternalPackageDirectory)/Latest</LatestDirectory>
+		<PublicationRoot Condition="$(CCNetBuildCondition)=='ForceBuild'">$(ExternalPackageDirectory)</PublicationRoot>
+		<PackageDirectory Condition="$(CCNetBuildCondition)=='ForceBuild'">$(ExternalPackageDirectory)\$(Version)</PackageDirectory>
 	</PropertyGroup>	
 </Project>

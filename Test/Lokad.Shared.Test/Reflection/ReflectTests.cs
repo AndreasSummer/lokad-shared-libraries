@@ -190,7 +190,7 @@ namespace Lokad.Reflection
 
 		class ClassWithConstraints<T> where T : ClassToReflect, new()
 		{
-			public T Target;
+			public T Target = default(T);
 
 			public string GetNameOfProperty()
 			{

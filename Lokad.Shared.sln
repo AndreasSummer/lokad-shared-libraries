@@ -17,7 +17,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		Lokad.Shared.shfb = Lokad.Shared.shfb
 		ReadMe.txt = ReadMe.txt
 		SharedKey.snk = SharedKey.snk
-		Source\VersionAssemblyInfo.cs = Source\VersionAssemblyInfo.cs
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lokad.Stack", "Source\Lokad.Stack\Lokad.Stack.csproj", "{5071C867-97B7-41BE-95A7-7B584B0C2F50}"
@@ -38,9 +37,14 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lokad.Shared.Contrib.Test",
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Templates", "Templates", "{89452278-CC35-4A09-86FA-837DE7398573}"
 	ProjectSection(SolutionItems) = preProject
-		Resource\Files\lib.template = Resource\Files\lib.template
-		Resource\Files\source.template = Resource\Files\source.template
+		Resource\Files\index.template = Resource\Files\index.template
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lokad.Logging", "Source\Lokad.Logging\Lokad.Logging.csproj", "{F674D061-0355-4617-9A3C-9A4E6E12DEEF}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tool", "Tool", "{F6D2FFD3-20B7-42AD-8D6B-C8B4E56A30B4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lokad.Linker", "Host\Lokad.Linker\Lokad.Linker.csproj", "{A7B85147-5434-4707-8733-8A10E999467A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -80,6 +84,14 @@ Global
 		{13E96105-62A8-4017-9552-6884DA392293}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{13E96105-62A8-4017-9552-6884DA392293}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{13E96105-62A8-4017-9552-6884DA392293}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F674D061-0355-4617-9A3C-9A4E6E12DEEF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F674D061-0355-4617-9A3C-9A4E6E12DEEF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F674D061-0355-4617-9A3C-9A4E6E12DEEF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F674D061-0355-4617-9A3C-9A4E6E12DEEF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A7B85147-5434-4707-8733-8A10E999467A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A7B85147-5434-4707-8733-8A10E999467A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A7B85147-5434-4707-8733-8A10E999467A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A7B85147-5434-4707-8733-8A10E999467A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -91,10 +103,12 @@ Global
 		{855AE75B-E675-4F90-873F-CC3D3F9879BD} = {5344E077-8212-47BA-8EA2-F92ECC2845A0}
 		{9C285BAA-786F-41E9-8CFB-C1FDDB3E6FE1} = {5344E077-8212-47BA-8EA2-F92ECC2845A0}
 		{30E7C57C-84B5-4414-BA3E-A440BE240C49} = {5344E077-8212-47BA-8EA2-F92ECC2845A0}
+		{F674D061-0355-4617-9A3C-9A4E6E12DEEF} = {5344E077-8212-47BA-8EA2-F92ECC2845A0}
 		{6DA4EA76-B037-4131-A39E-262E1FBAD19C} = {FFFDA17A-CB7D-4DA1-BAFA-838E873F668A}
 		{76BE68DD-B0AB-4CF6-B119-3C493F11B06D} = {FFFDA17A-CB7D-4DA1-BAFA-838E873F668A}
 		{D8AB1A43-FA5B-492A-9AEA-C1D177CD3C85} = {FFFDA17A-CB7D-4DA1-BAFA-838E873F668A}
 		{13E96105-62A8-4017-9552-6884DA392293} = {FFFDA17A-CB7D-4DA1-BAFA-838E873F668A}
 		{89452278-CC35-4A09-86FA-837DE7398573} = {758A6E18-B1E3-418F-94BE-D0F8DFC66FCD}
+		{A7B85147-5434-4707-8733-8A10E999467A} = {F6D2FFD3-20B7-42AD-8D6B-C8B4E56A30B4}
 	EndGlobalSection
 EndGlobal

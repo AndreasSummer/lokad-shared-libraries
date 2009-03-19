@@ -15,7 +15,7 @@ using Mono.Cecil.Cil;
 namespace Lokad.Quality
 {
 	/// <summary>
-	/// Extensions for the <see cref="ModuleDefinition"/>
+	/// Extensions for the <see cref="MethodDefinition"/>
 	/// </summary>
 	public static class MethodDefinitionExtensions
 	{
@@ -95,4 +95,6 @@ namespace Lokad.Quality
 			return definitions;
 		}
 	}
+
+
 }

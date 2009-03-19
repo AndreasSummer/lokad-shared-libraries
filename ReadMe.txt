@@ -30,16 +30,6 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 Packages
 ========
 
-Sdk Package
------------
-
-This package includes Lokad.Sdk.dll that is a part of Lokad Software 
-Development Kit (SDK) for .NET. It provides convenient access to Lokad
-forecasting services.
-
-Product page: http://www.lokad.com/sdk-dot-net.ashx
-
-
 Lib Package
 -----------
 
@@ -47,22 +37,18 @@ This package includes Lokad Shared Libraries.
 
 Unofficial page: http://abdullin.com/shared-libraries/
 
+
+Stack Package
+-------------
+
+This package includes Lokad Shared Libraries merged together 
+to reduce a number of files bing deployed.
+
 Source Package
 --------------
 
 This package includes snapshot of the source code files at the moment of 
 releasing the current build.
-
-
-Stack Package
--------------
-
-This package is a combination of Lokad SDK, Shared Libraries and other
-3rd party open source projects that are reused within other Open Source
-projects by Lokad (i.e.: Safety Stock Calculator and Call Center Calculator)
-
-Lokad Open Source: http://www.sf.net/projects/lokad
-
 
 3rd Party Libraries
 ===================

@@ -6,12 +6,15 @@
 
 #endregion
 
+using System;
+
 namespace Lokad
 {
 	/// <summary>
 	/// Shortcut interface for <see cref="IProvider{TKey,TValue}"/> that uses <see cref="string"/> as the key.
 	/// </summary>
 	/// <typeparam name="TValue"></typeparam>
+	[CLSCompliant(true)]
 	public interface INamedProvider<TValue> : IProvider<string, TValue>
 	{
 	}

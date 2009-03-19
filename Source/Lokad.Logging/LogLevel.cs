@@ -6,12 +6,15 @@
 
 #endregion
 
+using System;
+
 namespace Lokad
 {
 	/// <summary>
 	/// Degines the importance level associated with the log
 	/// entry in <see cref="ILog"/>
 	/// </summary>
+	[CLSCompliant(true)]
 	public enum LogLevel
 	{
 		/// <summary> Message is intended for debugging </summary>

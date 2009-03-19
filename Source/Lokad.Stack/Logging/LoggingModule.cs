@@ -71,7 +71,7 @@ namespace Lokad.Logging
 			var builder = new ContainerBuilder();
 
 			// register log provider
-			builder.Register(LoggingStack.GetLogProvider());
+			builder.Register(LoggingStack.GetLogProvider()).As<ILogProvider, INamedProvider<ILog>>();
 			builder.Register(c => c.Resolve<INamedProvider<ILog>>().Get("Default"));
 			builder.Build(container);
 		}
