@@ -21,7 +21,7 @@ namespace Lokad
 		{
 			var log = NullLog.Instance;
 			var ex = new Exception();
-			var id = 0;
+			const int id = 0;
 
 			log.Debug("Message");
 			log.Debug(ex, "Message with exception");

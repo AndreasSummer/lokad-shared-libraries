@@ -14,7 +14,7 @@ namespace Lokad
 	/// Extension methods for the <see cref="INamedProvider{TValue}"/>
 	/// of <see cref="ILog"/>
 	/// </summary>
-	[NoCodeCoverage]
+	[NoCodeCoverage, UsedImplicitly]
 	public static class ILogProviderExtensions
 	{
 		/// <summary>

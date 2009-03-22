@@ -16,9 +16,8 @@ namespace Lokad.Diagnostics
 	/// <summary>
 	/// <see cref="ILog"/> that writes to the <see cref="Trace.Listeners"/>
 	/// </summary>
-	[Immutable]
 	[Serializable]
-	[NoCodeCoverage]
+	[NoCodeCoverage, Immutable, UsedImplicitly]
 	public sealed class TraceLog : ILog
 	{
 		/// <summary>  Singleton instance </summary>

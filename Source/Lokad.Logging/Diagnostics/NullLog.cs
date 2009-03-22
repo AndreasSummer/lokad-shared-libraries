@@ -14,8 +14,8 @@ namespace Lokad.Diagnostics
 	/// <summary>
 	/// <see cref="ILog"/> that does not do anything
 	/// </summary>
-	[NoCodeCoverage]
-	[Immutable]
+	[Serializable]
+	[NoCodeCoverage, Immutable, UsedImplicitly]
 	public sealed class NullLog : ILog
 	{
 		/// <summary>

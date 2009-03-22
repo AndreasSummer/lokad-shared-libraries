@@ -17,7 +17,6 @@ namespace Lokad
 	/// augment their behavior (i.e. to retry on problems)
 	/// </summary>
 	[Immutable]
-	[NoCodeCoverage]
 	[Serializable]
 	public class ActionPolicy
 	{

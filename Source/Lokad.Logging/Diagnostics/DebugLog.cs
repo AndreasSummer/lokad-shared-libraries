@@ -17,9 +17,8 @@ namespace Lokad.Diagnostics
 	/// <summary>
 	/// <see cref="ILog"/> that writes to the <see cref="Debug.Listeners"/>
 	/// </summary>
-	[Immutable]
 	[Serializable]
-	[NoCodeCoverage]
+	[NoCodeCoverage, Immutable, UsedImplicitly]
 	public sealed class DebugLog : ILog
 	{
 		/// <summary>

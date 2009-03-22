@@ -15,6 +15,7 @@ namespace Lokad.Quality
 	/// </summary>
 	/// <remarks>This attribute helps R# in code analysis</remarks>
 	[AttributeUsage(AttributeTargets.Class, AllowMultiple = false, Inherited = true)]
+	[NoCodeCoverage]
 	public sealed class MeansImplicitUseAttribute : Attribute
 	{
 		/// <summary>

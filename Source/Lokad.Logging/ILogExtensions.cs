@@ -8,14 +8,12 @@
 
 using System;
 using System.Globalization;
-using Lokad.Quality;
 
 namespace Lokad
 {
 	/// <summary>
 	/// Helper extensions for any class that implements <see cref="ILog"/>
 	/// </summary>
-	[NoCodeCoverage]
 	public static class ILogExtensions
 	{
 		static readonly CultureInfo _culture = CultureInfo.InvariantCulture;

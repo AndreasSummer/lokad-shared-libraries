@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{F8677A4E-D9A7-4AFD-9C29-A83B5C5C4A6B}</ProjectGuid>
+    <ProjectGuid>{4A323EA1-F1FE-4917-9D2A-C415A39A6E29}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Lokad</RootNamespace>
-    <AssemblyName>Lokad.ActionPolicy.Test</AssemblyName>
+    <AssemblyName>Lokad.Logging.Test</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -41,26 +41,16 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ActionPolicyTests.cs" />
-    <Compile Include="HandlingProviderTests.cs" />
+    <Compile Include="ILogExtensionsTests.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\..\SharedKey.snk">
-      <Link>SharedKey.snk</Link>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\Source\Lokad.ActionPolicy\Lokad.ActionPolicy.csproj">
-      <Project>{F8001D8A-6F14-463B-AA8E-00D31EFFBFA0}</Project>
-      <Name>Lokad.ActionPolicy</Name>
+    <ProjectReference Include="..\..\Source\Lokad.Logging\Lokad.Logging.csproj">
+      <Project>{F674D061-0355-4617-9A3C-9A4E6E12DEEF}</Project>
+      <Name>Lokad.Logging</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Source\Lokad.Shared\Lokad.Shared.csproj">
       <Project>{9C285BAA-786F-41E9-8CFB-C1FDDB3E6FE1}</Project>
       <Name>Lokad.Shared</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Lokad.Shared.Test\Lokad.Shared.Test.csproj">
-      <Project>{76BE68DD-B0AB-4CF6-B119-3C493F11B06D}</Project>
-      <Name>Lokad.Shared.Test</Name>
     </ProjectReference>
   </ItemGroup>  
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

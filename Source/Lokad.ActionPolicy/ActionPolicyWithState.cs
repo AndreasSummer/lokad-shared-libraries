@@ -16,7 +16,6 @@ namespace Lokad
 	/// holds some state and thus must have syncronized access.
 	/// </summary>
 	[Immutable]
-	[NoCodeCoverage]
 	[Serializable]
 	public sealed class ActionPolicyWithState : ActionPolicy
 	{
