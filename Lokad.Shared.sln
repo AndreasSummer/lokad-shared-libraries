@@ -36,9 +36,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lokad.Shared.Contrib.Test", "Test\Lokad.Shared.Contrib.Test\Lokad.Shared.Contrib.Test.csproj", "{13E96105-62A8-4017-9552-6884DA392293}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Templates", "Templates", "{89452278-CC35-4A09-86FA-837DE7398573}"
-	ProjectSection(SolutionItems) = preProject
-		Resource\Files\index.template = Resource\Files\index.template
-	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lokad.Logging", "Source\Lokad.Logging\Lokad.Logging.csproj", "{F674D061-0355-4617-9A3C-9A4E6E12DEEF}"
 EndProject
