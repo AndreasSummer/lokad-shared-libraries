@@ -8,6 +8,7 @@
 
 using System.Collections.Generic;
 using System.Linq;
+using Lokad.Testing;
 using NUnit.Framework;
 
 namespace Lokad.Rules

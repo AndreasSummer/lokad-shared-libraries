@@ -9,6 +9,7 @@
 #if !SILVERLIGHT2
 
 using System;
+using Lokad.Testing;
 using NUnit.Framework;
 
 namespace Lokad.Reflection

@@ -7,6 +7,7 @@
 #endregion
 
 using Lokad.Container;
+using Lokad.Testing;
 using NUnit.Framework;
 
 namespace Lokad

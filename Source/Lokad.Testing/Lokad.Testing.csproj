@@ -5,13 +5,15 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{F8677A4E-D9A7-4AFD-9C29-A83B5C5C4A6B}</ProjectGuid>
+    <ProjectGuid>{CA5BC74E-E0DD-4F07-B29E-7B4F988F5E1F}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Lokad</RootNamespace>
-    <AssemblyName>Lokad.ActionPolicy.Test</AssemblyName>
+    <RootNamespace>Lokad.Testing</RootNamespace>
+    <AssemblyName>Lokad.Testing</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>..\..\SharedKey.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -21,6 +23,8 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <DocumentationFile>bin\Debug\Lokad.Testing.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -29,6 +33,8 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Release\Lokad.Testing.xml</DocumentationFile>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="nunit.framework, Version=2.4.6.0, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
@@ -41,31 +47,25 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ActionPolicyTests.cs" />
-    <Compile Include="HandlingProviderTests.cs" />
+    <Compile Include="..\GlobalAssemblyInfo.cs">
+      <Link>Properties\GlobalAssemblyInfo.cs</Link>
+    </Compile>
+    <Compile Include="..\VersionAssemblyInfo.cs">
+      <Link>Properties\VersionAssemblyInfo.cs</Link>
+    </Compile>
+    <Compile Include="Expects.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Lokad.Shared\Lokad.Shared.csproj">
+      <Project>{9C285BAA-786F-41E9-8CFB-C1FDDB3E6FE1}</Project>
+      <Name>Lokad.Shared</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\SharedKey.snk">
       <Link>SharedKey.snk</Link>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\Source\Lokad.ActionPolicy\Lokad.ActionPolicy.csproj">
-      <Project>{F8001D8A-6F14-463B-AA8E-00D31EFFBFA0}</Project>
-      <Name>Lokad.ActionPolicy</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Source\Lokad.Shared\Lokad.Shared.csproj">
-      <Project>{9C285BAA-786F-41E9-8CFB-C1FDDB3E6FE1}</Project>
-      <Name>Lokad.Shared</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Source\Lokad.Testing\Lokad.Testing.csproj">
-      <Project>{CA5BC74E-E0DD-4F07-B29E-7B4F988F5E1F}</Project>
-      <Name>Lokad.Testing</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Lokad.Shared.Test\Lokad.Shared.Test.csproj">
-      <Project>{76BE68DD-B0AB-4CF6-B119-3C493F11B06D}</Project>
-      <Name>Lokad.Shared.Test</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
