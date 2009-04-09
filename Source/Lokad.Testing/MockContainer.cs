@@ -92,6 +92,41 @@ namespace Lokad.Testing
 		{
 			return _container.Resolve<TService>().Stub(t => action(t));
 		}
+
+
+		/// <summary>
+		/// Raises the specified event on the <typeparamref name="TEventSource"/> resolved from the container.
+		/// </summary>
+		/// <typeparam name="TEventSource">The type of the service.</typeparam>
+		/// <param name="eventSubscription">The event subscription that specifies the event to be called.</param>
+		/// <param name="args">The optional arguments to be passed to the event.</param>
+		/// <returns>same instance of the mock container</returns>
+		/// <seealso cref="RhinoMocksExtensions.GetEventRaiser{TEventSource}"/>
+		/// <seealso cref="IEventRaiser.Raise(object[])"/>
+		public MockContainer RaiseEventOn<TEventSource>(Action<TEventSource> eventSubscription, params object[] args)
+			where TEventSource : class
+		{
+			_container
+				.Resolve<TEventSource>()
+				.GetEventRaiser(eventSubscription).Raise(args);
+
+			return this;
+		}
+
+		/// <summary>
+		/// Asserts that a particular method was called on the specified mock object
+		/// </summary>
+		/// <typeparam name="TService">The type of the service.</typeparam>
+		/// <param name="action">The action.</param>
+		/// <seealso cref="RhinoMocksExtensions.AssertWasCalled{T}(T,System.Action{T})"/>
+		/// <returns>same instance of the mock container</returns>
+		public MockContainer AssertWasCalled<TService>(Action<TService> action)
+		{
+			var resolve = _container
+				.Resolve<TService>();
+			resolve.AssertWasCalled(action);
+			return this;
+		}
 	}
 
 
