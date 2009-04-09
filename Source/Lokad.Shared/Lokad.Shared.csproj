@@ -59,6 +59,7 @@
     <Compile Include="ArrayExtensions.cs" />
     <Compile Include="Collections\Generic\ProjectionComparer.cs" />
     <Compile Include="Diagnostics\ExceptionStatistics.cs" />
+    <Compile Include="Testing\IEquatableExtensions.cs" />
     <Compile Include="Linq\ArrayExtensionsForLinq.cs" />
     <Compile Include="Linq\Indexer.cs" />
     <Compile Include="Maybe.cs" />

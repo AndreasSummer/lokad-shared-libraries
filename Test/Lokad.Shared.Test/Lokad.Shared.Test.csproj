@@ -59,6 +59,7 @@
   <ItemGroup>
     <Compile Include="ActionExtensionsTests.cs" />
     <Compile Include="IDictionaryExtensionsTests.cs" />
+    <Compile Include="Testing\IEquatableExtensionsTests.cs" />
     <Compile Include="Linq\ArrayExtensionsTests.cs" />
     <Compile Include="MaybeTests.cs" />
     <Compile Include="NumericExtensionsTests.cs" />
