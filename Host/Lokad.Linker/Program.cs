@@ -38,6 +38,7 @@ namespace Lokad.Linker
 				{
 					reference.Name = linked.Name.Name;
 					reference.Hash = linked.Name.Hash;
+					reference.Version = linked.Name.Version;
 				}
 			}
 

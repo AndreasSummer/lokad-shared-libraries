@@ -73,7 +73,10 @@ namespace Lokad.Testing
 			return _container.Resolve<TService>();
 		}
 
-		void IDisposable.Dispose()
+		/// <summary>
+		/// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+		/// </summary>
+		public void Dispose()
 		{
 			_container.Dispose();
 		}
