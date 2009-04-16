@@ -3,7 +3,11 @@
 <head>
 	<title>Lokad Shared Libraries</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<meta name="description" content="Download Lokad Shared Libraries"/>
+	<meta name="description" content="Download Lokad Shared Libraries"/>	
+	
+	<META Http-Equiv="Cache-Control" Content="no-cache">
+	<META Http-Equiv="Pragma" Content="no-cache">
+	<META Http-Equiv="Expires" Content="0">
 </head>
 <body>
 <h1>Lokad Shared Libraries</h1>
