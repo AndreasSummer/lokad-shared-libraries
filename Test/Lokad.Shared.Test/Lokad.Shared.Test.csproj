@@ -58,6 +58,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ActionExtensionsTests.cs" />
+    <Compile Include="Expects.cs" />
     <Compile Include="IDictionaryExtensionsTests.cs" />
     <Compile Include="Testing\IEquatableExtensionsTests.cs" />
     <Compile Include="Linq\ArrayExtensionsTests.cs" />
@@ -76,7 +77,6 @@
     <Compile Include="Diagnostics\ExceptionCounterTests.cs" />
     <Compile Include="Diagnostics\SystemDescriptorTests.cs" />
     <Compile Include="Utils\EnumUtilTests.cs" />
-    <Compile Include="Expects.cs" />
     <Compile Include="CodeQualityTests.cs" />
     <Compile Include="ICollectionExtensionsTests.cs" />
     <Compile Include="Linq\IEnumerableExtensionsTests.cs" />

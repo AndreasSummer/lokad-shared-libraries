@@ -8,7 +8,9 @@
 
 using System;
 using NUnit.Framework;
-
+// ReSharper disable InconsistentNaming
+// ReSharper disable MemberCanBePrivate.Global
+// ReSharper disable UnusedMember.Global
 namespace Lokad
 {
 	[TestFixture]
@@ -58,8 +60,25 @@ namespace Lokad
 			CollectionAssert.Contains(array, 0);
 		}
 
+		[Test]
+		public void NextItems_shuffles_array_when_all_items_are_selected()
+		{
+			var expected = Range.Array(10);
+			CollectionAssert.AreEquivalent(expected, Rand.NextItems(expected, 10));
+		}
+
+		[Test]
+		public void NextItems_returns_subset()
+		{
+			var expected = Range.Array(10);
+			var actual = Rand.NextItems(expected, 5);
+			CollectionAssert.IsSubsetOf(actual, expected);
+			Assert.AreEqual(5,actual.Length);
+		}
+
 #if !SILVERLIGHT2
 
+		
 		public sealed class XmlTestClass
 		{
 			public string Member { get; set; }

@@ -7,6 +7,8 @@
 #endregion
 
 using System;
+using System.Linq;
+using Lokad.Quality;
 
 namespace Lokad
 {
@@ -19,20 +21,20 @@ namespace Lokad
 	/// </remarks>
 	public static class Rand
 	{
-		static Func<int, int> _nextInt;
-		static Func<Func<int, int>> _activator;
+		static Func<int, int> NextInt;
+		static Func<Func<int, int>> Activator;
 
 		/// <summary>
 		/// Resets everything to the default.
 		/// </summary>
 		public static void ResetToDefault()
 		{
-			_activator = () =>
+			Activator = () =>
 				{
 					var r = new Random();
 					return i => r.Next(i);
 				};
-			_nextInt = _activator();
+			NextInt = Activator();
 		}
 
 		static Rand()
@@ -45,7 +47,7 @@ namespace Lokad
 		/// </summary>
 		public static void Reset()
 		{
-			_nextInt = _activator();
+			NextInt = Activator();
 		}
 
 		/// <summary>
@@ -54,8 +56,8 @@ namespace Lokad
 		/// <param name="activator">The activator.</param>
 		public static void Reset(Func<Func<int, int>> activator)
 		{
-			_activator = activator;
-			_nextInt = _activator();
+			Activator = activator;
+			NextInt = Activator();
 		}
 
 		/// <summary>
@@ -64,7 +66,7 @@ namespace Lokad
 		/// <returns>random integer</returns>
 		public static int Next()
 		{
-			return _nextInt(int.MaxValue);
+			return NextInt(int.MaxValue);
 		}
 
 		/// <summary>
@@ -74,7 +76,7 @@ namespace Lokad
 		/// <returns>random integer</returns>
 		public static int Next(int upperBound)
 		{
-			return _nextInt(upperBound);
+			return NextInt(upperBound);
 		}
 
 		/// <summary>
@@ -87,7 +89,7 @@ namespace Lokad
 		public static int Next(int lowerBound, int upperBound)
 		{
 			var range = upperBound - lowerBound;
-			return _nextInt(range) + lowerBound;
+			return NextInt(range) + lowerBound;
 		}
 
 		/// <summary> Picks random item from the provided array </summary>
@@ -96,7 +98,7 @@ namespace Lokad
 		/// <returns>random item from the array</returns>
 		public static TItem NextItem<TItem>(TItem[] items)
 		{
-			var index = _nextInt(items.Length);
+			var index = NextInt(items.Length);
 			return items[index];
 		}
 
@@ -121,10 +123,10 @@ namespace Lokad
 		/// <returns>random double value</returns>
 		public static double NextDouble()
 		{
-			return (double) _nextInt(int.MaxValue)/int.MaxValue;
+			return (double) NextInt(int.MaxValue)/int.MaxValue;
 		}
 
-		static readonly DateTime _minDate = new DateTime(1700, 1, 1);
+		static readonly DateTime MinDate = new DateTime(1700, 1, 1);
 
 		/// <summary>
 		/// Returns a random date between 1700-01-01 and 2100-01-01
@@ -132,12 +134,12 @@ namespace Lokad
 		/// <returns>random value</returns>
 		public static DateTime NextDate()
 		{
-			return _minDate
+			return MinDate
 				.AddYears(Next(500))
 				.AddDays(NextDouble()*24D*365.25D);
 		}
 
-		static readonly char[] _symbols = "!\"#%&'()*,-./:;?@[\\]_{} ".ToCharArray();
+		static readonly char[] Symbols = "!\"#%&'()*,-./:;?@[\\]_{} ".ToCharArray();
 
 
 		/// <summary>
@@ -151,8 +153,41 @@ namespace Lokad
 		{
 			//const int surrogateStartsAt = 55296;
 			int count = Next(lowerBound, upperBound);
-			var array = Range.Array(count, i => Next(5) == 1 ? NextItem(_symbols) : (char) Next(48, 122));
+			var array = Range.Array(count, i => Next(5) == 1 ? NextItem(Symbols) : (char) Next(48, 122));
 			return new string(array);
+		}
+
+		/// <summary>
+		/// Gets a random subset from the array
+		/// </summary>
+		/// <typeparam name="TValue">The type of the value.</typeparam>
+		/// <param name="items">The items.</param>
+		/// <param name="count">The count.</param>
+		/// <returns>array that contains <paramref name="count"/> items from the original array</returns>
+		/// <exception cref="ArgumentOutOfRangeException">when <paramref name="count"/> 
+		/// is bigger than the length of <paramref name="items"/></exception>
+		public static TValue[] NextItems<TValue>(TValue[] items, int count)
+		{
+			if (items == null) throw new ArgumentNullException("items");
+			if (count > items.Length)
+				throw new ArgumentOutOfRangeException();
+
+			if (count == 0)
+				return ArrayUtil<TValue>.Empty;
+
+			var indexes = Range.Array(items.Length).ToList();
+
+			var result = new TValue[count];
+
+			for (int i = 0; i < count; i++)
+			{
+				var next = Next(indexes.Count);
+				var index = indexes[next];
+				indexes.RemoveAt(next);
+				result[i] = items[index];
+			}
+
+			return result;
 		}
 	}
 }

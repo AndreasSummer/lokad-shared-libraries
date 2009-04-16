@@ -24,5 +24,23 @@ namespace Lokad
 		{
 			return array == null || array.Length == 0;
 		}
+
+		/// <summary>
+		/// Empty array of <see cref="Guid"/>
+		/// </summary>
+		public static readonly Guid[] EmptyGuid = new Guid[0];
+		/// <summary>
+		/// Empty array of <see cref="int"/>
+		/// </summary>
+		public static readonly int[] EmptyInt32 = new int[0];
+		/// <summary>
+		/// Empty array of <see cref="string"/>
+		/// </summary>
+		public static readonly string[] EmptyString = new string[0];
+	}
+
+	static class ArrayUtil<T>
+	{
+		internal static readonly T[] Empty = new T[0];
 	}
 }
