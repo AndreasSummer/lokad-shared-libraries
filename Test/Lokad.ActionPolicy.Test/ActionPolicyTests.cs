@@ -110,6 +110,17 @@ namespace Lokad
 			Expect<TimeoutException>(3, policy);
 		}
 
+
+		[Test]
+		public void Retry_Once()
+		{
+			var policy = ActionPolicy.Handle<TimeoutException>().Retry(0);
+			// non-handled exception
+			Expect<ArgumentException>(() => policy.Do(RaiseArgument));
+			Raise<TimeoutException>(0, policy);
+			Expect<TimeoutException>(1, policy);
+		}
+
 		[Test]
 		public void Retry_With_Action()
 		{
