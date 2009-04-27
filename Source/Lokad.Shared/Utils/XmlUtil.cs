@@ -17,22 +17,22 @@ namespace Lokad
 	/// <summary>
 	/// Simple static class that caches <see cref="XmlSerializer"/> instances.
 	/// </summary>
-	/// <typeparam name="T"></typeparam>
+	/// <typeparam name="TXml"></typeparam>
 	[NoCodeCoverage]
-	public static class XmlUtil<T>
+	public static class XmlUtil<TXml>
 	{
-		static readonly XmlSerializer _serializer = new XmlSerializer(typeof (T));
+		static readonly XmlSerializer Serializer = new XmlSerializer(typeof (TXml));
 
 		/// <summary> Serializes instance to the provided writer </summary>
-		public static void Serialize(T instance, TextWriter writer)
+		public static void Serialize(TXml instance, TextWriter writer)
 		{
-			_serializer.Serialize(writer, instance);
+			Serializer.Serialize(writer, instance);
 		}
 
 		/// <summary> Serializes instance to the provided stream </summary>
-		public static void Serialize(T instance, Stream stream)
+		public static void Serialize(TXml instance, Stream stream)
 		{
-			_serializer.Serialize(stream, instance);
+			Serializer.Serialize(stream, instance);
 		}
 
 		/// <summary>
@@ -40,7 +40,7 @@ namespace Lokad
 		/// </summary>
 		/// <param name="instance"></param>
 		/// <returns></returns>
-		public static string Serialize(T instance)
+		public static string Serialize(TXml instance)
 		{
 			using (var writer = new StringWriter())
 			{
@@ -55,11 +55,11 @@ namespace Lokad
 		/// </summary>
 		/// <param name="source">xml string</param>
 		/// <returns></returns>
-		public static T Deserialize(string source)
+		public static TXml Deserialize(string source)
 		{
 			using (var reader = new StringReader(source))
 			{
-				return (T) _serializer.Deserialize(reader);
+				return (TXml) Serializer.Deserialize(reader);
 			}
 		}
 
@@ -69,9 +69,9 @@ namespace Lokad
 		/// </summary>
 		/// <param name="stream"></param>
 		/// <returns></returns>
-		public static T Deserialize(Stream stream)
+		public static TXml Deserialize(Stream stream)
 		{
-			return (T) _serializer.Deserialize(stream);
+			return (TXml) Serializer.Deserialize(stream);
 		}
 	}
 
@@ -197,6 +197,22 @@ namespace Lokad
 		public static string Serialize<T>(T instance) where T : new()
 		{
 			return XmlUtil<T>.Serialize(instance);
+		}
+
+		/// <summary>
+		/// Serializes the specified instance to the specified file
+		/// </summary>
+		/// <typeparam name="TXml">The type of the XML-serializable object.</typeparam>
+		/// <param name="instance">The instance.</param>
+		/// <param name="fileName">Name of the file.</param>
+		[NoCodeCoverage]
+		public static void SerializeTo<TXml>(TXml instance, string fileName) 
+			where TXml : new()
+		{
+			using (var writer = File.CreateText(fileName))
+			{
+				XmlUtil<TXml>.Serialize(instance, writer);
+			}
 		}
 
 		/// <summary>
