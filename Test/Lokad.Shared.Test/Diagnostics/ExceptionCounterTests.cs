@@ -16,9 +16,11 @@ namespace Lokad.Diagnostics
 	[TestFixture]
 	public sealed class ExceptionCounterTests
 	{
-		static readonly Exception ex1 = Capture(() => Stack1("E1"));
-		static readonly Exception ex2 = Capture(() => Stack2("E1"));
-		static readonly Exception ex3 = Capture(() => Stack1("E2"));
+		static readonly Exception Ex1 = Capture(() => Stack1("E1"));
+		static readonly Exception Ex2 = Capture(() => Stack2("E1"));
+		static readonly Exception Ex3 = Capture(() => Stack1("E2"));
+
+		// ReSharper disable InconsistentNaming
 
 		static void Stack2(string msg)
 		{
@@ -47,8 +49,8 @@ namespace Lokad.Diagnostics
 		public void Same_Exceptions_Get_Counted_Properly()
 		{
 			var counter = new ExceptionCounters();
-			var id1 = counter.Add(ex1);
-			var id2 = counter.Add(ex1);
+			var id1 = counter.Add(Ex1);
+			var id2 = counter.Add(Ex1);
 
 			var history = counter.GetHistory();
 			Assert.AreEqual(1, history.Count, "A01");
@@ -61,9 +63,9 @@ namespace Lokad.Diagnostics
 		public void Different_Exceptions_Get_Counted_Properly()
 		{
 			var counter = new ExceptionCounters();
-			counter.Add(ex1);
-			counter.Add(ex2);
-			counter.Add(ex3);
+			counter.Add(Ex1);
+			counter.Add(Ex2);
+			counter.Add(Ex3);
 
 			var history = counter.GetHistory();
 			Assert.AreEqual(3, history.Count);
@@ -75,11 +77,40 @@ namespace Lokad.Diagnostics
 		public void Clear_Works()
 		{
 			var counter = new ExceptionCounters();
-			counter.Add(ex1);
-			counter.Add(ex1);
+			counter.Add(Ex1);
+			counter.Add(Ex1);
 
 			counter.Clear();
 			Assert.AreEqual(0, counter.GetHistory().Count);
+		}
+
+		[Test]
+		public void Merging_statistics()
+		{
+			var counter1 = new ExceptionCounters();
+			var counter2 = new ExceptionCounters();
+
+			counter1.Add(Ex1);
+			counter2.Add(Ex1);
+
+
+			var history1 = counter1
+				.GetHistory();
+
+
+			var history2 = counter2.GetHistory();
+
+			var merged = history1
+				.Concat(history2)
+				.GroupBy(s => s.Text)
+				.ToArray(g =>
+					{
+						var first = g.First();
+						return new ExceptionStatistics(first.ID, g.Sum(s => s.Count), first.Name, first.Message, first.Text);
+					});
+
+			Assert.AreEqual(1, merged.Length);
+			Assert.AreEqual(2, merged[0].Count);
 		}
 	}
 }
