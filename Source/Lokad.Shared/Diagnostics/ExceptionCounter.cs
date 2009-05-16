@@ -12,7 +12,7 @@ using System.Threading;
 namespace Lokad.Diagnostics
 {
 	/// <summary>
-	/// Class holding information about exception
+	/// Class holding information about exception.
 	/// </summary>
 	sealed class ExceptionCounter
 	{

@@ -8,13 +8,23 @@
 
 using System.Diagnostics;
 using System.Linq;
+using System.Threading;
 
 #if !SILVERLIGHT2
 
 namespace Lokad.Diagnostics
 {
 	/// <summary>
-	/// Class to provide simple measurement of some method calls
+	/// <para>Class to provide simple measurement of some method calls. 
+	/// This class has been designed to provide light performance monitoring
+	/// that could be used for instrumenting methods in production. It does 
+	/// not use any locks.</para>
+	/// <para>It does provide almost no concurrency support, yet these classes
+	/// are mostly safe for the multi-threaded environments (and have been used there).</para>
+	/// <para>The usage idea is simple - data is captured from the counters at regular intervals
+	/// of time (i.e. 5-10 minutes). Counters are reset after that. Data itself is aggregated 
+	/// on the monitoring side. If there are some bad values (i.e. due to some rare race condition)
+	/// then the counter data is simply discarded.</para>
 	/// </summary>
 	public sealed class ExecutionCounter
 	{
@@ -52,10 +62,11 @@ namespace Lokad.Diagnostics
 			// but we do not care that much
 			unchecked
 			{
-				_openCount += 1;
+				Interlocked.Increment(ref _openCount);
+				
 				for (int i = 0; i < openCounters.Length; i++)
 				{
-					_openCounters[i] += openCounters[i];
+					Interlocked.Add(ref _openCounters[i], openCounters[i]);
 				}
 			}
 			return Stopwatch.GetTimestamp();
@@ -71,15 +82,20 @@ namespace Lokad.Diagnostics
 		{
 			var runningTime = Stopwatch.GetTimestamp() - timestamp;
 
+			// this counter has been reset after opening - discard
+			if ((_openCount == 0) || (runningTime < 0))
+				return;
+
 			// abdullin: this is not really atomic and precise,
 			// but we do not care that much
 			unchecked
 			{
-				_runningTime += runningTime;
-				_closeCount += 1;
+				Interlocked.Add(ref _runningTime, runningTime);
+				Interlocked.Increment(ref _closeCount);
+				
 				for (int i = 0; i < closeCounters.Length; i++)
 				{
-					_closeCounters[i] += closeCounters[i];
+					Interlocked.Add(ref _closeCounters[i], closeCounters[i]);
 				}
 			}
 		}

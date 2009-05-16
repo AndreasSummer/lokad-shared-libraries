@@ -58,6 +58,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ActionExtensionsTests.cs" />
+    <Compile Include="Diagnostics\ExecutionCounterTests.cs" />
     <Compile Include="Expects.cs" />
     <Compile Include="IDictionaryExtensionsTests.cs" />
     <Compile Include="Testing\IEquatableExtensionsTests.cs" />
