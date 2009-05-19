@@ -112,6 +112,34 @@ namespace Lokad.Diagnostics
 			Assert.AreEqual(1, merged.Length);
 			Assert.AreEqual(2, merged[0].Count);
 		}
+
+		[Test]
+		public void ExceptionCounters_Get_Merge_Properly()
+		{
+			var counter1 = new ExceptionCounters();
+			var counter2 = new ExceptionCounters();
+			var counter3 = new ExceptionCounters();
+
+			counter1.Add(Ex1);
+			counter1.Add(Ex1);
+			counter1.Add(Ex2);
+			counter1.Add(Ex3);
+
+			counter2.Add(Ex2);
+			counter2.Add(Ex2);
+			counter2.Add(Ex3);
+
+			counter3.Add(Ex3);
+
+			var mergingCounter = new ExceptionCounters();
+			mergingCounter.Add(new[] { counter1, counter2, counter3 } );
+
+			var history = mergingCounter.GetHistory();
+			Assert.AreEqual(3, history.Count);
+			Assert.AreEqual(2, history[0].Count);
+			Assert.AreEqual(3, history[1].Count);
+			Assert.AreEqual(3, history[2].Count);
+		}
 	}
 }
 
