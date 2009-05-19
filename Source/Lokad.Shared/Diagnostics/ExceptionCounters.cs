@@ -108,54 +108,6 @@ namespace Lokad.Diagnostics
 			}
 		}
 
-		//TODO: [durut] See ticket 707
-		/// <summary>Enrich this exceptionCounters with other exceptionCounters</summary>
-		public void Add(ExceptionCounters[] exceptionCounters)
-		{
-			var exceptionCounts = 
-				exceptionCounters.SelectMany(e => e._dictionary.Values)
-								 .GroupBy(p=>p.FirstInstance.ToString())
-								 .Select(g=> new
-								 	{
-								 		Exception = g.First().FirstInstance,
-								 		Count = g.Sum(o => o.Count)
-								 	})
-								 .ToArray();
-			
-			for (int i = 0 ; i < exceptionCounts.Length ; i++)
-			{
-				var text = exceptionCounts[i].Exception.ToString();
-				var count = exceptionCounts[i].Count;
-				ExceptionCounter value;
-
-				using (_lockSlim.GetUpgradeableReadLock())
-				{
-					if (_dictionary.TryGetValue(text, out value))
-					{
-						for (int k = 0; k < count; k++)
-							value.InterlockedIncrement();
-					}
-
-					value = new ExceptionCounter(exceptionCounts[i].Exception);
-					using (_lockSlim.GetWriteLock())
-					{
-						if (CapacityThreshold <= _dictionary.Count)
-						{
-							var mostRare = _dictionary
-								.OrderBy(v => v.Value.Count)
-								.First();
-							_dictionary.Remove(mostRare);
-						}
-
-						for (int k = 0; k < count - 1; k++)
-							value.InterlockedIncrement();
-
-						_dictionary.Add(text, value);
-					}
-				}
-			}
-		}
-
 		/// <summary>
 		/// Clears this counter.
 		/// </summary>
