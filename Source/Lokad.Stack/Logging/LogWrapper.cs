@@ -8,12 +8,14 @@
 
 using System;
 using log4net;
+using Lokad.Quality;
 
 namespace Lokad.Logging
 {
 	/// <summary>
 	/// Wrapper around <see cref="log4net.ILog"/>
 	/// </summary>
+	[NoCodeCoverage]
 	sealed class LogWrapper : ILog
 	{
 		readonly log4net.ILog _inner;
@@ -52,7 +54,7 @@ namespace Lokad.Logging
 			}
 		}
 
-		public bool IsEnabled(LogLevel level)
+		bool ILog.IsEnabled(LogLevel level)
 		{
 			switch (level)
 			{
