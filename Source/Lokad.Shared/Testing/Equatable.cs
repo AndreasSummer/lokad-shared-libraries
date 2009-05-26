@@ -14,7 +14,7 @@ namespace Lokad.Testing
 	/// <summary>
 	/// Helper extensions for the <see cref="IEquatable{T}"/> used in testing of models.
 	/// </summary>
-	public static class IEquatableExtensions
+	public static class Equatable
 	{
 		/// <summary>
 		/// Checks if the specified object instance is equal to another instance

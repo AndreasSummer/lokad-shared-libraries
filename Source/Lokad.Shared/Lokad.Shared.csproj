@@ -59,7 +59,7 @@
     <Compile Include="ArrayExtensions.cs" />
     <Compile Include="Collections\Generic\ProjectionComparer.cs" />
     <Compile Include="Diagnostics\ExceptionStatistics.cs" />
-    <Compile Include="Testing\IEquatableExtensions.cs" />
+    <Compile Include="Testing\Equatable.cs" />
     <Compile Include="Linq\ArrayExtensionsForLinq.cs" />
     <Compile Include="Linq\Indexer.cs" />
     <Compile Include="Maybe.cs" />
@@ -103,6 +103,7 @@
     <Compile Include="IDictionaryExtensions.cs" />
     <Compile Include="KeyInvalidException.cs" />
     <Compile Include="DisposableAction.cs" />
+    <Compile Include="Utils\DebugUtil.cs" />
     <Compile Include="Utils\EnumUtil.cs" />
     <Compile Include="Int32Extensions.cs" />
     <Compile Include="IProvider.cs" />

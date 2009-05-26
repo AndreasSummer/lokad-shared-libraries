@@ -217,7 +217,6 @@ namespace Lokad
 		/// <param name="converter">The reflector.</param>
 		/// <returns><see cref="Maybe{T}"/> that represents the original value behind the <see cref="Result{T}"/> after the conversion</returns>
 		public Maybe<TTarget> ToMaybe<TTarget>(Func<T, TTarget> converter)
-
 		{
 			if (!_isSuccess)
 				return Maybe<TTarget>.Empty;
