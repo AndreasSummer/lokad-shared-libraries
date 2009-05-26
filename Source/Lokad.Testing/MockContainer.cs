@@ -64,6 +64,18 @@ namespace Lokad.Testing
 		}
 
 		/// <summary>
+		/// Registers the specified component instance in this container.
+		/// </summary>
+		/// <typeparam name="TComponent">The type of the component.</typeparam>
+		/// <param name="instance">The actual instance.</param>
+		public void Register<TComponent>(TComponent instance)
+		{
+			var builder = new ContainerBuilder();
+			builder.Register(instance).ExternallyOwned();
+			builder.Build(_container);
+		}
+
+		/// <summary>
 		/// Resolves the specified service from the container
 		/// </summary>
 		/// <typeparam name="TService">The type of the service.</typeparam>
@@ -139,7 +151,10 @@ namespace Lokad.Testing
 		/// <summary>
 		/// Testing subject
 		/// </summary>
-		public readonly TSubject Subject;
+		public TSubject Subject
+		{
+			get { return Resolve<TSubject>(); }
+		}
 
 		/// <summary>
 		/// Initializes a new instance of the <see cref="MockContainer{TSubject}"/> class.
@@ -147,7 +162,6 @@ namespace Lokad.Testing
 		public MockContainer()
 		{
 			Register<TSubject>();
-			Subject = Resolve<TSubject>();
 		}
 	}
 }

@@ -14,6 +14,7 @@ namespace Lokad
 	[TestFixture]
 	public sealed class RangeTests
 	{
+		// ReSharper disable InconsistentNaming
 		[Test]
 		public void Test_Create()
 		{
