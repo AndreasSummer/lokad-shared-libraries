@@ -18,6 +18,8 @@ namespace Lokad
 	[TestFixture]
 	public sealed class StreamExtensionsTests
 	{
+		// ReSharper disable InconsistentNaming
+
 		[Test]
 		public void Pump()
 		{
@@ -37,6 +39,48 @@ namespace Lokad
 					CollectionAssert.AreEqual(list, list1);
 				}
 				formatter.Serialize(stream, list);
+			}
+		}
+
+		[Test]
+		public void Compression_with_opened_streams()
+		{
+			var array = Range.Array(10);
+			using (var stream = new MemoryStream())
+			{
+				using (var compress = stream.Compress(true))
+				{
+					XmlUtil.SerializeArray(array, compress);
+				}
+				stream.Seek(0, SeekOrigin.Begin);
+				using (var decompress = stream.Decompress(true))
+				{
+					var i = XmlUtil<int[]>.Deserialize(decompress);
+					CollectionAssert.AreEqual(array, i);
+				}
+			}
+		}
+
+		[Test]
+		public void Default_compression()
+		{
+			var array = Range.Array(10);
+			byte[] buffer;
+			using (var stream = new MemoryStream())
+			{
+				using (var compress = stream.Compress())
+				{
+					XmlUtil.SerializeArray(array, compress);
+				}
+				buffer = stream.ToArray();
+			}
+			using (var stream = new MemoryStream(buffer))
+			{
+				using (var decompress = stream.Decompress())
+				{
+					var i = XmlUtil<int[]>.Deserialize(decompress);
+					CollectionAssert.AreEqual(array, i);
+				}
 			}
 		}
 	}

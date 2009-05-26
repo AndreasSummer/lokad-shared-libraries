@@ -11,7 +11,6 @@
 using System;
 using System.IO;
 using System.IO.Compression;
-using Lokad.Quality;
 
 namespace Lokad
 {
@@ -21,23 +20,45 @@ namespace Lokad
 	public static class StreamExtensions
 	{
 		/// <summary>
-		/// Wraps the stream with Compression stream
+		/// Wraps the specified stream with Compression stream
 		/// </summary>
-		/// <param name="stream"></param>
-		/// <returns></returns>
-		[NoCodeCoverage]
+		/// <param name="stream">The stream to compress</param>
+		/// <returns>compressing stream</returns>
 		public static GZipStream Compress(this Stream stream)
 		{
 			return new GZipStream(stream, CompressionMode.Compress);
 		}
 
 		/// <summary>
+		/// Wraps the specified stream with Compression stream
+		/// </summary>
+		/// <param name="stream">The stream the stream to compress.</param>
+		/// <param name="leaveOpen"><c>true</c> to leave the stream open; overwise <c>false</c>.</param>
+		/// <returns>compressing stream</returns>
+		public static GZipStream Compress(this Stream stream, bool leaveOpen)
+		{
+			return new GZipStream(stream, CompressionMode.Compress, leaveOpen);
+		}
+
+		/// <summary>
 		/// Wraps the stream with Decompressing stream
 		/// </summary>
-		[NoCodeCoverage]
+		/// <param name="stream">The stream to decompress.</param>
+		/// <returns>decompressing stream</returns>
 		public static GZipStream Decompress(this Stream stream)
 		{
 			return new GZipStream(stream, CompressionMode.Decompress);
+		}
+
+		/// <summary>
+		/// Wraps the stream with Decompressing stream
+		/// </summary>
+		/// <param name="stream">The stream to decompress.</param>
+		/// <param name="leaveOpen"><c>true</c> to leave the stream open; overwise <c>false</c>.</param>
+		/// <returns>decompressing stream</returns>
+		public static GZipStream Decompress(this Stream stream, bool leaveOpen)
+		{
+			return new GZipStream(stream, CompressionMode.Decompress, leaveOpen);
 		}
 
 		/// <summary>
