@@ -14,18 +14,22 @@ using System.Threading;
 
 namespace Lokad.Diagnostics
 {
-	/// <summary>
-	/// <para>Class to provide simple measurement of some method calls. 
+	/// <summary> <para>
+	/// Class to provide simple measurement of some method calls. 
 	/// This class has been designed to provide light performance monitoring
 	/// that could be used for instrumenting methods in production. It does 
-	/// not use any locks.</para>
-	/// <para>It does provide almost no concurrency support, yet these classes
-	/// are mostly safe for the multi-threaded environments (and have been used there).</para>
-	/// <para>The usage idea is simple - data is captured from the counters at regular intervals
-	/// of time (i.e. 5-10 minutes). Counters are reset after that. Data itself is aggregated 
-	/// on the monitoring side. If there are some bad values (i.e. due to some rare race condition)
-	/// then the counter data is simply discarded.</para>
-	/// </summary>
+	/// not use any locks and uses design to avoid 90% of concurrency issues.
+	/// </para><para>
+	/// Counters are designed to be "cheap" and throwaway, so we basically we
+	/// don't care about the remaining 10%
+	/// </para><para>
+	/// The usage idea is simple - data is captured from the counters at
+	/// regular intervals of time (i.e. 5-10 minutes). Counters are reset 
+	/// after that. Data itself is aggregated on the monitoring side. 
+	/// If there are some bad values (i.e. due to some rare race condition
+	/// between multiple threads and monitoring scan) then the counter data
+	/// is simply discarded.
+	/// </para></summary>
 	public sealed class ExecutionCounter
 	{
 		long _openCount;
