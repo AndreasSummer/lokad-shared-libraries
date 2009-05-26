@@ -64,18 +64,31 @@ namespace Lokad
 		/// <summary>
 		/// Copies contents of this stream to the target stream
 		/// </summary>
-		/// <param name="source"></param>
-		/// <param name="target"></param>
-		/// <param name="bufferSize"></param>
-		/// <returns></returns>
+		/// <param name="source">The source.</param>
+		/// <param name="target">The target.</param>
+		/// <param name="bufferSize">Size of the buffer.</param>
+		/// <returns>total amount of bytes copied</returns>
 		public static long PumpTo(this Stream source, Stream target, int bufferSize)
 		{
 			if (source == null) throw new ArgumentNullException("source");
 			if (target == null) throw new ArgumentNullException("target");
+			if (bufferSize <= 0)
+				throw new ArgumentOutOfRangeException("bufferSize", "Size of the buffer must be positive");
 
-			Enforce.With<ArgumentOutOfRangeException>(bufferSize > 0, "bufferSize must be positive");
+			return source.PumpTo(target, new byte[bufferSize]);
+		}
 
-			var buffer = new byte[bufferSize];
+		/// <summary>
+		/// Copies contents of this stream to the target stream, using the provided buffer
+		/// </summary>
+		/// <param name="source">The source.</param>
+		/// <param name="target">The target.</param>
+		/// <param name="buffer">The buffer.</param>
+		/// <returns>total amount of bytes copied</returns>
+		public static long PumpTo(this Stream source, Stream target, byte[] buffer)
+		{
+			if (buffer == null) throw new ArgumentNullException("buffer");
+			int bufferSize = buffer.Length;
 			long total = 0;
 			int count;
 			while (0 < (count = source.Read(buffer, 0, bufferSize)))
