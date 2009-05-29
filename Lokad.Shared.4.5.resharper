@@ -63,6 +63,7 @@ This code is released under the terms of the new BSD licence]]></FileHeader>
       <PredefinedRule Inspect="True" Prefix="" Suffix="" Style="AaBb" ElementKind="EnumMember" />
       <PredefinedRule Inspect="True" Prefix="" Suffix="" Style="AaBb" ElementKind="Other" />
       <Abbreviation Text="ID" />
+      <Abbreviation Text="CLR" />
     </Naming2>
   </CodeStyleSettings>
   <CodeAnnotations>

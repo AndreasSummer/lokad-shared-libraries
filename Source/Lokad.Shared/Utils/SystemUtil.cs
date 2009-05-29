@@ -19,19 +19,19 @@ namespace Lokad
 		/// <summary>
 		/// <see cref="Thread.Sleep(TimeSpan)"/>
 		/// </summary>
-		static Action<TimeSpan> _sleep;
+		static Action<TimeSpan> SleepAction;
 
 		/// <summary>
 		/// Allows to set custom date time implementation for the testing purposes.
 		/// </summary>
-		static Func<DateTime> _dateTimeProvider;
+		static Func<DateTime> DateTimeProvider;
 
 		/// <summary>
 		/// <see cref="DateTime.Now"/>
 		/// </summary>
 		public static DateTime Now
 		{
-			get { return _dateTimeProvider(); }
+			get { return DateTimeProvider(); }
 		}
 
 		static SystemUtil()
@@ -44,8 +44,8 @@ namespace Lokad
 		/// </summary>
 		public static void Reset()
 		{
-			_dateTimeProvider = () => DateTime.Now;
-			_sleep = span => Thread.Sleep(span);
+			DateTimeProvider = () => DateTime.Now;
+			SleepAction = span => Thread.Sleep(span);
 		}
 
 		/// <summary>
@@ -54,7 +54,7 @@ namespace Lokad
 		/// <param name="sleepRoutine">The sleep routine.</param>
 		public static void SetSleep(Action<TimeSpan> sleepRoutine)
 		{
-			_sleep = sleepRoutine;
+			SleepAction = sleepRoutine;
 		}
 
 		/// <summary>
@@ -63,7 +63,7 @@ namespace Lokad
 		/// <param name="dateTimeProvider">The date time provider.</param>
 		public static void SetDateTimeProvider(Func<DateTime> dateTimeProvider)
 		{
-			_dateTimeProvider = dateTimeProvider;
+			DateTimeProvider = dateTimeProvider;
 		}
 
 		/// <summary>
@@ -72,7 +72,7 @@ namespace Lokad
 		/// <param name="time">The time.</param>
 		public static void SetTime(DateTime time)
 		{
-			_dateTimeProvider = () => time;
+			DateTimeProvider = () => time;
 		}
 
 
@@ -83,7 +83,7 @@ namespace Lokad
 		/// <param name="span">The span.</param>
 		public static void Sleep(TimeSpan span)
 		{
-			_sleep(span);
+			SleepAction(span);
 		}
 
 		internal static int GetHashCode(params object[] args)
