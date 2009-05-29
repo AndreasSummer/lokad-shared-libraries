@@ -72,6 +72,8 @@
     <Compile Include="Rules\Scopes\ModifierScopeTests.cs" />
     <Compile Include="Rules\Scopes\SimpleScopeTests.cs" />
     <Compile Include="Rules\ScopeTests.cs" />
+    <Compile Include="Threading\ParallelExtensions.cs" />
+    <Compile Include="Threading\ParallelExtensionsTests.cs" />
     <Compile Include="Threading\WaitForTests.cs" />
     <Compile Include="Utils\ArrayUtilTests.cs" />
     <Compile Include="Utils\AssemblyUtilTests.cs" />

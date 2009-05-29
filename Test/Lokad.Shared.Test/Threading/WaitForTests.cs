@@ -15,7 +15,7 @@ using NUnit.Framework;
 namespace Lokad.Threading
 {
 	[TestFixture]
-	public sealed class WaitTests
+	public sealed class WaitForTests
 	{
 		// ReSharper disable InconsistentNaming
 
