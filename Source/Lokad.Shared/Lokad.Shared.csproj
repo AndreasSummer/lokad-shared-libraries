@@ -89,6 +89,7 @@
     <Compile Include="Rules\Scopes\SimpleScope.cs" />
     <Compile Include="Silverlight\AllowPartiallyTrustedCallerAttribute.cs" />
     <Compile Include="Silverlight\SerializableAttribute.cs" />
+    <Compile Include="Threading\ParallelExtensions.cs" />
     <Compile Include="Threading\WaitFor.cs" />
     <Compile Include="Tuples\TupleExtensions.cs" />
     <Compile Include="Utils\ArrayUtil.cs" />
