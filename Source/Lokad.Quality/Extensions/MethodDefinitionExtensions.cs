@@ -95,6 +95,4 @@ namespace Lokad.Quality
 			return definitions;
 		}
 	}
-
-
 }

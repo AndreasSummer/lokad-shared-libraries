@@ -24,7 +24,7 @@ namespace Lokad.Data.SqlClient
 		/// </summary>
 		public static readonly IComparer<Guid> Instance = new SqlServerGuidComparer();
 
-		static readonly int[] _importance = new[] {3, 2, 1, 0, 5, 4, 7, 6, 9, 8, 15, 14, 13, 12, 11, 10};
+		static readonly int[] Importance = new[] {3, 2, 1, 0, 5, 4, 7, 6, 9, 8, 15, 14, 13, 12, 11, 10};
 
 		/// <summary>
 		/// Compares two guids and returns a value indicating whether one is less than, equal to, or greater than the other.
@@ -39,9 +39,9 @@ namespace Lokad.Data.SqlClient
 			var a = x.ToByteArray();
 			var b = y.ToByteArray();
 
-			for (int i = _importance.Length - 1; i >= 0; i--)
+			for (int i = Importance.Length - 1; i >= 0; i--)
 			{
-				var compare = _importance[i];
+				var compare = Importance[i];
 				var c = a[compare].CompareTo(b[compare]);
 				if (c != 0)
 				{

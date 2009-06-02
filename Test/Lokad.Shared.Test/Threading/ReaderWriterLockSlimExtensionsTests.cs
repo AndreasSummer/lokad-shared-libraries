@@ -18,7 +18,10 @@ namespace Lokad.Threading
 	{
 		readonly ReaderWriterLockSlim _lock = new ReaderWriterLockSlim();
 
+		// ReSharper disable InconsistentNaming
+
 		[Test]
+
 		public void Test_GetReadLock()
 		{
 			using (_lock.GetReadLock())

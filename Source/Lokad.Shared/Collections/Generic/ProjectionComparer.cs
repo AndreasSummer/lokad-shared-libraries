@@ -11,23 +11,27 @@ using System.Collections.Generic;
 
 namespace Lokad.Collections.Generic
 {
-	sealed class ProjectionComparer<T, K> : IEqualityComparer<T>
+	sealed class ProjectionComparer<TValue, TProjection> : IEqualityComparer<TValue>
 	{
-		readonly Func<T, K> _projection;
+		readonly Func<TValue, TProjection> _projection;
 
-		public ProjectionComparer(Func<T, K> projection)
+		public ProjectionComparer(Func<TValue, TProjection> projection)
 		{
 			_projection = projection;
 		}
 
-		bool IEqualityComparer<T>.Equals(T x, T y)
+		bool IEqualityComparer<TValue>.Equals(TValue x, TValue y)
 		{
-			return _projection(x).Equals(_projection(y));
+			var projectedX = _projection(x);
+			var projectedY = _projection(y);
+
+			return projectedX.Equals(projectedY);
 		}
 
-		int IEqualityComparer<T>.GetHashCode(T obj)
+		int IEqualityComparer<TValue>.GetHashCode(TValue obj)
 		{
-			return _projection(obj).GetHashCode();
+			var projectedObj = _projection(obj);
+			return projectedObj.GetHashCode();
 		}
 	}
 }

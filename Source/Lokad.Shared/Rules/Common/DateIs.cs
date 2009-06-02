@@ -13,7 +13,7 @@ namespace Lokad.Rules
 	/// <summary> Rules for the <see cref="DateTime"/> </summary>
 	public static class DateIs
 	{
-		static readonly DateTime _sqlMinDateTime = new DateTime(1753, 1, 1);
+		static readonly DateTime SqlMinDateTime = new DateTime(1753, 1, 1);
 
 		/// <summary>
 		/// Verifies that it is ok to send this date directly into the MS SQL DB
@@ -22,8 +22,8 @@ namespace Lokad.Rules
 		/// <param name="scope">validation scope</param>
 		public static void SqlCompatible(DateTime dateTime, IScope scope)
 		{
-			if (dateTime < _sqlMinDateTime)
-				scope.Error(RuleResources.Date_must_be_greater_than_X, _sqlMinDateTime);
+			if (dateTime < SqlMinDateTime)
+				scope.Error(RuleResources.Date_must_be_greater_than_X, SqlMinDateTime);
 		}
 	}
 }

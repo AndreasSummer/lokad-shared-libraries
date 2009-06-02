@@ -12,7 +12,7 @@ namespace Lokad.Quality
 	{
 		internal static readonly string MonoName = GetMonoName();
 
-		public static string GetMonoName()
+		static string GetMonoName()
 		{
 			return (typeof (T).FullName).Replace('+', '/');
 		}
