@@ -14,6 +14,8 @@ namespace Lokad
 	[TestFixture]
 	public sealed class SystemUtilTests
 	{
+		// ReSharper disable InconsistentNaming
+
 		[TearDown]
 		public void TearDown()
 		{
@@ -21,6 +23,7 @@ namespace Lokad
 		}
 
 		[Test]
+
 		public void Test_Now()
 		{
 			var now = SystemUtil.Now;
@@ -43,6 +46,12 @@ namespace Lokad
 
 			SystemUtil.Sleep(1.Seconds());
 			Assert.IsTrue(flag);
+		}
+
+		[Test]
+		public void GetHashCode_works_with_nulls()
+		{
+			SystemUtil.GetHashCode("test", null);
 		}
 	}
 }

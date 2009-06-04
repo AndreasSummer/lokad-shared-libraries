@@ -93,7 +93,7 @@ namespace Lokad
 				int result = 0;
 				foreach (var o in args)
 				{
-					result = (result*397) ^ o.GetHashCode();
+					result = (result*397) ^ (o !=null ? o.GetHashCode() : 0);
 				}
 				return result;
 			}
