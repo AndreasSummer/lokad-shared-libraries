@@ -51,6 +51,7 @@ namespace Lokad
 			Assert.AreNotEqual(0, Rand.NextString(1, 5).Length);
 			Assert.AreEqual(new Guid("aefd513f-48a7-b49d-b3f3-172961cc2bcb"), Rand.NextGuid());
 			Assert.AreEqual(new DateTime(590668128477790000), Rand.NextDate());
+			Assert.AreEqual(new DateTime(633936311847180000), Rand.NextDate(2009, 2010));
 		}
 
 		[Test]
@@ -74,6 +75,13 @@ namespace Lokad
 			var actual = Rand.NextItems(expected, 5);
 			CollectionAssert.IsSubsetOf(actual, expected);
 			Assert.AreEqual(5,actual.Length);
+		}
+
+		[Test]
+		public void NextDate()
+		{
+			Assert.LessOrEqual(new DateTime(2008,1,1), Rand.NextDate(2008, 3000));
+			Assert.Greater(new DateTime(2008,1,1), Rand.NextDate(1900,2008));
 		}
 
 #if !SILVERLIGHT2

@@ -139,6 +139,18 @@ namespace Lokad
 				.AddDays(NextDouble()*24D*365.25D);
 		}
 
+		/// <summary>
+		/// Returns a random date between the specified range.
+		/// </summary>
+		/// <param name="minYear">The min year.</param>
+		/// <param name="maxYear">The max year.</param>
+		/// <returns>new random date</returns>
+		public static DateTime NextDate(int minYear, int maxYear)
+		{
+			var days = NextDouble()*356*(maxYear - minYear);
+			return new DateTime(minYear, 1, 1).AddDays(days);
+		}
+
 		static readonly char[] Symbols = "!\"#%&'()*,-./:;?@[\\]_{} ".ToCharArray();
 
 
