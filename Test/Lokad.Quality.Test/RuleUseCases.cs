@@ -13,6 +13,13 @@ using NUnit.Framework;
 
 namespace Lokad.Quality.Test
 {
+
+	public sealed class ElementAttribute : Attribute
+	{
+		
+	}
+
+	[Element]
 	public static class Fire
 	{
 		public static void Extend(this object self)
@@ -24,6 +31,7 @@ namespace Lokad.Quality.Test
 	[TestFixture]
 	public class RuleUseCases
 	{
+		// ReSharper disable InconsistentNaming
 		[Test]
 		public void Count_Methods_With_Exceptions()
 		{

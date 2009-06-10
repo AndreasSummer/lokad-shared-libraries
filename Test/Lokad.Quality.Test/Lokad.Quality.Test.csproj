@@ -50,6 +50,7 @@
     <Compile Include="RuleUseCases.cs" />
     <Compile Include="GlobalSetup.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TypeDefinitionExtensionsTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Source\Lokad.Quality\Lokad.Quality.csproj">

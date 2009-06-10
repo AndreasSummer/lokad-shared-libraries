@@ -6,15 +6,20 @@
 
 #endregion
 
+using System;
+
 namespace Lokad.Quality
 {
 	static class CecilUtil<T>
 	{
-		internal static readonly string MonoName = GetMonoName();
+		internal static readonly string MonoName = CecilUtil.GetMonoName(typeof(T));
+	}
 
-		static string GetMonoName()
+	static class CecilUtil
+	{
+		internal static string GetMonoName(Type type)
 		{
-			return (typeof (T).FullName).Replace('+', '/');
+			return (type.FullName).Replace('+', '/');
 		}
 	}
 }

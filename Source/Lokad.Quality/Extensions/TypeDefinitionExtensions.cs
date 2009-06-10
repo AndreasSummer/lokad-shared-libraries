@@ -86,5 +86,16 @@ namespace Lokad.Quality
 			QualityAssert.TypesPass(definitions, check);
 			return definitions;
 		}
+
+		/// <summary>
+		/// Selects only types with the specified attribute
+		/// </summary>
+		/// <typeparam name="TAttribute">The type of the attribute.</typeparam>
+		/// <param name="definitions">The definitions.</param>
+		/// <returns>filtered sequence</returns>
+		public static IEnumerable<TypeDefinition> With<TAttribute>(this IEnumerable<TypeDefinition> definitions) where TAttribute : Attribute
+		{
+			return definitions.Where(d => d.Has<TAttribute>());
+		}
 	}
 }

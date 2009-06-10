@@ -6,6 +6,7 @@
 
 #endregion
 
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -132,6 +133,16 @@ namespace Lokad.Quality
 		public TypeDefinition Find<T>()
 		{
 			return _typeDictionary[CecilUtil<T>.MonoName];
+		}
+
+		/// <summary>
+		/// Looks up the type based on the .NET type.
+		/// </summary>
+		/// <param name="type">The type.</param>
+		/// <returns>matching type definition</returns>
+		public Maybe<TypeDefinition> Find(Type type)
+		{
+			return _typeDictionary.GetValue(CecilUtil.GetMonoName(type));
 		}
 	}
 }
