@@ -14,7 +14,9 @@ namespace Lokad.Rules
 	[TestFixture]
 	public sealed class StringIsTests
 	{
-		const string validEmails =
+
+		// ReSharper disable InconsistentNaming
+		const string ValidEmails =
 			@"l3tt3rsAndNumb3rs@domain.com
 has-dash@domain.com
 hasApostrophe.o'leary@domain.org
@@ -32,7 +34,7 @@ a@singleLetterLocal.org
 singleLetterDomain@x.org
 disposable+email@gmail.com";
 
-		const string invalidEmails =
+		const string InvalidEmails =
 			@"two@@signs.com
 missingDomain@.com
 @missingLocal.org
@@ -52,25 +54,60 @@ missingTLD@domain.
 invalidCharsInDomain@! ""#$%(),/;<>_[]`|.org
 local@SecondLevelDomainNamesAreInvalidIfTheyAreLongerThan64Charactersss.org";
 
+		const string ValidHostNames = 
+@"localhost
+127.0.0.1
+localhost:80
+proxy.com:8080
+google.com
+myserver.com
+uncommonTLD.museum
+x.org";
+
+		const string InvalidHostNames =
+			@"127.0.0.1:
+
+
+_domain.com
+domain_.com
+domain.com:
+domain.
+! ""#$%(),/;<>_[]`|.org
+SecondLevelDomainNamesAreInvalidIfTheyAreLongerThan64Charactersss.org";
+
+		static string[] Split(string source)
+		{
+			return source.Split(new[] { Environment.NewLine },
+				StringSplitOptions.RemoveEmptyEntries);
+		}
+
 		//TLDDoesntExist@domain.moc
 		[Test]
 		public void ValidEmail_Positives()
 		{
-			var split = validEmails.Split(new[] {Environment.NewLine},
-				StringSplitOptions.RemoveEmptyEntries);
-
 			RuleAssert.For<string>(StringIs.ValidEmail)
-				.ExpectNone(split);
+				.ExpectNone(Split(ValidEmails));
 		}
 
 		[Test]
 		public void ValidEmail_Negatives()
 		{
-			var split = invalidEmails.Split(new[] {Environment.NewLine},
-				StringSplitOptions.RemoveEmptyEntries);
-
 			RuleAssert.For<string>(StringIs.ValidEmail)
-				.ExpectError(split);
+				.ExpectError(Split(InvalidEmails));
+		}
+
+		[Test]
+		public void ValidHost_Positives()
+		{
+			RuleAssert.For<string>(StringIs.ValidServerConnection)
+				.ExpectNone(Split(ValidHostNames));
+		}
+
+		[Test]
+		public void ValidHost_Negatives()
+		{
+			RuleAssert.For<string>(StringIs.ValidServerConnection)
+				.ExpectError(Split(InvalidHostNames));
 		}
 
 

@@ -180,4 +180,7 @@
   <data name="Expression_X_must_be_true" xml:space="preserve">
     <value>Expression should be true: {0}.</value>
   </data>
+  <data name="String_must_be_valid_host" xml:space="preserve">
+    <value>String should be a valid host name.</value>
+  </data>
 </root>

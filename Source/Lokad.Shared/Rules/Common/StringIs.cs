@@ -14,13 +14,13 @@ namespace Lokad.Rules
 	/// <summary>
 	/// Common string rules
 	/// </summary>
-	public sealed class StringIs
+	public static class StringIs
 	{
 		/// <summary>
 		/// Originally http://fightingforalostcause.net/misc/2006/compare-email-regex.php,
 		/// but modified to have less negative results 
-		/// </summary>
-		static readonly Regex _emailRegex = new Regex(
+		/// </summary> 
+		static readonly Regex EmailRegex = new Regex(
 			@"^[a-z0-9](([_\.\-\'\+]?[a-z0-9]+)*)" +
 				@"@(([a-z0-9]{1,64})(([\.\-][a-z0-9]{1,64})*)\.([a-z]{2,})" +
 					@"|(\d{1,3}(\.\d{1,3}){3}))$",
@@ -29,6 +29,11 @@ namespace Lokad.Rules
 #endif
 				RegexOptions.Singleline | RegexOptions.IgnoreCase);
 
+
+		static readonly Regex ServerConnectionRegex = new Regex(
+			@"^(([a-z0-9]{1,64})(([\.\-][a-z0-9]{1,64})*)(\:\d{1,5})?)$",
+			RegexOptions.Singleline | RegexOptions.Compiled | RegexOptions.IgnoreCase);
+
 		/// <summary>
 		/// Determines whether the string is valid email address
 		/// </summary>
@@ -36,8 +41,19 @@ namespace Lokad.Rules
 		/// <param name="scope">validation scope.</param>
 		public static void ValidEmail(string email, IScope scope)
 		{
-			if (!_emailRegex.IsMatch(email))
+			if (!EmailRegex.IsMatch(email))
 				scope.Error(RuleResources.String_must_be_valid_email);
+		}
+
+		/// <summary>
+		/// Determines whether the string is valid server connection (with optional port)
+		/// </summary>
+		/// <param name="host">The host name to validate.</param>
+		/// <param name="scope">The validation scope.</param>
+		public static void ValidServerConnection(string host, IScope scope)
+		{
+			if (!ServerConnectionRegex.IsMatch(host))
+				scope.Error(RuleResources.String_must_be_valid_host);
 		}
 
 		/// <summary>
@@ -117,7 +133,7 @@ namespace Lokad.Rules
 
 		/// <summary> String validator checking for presence of 
 		/// white-space characters in the beginning of string </summary>
-		public static Rule<string> WithoutLeadingWhiteSpace = (s, scope) =>
+		public static readonly Rule<string> WithoutLeadingWhiteSpace = (s, scope) =>
 			{
 				if (s.Length > 0 && char.IsWhiteSpace(s[0]))
 					scope.Error(RuleResources.String_cant_start_with_whitespace);
@@ -125,7 +141,7 @@ namespace Lokad.Rules
 
 		/// <summary> String validator checking for presence of 
 		/// white-space characters in the end of string </summary>
-		public static Rule<string> WithoutTrailingWhiteSpace = (s, scope) =>
+		public static readonly Rule<string> WithoutTrailingWhiteSpace = (s, scope) =>
 			{
 				if (s.Length > 0 && char.IsWhiteSpace(s.Last()))
 					scope.Error(RuleResources.String_cant_end_with_whitespace);
