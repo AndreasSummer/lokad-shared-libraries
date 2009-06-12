@@ -12,7 +12,7 @@ using NUnit.Framework;
 namespace Lokad
 {
 	[TestFixture]
-	public sealed class RetryPolicyTests
+	public sealed class CircuitBreakerPolicyTests
 	{
 		// ReSharper disable InconsistentNaming
 
@@ -21,9 +21,17 @@ namespace Lokad
 		{
 			var policy = ActionPolicy
 				.Handle<InvalidOperationException>()
-				.Retry(2);
+				.CircuitBreaker(10.Seconds(), 6);
+
+			SystemUtil.SetSleep(s => { });
 
 			StackTest<InvalidOperationException>.Check(policy);
+		}
+
+		[TearDown]
+		public void TearDown()
+		{
+			SystemUtil.Reset();
 		}
 	}
 }

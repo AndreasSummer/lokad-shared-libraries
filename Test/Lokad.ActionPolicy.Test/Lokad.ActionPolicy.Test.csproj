@@ -44,8 +44,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ActionPolicyTests.cs" />
+    <Compile Include="CircuitBreakerPolicyTests.cs" />
     <Compile Include="HandlingProviderTests.cs" />
     <Compile Include="RetryPolicyTests.cs" />
+    <Compile Include="StackTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\SharedKey.snk">
