@@ -21,7 +21,7 @@ namespace Lokad.Exceptions
 			_onRetry = onRetry;
 		}
 
-		public bool CanRetry(Exception ex)
+		bool IRetryState.CanRetry(Exception ex)
 		{
 			_onRetry(ex);
 			return true;

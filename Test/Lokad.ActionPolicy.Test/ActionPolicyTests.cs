@@ -15,6 +15,8 @@ namespace Lokad
 	[TestFixture]
 	public sealed class ActionPolicyTests
 	{
+
+		// ReSharper disable InconsistentNaming
 		#region Setup/Teardown
 
 		[TearDown]
