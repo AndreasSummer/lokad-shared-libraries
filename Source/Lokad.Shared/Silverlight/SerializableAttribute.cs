@@ -9,6 +9,8 @@
 
 #if SILVERLIGHT2
 
+using System;
+
 namespace Lokad
 {
 	/// <summary>

@@ -9,7 +9,9 @@
 
 #if SILVERLIGHT2
 
-namespace Lokad.Reflection
+using System;
+
+namespace System.Security
 {
 	/// <summary>
 	/// Attribute marker to make code compatible with Silverlight

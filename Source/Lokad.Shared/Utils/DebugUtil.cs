@@ -6,6 +6,8 @@
 
 #endregion
 
+#if !SILVERLIGHT2
+
 using System;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
@@ -16,7 +18,7 @@ namespace Lokad
 	/// <summary>
 	/// Helper utility for debugging
 	/// </summary>
-	[NoCodeCoverage]
+	[NoCodeCoverage, UsedImplicitly]
 	public static class DebugUtil
 	{
 		static readonly BinaryFormatter Formatter = new BinaryFormatter();
@@ -66,3 +68,5 @@ namespace Lokad
 		}
 	}
 }
+
+#endif

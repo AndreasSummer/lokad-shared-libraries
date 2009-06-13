@@ -32,7 +32,11 @@ namespace Lokad.Rules
 
 		static readonly Regex ServerConnectionRegex = new Regex(
 			@"^(([a-z0-9]{1,64})(([\.\-][a-z0-9]{1,64})*)(\:\d{1,5})?)$",
-			RegexOptions.Singleline | RegexOptions.Compiled | RegexOptions.IgnoreCase);
+			RegexOptions.Singleline |
+#if !SILVERLIGHT2
+				RegexOptions.Compiled |
+#endif
+					RegexOptions.IgnoreCase);
 
 		/// <summary>
 		/// Determines whether the string is valid email address

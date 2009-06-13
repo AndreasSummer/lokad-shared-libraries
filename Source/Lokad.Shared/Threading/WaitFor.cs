@@ -6,6 +6,8 @@
 
 #endregion
 
+#if !SILVERLIGHT2
+
 using System;
 using System.Threading;
 using Lokad.Quality;
@@ -113,3 +115,5 @@ namespace Lokad.Threading
 		}
 	}
 }
+
+#endif
