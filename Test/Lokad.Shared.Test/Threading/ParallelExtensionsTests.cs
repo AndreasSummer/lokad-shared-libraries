@@ -70,6 +70,8 @@ namespace Lokad.Threading
 			}
 		}
 
+#if !SILVERLIGHT2
+
 		[Test, Explicit]
 		public void ContextTesting()
 		{
@@ -108,6 +110,8 @@ namespace Lokad.Threading
 			var watch = Stopwatch.StartNew();
 			return new DisposableAction(() => Console.WriteLine("'{0}' took {1}", name, watch.Elapsed));
 		}
+
+#endif
 
 		[Test, Explicit]
 		public void Test()

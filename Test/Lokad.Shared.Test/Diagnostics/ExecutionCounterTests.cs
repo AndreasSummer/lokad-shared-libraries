@@ -1,7 +1,8 @@
 using Lokad.Rules;
 using NUnit.Framework;
 
-#if !SILVERLIGHT
+#if !SILVERLIGHT2
+
 namespace Lokad.Diagnostics
 {
 	[TestFixture]
