@@ -19,12 +19,9 @@
 				 -->
 		<TestPath>$(BuildPath)\Test</TestPath>
 		<LibraryPath>$(BuildPath)\Library</LibraryPath>
-		<StackPath>$(BuildPath)\Stack</StackPath>
 		
 		<LibrarySource>Source\Lokad.Shared\bin\$(Configuration)</LibrarySource>
-		<QualitySource>Source\Lokad.Quality\bin\$(Configuration)</QualitySource>
-
-		<StackSource>Source\Lokad.Stack\bin\$(Configuration)</StackSource>
+		<QualitySource>Source\Lokad.Quality\bin\$(Configuration)</QualitySource>		
 		<ApiSource>Source\Lokad.Api.Core\bin\$(Configuration)</ApiSource>
     <BaseName>$(MSBuildProjectName)</BaseName>
     <MSBuildTargets>Silverlight 2.0</MSBuildTargets>
@@ -67,13 +64,7 @@
 		<CreateItem Include="$(LibrarySource)\*.*;$(QualitySource)\*.*">
 			<Output ItemName="libraryFiles" TaskParameter="Include"/>
 		</CreateItem>
-		<Copy SourceFiles="@(libraryFiles)" DestinationFolder="$(LibraryPath)" />
-		
-		<!--Stack-->
-		<CreateItem Include="$(StackSource)\*.*;$(ApiSource)\*.*;$(QualitySource)\*.*">
-			<Output ItemName="stackFiles" TaskParameter="Include"/>
-		</CreateItem>
-		<Copy SourceFiles="@(stackFiles)" DestinationFolder="$(StackPath)" />
+		<Copy SourceFiles="@(libraryFiles)" DestinationFolder="$(LibraryPath)" />		
 
 		<!--All Tests-->
 		<CreateItem Include="Test\**\bin\$(Configuration)\*.*" Exclude="Test\**\bin\$(Configuration)\*.xml;Test\**\bin\$(Configuration)\*.pdb;">
@@ -145,10 +136,5 @@
 			<Output ItemName="_libFiles" TaskParameter="Include" />
 		</CreateItem>
 		<Zip Files="@(_libFiles)" ZipFileName="$(PackageDirectory)\$(BaseName)-Lib-$(Version).zip" Flatten="true" />
-
-		<CreateItem Include="$(StackPath)\*.*">
-			<Output ItemName="_stackFiles" TaskParameter="Include" />
-		</CreateItem>
-		<Zip Files="@(_stackFiles)" ZipFileName="$(PackageDirectory)\$(BaseName)-Stack-$(Version).zip" Flatten="true" />
 	</Target>
 </Project>
