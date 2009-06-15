@@ -16,6 +16,7 @@ namespace Lokad.Rules
 	/// <summary>
 	/// Helper class that invokes different scopes
 	/// </summary>
+	[UsedImplicitly]
 	public static class Scope
 	{
 		/// <summary>
@@ -262,11 +263,16 @@ namespace Lokad.Rules
 			}
 		}
 
+		/// <summary>
+		/// Rule path separator char
+		/// </summary>
+		public const char RulePathSeprator = '.';
+
 		[NoCodeCoverage]
 		internal static string ComposePathInternal(string prefix, string suffix)
 		{
 			// no checks here, since the call is coming from the trusted code.
-			return prefix + '.' + suffix;
+			return prefix + RulePathSeprator + suffix;
 		}
 
 		/// <summary>
