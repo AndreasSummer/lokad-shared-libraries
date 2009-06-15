@@ -111,6 +111,25 @@ namespace Lokad
 		}
 
 		/// <summary>
+		/// Returns <em>true</em> with the specified probability.
+		/// </summary>
+		/// <param name="probability">The probability (between 0 and 1).</param>
+		/// <returns><em>true</em> with the specified probability</returns>
+		public static bool NextBool(double probability)
+		{
+			return NextDouble() < probability;
+		}
+
+		/// <summary>
+		/// Returns either <em>true</em> or <em>false</em>
+		/// </summary>
+		/// <returns>either <em>true</em> or <em>false</em></returns>
+		public static bool NextBool()
+		{
+			return NextBool(0.5D);
+		}
+
+		/// <summary>
 		/// Picks random <see cref="Guid"/>
 		/// </summary>
 		/// <returns>random value</returns>

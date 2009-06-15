@@ -52,6 +52,10 @@ namespace Lokad
 			Assert.AreEqual(new Guid("aefd513f-48a7-b49d-b3f3-172961cc2bcb"), Rand.NextGuid());
 			Assert.AreEqual(new DateTime(590668128477790000), Rand.NextDate());
 			Assert.AreEqual(new DateTime(633936311847180000), Rand.NextDate(2009, 2010));
+
+			Assert.AreEqual(true, Rand.NextBool(1));
+			Assert.AreEqual(false, Rand.NextBool(0));
+			Assert.AreEqual(false, Rand.NextBool());
 		}
 
 		[Test]
