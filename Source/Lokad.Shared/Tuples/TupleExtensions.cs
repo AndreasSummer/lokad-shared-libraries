@@ -62,6 +62,41 @@ namespace Lokad
 			return Tuple.From(tuple.Item1, tuple.Item2, tuple.Item3, tuple.Item4, item);
 		}
 
+		/// <summary>
+		/// Appends the specified <paramref name="item"/> to the <paramref name="tuple"/>.
+		/// </summary>
+		/// <typeparam name="T1">The type of the first item.</typeparam>
+		/// <typeparam name="T2">The type of the second item.</typeparam>
+		/// <typeparam name="T3">The type of the third item.</typeparam>
+		/// <typeparam name="T4">The type of the fourth item.</typeparam>
+		/// <typeparam name="T5">The type of the fifth item.</typeparam>
+		/// <typeparam name="T6">The type of the sixth item.</typeparam>
+		/// <param name="tuple">The tuple to append to.</param>
+		/// <param name="item">The item to append.</param>
+		/// <returns>New tuple instance</returns>
+		public static Tuple<T1, T2, T3, T4, T5, T6> Append<T1, T2, T3, T4, T5, T6>(this Tuple<T1, T2, T3, T4, T5> tuple, T6 item)
+		{
+			return Tuple.From(tuple.Item1, tuple.Item2, tuple.Item3, tuple.Item4, tuple.Item5, item);
+		}
+
+		/// <summary>
+		/// Appends the specified <paramref name="item"/> to the <paramref name="tuple"/>.
+		/// </summary>
+		/// <typeparam name="T1">The type of the first item.</typeparam>
+		/// <typeparam name="T2">The type of the second item.</typeparam>
+		/// <typeparam name="T3">The type of the third item.</typeparam>
+		/// <typeparam name="T4">The type of the fourth item.</typeparam>
+		/// <typeparam name="T5">The type of the fifth item.</typeparam>
+		/// <typeparam name="T6">The type of the sixth item.</typeparam>
+		/// <typeparam name="T7">The type of the seventh item.</typeparam>
+		/// <param name="tuple">The tuple to append to.</param>
+		/// <param name="item">The item to append.</param>
+		/// <returns>New tuple instance</returns>
+		public static Tuple<T1, T2, T3, T4, T5, T6, T7> Append<T1, T2, T3, T4, T5, T6, T7>(this Tuple<T1, T2, T3, T4, T5, T6> tuple, T7 item)
+		{
+			return Tuple.From(tuple.Item1, tuple.Item2, tuple.Item3, tuple.Item4, tuple.Item5, tuple.Item6, item);
+		}
+
 		/// <summary> Shortcut to create and add tuple to the collection </summary>
 		/// <typeparam name="T1">The type of the first item.</typeparam>
 		/// <typeparam name="T2">The type of the second item.</typeparam>
