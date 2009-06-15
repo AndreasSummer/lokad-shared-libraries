@@ -7,22 +7,37 @@
 #endregion
 
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using Mono.Cecil;
+using Mono.Cecil.Cil;
 using NUnit.Framework;
 
 namespace Lokad.Quality.Test
 {
-
 	public sealed class ElementAttribute : Attribute
 	{
-		
 	}
 
 	[Element]
 	public static class Fire
 	{
 		public static void Extend(this object self)
+		{
+			throw new NotImplementedException();
+		}
+	}
+
+	class ExceptionClass
+	{
+		public void Run()
+		{
+			InnerCall();
+			throw new NotSupportedException();
+		}
+
+		void InnerCall()
 		{
 			throw new NotImplementedException();
 		}
@@ -43,10 +58,34 @@ namespace Lokad.Quality.Test
 					.Exists(i => i.Creates<NotImplementedException>()))
 				.ToArray();
 
-			Assert.AreEqual(1, throwingMethods.Length);
+			Assert.AreEqual(2, throwingMethods.Length);
+		}
 
-			//if (throwingMethods.Length > 0)
-			//    CollectionAssert.IsEmpty(throwingMethods);
+		[Test]
+		public void Get_created_exceptions()
+		{
+			var type = GlobalSetup.Codebase.Find<ExceptionClass>();
+			var method = type.GetMethods().First(md => md.Name == "Run");
+
+			var exceptions = GetCreatedExceptions(method)
+				.ToArray();
+
+			Assert.AreEqual(1, exceptions.Length);
+			Assert.AreEqual("NotSupportedException", exceptions[0].Name);
+
+			var references = method
+				.GetReferencedMethods()
+				.ToArray();
+			Console.WriteLine(references[0]);
+		}
+
+		static IEnumerable<TypeReference> GetCreatedExceptions(MethodDefinition method)
+		{
+			return method.GetInstructions()
+				.Where(i => i.OpCode == OpCodes.Newobj)
+				.Select(i => ((MemberReference) i.Operand).DeclaringType)
+				.Where(tr => tr.Name.EndsWith("Exception"))
+				.Distinct();
 		}
 
 		[Test]

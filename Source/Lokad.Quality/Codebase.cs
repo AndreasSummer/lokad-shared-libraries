@@ -89,7 +89,8 @@ namespace Lokad.Quality
 
 			var referencedTypes = _refs
 				.SelectMany(r => r.GetAllTypes())
-				.Where(t => t.IsPublic);
+				.Where(t => t.IsPublic)
+				.ToArray();
 
 			_typeDictionary = new Dictionary<string, TypeDefinition>();
 
@@ -143,6 +144,16 @@ namespace Lokad.Quality
 		public Maybe<TypeDefinition> Find(Type type)
 		{
 			return _typeDictionary.GetValue(CecilUtil.GetMonoName(type));
+		}
+
+		/// <summary>
+		/// Finds the specified reference.
+		/// </summary>
+		/// <param name="reference">The reference.</param>
+		/// <returns>matching type definition</returns>
+		public Maybe<TypeDefinition> Find(TypeReference reference)
+		{
+			return _typeDictionary.GetValue(reference.FullName);
 		}
 	}
 }
