@@ -59,7 +59,6 @@
     <Compile Include="ArrayExtensions.cs" />
     <Compile Include="Collections\Generic\ProjectionComparer.cs" />
     <Compile Include="Diagnostics\ExceptionStatistics.cs" />
-    <Compile Include="Quality\Guidelines.cs" />
     <Compile Include="Silverlight\Stopwatch.cs" />
     <Compile Include="Testing\Equatable.cs" />
     <Compile Include="Linq\ArrayExtensionsForLinq.cs" />
