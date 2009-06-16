@@ -16,6 +16,8 @@ namespace Lokad.Rules
 	[TestFixture]
 	public sealed class EnforceTests
 	{
+		// ReSharper disable InconsistentNaming
+
 		static void ClassUsagePatterns<T>(T param, IEnumerable<T> collection, Rule<T> rule) where T : class
 		{
 			Enforce.Argument(() => param);
@@ -33,6 +35,14 @@ namespace Lokad.Rules
 
 			Enforce.That(param, rule);
 			Enforce.That(collection, rule);
+		}
+
+		[Test]
+		public void Simple_usage_patterns()
+		{
+			Enforce.That(true);
+			Enforce.That(true, "Check");
+			Enforce.That(true, "Format {0}", 1);
 		}
 
 		static void ValueUsagePatterns<T>(T param, IEnumerable<T> collection, Rule<T> rule)

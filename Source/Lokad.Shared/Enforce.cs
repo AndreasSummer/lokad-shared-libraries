@@ -181,6 +181,8 @@ namespace Lokad
 		/// <summary>
 		/// Throws exception if the check does not pass.
 		/// </summary>
+		/// <param name="check">if set to <c>true</c> then check will pass.</param>
+		/// <param name="name">The name of the assertion.</param>
 		/// <exception cref="InvalidOperationException">If the assertion has failed.</exception>
 		[DebuggerNonUserCode]
 		[AssertionMethod]
@@ -190,6 +192,24 @@ namespace Lokad
 			if (!check)
 			{
 				throw Errors.InvalidOperation("Failed assertion '{0}'", name);
+			}
+		}
+
+		/// <summary>
+		/// Throws exception if the check does not pass.
+		/// </summary>
+		/// <param name="check">if set to <c>true</c> then check will pass.</param>
+		/// <param name="message">The message.</param>
+		/// <param name="arguments">The format arguments.</param>
+		/// <exception cref="InvalidOperationException">If the assertion has failed.</exception>
+		[DebuggerNonUserCode]
+		[AssertionMethod]
+		public static void That(
+			[AssertionCondition(AssertionConditionType.IS_TRUE)] bool check, [NotNull] string message, params object[] arguments)
+		{
+			if (!check)
+			{
+				throw Errors.InvalidOperation(message, arguments);
 			}
 		}
 
