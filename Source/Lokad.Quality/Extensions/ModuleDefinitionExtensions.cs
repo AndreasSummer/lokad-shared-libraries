@@ -26,15 +26,5 @@ namespace Lokad.Quality
 		{
 			return moduleDefinition.AssemblyReferences.Cast<AssemblyNameReference>();
 		}
-
-		/// <summary>
-		/// Gets the module references.
-		/// </summary>
-		/// <param name="moduleDefinition">The module definition.</param>
-		/// <returns>lazy enumerator over the results</returns>
-		public static IEnumerable<ModuleReference> GetModuleReferences(this ModuleDefinition moduleDefinition)
-		{
-			return moduleDefinition.ModuleReferences.Cast<ModuleReference>();
-		}
 	}
 }

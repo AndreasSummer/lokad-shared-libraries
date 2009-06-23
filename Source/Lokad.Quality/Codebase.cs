@@ -39,13 +39,22 @@ namespace Lokad.Quality
 			get { return _types; }
 		}
 
+		/// <summary>
+		/// Gets the assemblies being checked.
+		/// </summary>
+		/// <value>The assemblies.</value>
+		public AssemblyDefinition[] Assemblies
+		{
+			get { return _assemblies.Convert(a => a.Value); }
+		}
+
 		readonly TypeDefinition[] _types;
 		readonly MethodDefinition[] _methods;
 
 		readonly IDictionary<string, TypeDefinition> _typeDictionary;
 
-		readonly AssemblyDefinition[] _refs;
-		readonly Pair<string, AssemblyDefinition>[] _defs;
+		readonly AssemblyDefinition[] _references;
+		readonly Pair<string, AssemblyDefinition>[] _assemblies;
 
 
 		/// <summary>
@@ -54,7 +63,7 @@ namespace Lokad.Quality
 		/// <param name="path">The path.</param>
 		public void SaveTo(string path)
 		{
-			foreach (var def in _defs)
+			foreach (var def in _assemblies)
 			{
 				var fileName = Path.GetFileName(def.Key);
 				var fullName = Path.Combine(path, fileName);
@@ -68,10 +77,10 @@ namespace Lokad.Quality
 		/// <param name="assembliesToAnalyze">The assemblies to load.</param>
 		public Codebase(params string[] assembliesToAnalyze)
 		{
-			_defs = assembliesToAnalyze
+			_assemblies = assembliesToAnalyze
 				.Convert(n => Tuple.From(Path.GetFileName(n), AssemblyFactory.GetAssembly(n)));
 
-			var defs = _defs.Convert(p => p.Value);
+			var defs = _assemblies.Convert(p => p.Value);
 
 			_types = defs
 				.SelectMany(m => m.GetTypes())
@@ -81,13 +90,13 @@ namespace Lokad.Quality
 				.SelectMany(t => t.GetMethods())
 				.ToArray();
 
-			_refs = defs
+			_references = defs
 				.SelectMany(m => m
 					.GetAssemblyReferences()
 					.Select(nr => m.Resolver.Resolve(nr)))
 				.ToArray();
 
-			var referencedTypes = _refs
+			var referencedTypes = _references
 				.SelectMany(r => r.GetAllTypes())
 				.Where(t => t.IsPublic)
 				.ToArray();
@@ -105,8 +114,10 @@ namespace Lokad.Quality
 		/// <returns>lazy enumerator over the results.</returns>
 		public IEnumerable<TypeReference> GetAllTypeReferences()
 		{
-			return _defs.SelectMany(a => a.Value.GetTypeReferences());
+			return _assemblies.SelectMany(a => a.Value.GetTypeReferences());
 		}
+
+		
 
 
 		TypeDefinition IProvider<TypeReference, TypeDefinition>.Get(TypeReference key)

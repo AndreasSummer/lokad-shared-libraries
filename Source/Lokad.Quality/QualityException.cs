@@ -14,7 +14,7 @@ namespace Lokad.Quality
 	/// <summary>
 	/// Exception thrown by rules checking code quality
 	/// </summary>
-	[Serializable]
+	[Serializable, NoCodeCoverage]
 	public sealed class QualityException : Exception
 	{
 		/// <summary>

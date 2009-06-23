@@ -47,6 +47,7 @@
   <ItemGroup>
     <Compile Include="CecilExtensionsTest.cs" />
     <Compile Include="CodebaseTests.cs" />
+    <Compile Include="ModuleDefinitionExtensionsTests.cs" />
     <Compile Include="RuleUseCases.cs" />
     <Compile Include="GlobalSetup.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
