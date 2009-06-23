@@ -60,6 +60,16 @@ namespace Lokad.Quality
 			return definition.Constructors.Cast<MethodDefinition>();
 		}
 
+		/// <summary>
+		/// Gets the properties found on the type definition.
+		/// Inheritance is not considered.
+		/// </summary>
+		/// <param name="definition">The definition.</param>
+		/// <returns>lazy collection of the properties</returns>
+		public static IEnumerable<PropertyDefinition> GetProperties(this TypeDefinition definition)
+		{
+			return definition.Properties.Cast<PropertyDefinition>();
+		}
 
 		/// <summary>
 		/// Resolves the specified definition to <see cref="Type"/>.

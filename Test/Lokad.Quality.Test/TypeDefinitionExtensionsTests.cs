@@ -33,14 +33,14 @@ namespace Lokad.Quality.Test
 			var resolve = GlobalSetup.Codebase
 				.Find<ElementAttribute>().Resolve();
 
-			Assert.AreEqual(typeof(ElementAttribute), resolve);
+			Assert.AreEqual(typeof (ElementAttribute), resolve);
 		}
 
 		[Test]
 		public void GetConstructors_of_empty_class()
 		{
 			var ctors = GlobalSetup.Codebase
-				.Find(typeof(Fire)).Value
+				.Find(typeof (Fire)).Value
 				.GetConstructors();
 
 			CollectionAssert.IsEmpty(ctors);
@@ -56,6 +56,32 @@ namespace Lokad.Quality.Test
 			CollectionAssert.IsNotEmpty(ctors);
 			Assert.AreEqual(1, ctors.Count());
 			Assert.AreEqual(".ctor", ctors.First().Name);
+		}
+
+		[UsedImplicitly]
+		sealed class ClassWithProperty
+		{
+			internal string Property { get; set; }
+		}
+
+		[Test]
+		public void GetProperties()
+		{
+			var properties = GlobalSetup.Codebase
+				.Find<ClassWithProperty>()
+				.GetProperties();
+
+			CollectionAssert.IsNotEmpty(properties);
+			Assert.AreEqual(1, properties.Count());
+			Assert.AreEqual("Property", properties.First().Name);
+		}
+
+		[Test]
+		public void GetProperties_of_empty_class()
+		{
+			CollectionAssert.IsEmpty(GlobalSetup.Codebase
+				.Find(typeof (Fire)).Value
+				.GetProperties());
 		}
 	}
 }
