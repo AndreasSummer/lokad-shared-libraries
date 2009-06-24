@@ -58,9 +58,7 @@ namespace Lokad.Testing
 		/// <typeparam name="TComponent">The type of the component.</typeparam>
 		public void Register<TComponent>()
 		{
-			var builder = new ContainerBuilder();
-			builder.Register<TComponent>();
-			builder.Build(_container);
+			Build(builder => builder.Register<TComponent>());
 		}
 
 		/// <summary>
@@ -70,8 +68,17 @@ namespace Lokad.Testing
 		/// <param name="instance">The actual instance.</param>
 		public void Register<TComponent>(TComponent instance)
 		{
+			Build(builder => builder.Register(instance).ExternallyOwned());
+		}
+
+		/// <summary>
+		/// Builds the specified registration into the container.
+		/// </summary>
+		/// <param name="registration">The registration.</param>
+		public void Build(Action<ContainerBuilder> registration)
+		{
 			var builder = new ContainerBuilder();
-			builder.Register(instance).ExternallyOwned();
+			registration(builder);
 			builder.Build(_container);
 		}
 
