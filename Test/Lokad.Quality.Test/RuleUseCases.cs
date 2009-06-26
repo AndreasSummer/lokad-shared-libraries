@@ -72,11 +72,6 @@ namespace Lokad.Quality.Test
 
 			Assert.AreEqual(1, exceptions.Length);
 			Assert.AreEqual("NotSupportedException", exceptions[0].Name);
-
-			var references = method
-				.GetReferencedMethods()
-				.ToArray();
-			Console.WriteLine(references[0]);
 		}
 
 		static IEnumerable<TypeReference> GetCreatedExceptions(MethodDefinition method)
