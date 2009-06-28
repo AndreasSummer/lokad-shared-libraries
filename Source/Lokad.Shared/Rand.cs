@@ -25,15 +25,26 @@ namespace Lokad
 		static Func<Func<int, int>> Activator;
 
 		/// <summary>
-		/// Resets everything to the default.
+		/// Resets everything to the default, using <see cref="Random"/> generator and random seed. 
 		/// </summary>
 		public static void ResetToDefault()
 		{
+			ResetToDefault(new Random().Next());
+		}
+
+		/// <summary>
+		/// Resets everything to the default, using <see cref="Random"/> generator and the specified
+		/// rand seed.
+		/// </summary>
+		/// <param name="randSeed">The rand seed.</param>
+		[UsedImplicitly]
+		public static void ResetToDefault(int randSeed)
+		{
 			Activator = () =>
-				{
-					var r = new Random();
-					return i => r.Next(i);
-				};
+			{
+				var r = new Random(randSeed);
+				return i => r.Next(i);
+			};
 			NextInt = Activator();
 		}
 
@@ -45,6 +56,7 @@ namespace Lokad
 		/// <summary>
 		/// Resets the random generator, using the provided activator
 		/// </summary>
+		[UsedImplicitly]
 		public static void Reset()
 		{
 			NextInt = Activator();

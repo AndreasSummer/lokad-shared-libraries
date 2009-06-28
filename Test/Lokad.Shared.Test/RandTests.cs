@@ -19,11 +19,7 @@ namespace Lokad
 		[SetUp]
 		public void SetUp()
 		{
-			Rand.Reset(() =>
-				{
-					var r = new Random(1);
-					return i => r.Next(i);
-				});
+			Rand.ResetToDefault(1);
 		}
 
 		[TestFixtureTearDown]
