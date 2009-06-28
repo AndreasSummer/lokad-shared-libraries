@@ -19,7 +19,7 @@ namespace Lokad
 	/// <remarks>
 	/// Keep in mind, that this implementation is not thread-safe.
 	/// </remarks>
-	public static class Rand
+	public static partial class Rand
 	{
 		static Func<int, int> NextInt;
 		static Func<Func<int, int>> Activator;

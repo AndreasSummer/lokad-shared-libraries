@@ -8,6 +8,8 @@
 
 using System;
 using NUnit.Framework;
+using System.Linq;
+
 // ReSharper disable InconsistentNaming
 // ReSharper disable MemberCanBePrivate.Global
 // ReSharper disable UnusedMember.Global
@@ -35,6 +37,9 @@ namespace Lokad
 			Maybe
 		}
 
+		/// <summary>
+		/// Tests this instance.
+		/// </summary>
 		[Test]
 		public void Test()
 		{
@@ -52,6 +57,14 @@ namespace Lokad
 			Assert.AreEqual(true, Rand.NextBool(1));
 			Assert.AreEqual(false, Rand.NextBool(0));
 			Assert.AreEqual(false, Rand.NextBool());
+
+			Assert.AreEqual("accusam", Rand.String.NextWord());
+			Assert.AreEqual("Sed stet amet in invidunt.", Rand.String.NextSentence(1, 6));
+			var actual = Rand.String.NextText(20,90);
+
+			Assert.IsTrue(actual.Contains(Environment.NewLine));
+			Assert.AreEqual(537, actual.Length);
+			Assert.AreEqual(87, actual.Count(c => c==' '));
 		}
 
 		[Test]
