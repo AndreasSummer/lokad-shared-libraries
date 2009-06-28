@@ -7,6 +7,7 @@
 #endregion
 
 using System;
+using System.Globalization;
 using System.Text;
 using System.Linq;
 
@@ -80,7 +81,7 @@ namespace Lokad
 					var value = NextWord();
 					if (i == 0)
 					{
-						value = char.ToUpperInvariant(value[0]) + value.Remove(0, 1);
+						value = char.ToUpper(value[0], CultureInfo.InvariantCulture) + value.Remove(0, 1);
 					}
 					else
 					{
