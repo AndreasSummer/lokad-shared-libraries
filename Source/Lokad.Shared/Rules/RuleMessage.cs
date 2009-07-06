@@ -15,14 +15,20 @@ namespace Lokad.Rules
 	/// <summary> Rule message </summary>
 	[Immutable]
 	[Serializable]
-	public sealed class RuleMessage
+	public sealed class RuleMessage : IEquatable<RuleMessage>
 	{
 		const string Format = "{0}: [{1}] {2}";
 		readonly RuleLevel _level;
 		readonly string _message;
 		readonly string _path;
 
-		internal RuleMessage(string path, RuleLevel level, string message)
+		/// <summary>
+		/// Initializes a new instance of the <see cref="RuleMessage"/> class.
+		/// </summary>
+		/// <param name="path">The path.</param>
+		/// <param name="level">The level.</param>
+		/// <param name="message">The message.</param>
+		public RuleMessage(string path, RuleLevel level, string message)
 		{
 			_path = path;
 			_level = level;
@@ -54,6 +60,13 @@ namespace Lokad.Rules
 		public string Message
 		{
 			get { return _message; }
+		}
+
+		bool IEquatable<RuleMessage>.Equals(RuleMessage other)
+		{
+			return _message == other.Message
+				&& Level == other.Level
+					&& Path == other.Path;
 		}
 
 		/// <summary>
