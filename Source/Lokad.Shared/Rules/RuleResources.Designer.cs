@@ -214,7 +214,7 @@ namespace Lokad.Rules {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Value should not be less than &apos;{0}&apos;..
+        ///   Looks up a localized string similar to Value should not be greater than &apos;{0}&apos;..
         /// </summary>
         internal static string Value_cant_be_greater_than_X {
             get {
@@ -223,7 +223,7 @@ namespace Lokad.Rules {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Value should not be greater than &apos;{0}&apos;..
+        ///   Looks up a localized string similar to Value should not be less than &apos;{0}&apos;..
         /// </summary>
         internal static string Value_cant_be_less_than_X {
             get {
