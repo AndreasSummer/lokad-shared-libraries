@@ -11,6 +11,6 @@ using System.Reflection;
 
 [assembly : AssemblyTitle("Lokad.Logging")]
 [assembly : AssemblyDescription("Lokad Logging abstraction")]
-[assembly : AssemblyCopyright("Copyright (c) Lokad 2008")]
-[assembly : AssemblyTrademark("This code is released under the terms of the new BSD licence")]
-[assembly : CLSCompliant(true)]
+[assembly: AssemblyCopyright(GlobalAssemblyInfo.Copyright)]
+[assembly: AssemblyTrademark(GlobalAssemblyInfo.Trademark)]
+[assembly: CLSCompliant(true)]

@@ -12,8 +12,8 @@ using System.Runtime.CompilerServices;
 
 [assembly : AssemblyTitle("Lokad.ActionPolicy")]
 [assembly : AssemblyDescription("Action Policies and reliability")]
-[assembly : AssemblyCopyright("Copyright (c) Lokad 2009")]
-[assembly : AssemblyTrademark("This code is released under the terms of the new BSD licence")]
-[assembly : CLSCompliant(true)]
+[assembly: AssemblyCopyright(GlobalAssemblyInfo.Copyright)]
+[assembly: AssemblyTrademark(GlobalAssemblyInfo.Trademark)]
+[assembly: CLSCompliant(true)]
 
 [assembly: InternalsVisibleTo("Lokad.ActionPolicy.Test, PublicKey = " + GlobalAssemblyInfo.PublicKey)]

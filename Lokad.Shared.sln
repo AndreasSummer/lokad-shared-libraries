@@ -9,14 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lokad.Shared.Test", "Test\L
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{758A6E18-B1E3-418F-94BE-D0F8DFC66FCD}"
 	ProjectSection(SolutionItems) = preProject
-		Source\GlobalAssemblyInfo.cs = Source\GlobalAssemblyInfo.cs
-		Lokad.Shared.build = Lokad.Shared.build
-		Lokad.Shared.ccnet = Lokad.Shared.ccnet
-		Lokad.Shared.FxCop = Lokad.Shared.FxCop
 		Lokad.Shared.License.txt = Lokad.Shared.License.txt
-		Lokad.Shared.shfb = Lokad.Shared.shfb
 		ReadMe.txt = ReadMe.txt
-		SharedKey.snk = SharedKey.snk
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lokad.Stack", "Source\Lokad.Stack\Lokad.Stack.csproj", "{5071C867-97B7-41BE-95A7-7B584B0C2F50}"
@@ -30,10 +24,6 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{FFFDA17A-CB7D-4DA1-BAFA-838E873F668A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lokad.Quality.Test", "Test\Lokad.Quality.Test\Lokad.Quality.Test.csproj", "{D8AB1A43-FA5B-492A-9AEA-C1D177CD3C85}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lokad.Shared.Contrib", "Source\Lokad.Shared.Contrib\Lokad.Shared.Contrib.csproj", "{30E7C57C-84B5-4414-BA3E-A440BE240C49}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lokad.Shared.Contrib.Test", "Test\Lokad.Shared.Contrib.Test\Lokad.Shared.Contrib.Test.csproj", "{13E96105-62A8-4017-9552-6884DA392293}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Templates", "Templates", "{89452278-CC35-4A09-86FA-837DE7398573}"
 	ProjectSection(SolutionItems) = preProject
@@ -55,6 +45,21 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lokad.Testing", "Source\Lokad.Testing\Lokad.Testing.csproj", "{CA5BC74E-E0DD-4F07-B29E-7B4F988F5E1F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lokad.Testing.Test", "Test\Lokad.Testing.Test\Lokad.Testing.Test.csproj", "{D1A9180F-9F43-4724-B414-B3484858904A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build Files", "Build Files", "{E3605A5A-77F7-4D73-A6CA-CC930FEBCA02}"
+	ProjectSection(SolutionItems) = preProject
+		Lokad.Shared.build = Lokad.Shared.build
+		Lokad.Shared.ccnet = Lokad.Shared.ccnet
+		Lokad.Shared.FxCop = Lokad.Shared.FxCop
+		Lokad.Shared.shfb = Lokad.Shared.shfb
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared Assembly Files", "Shared Assembly Files", "{DECF1CED-BABB-4934-A97B-87001B797BF4}"
+	ProjectSection(SolutionItems) = preProject
+		Source\GlobalAssemblyInfo.cs = Source\GlobalAssemblyInfo.cs
+		SharedKey.snk = SharedKey.snk
+		Source\VersionAssemblyInfo.cs = Source\VersionAssemblyInfo.cs
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -86,14 +91,6 @@ Global
 		{D8AB1A43-FA5B-492A-9AEA-C1D177CD3C85}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D8AB1A43-FA5B-492A-9AEA-C1D177CD3C85}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D8AB1A43-FA5B-492A-9AEA-C1D177CD3C85}.Release|Any CPU.Build.0 = Release|Any CPU
-		{30E7C57C-84B5-4414-BA3E-A440BE240C49}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{30E7C57C-84B5-4414-BA3E-A440BE240C49}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{30E7C57C-84B5-4414-BA3E-A440BE240C49}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{30E7C57C-84B5-4414-BA3E-A440BE240C49}.Release|Any CPU.Build.0 = Release|Any CPU
-		{13E96105-62A8-4017-9552-6884DA392293}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{13E96105-62A8-4017-9552-6884DA392293}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{13E96105-62A8-4017-9552-6884DA392293}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{13E96105-62A8-4017-9552-6884DA392293}.Release|Any CPU.Build.0 = Release|Any CPU
 		{F674D061-0355-4617-9A3C-9A4E6E12DEEF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{F674D061-0355-4617-9A3C-9A4E6E12DEEF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F674D061-0355-4617-9A3C-9A4E6E12DEEF}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -132,18 +129,18 @@ Global
 		{5071C867-97B7-41BE-95A7-7B584B0C2F50} = {5344E077-8212-47BA-8EA2-F92ECC2845A0}
 		{855AE75B-E675-4F90-873F-CC3D3F9879BD} = {5344E077-8212-47BA-8EA2-F92ECC2845A0}
 		{9C285BAA-786F-41E9-8CFB-C1FDDB3E6FE1} = {5344E077-8212-47BA-8EA2-F92ECC2845A0}
-		{30E7C57C-84B5-4414-BA3E-A440BE240C49} = {5344E077-8212-47BA-8EA2-F92ECC2845A0}
 		{F674D061-0355-4617-9A3C-9A4E6E12DEEF} = {5344E077-8212-47BA-8EA2-F92ECC2845A0}
 		{F8001D8A-6F14-463B-AA8E-00D31EFFBFA0} = {5344E077-8212-47BA-8EA2-F92ECC2845A0}
 		{CA5BC74E-E0DD-4F07-B29E-7B4F988F5E1F} = {5344E077-8212-47BA-8EA2-F92ECC2845A0}
 		{6DA4EA76-B037-4131-A39E-262E1FBAD19C} = {FFFDA17A-CB7D-4DA1-BAFA-838E873F668A}
 		{76BE68DD-B0AB-4CF6-B119-3C493F11B06D} = {FFFDA17A-CB7D-4DA1-BAFA-838E873F668A}
 		{D8AB1A43-FA5B-492A-9AEA-C1D177CD3C85} = {FFFDA17A-CB7D-4DA1-BAFA-838E873F668A}
-		{13E96105-62A8-4017-9552-6884DA392293} = {FFFDA17A-CB7D-4DA1-BAFA-838E873F668A}
 		{F8677A4E-D9A7-4AFD-9C29-A83B5C5C4A6B} = {FFFDA17A-CB7D-4DA1-BAFA-838E873F668A}
 		{4A323EA1-F1FE-4917-9D2A-C415A39A6E29} = {FFFDA17A-CB7D-4DA1-BAFA-838E873F668A}
 		{D1A9180F-9F43-4724-B414-B3484858904A} = {FFFDA17A-CB7D-4DA1-BAFA-838E873F668A}
 		{89452278-CC35-4A09-86FA-837DE7398573} = {758A6E18-B1E3-418F-94BE-D0F8DFC66FCD}
+		{E3605A5A-77F7-4D73-A6CA-CC930FEBCA02} = {758A6E18-B1E3-418F-94BE-D0F8DFC66FCD}
+		{DECF1CED-BABB-4934-A97B-87001B797BF4} = {758A6E18-B1E3-418F-94BE-D0F8DFC66FCD}
 		{A7B85147-5434-4707-8733-8A10E999467A} = {F6D2FFD3-20B7-42AD-8D6B-C8B4E56A30B4}
 	EndGlobalSection
 EndGlobal

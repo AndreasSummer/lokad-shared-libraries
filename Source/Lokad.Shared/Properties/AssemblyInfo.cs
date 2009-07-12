@@ -17,6 +17,6 @@ using System.Runtime.CompilerServices;
 [assembly : AssemblyTitle("Lokad.Shared")]
 [assembly : AssemblyDescription("Shared helper routines")]
 [assembly : InternalsVisibleTo("Lokad.Shared.Test, PublicKey = " + GlobalAssemblyInfo.PublicKey)]
-[assembly : AssemblyCopyright("Copyright (c) Lokad 2008")]
-[assembly : AssemblyTrademark("This code is released under the terms of the new BSD licence")]
+[assembly : AssemblyCopyright(GlobalAssemblyInfo.Copyright)]
+[assembly : AssemblyTrademark(GlobalAssemblyInfo.Trademark)]
 [assembly : CLSCompliant(true)]

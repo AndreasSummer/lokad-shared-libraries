@@ -16,7 +16,7 @@ using System.Runtime.CompilerServices;
 
 [assembly : AssemblyTitle("Lokad.Stack")]
 [assembly : AssemblyDescription("Stack-specific library for the Loked.Shared")]
-[assembly : AssemblyTrademark("This code is released under the terms of the new BSD licence")]
 [assembly : CLSCompliant(true)]
-[assembly : AssemblyCopyright("Copyright (c) Lokad 2008")]
+[assembly: AssemblyCopyright(GlobalAssemblyInfo.Copyright)]
+[assembly: AssemblyTrademark(GlobalAssemblyInfo.Trademark)]
 [assembly : InternalsVisibleTo("Lokad.Stack.Test, PublicKey = " + GlobalAssemblyInfo.PublicKey)]
