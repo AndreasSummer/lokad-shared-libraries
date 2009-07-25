@@ -14,12 +14,12 @@ using System.Reflection;
 namespace Lokad
 {
 	/// <summary>
-	/// Helper related to the <see cref="Type"/>
+	/// Helper related to the <see cref="Type"/>.
 	/// </summary>
 	public static class TypeExtensions
 	{
 		///<summary>
-		/// Extension method to retrieve attributes from the type
+		/// Extension method to retrieve attributes from the type.
 		///</summary>
 		///<param name="target">Type to perform operation upon</param>
 		///<param name="inherit"><see cref="MemberInfo.GetCustomAttributes(Type,bool)"/></param>
@@ -37,7 +37,7 @@ namespace Lokad
 		}
 
 		/// <summary>
-		/// Returns single attribute from the type
+		/// Returns single attribute from the type.
 		/// </summary>
 		/// <typeparam name="T">Attribute to use</typeparam>
 		/// <param name="target">Attribute provider</param>
@@ -60,7 +60,7 @@ namespace Lokad
 
 
 		/// <summary>
-		/// Selects non-abstract types marked with the specified attribute
+		/// Selects non-abstract types marked with the specified attribute.
 		/// </summary>
 		/// <typeparam name="T"></typeparam>
 		/// <param name="types"></param>
