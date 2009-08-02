@@ -8,7 +8,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
 using Autofac;
 using Autofac.Builder;
@@ -106,55 +105,6 @@ namespace Lokad.Container
 				default:
 					throw new ArgumentOutOfRangeException("scope");
 			}
-		}
-
-		/// <summary>
-		/// Loads decorators into the container
-		/// </summary>
-		/// <param name="container"></param>
-		/// <param name="decorators"></param>
-		public static void LoadDecorators(this IContainer container, IEnumerable<DecoratorInfo> decorators)
-		{
-			var builder = new ContainerBuilder();
-
-			foreach (var info in decorators)
-			{
-				// register decorators
-				builder.Register(info.DecoratorClass)
-					.FactoryScoped()
-					.OwnedByContainer();
-
-				// intercept classes that are already registered
-				var typedService = new TypedService(info.Service);
-				IComponentRegistration registration;
-				if (container.TryGetDefaultRegistrationFor(typedService, out registration))
-				{
-					ApplyDecorator(info, registration);
-				}
-			}
-
-			// make sure that future registrations will also be intercepted
-			var dict = decorators.ToDictionary(di => new TypedService(di.Service) as Service);
-			container.ComponentRegistered += (sender, e) =>
-				{
-					var services = e.ComponentRegistration.Descriptor.Services;
-					var matchingService = services.FirstOrDefault(dict.ContainsKey);
-					if (matchingService != null)
-					{
-						ApplyDecorator(dict[matchingService], e.ComponentRegistration);
-					}
-				};
-
-			builder.Build(container);
-		}
-
-		static void ApplyDecorator(DecoratorInfo info1, IComponentRegistration registration)
-		{
-			registration.Activating += (sender, e) =>
-				{
-					var wrapper = e.Context.Resolve(info1.DecoratorClass, new NamedParameter("inner", e.Instance));
-					e.Instance = wrapper;
-				};
 		}
 	}
 }

@@ -97,8 +97,6 @@
     <Compile Include="Utils\ArrayUtil.cs" />
     <Compile Include="Utils\AssemblyUtil.cs" />
     <Compile Include="Container\ComponentAttribute.cs" />
-    <Compile Include="Container\DecoratorAttribute.cs" />
-    <Compile Include="Container\DecoratorInfo.cs" />
     <Compile Include="Container\RegistrationScope.cs" />
     <Compile Include="Diagnostics\ExceptionCounter.cs" />
     <Compile Include="Diagnostics\ExecutionCounters.cs" />

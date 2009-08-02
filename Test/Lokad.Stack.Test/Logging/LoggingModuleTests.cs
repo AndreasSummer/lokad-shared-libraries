@@ -14,6 +14,7 @@ namespace Lokad.Logging
 	[TestFixture]
 	public sealed class LoggingModuleTests
 	{
+		// ReSharper disable InconsistentNaming
 		[Test]
 		public void Test_Console()
 		{

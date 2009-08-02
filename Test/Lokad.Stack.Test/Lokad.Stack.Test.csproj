@@ -55,6 +55,7 @@
     </Compile>
     <Compile Include="Logging\LoggingModuleTests.cs" />
     <Compile Include="Logging\LoggingStackTests.cs" />
+    <Compile Include="Container\PendingAutofacExtensionsTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
