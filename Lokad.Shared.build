@@ -40,10 +40,21 @@
 
 
 	<ItemGroup>
-		<Tokens Include="StackPackage"><ReplacementValue>$(MSBuildProjectName)-Stack-$(Version).zip</ReplacementValue></Tokens>
-		<Tokens Include="LibraryPackage"><ReplacementValue>$(MSBuildProjectName)-Lib-$(Version).zip</ReplacementValue></Tokens>
-		<Tokens Include="SourcePackage"><ReplacementValue>$(MSBuildProjectName)-Source-$(Version).zip</ReplacementValue></Tokens>
-		<Tokens Include="Version"><ReplacementValue>$(Version)</ReplacementValue></Tokens>
+		<Tokens Include="StackPackage">
+			<ReplacementValue>$(MSBuildProjectName)-Stack-$(Version).zip</ReplacementValue>
+		</Tokens>
+		<Tokens Include="LibraryPackage">
+			<ReplacementValue>$(MSBuildProjectName)-Lib-$(Version).zip</ReplacementValue>
+		</Tokens>
+		<Tokens Include="SourcePackage">
+			<ReplacementValue>$(MSBuildProjectName)-Source-$(Version).zip</ReplacementValue>
+		</Tokens>
+		<Tokens Include="Version">
+			<ReplacementValue>$(Version)</ReplacementValue>
+		</Tokens>
+		<Tokens Include="BuildTime">
+			<ReplacementValue>$(BuildTime)</ReplacementValue>
+		</Tokens>
 	</ItemGroup>
 
 	<!-- 
@@ -158,7 +169,8 @@
 		<CreateItem Include="@(_VersionPaths->'%(SubFolder)%(RecursiveDir)VersionAssemblyInfo.cs')">
 			<Output ItemName="_VersionFiles" TaskParameter="Include"/>
 		</CreateItem>
-		<Time Format="yyyy-MM-dd HH:mm">
+		<!--If it is not set by CCNet-->
+		<Time Format="yyyy-MM-dd HH:mm" Condition="$(BuildTime)==''" >
 			<Output TaskParameter="FormattedTime" PropertyName="BuildTime" />
 		</Time>
 		<AssemblyInfo OutputFile="%(_VersionFiles.FullPath)" CodeLanguage="CS"

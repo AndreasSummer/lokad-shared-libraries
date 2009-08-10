@@ -11,7 +11,6 @@
 </head>
 <body>
 <h1>Lokad Shared Libraries</h1>
-<p><em>Development build ${Version}</em></p>
 <h2>Downloads</h2>
 <ul>
 	<li><a href="${Version}/${StackPackage}">Download merged binaries</a> (DLL, PDB, XML). <strong>Featured!</strong></li>
@@ -23,7 +22,8 @@
 	<li><a href="http://code.google.com/p/lokad-shared-libraries/">Project page on <em>Google Code</em></a></li>
 	<li><a href="http://www.lokad.com">Lokad.com</a></li>
 </ul>
-<p>&copy;2009 Lokad. All rights reserved</p>
+<p><sub><em>Build ${Version} released on ${BuildTime}.</em></sub></p>
+<p>&copy;2009 Lokad. All rights reserved.</p>
 </body>
 </html>
 
