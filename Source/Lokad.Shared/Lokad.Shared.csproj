@@ -60,6 +60,8 @@
     <Compile Include="Collections\Generic\ProjectionComparer.cs" />
     <Compile Include="Diagnostics\ExceptionStatistics.cs" />
     <Compile Include="Rand.String.cs" />
+    <Compile Include="Result.1.cs" />
+    <Compile Include="Result.2.cs" />
     <Compile Include="Silverlight\Stopwatch.cs" />
     <Compile Include="Testing\Equatable.cs" />
     <Compile Include="Linq\ArrayExtensionsForLinq.cs" />

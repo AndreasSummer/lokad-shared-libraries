@@ -17,21 +17,23 @@ namespace Lokad
 	[TestFixture]
 	public sealed class ResultTests
 	{
+		// ReSharper disable InconsistentNaming
+
 		[Test, Expects.InvalidOperationException]
 		public void Access_Success()
 		{
-			var result = Result.Success(SystemDescriptor.Default.Version);
+			var result = Result.CreateSuccess(SystemDescriptor.Default.Version);
 			Assert.IsTrue(result.IsSuccess);
 			Assert.AreEqual(SystemDescriptor.Default.Version, result.Value);
-			Assert.IsNull(result.ErrorMessage, "this should fail");
+			Assert.IsNull(result.Error, "this should fail");
 		}
 
 		[Test, Expects.InvalidOperationException]
 		public void Access_Error()
 		{
-			var result = Result<int>.Error("Failed");
+			var result = Result<int>.CreateError("Failed");
 			Assert.IsFalse(result.IsSuccess);
-			Assert.AreEqual(result.ErrorMessage, "Failed");
+			Assert.AreEqual(result.Error, "Failed");
 			Assert.IsNull(result.Value, "This should fail");
 		}
 
@@ -39,13 +41,13 @@ namespace Lokad
 		public void Reference_Value_Is_Checked_For_Null()
 		{
 			// if you have R#, this should be highlighted
-			Result.Success(default(object));
+			Result.CreateSuccess(default(object));
 		}
 
 		[Test]
 		public void Value_Can_Be_Default()
 		{
-			Result.Success(default(int));
+			Result.CreateSuccess(default(int));
 		}
 
 		[Test]
@@ -56,7 +58,7 @@ namespace Lokad
 		}
 
 		readonly Result<int> Result10 = Result.Success(10);
-		readonly Result<int> ResultEmpty = Result<int>.Error("Error");
+		readonly Result<int> ResultEmpty = Result<int>.CreateError("Error");
 
 		[Test]
 		public void Apply()
@@ -70,20 +72,20 @@ namespace Lokad
 		[Test]
 		public void Convert()
 		{
-			Assert.AreEqual(Result.Success("10"), Result10.Convert(i => i.ToString()));
-			Assert.AreEqual(Result<string>.Error("Error"), ResultEmpty.Convert(i => i.ToString()));
+			Assert.AreEqual(Result.CreateSuccess("10"), Result10.Convert(i => i.ToString()), "#1");
+			Assert.AreEqual(Result<string>.CreateError("Error"), ResultEmpty.Convert(i => i.ToString()),"#2");
 		}
 
 		[Test]
 		public void Combine()
 		{
-			var error1 = Result<int>.Error("E1");
-			var error1s = Result<string>.Error("E1");
+			var error1 = Result<int>.CreateError("E1");
+			var error1s = Result<string>.CreateError("E1");
 			Func<int, Result<string>> fails = i => { throw new InvalidOperationException(); };
 
 			Assert.AreEqual(error1s, error1.Combine(fails));
 			Assert.AreEqual(error1s, Result10.Combine(i => error1s));
-			Assert.AreEqual(Result.Success("10"), Result10.Combine(i => Result.Success(i.ToString())));
+			Assert.AreEqual(Result.CreateSuccess("10"), Result10.Combine(i => Result.Success(i.ToString())));
 		}
 
 		[Test]

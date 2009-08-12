@@ -36,8 +36,8 @@ namespace Lokad
 				.GetAttributes<AssemblyConfigurationAttribute>(true);
 
 			if (attributes.Length == 0)
-				return Result<string>.Error("Attribute is not present");
-			return Result.Success(attributes[0].Configuration);
+				return Result<string>.CreateError("Attribute is not present");
+			return Result.CreateSuccess(attributes[0].Configuration);
 		}
 
 		/// <summary>
@@ -52,9 +52,9 @@ namespace Lokad
 				.GetAttributes<AssemblyDescriptionAttribute>(true);
 
 			if (attributes.Length == 0)
-				return Result<string>.Error("Attribute was not found");
+				return Result<string>.CreateError("Attribute was not found");
 
-			return Result.Success(attributes[0].Description);
+			return attributes[0].Description;
 		}
 	}
 }
