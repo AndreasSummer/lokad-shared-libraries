@@ -107,6 +107,7 @@
     <Compile Include="IDictionaryExtensions.cs" />
     <Compile Include="KeyInvalidException.cs" />
     <Compile Include="DisposableAction.cs" />
+    <Compile Include="Utils\BufferUtil.cs" />
     <Compile Include="Utils\DebugUtil.cs" />
     <Compile Include="Utils\EnumUtil.cs" />
     <Compile Include="Int32Extensions.cs" />

@@ -79,6 +79,7 @@
     <Compile Include="Container\ComponentAttributeTests.cs" />
     <Compile Include="Diagnostics\ExceptionCounterTests.cs" />
     <Compile Include="Diagnostics\SystemDescriptorTests.cs" />
+    <Compile Include="Utils\BufferUtilTests.cs" />
     <Compile Include="Utils\EnumUtilTests.cs" />
     <Compile Include="CodeQualityTests.cs" />
     <Compile Include="ICollectionExtensionsTests.cs" />
