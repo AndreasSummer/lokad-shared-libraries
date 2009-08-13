@@ -15,7 +15,7 @@ namespace Lokad
 	/// Helper extensions for tuples
 	/// </summary>
 	[NoCodeCoverage]
-	public static class TupleExtensions
+	public static class ExtendTuple
 	{
 		/// <summary>
 		/// Appends the specified <paramref name="item"/> to the <paramref name="tuple"/>.
@@ -103,7 +103,7 @@ namespace Lokad
 		/// <param name="collection">The collection to add to.</param>
 		/// <param name="first">The first item.</param>
 		/// <param name="second">The second item.</param>
-		public static void Add<T1, T2>(this ICollection<Tuple<T1, T2>> collection, T1 first, T2 second)
+		public static void AddTuple<T1, T2>(this ICollection<Tuple<T1, T2>> collection, T1 first, T2 second)
 		{
 			collection.Add(Tuple.From(first, second));
 		}
@@ -114,7 +114,7 @@ namespace Lokad
 		/// <param name="collection">The collection to add to.</param>
 		/// <param name="first">The first item.</param>
 		/// <param name="second">The second item.</param>
-		public static void Add<T1, T2>(this ICollection<Pair<T1, T2>> collection, T1 first, T2 second)
+		public static void AddTuple<T1, T2>(this ICollection<Pair<T1, T2>> collection, T1 first, T2 second)
 		{
 			collection.Add(Tuple.From(first, second));
 		}
@@ -127,7 +127,7 @@ namespace Lokad
 		/// <param name="first">The first item.</param>
 		/// <param name="second">The second item.</param>
 		/// <param name="third">The third item.</param>
-		public static void Add<T1, T2, T3>(this ICollection<Tuple<T1, T2, T3>> collection, T1 first, T2 second, T3 third)
+		public static void AddTuple<T1, T2, T3>(this ICollection<Tuple<T1, T2, T3>> collection, T1 first, T2 second, T3 third)
 		{
 			collection.Add(Tuple.From(first, second, third));
 		}
@@ -142,7 +142,7 @@ namespace Lokad
 		/// <param name="second">The second item.</param>
 		/// <param name="third">The third item.</param>
 		/// <param name="fourth">The fourth item.</param>
-		public static void Add<T1, T2, T3, T4>(this ICollection<Tuple<T1, T2, T3, T4>> collection, T1 first, T2 second,
+		public static void AddTuple<T1, T2, T3, T4>(this ICollection<Tuple<T1, T2, T3, T4>> collection, T1 first, T2 second,
 			T3 third, T4 fourth)
 		{
 			collection.Add(Tuple.From(first, second, third, fourth));
@@ -160,7 +160,7 @@ namespace Lokad
 		/// <param name="third">The third item.</param>
 		/// <param name="fourth">The fourth item.</param>
 		/// <param name="fifth">The fifth item.</param>
-		public static void Add<T1, T2, T3, T4, T5>(this ICollection<Tuple<T1, T2, T3, T4, T5>> collection, T1 first, T2 second,
+		public static void AddTuple<T1, T2, T3, T4, T5>(this ICollection<Tuple<T1, T2, T3, T4, T5>> collection, T1 first, T2 second,
 			T3 third, T4 fourth, T5 fifth)
 		{
 			collection.Add(Tuple.From(first, second, third, fourth, fifth));

@@ -96,7 +96,13 @@
     <Compile Include="Silverlight\SerializableAttribute.cs" />
     <Compile Include="Threading\ParallelExtensions.cs" />
     <Compile Include="Threading\WaitFor.cs" />
-    <Compile Include="Tuples\TupleExtensions.cs" />
+    <Compile Include="Tuples\Tuple.2.cs" />
+    <Compile Include="Tuples\Tuple.3.cs" />
+    <Compile Include="Tuples\Tuple.4.cs" />
+    <Compile Include="Tuples\Tuple.5.cs" />
+    <Compile Include="Tuples\Tuple.6.cs" />
+    <Compile Include="Tuples\Tuple.7.cs" />
+    <Compile Include="Tuples\ExtendTuple.cs" />
     <Compile Include="Utils\ArrayUtil.cs" />
     <Compile Include="Utils\AssemblyUtil.cs" />
     <Compile Include="Container\ComponentAttribute.cs" />
