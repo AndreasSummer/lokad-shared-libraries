@@ -151,5 +151,13 @@ SecondLevelDomainNamesAreInvalidIfTheyAreLongerThan64Charactersss.org";
 				.ExpectNone("", "non", " leading", "mid dle")
 				.ExpectError(null, "new line\r", "new line\n", "tab\t", "space ");
 		}
+
+		[Test]
+		public void WithoutUppercase()
+		{
+			RuleAssert.For(StringIs.WithoutUppercase)
+				.ExpectNone("", "valid", "another\tvalid")
+				.ExpectError("Fail", "\tthis should Fail");
+		}
 	}
 }

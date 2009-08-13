@@ -150,5 +150,20 @@ namespace Lokad.Rules
 				if (s.Length > 0 && char.IsWhiteSpace(s.Last()))
 					scope.Error(RuleResources.String_cant_end_with_whitespace);
 			};
+
+
+		/// <summary> String validator checking for presence of uppercase 
+		/// characters </summary>
+		public static readonly Rule<string> WithoutUppercase = (s, scope) =>
+		{
+			for (int i = 0; i < s.Length; i++)
+			{
+				if (char.IsUpper(s, i))
+				{
+					scope.Error(RuleResources.String_cant_contain_uppercase);
+					return;
+				}
+			}
+		};
 	}
 }

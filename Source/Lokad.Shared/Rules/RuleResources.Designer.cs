@@ -160,6 +160,15 @@ namespace Lokad.Rules {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to String should not have uppercase characters..
+        /// </summary>
+        internal static string String_cant_contain_uppercase {
+            get {
+                return ResourceManager.GetString("String_cant_contain_uppercase", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to String should not contain following characters: {0}..
         /// </summary>
         internal static string String_cant_contain_X_characters {

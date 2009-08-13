@@ -183,4 +183,7 @@
   <data name="String_must_be_valid_host" xml:space="preserve">
     <value>String should be a valid host name.</value>
   </data>
+  <data name="String_cant_contain_uppercase" xml:space="preserve">
+    <value>String should not have uppercase characters.</value>
+  </data>
 </root>
