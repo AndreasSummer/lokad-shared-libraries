@@ -106,12 +106,13 @@ namespace Lokad
 		[Test]
 		public void Equality_members()
 		{
-			var hashset = new[] { ResultSuccess }
-				.ToSet();
+			// Silverlight does not contain Hashset
+			var hashset = new[] { ResultSuccess }.ToDictionary(r => r);
 
-			CollectionAssert.Contains(hashset, ResultSuccess);
-			CollectionAssert.DoesNotContain(hashset, ResultError);
-			CollectionAssert.Contains(hashset, Result.CreateSuccess(10));
+			Assert.IsTrue(hashset.ContainsKey(ResultSuccess));
+			Assert.IsFalse(hashset.ContainsKey(ResultError));
+			Assert.IsTrue(hashset.ContainsKey(10));
 		}
+
 	}
 }
