@@ -26,20 +26,20 @@ namespace Lokad
 		/// <summary>
 		/// Error message associated with this failure
 		/// </summary>
-		[Obsolete("Use Error instead")]
+		[Obsolete("Use Error instead"), UsedImplicitly]
 		public string ErrorMessage
 		{
-			get { return Error; }
+			get { return _error; }
 		}
 
 		/// <summary>  Creates failure result </summary>
 		/// <param name="errorFormatString">format string for the error message</param>
 		/// <param name="args">The arguments.</param>
 		/// <returns>result that is a failure</returns>
-		public static Result<T> CreateError(string errorFormatString, params object[] args)
+		/// <exception cref="ArgumentNullException">if format string is null</exception>
+		public static Result<T> CreateError([NotNull] string errorFormatString, params object[] args)
 		{
-			if (string.IsNullOrEmpty(errorFormatString))
-				throw new ArgumentException("String can't be null or empty", "errorFormatString");
+			if (errorFormatString == null) throw new ArgumentNullException("errorFormatString");
 
 			return CreateError(string.Format(errorFormatString, args));
 		}

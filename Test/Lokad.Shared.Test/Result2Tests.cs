@@ -3,6 +3,7 @@ using Lokad.Diagnostics;
 using Lokad.Rules;
 using Lokad.Testing;
 using NUnit.Framework;
+using System.Linq;
 
 namespace Lokad
 {
@@ -108,6 +109,16 @@ namespace Lokad
 		{
 			Assert.AreEqual(Maybe<string>.Empty, ResultError.ToMaybe(i => i));
 			Assert.AreEqual(Maybe.From("Hi"), ResultSuccess.ToMaybe(i => i));
+		}
+
+		[Test]
+		public void Equality_members()
+		{
+			var hashset = new[] {ResultSuccess}.ToSet();
+
+			CollectionAssert.Contains(hashset, ResultSuccess);
+			CollectionAssert.DoesNotContain(hashset, ResultError);
+			CollectionAssert.Contains(hashset, MyResult.CreateSuccess("Hi"));
 		}
 	}
 }

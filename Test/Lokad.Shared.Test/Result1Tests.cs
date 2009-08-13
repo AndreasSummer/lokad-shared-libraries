@@ -7,6 +7,7 @@
 #endregion
 
 using System;
+using System.Linq;
 using Lokad.Diagnostics;
 using Lokad.Rules;
 using Lokad.Testing;
@@ -57,23 +58,23 @@ namespace Lokad
 			RuleAssert.IsTrue(() => result.IsSuccess);
 		}
 
-		readonly Result<int> Result10 = Result.CreateSuccess(10);
-		readonly Result<int> ResultEmpty = Result<int>.CreateError("Error");
+		readonly Result<int> ResultSuccess = 10;
+		readonly Result<int> ResultError = Result<int>.CreateError("Error");
 
 		[Test]
 		public void Apply()
 		{
-			ResultEmpty.Apply(i => Assert.Fail());
+			ResultError.Apply(i => Assert.Fail());
 			int applied = 0;
-			Result10.Apply(i => applied = i);
+			ResultSuccess.Apply(i => applied = i);
 			Assert.AreEqual(10, applied);
 		}
 
 		[Test]
 		public void Convert()
 		{
-			Assert.AreEqual(Result.CreateSuccess("10"), Result10.Convert(i => i.ToString()), "#1");
-			Assert.AreEqual(Result<string>.CreateError("Error"), ResultEmpty.Convert(i => i.ToString()),"#2");
+			Assert.AreEqual(Result.CreateSuccess("10"), ResultSuccess.Convert(i => i.ToString()), "#1");
+			Assert.AreEqual(Result<string>.CreateError("Error"), ResultError.Convert(i => i.ToString()),"#2");
 		}
 
 		[Test]
@@ -84,15 +85,33 @@ namespace Lokad
 			Func<int, Result<string>> fails = i => { throw new InvalidOperationException(); };
 
 			Assert.AreEqual(error1s, error1.Combine(fails));
-			Assert.AreEqual(error1s, Result10.Combine(i => error1s));
-			Assert.AreEqual(Result.CreateSuccess("10"), Result10.Combine(i => Result.CreateSuccess(i.ToString())));
+			Assert.AreEqual(error1s, ResultSuccess.Combine(i => error1s));
+			Assert.AreEqual(Result.CreateSuccess("10"), ResultSuccess.Combine(i => Result.CreateSuccess(i.ToString())));
 		}
 
 		[Test]
 		public void ToMaybe()
 		{
-			Assert.AreEqual(Maybe<int>.Empty, ResultEmpty.ToMaybe(i => i));
-			Assert.AreEqual(Maybe.From(10), Result10.ToMaybe(i => i));
+			Assert.AreEqual(Maybe<int>.Empty, ResultError.ToMaybe(i => i));
+			Assert.AreEqual(Maybe.From(10), ResultSuccess.ToMaybe(i => i));
+		}
+
+		[Test]
+		public void Create_formatted_error()
+		{
+			var result = Result<int>.CreateError("Error {0}", 1);
+			Assert.AreEqual("Error 1", result.Error);
+		}
+
+		[Test]
+		public void Equality_members()
+		{
+			var hashset = new[] { ResultSuccess }
+				.ToSet();
+
+			CollectionAssert.Contains(hashset, ResultSuccess);
+			CollectionAssert.DoesNotContain(hashset, ResultError);
+			CollectionAssert.Contains(hashset, Result.CreateSuccess(10));
 		}
 	}
 }
