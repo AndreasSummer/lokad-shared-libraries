@@ -61,6 +61,24 @@ namespace Lokad.Rules {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Byte array should not be longer than {0} bytes..
+        /// </summary>
+        internal static string Buffer_cant_be_longer_than_X {
+            get {
+                return ResourceManager.GetString("Buffer_cant_be_longer_than_X", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Byte array should have valid hash..
+        /// </summary>
+        internal static string Buffer_must_have_valid_hash {
+            get {
+                return ResourceManager.GetString("Buffer_must_have_valid_hash", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Collection of type &apos;{0}&apos; should not be null..
         /// </summary>
         internal static string Collection_X_cant_be_null {

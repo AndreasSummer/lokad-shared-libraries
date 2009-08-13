@@ -34,5 +34,13 @@ namespace Lokad.Rules
 
 			Assert.IsFalse(Scope.IsValid(buffer, BufferIs.WithValidHash(hash)));
 		}
+
+		[Test]
+		public void Limited()
+		{
+			RuleAssert.For(BufferIs.Limited(10))
+				.ExpectNone(new byte[10], new byte[9])
+				.ExpectError(null, new byte[11], new byte[12]);
+		}
 	}
 }
