@@ -15,7 +15,7 @@ using NUnit.Framework;
 namespace Lokad
 {
 	[TestFixture]
-	public sealed class ResultTests
+	public sealed class Result1Tests
 	{
 		// ReSharper disable InconsistentNaming
 
@@ -45,19 +45,19 @@ namespace Lokad
 		}
 
 		[Test]
-		public void Value_Can_Be_Default()
+		public void Value_can_be_default()
 		{
 			Result.CreateSuccess(default(int));
 		}
 
 		[Test]
-		public void Implicit_Conversion()
+		public void Implicit_value_conversion()
 		{
 			Result<int> result = 10;
 			RuleAssert.IsTrue(() => result.IsSuccess);
 		}
 
-		readonly Result<int> Result10 = Result.Success(10);
+		readonly Result<int> Result10 = Result.CreateSuccess(10);
 		readonly Result<int> ResultEmpty = Result<int>.CreateError("Error");
 
 		[Test]
@@ -85,7 +85,7 @@ namespace Lokad
 
 			Assert.AreEqual(error1s, error1.Combine(fails));
 			Assert.AreEqual(error1s, Result10.Combine(i => error1s));
-			Assert.AreEqual(Result.CreateSuccess("10"), Result10.Combine(i => Result.Success(i.ToString())));
+			Assert.AreEqual(Result.CreateSuccess("10"), Result10.Combine(i => Result.CreateSuccess(i.ToString())));
 		}
 
 		[Test]

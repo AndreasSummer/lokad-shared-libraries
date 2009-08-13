@@ -61,6 +61,7 @@
     <Compile Include="Diagnostics\ExecutionCounterTests.cs" />
     <Compile Include="Expects.cs" />
     <Compile Include="Extensions\ExtendIDictionaryTests.cs" />
+    <Compile Include="Result2Tests.cs" />
     <Compile Include="Rules\Common\BufferIsTests.cs" />
     <Compile Include="Testing\IEquatableExtensionsTests.cs" />
     <Compile Include="Linq\ArrayExtensionsTests.cs" />
@@ -95,7 +96,7 @@
     <Compile Include="ResolverTests.cs" />
     <Compile Include="Utils\ResourceUtilTests.cs" />
     <Compile Include="Data\SqlClient\SqlServerGuidComparerTest.cs" />
-    <Compile Include="ResultTests.cs" />
+    <Compile Include="Result1Tests.cs" />
     <Compile Include="Rules\Case1\BusinessRules.cs" />
     <Compile Include="Rules\Case1\Program.cs" />
     <Compile Include="Rules\Case1\Visitor.cs" />
