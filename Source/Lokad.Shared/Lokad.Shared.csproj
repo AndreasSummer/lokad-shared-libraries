@@ -55,8 +55,8 @@
     <Compile Include="..\VersionAssemblyInfo.cs">
       <Link>Properties\VersionAssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="ActionExtensions.cs" />
-    <Compile Include="ArrayExtensions.cs" />
+    <Compile Include="Extensions\ExtendAction.cs" />
+    <Compile Include="Extensions\ExtendArray.cs" />
     <Compile Include="Collections\Generic\ProjectionComparer.cs" />
     <Compile Include="Diagnostics\ExceptionStatistics.cs" />
     <Compile Include="Rand.String.cs" />
@@ -103,15 +103,15 @@
     <Compile Include="Container\RegistrationScope.cs" />
     <Compile Include="Diagnostics\ExceptionCounter.cs" />
     <Compile Include="Diagnostics\ExecutionCounters.cs" />
-    <Compile Include="DoubleExtensions.cs" />
+    <Compile Include="Extensions\ExtendDouble.cs" />
     <Compile Include="Errors.cs" />
-    <Compile Include="IDictionaryExtensions.cs" />
+    <Compile Include="Extensions\ExtendIDictionary.cs" />
     <Compile Include="KeyInvalidException.cs" />
     <Compile Include="DisposableAction.cs" />
     <Compile Include="Utils\BufferUtil.cs" />
     <Compile Include="Utils\DebugUtil.cs" />
     <Compile Include="Utils\EnumUtil.cs" />
-    <Compile Include="Int32Extensions.cs" />
+    <Compile Include="Extensions\ExtendInt32.cs" />
     <Compile Include="IProvider.cs" />
     <Compile Include="IResolver.cs" />
     <Compile Include="Lambda.cs" />
@@ -146,12 +146,12 @@
     <Compile Include="Reflection\Reflect.cs" />
     <Compile Include="Tuples\Triple.cs" />
     <Compile Include="Tuples\Tuple.cs" />
-    <Compile Include="TypeExtensions.cs" />
+    <Compile Include="Extensions\ExtendType.cs" />
     <Compile Include="Diagnostics\ExecutionCounterGroup.cs" />
     <Compile Include="Diagnostics\ExceptionCounters.cs" />
     <Compile Include="Diagnostics\SystemDescriptor.cs" />
     <Compile Include="Enforce.cs" />
-    <Compile Include="ICollectionExtensions.cs" />
+    <Compile Include="Extensions\ExtendICollection.cs" />
     <Compile Include="ICommand.cs" />
     <Compile Include="Linq\IEnumerableExtensions.cs" />
     <Compile Include="Diagnostics\ExecutionCounter.cs" />
@@ -159,7 +159,7 @@
     <Compile Include="Diagnostics\ExecutionStatistics.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Container\RegistrationType.cs" />
-    <Compile Include="StreamExtensions.cs" />
+    <Compile Include="Extensions\ExtendStream.cs" />
     <Compile Include="Utils\SystemUtil.cs" />
     <Compile Include="Utils\VersionUtil.cs" />
     <Compile Include="Utils\XmlUtil.cs" />

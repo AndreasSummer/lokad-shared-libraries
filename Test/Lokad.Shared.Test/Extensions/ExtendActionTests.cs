@@ -12,7 +12,7 @@ using NUnit.Framework;
 namespace Lokad
 {
 	[TestFixture]
-	public sealed class ActionExtensionsTests
+	public sealed class ExtendActionTests
 	{
 		[Test]
 		public void Test()
@@ -22,6 +22,7 @@ namespace Lokad
 
 			using (act.AsDisposable())
 			{
+				Assert.IsFalse(flag);
 			}
 			Assert.IsTrue(flag);
 		}

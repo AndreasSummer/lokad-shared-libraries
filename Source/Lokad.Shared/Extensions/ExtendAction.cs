@@ -13,7 +13,7 @@ namespace Lokad
 	/// <summary>
 	/// Extensions for the <see cref="Action"/>
 	/// </summary>
-	public static class ActionExtensions
+	public static class ExtendAction
 	{
 		/// <summary>
 		/// Converts the action into <see cref="DisposableAction"/>

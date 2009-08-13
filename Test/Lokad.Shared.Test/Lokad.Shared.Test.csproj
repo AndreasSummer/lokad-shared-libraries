@@ -57,15 +57,15 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ActionExtensionsTests.cs" />
+    <Compile Include="Extensions\ExtendActionTests.cs" />
     <Compile Include="Diagnostics\ExecutionCounterTests.cs" />
     <Compile Include="Expects.cs" />
-    <Compile Include="IDictionaryExtensionsTests.cs" />
+    <Compile Include="Extensions\ExtendIDictionaryTests.cs" />
     <Compile Include="Rules\Common\BufferIsTests.cs" />
     <Compile Include="Testing\IEquatableExtensionsTests.cs" />
     <Compile Include="Linq\ArrayExtensionsTests.cs" />
     <Compile Include="MaybeTests.cs" />
-    <Compile Include="NumericExtensionsTests.cs" />
+    <Compile Include="Extensions\ExtendNumberTests.cs" />
     <Compile Include="Reflection\ExpressTests.cs" />
     <Compile Include="Rules\Common\DateIsTests.cs" />
     <Compile Include="Rules\Common\RuleAssertTests.cs" />
@@ -83,7 +83,7 @@
     <Compile Include="Utils\BufferUtilTests.cs" />
     <Compile Include="Utils\EnumUtilTests.cs" />
     <Compile Include="CodeQualityTests.cs" />
-    <Compile Include="ICollectionExtensionsTests.cs" />
+    <Compile Include="Extensions\ExtendICollectionTests.cs" />
     <Compile Include="Linq\IEnumerableExtensionsTests.cs" />
     <Compile Include="NamedProviderTests.cs" />
     <Compile Include="Tuples\PairTests.cs" />
@@ -110,7 +110,7 @@
     <Compile Include="Rules\Scopes\ValidationScopeTests.cs" />
     <Compile Include="Rules\Common\StringIsTests.cs" />
     <Compile Include="Rules\Scopes\ScopeTestHelper.cs" />
-    <Compile Include="StreamExtensionsTests.cs" />
+    <Compile Include="Extensions\ExtendStreamTests.cs" />
     <Compile Include="Threading\ReaderWriterLockSlimExtensionsTests.cs" />
     <Compile Include="Utils\StringUtilTests.cs" />
     <Compile Include="Utils\SystemUtilTests.cs" />

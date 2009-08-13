@@ -11,7 +11,7 @@ using System;
 namespace Lokad
 {
 	/// <summary> Extensions to the <see cref="int"/> </summary>
-	public static class Int32Extensions
+	public static class ExtendInt32
 	{
 		/// <summary>
 		/// Returns kilobytes

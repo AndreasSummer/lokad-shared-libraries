@@ -14,7 +14,7 @@ namespace Lokad
 	/// <summary>
 	/// Simple helper extensions for <see cref="ICollection{T}"/>
 	/// </summary>
-	public static class ICollectionExtensions
+	public static class ExtendICollection
 	{
 		/// <summary>
 		/// Adds all items to the target collection

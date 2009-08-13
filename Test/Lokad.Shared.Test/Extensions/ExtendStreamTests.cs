@@ -16,7 +16,7 @@ namespace Lokad
 {
 #if !SILVERLIGHT2
 	[TestFixture]
-	public sealed class StreamExtensionsTests
+	public sealed class ExtendStreamTests
 	{
 		// ReSharper disable InconsistentNaming
 

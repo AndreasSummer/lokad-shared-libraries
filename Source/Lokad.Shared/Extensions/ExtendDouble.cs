@@ -13,7 +13,7 @@ namespace Lokad
 	/// <summary>
 	/// Some helper shortcuts for the <see cref="double"/>
 	/// </summary>
-	public static class DoubleExtensions
+	public static class ExtendDouble
 	{
 		/// <summary>
 		/// Rounds the specified double with the provided number 

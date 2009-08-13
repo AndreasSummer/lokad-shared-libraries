@@ -12,7 +12,7 @@ using NUnit.Framework;
 namespace Lokad
 {
 	[TestFixture]
-	public sealed class IDictionaryExtensionsTests
+	public sealed class ExtendIDictionaryTests
 	{
 		[Test]
 		public void GetValue()

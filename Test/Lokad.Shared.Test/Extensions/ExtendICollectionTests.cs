@@ -13,8 +13,9 @@ using NUnit.Framework;
 namespace Lokad
 {
 	[TestFixture]
-	public sealed class ICollectionExtensionsTests
+	public sealed class ExtendICollectionTests
 	{
+		// ReSharper disable InconsistentNaming
 		[Test]
 		public void Test_AddRange()
 		{

@@ -17,7 +17,7 @@ namespace Lokad
 	/// <summary>
 	/// Simple helper extensions for the <see cref="Stream"/>
 	/// </summary>
-	public static class StreamExtensions
+	public static class ExtendStream
 	{
 		/// <summary>
 		/// Wraps the specified stream with Compression stream

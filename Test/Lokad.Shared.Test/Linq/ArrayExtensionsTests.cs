@@ -19,7 +19,7 @@ namespace Lokad.Linq
 		[Test, Expects.ArgumentNullException]
 		public void Slice_Detects_Null_Argument()
 		{
-			ArrayExtensions.SliceArray<int>(null, 3);
+			ExtendArray.SliceArray<int>(null, 3);
 		}
 
 		[Test, Expects.ArgumentOutOfRangeException]

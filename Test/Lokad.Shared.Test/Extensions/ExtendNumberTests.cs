@@ -11,7 +11,7 @@ using NUnit.Framework;
 namespace Lokad
 {
 	[TestFixture]
-	public sealed class NumericExtensionsTests
+	public sealed class ExtendNumberTests
 	{
 		[Test]
 		public void UseCases()

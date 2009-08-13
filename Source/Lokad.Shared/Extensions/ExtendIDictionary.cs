@@ -14,7 +14,7 @@ namespace Lokad
 	/// <summary>
 	/// Extensions for <see cref="IDictionary{TKey,TValue}"/>
 	/// </summary>
-	public static class IDictionaryExtensions
+	public static class ExtendIDictionary
 	{
 		/// <summary>
 		/// Wraps the dictionary with the read-only provider instance

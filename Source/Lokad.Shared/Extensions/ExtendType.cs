@@ -16,7 +16,7 @@ namespace Lokad
 	/// <summary>
 	/// Helper related to the <see cref="Type"/>.
 	/// </summary>
-	public static class TypeExtensions
+	public static class ExtendType
 	{
 		///<summary>
 		/// Extension method to retrieve attributes from the type.

@@ -14,7 +14,7 @@ namespace Lokad
 	/// <summary>
 	/// Shortcuts for some common array operations
 	/// </summary>
-	public static class ArrayExtensions
+	public static class ExtendArray
 	{
 		/// <summary>
 		/// Shorthand extension method for converting the arrays
