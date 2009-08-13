@@ -23,13 +23,43 @@ namespace Lokad
 		}
 
 		[Test]
-
-		public void Test_Now()
+		public void Fixed_Now()
 		{
 			var now = SystemUtil.Now;
 			SystemUtil.SetDateTimeProvider(() => DateTime.MaxValue);
 			Assert.AreNotEqual(now, SystemUtil.Now);
 			Assert.AreEqual(SystemUtil.Now, SystemUtil.Now);
+		}
+
+		[Test]
+		public void Utc_diff()
+		{
+			var time = DateTime.Now;
+			var diff = time - time.ToUniversalTime();
+
+			SystemUtil.SetTime(DateTime.Now);
+
+			Assert.AreEqual(diff, SystemUtil.Now - SystemUtil.UtcNow);
+		}
+
+		[Test]
+		public void Normal_Now()
+		{
+			var time0 = DateTime.Now;
+			var time1 = SystemUtil.Now;
+			var time2 = DateTime.Now;
+
+			Assert.IsTrue(time0 <= time1 && time1 <= time2);
+		}
+
+		[Test]
+		public void Normal_UtcNow()
+		{
+			var time0 = DateTime.UtcNow;
+			var time1 = SystemUtil.UtcNow;
+			var time2 = DateTime.UtcNow;
+
+			Assert.IsTrue(time0 <= time1 && time1 <= time2);
 		}
 
 		[Test]

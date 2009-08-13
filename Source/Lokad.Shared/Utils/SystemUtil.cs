@@ -34,6 +34,14 @@ namespace Lokad
 			get { return DateTimeProvider(); }
 		}
 
+		/// <summary>
+		/// <see cref="DateTime.UtcNow"/>
+		/// </summary>
+		public static DateTime UtcNow
+		{
+			get { return Now.ToUniversalTime(); }
+		}
+
 		static SystemUtil()
 		{
 			Reset();
