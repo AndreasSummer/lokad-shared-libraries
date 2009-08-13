@@ -203,8 +203,8 @@ namespace Lokad
 			unchecked
 			{
 				int result = _isSuccess.GetHashCode();
-				result = (result*397) ^ _value.GetHashCode();
 // ReSharper disable CompareNonConstrainedGenericWithNull
+				result = (result*397) ^ (_value != null ? _value.GetHashCode() : 1);
 				result = (result*397) ^ (_error != null ? _error.GetHashCode() : 0);
 // ReSharper restore CompareNonConstrainedGenericWithNull
 				return result;
