@@ -1,0 +1,8 @@
+relre:.*\.user
+relre:/obj/
+relre:/bin/
+relre:\.suo
+relre:\.cache
+relre:\.svn/
+relre:_ReSharper.*/
+relre:Build/
