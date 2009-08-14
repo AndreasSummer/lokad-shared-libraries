@@ -147,28 +147,4 @@ namespace Lokad.Testing
 			return this;
 		}
 	}
-
-
-	/// <summary>
-	/// Extends the <see cref="MockContainer"/> and autoregisters the specified subject.
-	/// </summary>
-	/// <typeparam name="TSubject">The type of the subject.</typeparam>
-	public sealed class MockContainer<TSubject> : MockContainer
-	{
-		/// <summary>
-		/// Testing subject
-		/// </summary>
-		public TSubject Subject
-		{
-			get { return Resolve<TSubject>(); }
-		}
-
-		/// <summary>
-		/// Initializes a new instance of the <see cref="MockContainer{TSubject}"/> class.
-		/// </summary>
-		public MockContainer()
-		{
-			Register<TSubject>();
-		}
-	}
 }
