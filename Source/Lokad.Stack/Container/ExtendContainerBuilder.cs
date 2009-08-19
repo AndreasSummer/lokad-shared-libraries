@@ -17,7 +17,7 @@ namespace Lokad.Container
 	/// <summary>
 	/// Extensions for the <see cref="ContainerBuilder"/>
 	/// </summary>
-	public static class ContainerBuilderExtensions
+	public static class ExtendContainerBuilder
 	{
 		/// <see cref="AutoRegisterType"/>
 		public static void AutoRegister<T>(this ContainerBuilder builder)
@@ -105,6 +105,16 @@ namespace Lokad.Container
 				default:
 					throw new ArgumentOutOfRangeException("scope");
 			}
+		}
+
+		/// <summary>
+		/// Registers the module.
+		/// </summary>
+		/// <typeparam name="TModule">The type of the module.</typeparam>
+		/// <param name="containerBuilder">The container builder.</param>
+		public static void RegisterModule<TModule>(this ContainerBuilder containerBuilder) where TModule : IModule, new()
+		{
+			containerBuilder.RegisterModule(new TModule());
 		}
 	}
 }

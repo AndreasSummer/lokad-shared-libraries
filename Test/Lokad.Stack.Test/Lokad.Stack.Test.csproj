@@ -53,9 +53,10 @@
     <Compile Include="..\..\Source\VersionAssemblyInfo.cs">
       <Link>Properties\VersionAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="Container\ExtendContainerBuilderTests.cs" />
     <Compile Include="Logging\LoggingModuleTests.cs" />
     <Compile Include="Logging\LoggingStackTests.cs" />
-    <Compile Include="Container\PendingAutofacExtensionsTests.cs" />
+    <Compile Include="Container\ExtendIContainer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

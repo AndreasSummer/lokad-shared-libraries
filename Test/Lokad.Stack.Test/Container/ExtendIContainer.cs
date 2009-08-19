@@ -13,7 +13,7 @@ using NUnit.Framework;
 namespace Lokad.Container
 {
 	[TestFixture]
-	public sealed class PendingAutofacExtensionsTests
+	public sealed class ExtendIContainer
 	{
 		// ReSharper disable InconsistentNaming
 		interface IMyService

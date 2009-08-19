@@ -15,7 +15,7 @@ namespace Autofac
 	/// <summary>
 	/// Pending extensions. To be pulled upstream to Autofac, if they prove useful in multiple projects
 	/// </summary>
-	public static class PendingAutofacExtensions
+	public static class ExtendIContainer
 	{
 		/// <summary>
 		/// Builds the specified registration into the container.
