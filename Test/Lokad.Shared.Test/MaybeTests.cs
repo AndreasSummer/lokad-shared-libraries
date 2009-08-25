@@ -6,6 +6,7 @@
 
 #endregion
 
+using System;
 using Lokad.Testing;
 using NUnit.Framework;
 
@@ -14,6 +15,8 @@ namespace Lokad
 	[TestFixture]
 	public sealed class MaybeTests
 	{
+
+		// ReSharper disable InconsistentNaming
 		[Test]
 		[Expects.ArgumentNullException]
 		public void Nullables_are_detected()
@@ -84,6 +87,23 @@ namespace Lokad
 		public void Check_GetHashCode()
 		{
 			Assert.AreEqual(Maybe10.GetHashCode(), Maybe.From(10).GetHashCode());
+		}
+
+		static void Throw()
+		{
+			throw new InvalidOperationException();
+		}
+
+		[Test]
+		public void Handle_and_apply()
+		{
+			var i = 0;
+			Maybe10
+				.Handle(Throw)
+				.Apply(x => i = x)
+				.Handle(Throw);
+
+			Assert.AreEqual(Maybe10.Value, i);
 		}
 	}
 }

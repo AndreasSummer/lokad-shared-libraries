@@ -74,12 +74,28 @@ namespace Lokad
 		/// Applies the specified action to the value, if it is present.
 		/// </summary>
 		/// <param name="action">The action.</param>
-		public void Apply(Action<T> action)
+		/// <returns>same instance for inlining</returns>
+		public Maybe<T> Apply(Action<T> action)
 		{
 			if (_hasValue)
 			{
 				action(_value);
 			}
+			return this;
+		}
+
+		/// <summary>
+		/// Executes the specified action, if the value is absent
+		/// </summary>
+		/// <param name="action">The action.</param>
+		/// <returns>same instance for inlining</returns>
+		public Maybe<T> Handle(Action action)
+		{
+			if (!_hasValue)
+			{
+				action();
+			}
+			return this;
 		}
 
 		/// <summary>
