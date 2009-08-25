@@ -114,5 +114,30 @@ namespace Lokad
 			Assert.IsTrue(hashset.ContainsKey(10));
 		}
 
+		static void Throw(string message)
+		{
+			throw new InvalidOperationException();
+		}
+
+		[Test]
+		public void Success_with_apply_handle()
+		{
+			var val = 0;
+			ResultSuccess
+				.Apply(x => val = x)
+				.Handle(Throw)
+				.Apply(x => val += x);
+
+			Assert.AreEqual(ResultSuccess.Value * 2, val);
+		}
+
+		[Test, Expects.InvalidOperationException]
+		public void Failure_with_apply_handle()
+		{
+			ResultError
+				.Apply(x => Assert.Fail())
+				.Handle(Throw);
+		}
+
 	}
 }

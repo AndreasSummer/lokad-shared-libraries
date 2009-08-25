@@ -16,11 +16,17 @@ namespace Lokad
 	/// </summary>
 	/// <typeparam name="T">type of the associated data</typeparam>
 	[Immutable]
-	public sealed class Result<T> : Result<T, string>, IEquatable<Result<T>>
+	public sealed class Result<T> : IEquatable<Result<T>>
 	{
+		readonly bool _isSuccess;
+		readonly T _value;
+		readonly string _error;
+
 		Result(bool isSuccess, T value, string error)
-			: base(isSuccess, value, error)
 		{
+			_isSuccess = isSuccess;
+			_value = value;
+			_error = error;
 		}
 
 		/// <summary>
@@ -50,7 +56,7 @@ namespace Lokad
 		/// <param name="value">The value.</param>
 		/// <returns>result encapsulating the success value</returns>
 		/// <exception cref="ArgumentNullException">if value is a null reference type</exception>
-		public new static Result<T> CreateSuccess(T value)
+		public static Result<T> CreateSuccess(T value)
 		{
 			// ReSharper disable CompareNonConstrainedGenericWithNull
 			if (null == value) throw new ArgumentNullException("value");
@@ -67,7 +73,7 @@ namespace Lokad
 		/// <param name="converter">The converter.</param>
 		/// <returns>Converted result</returns>
 		/// <exception cref="ArgumentNullException"> if <paramref name="converter"/> is null</exception>
-		public new Result<TTarget> Convert<TTarget>([NotNull] Func<T, TTarget> converter)
+		public Result<TTarget> Convert<TTarget>([NotNull] Func<T, TTarget> converter)
 		{
 			if (converter == null) throw new ArgumentNullException("converter");
 			if (!_isSuccess)
@@ -82,7 +88,7 @@ namespace Lokad
 		/// <param name="error">The error.</param>
 		/// <returns>result encapsulating the error value</returns>
 		/// <exception cref="ArgumentNullException">if error is null</exception>
-		public new static Result<T> CreateError(string error)
+		public static Result<T> CreateError(string error)
 		{
 			if (null == error) throw new ArgumentNullException("error");
 
@@ -167,6 +173,85 @@ namespace Lokad
 			if (ReferenceEquals(null, other)) return false;
 			if (ReferenceEquals(this, other)) return true;
 			return other._isSuccess.Equals(_isSuccess) && Equals(other._value, _value) && Equals(other._error, _error);
+		}
+
+		/// <summary>
+		/// Applies the specified <paramref name="action"/>
+		/// to this <see cref="Result{T}"/>, if it has value.
+		/// </summary>
+		/// <param name="action">The action to apply.</param>
+		/// <returns>returns same instance for inlining</returns>
+		/// <exception cref="ArgumentNullException">if <paramref name="action"/> is null</exception>
+		public Result<T> Apply([NotNull] Action<T> action)
+		{
+			if (action == null) throw new ArgumentNullException("action");
+			if (_isSuccess)
+				action(_value);
+
+			return this;
+		}
+
+		/// <summary>
+		/// Handles the specified handler.
+		/// </summary>
+		/// <param name="handler">The handler.</param>
+		/// <returns>same instance for the inlining</returns>
+		public Result<T> Handle([NotNull] Action<string> handler)
+		{
+			if (handler == null) throw new ArgumentNullException("handler");
+
+			if (!_isSuccess)
+				handler(_error);
+
+			return this;
+		}
+
+		/// <summary>
+		/// Gets a value indicating whether this result is valid.
+		/// </summary>
+		/// <value><c>true</c> if this result is valid; otherwise, <c>false</c>.</value>
+		public bool IsSuccess
+		{
+			get { return _isSuccess; }
+		}
+
+		/// <summary>
+		/// item associated with this result
+		/// </summary>
+		public T Value
+		{
+			get
+			{
+				Enforce.That(_isSuccess, "You should not access result data if it has failed.");
+				return _value;
+			}
+		}
+
+		/// <summary>
+		/// Error message associated with this failure
+		/// </summary>
+		public string Error
+		{
+			get
+			{
+				Enforce.That(!_isSuccess, "You should not access error message if the result is valid.");
+				return _error;
+			}
+		}
+
+		/// <summary>
+		/// Converts this <see cref="Result{T}"/> to <see cref="Maybe{T}"/>, 
+		/// using the <paramref name="converter"/> to perform the value conversion.
+		/// </summary>
+		/// <typeparam name="TTarget">The type of the target.</typeparam>
+		/// <param name="converter">The reflector.</param>
+		/// <returns><see cref="Maybe{T}"/> that represents the original value behind the <see cref="Result{T}"/> after the conversion</returns>
+		public Maybe<TTarget> ToMaybe<TTarget>(Func<T, TTarget> converter)
+		{
+			if (!_isSuccess)
+				return Maybe<TTarget>.Empty;
+
+			return converter(_value);
 		}
 	}
 }

@@ -18,19 +18,13 @@ namespace Lokad
 	/// <typeparam name="TError">The type of the error.</typeparam>
 	/// <remarks>It is to be moved up-stream if found useful in other projects.</remarks>
 	[Immutable]
-	public class Result<TValue, TError> : IEquatable<Result<TValue, TError>>
+	public sealed class Result<TValue, TError> : IEquatable<Result<TValue, TError>>
 	{
-		internal readonly bool _isSuccess;
-		internal readonly TValue _value;
-		internal readonly TError _error;
+		readonly bool _isSuccess;
+		readonly TValue _value;
+		readonly TError _error;
 
-		/// <summary>
-		/// Initializes a new instance of the <see cref="Result&lt;TValue, TError&gt;"/> class.
-		/// </summary>
-		/// <param name="isSuccess">if set to <c>true</c> [is success].</param>
-		/// <param name="value">The value.</param>
-		/// <param name="error">The error.</param>
-		protected Result(bool isSuccess, TValue value, TError error)
+		Result(bool isSuccess, TValue value, TError error)
 		{
 			_isSuccess = isSuccess;
 			_value = value;
@@ -148,12 +142,30 @@ namespace Lokad
 		/// to this <see cref="Result{T}"/>, if it has value.
 		/// </summary>
 		/// <param name="action">The action to apply.</param>
+		/// <returns>returns same instance for inlining</returns>
 		/// <exception cref="ArgumentNullException">if <paramref name="action"/> is null</exception>
-		public void Apply([NotNull] Action<TValue> action)
+		public Result<TValue,TError> Apply([NotNull] Action<TValue> action)
 		{
 			if (action == null) throw new ArgumentNullException("action");
 			if (_isSuccess)
 				action(_value);
+
+			return this;
+		}
+
+		/// <summary>
+		/// Handles the specified handler.
+		/// </summary>
+		/// <param name="handler">The handler.</param>
+		/// <returns>same instance for the inlining</returns>
+		public Result<TValue, TError> Handle([NotNull] Action<TError> handler)
+		{
+			if (handler == null) throw new ArgumentNullException("handler");
+
+			if (!_isSuccess)
+				handler(_error);
+
+			return this;
 		}
 
 		/// <summary>
