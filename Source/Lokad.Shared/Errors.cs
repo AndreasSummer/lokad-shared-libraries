@@ -93,7 +93,7 @@ namespace Lokad
 		[NotNull, StringFormatMethod("message")]
 		public static Exception InvalidOperation([NotNull] string message, params object[] args)
 		{
-			return new InvalidOperationException(string.Format(message, args));
+			return new InvalidOperationException(string.Format(CultureInfo.InvariantCulture, message, args));
 		}
 
 		[NotNull]

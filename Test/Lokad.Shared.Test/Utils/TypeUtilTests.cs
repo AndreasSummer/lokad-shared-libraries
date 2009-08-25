@@ -15,6 +15,8 @@ namespace Lokad
 	[TestFixture]
 	public sealed class TypeUtilTests
 	{
+		// ReSharper disable InconsistentNaming
+
 		[Component]
 		[Component]
 		public sealed class ClassWith2Attributes

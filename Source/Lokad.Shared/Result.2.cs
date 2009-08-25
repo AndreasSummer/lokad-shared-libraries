@@ -68,7 +68,9 @@ namespace Lokad
 		{
 			get
 			{
-				Enforce.That(_isSuccess, "You should not access result data if it has failed.");
+				if (!_isSuccess)
+					throw Errors.InvalidOperation(ResultResources.Dont_access_result_on_error_X, _error);
+
 				return _value;
 			}
 		}
@@ -80,7 +82,9 @@ namespace Lokad
 		{
 			get
 			{
-				Enforce.That(!_isSuccess, "You should not access error message if the result is valid.");
+				if (_isSuccess)
+					throw new InvalidOperationException(ResultResources.Dont_access_error_on_valid_result);
+				
 				return _error;
 			}
 		}

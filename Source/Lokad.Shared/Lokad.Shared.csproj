@@ -63,6 +63,11 @@
     <Compile Include="Rand.String.cs" />
     <Compile Include="Result.1.cs" />
     <Compile Include="Result.2.cs" />
+    <Compile Include="ResultResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ResultResources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Rules\Common\BufferIs.cs" />
     <Compile Include="Silverlight\Stopwatch.cs" />
     <Compile Include="Syntax.1.cs" />
@@ -182,6 +187,10 @@
     <Content Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="ResultResources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>ResultResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Rules\RuleResources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>RuleResources.Designer.cs</LastGenOutput>
