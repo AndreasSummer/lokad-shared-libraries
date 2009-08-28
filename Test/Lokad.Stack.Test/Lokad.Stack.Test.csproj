@@ -56,7 +56,6 @@
     <Compile Include="Container\ExtendContainerBuilderTests.cs" />
     <Compile Include="Logging\LoggingModuleTests.cs" />
     <Compile Include="Logging\LoggingStackTests.cs" />
-    <Compile Include="Container\ExtendIContainer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
