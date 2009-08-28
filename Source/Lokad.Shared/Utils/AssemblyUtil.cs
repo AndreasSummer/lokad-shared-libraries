@@ -54,7 +54,7 @@ namespace Lokad
 			if (attributes.Length == 0)
 				return Result<string>.CreateError("Attribute was not found");
 
-			return attributes[0].Description;
+			return Result.CreateSuccess(attributes[0].Description);
 		}
 	}
 }

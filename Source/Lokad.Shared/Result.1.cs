@@ -257,5 +257,20 @@ namespace Lokad
 
 			return converter(_value);
 		}
+
+
+		/// <summary>
+		/// Performs an implicit conversion from <see cref="System.String"/> to <see cref="Lokad.Result&lt;T&gt;"/>.
+		/// </summary>
+		/// <param name="error">The error.</param>
+		/// <returns>The result of the conversion.</returns>
+		/// <exception cref="ArgumentNullException">If value is a null reference type</exception>
+		public static implicit operator Result<T>(string error)
+		{
+			// ReSharper disable CompareNonConstrainedGenericWithNull
+			if (null == error) throw new ArgumentNullException("error");
+			// ReSharper restore CompareNonConstrainedGenericWithNull
+			return CreateError(error);
+		}
 	}
 }
