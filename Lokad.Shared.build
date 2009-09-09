@@ -32,7 +32,7 @@
 		
 		<SampleSource>Sample</SampleSource>
 
-		<SourceExclusions>**\.svn\**\*.*;**\_svn\**\*.*;**\*.user;**\*.suo;**\*.db;**\bin\**\*.*;**\obj\**\*.*;</SourceExclusions>
+		<SourceExclusions>**\.svn\**\*.*;**\_svn\**\*.*;**\*.user;**\*.suo;**\*.db;**\bin\**\*.*;**\obj\**\*.*;.hg\**\*.*;_hg\**\*.*</SourceExclusions>
 
 		<ILMerge>Resource\Tool\ILMerge\ILMerge.exe</ILMerge>
 		<Linker>Host\Lokad.Linker\bin\$(Configuration)\Lokad.Linker.exe</Linker>
@@ -91,7 +91,7 @@
 		<MakeDir Directories="$(BuildPath);$(StackPath);$(TempPath)"/>
 
 		<!--Library-->
-		<CreateItem Include="Source\**\bin\$(Configuration)\*.*">
+		<CreateItem Include="Source\**\bin\$(Configuration)\*.*;Resource\Library\*.*">
 			<Output ItemName="rawFiles" TaskParameter="Include"/>
 		</CreateItem>
 		<Copy SourceFiles="@(rawFiles)" DestinationFolder="$(RawPath)" />
@@ -101,6 +101,8 @@
 		<Exec Command="$(ILMerge) &quot;$(RawPath)\Lokad.Shared.dll&quot; &quot;$(RawPath)/Lokad.Logging.dll&quot; &quot;$(RawPath)/Lokad.ActionPolicy.dll&quot; /out:&quot;$(StackPath)/Lokad.Shared.dll&quot; /keyfile:SharedKey.snk /xmldocs=true /ver:$(Version) /attr:&quot;$(RawPath)/Lokad.Shared.dll&quot;" />
 		<Exec Command="$(ILMerge) &quot;$(RawPath)\Lokad.Quality.dll&quot; &quot;$(RawPath)/Mono.Cecil.dll&quot; /out:&quot;$(StackPath)/Lokad.Quality.dll&quot; /keyfile:SharedKey.snk /xmldocs=true /ver:$(Version) /attr:&quot;$(RawPath)/Lokad.Quality.dll&quot;" />
 		<Exec Command="$(ILMerge) &quot;$(RawPath)\Lokad.Stack.dll&quot; &quot;$(RawPath)/Autofac.dll&quot; &quot;$(RawPath)/log4net.dll&quot; /out:&quot;$(StackPath)/Lokad.Stack.dll&quot; /keyfile:SharedKey.snk /xmldocs=true /ver:$(Version)  /attr:&quot;$(RawPath)/Lokad.Stack.dll&quot;" />
+		<Exec Command="$(ILMerge) &quot;$(RawPath)\Autofac.Integration.Mef.dll&quot; &quot;$(RawPath)/System.ComponentModel.Composition.dll&quot; /out:&quot;$(StackPath)/Lokad.Stack.Mef.dll&quot; /keyfile:SharedKey.snk /xmldocs=true /ver:$(Version)  /attr:&quot;$(RawPath)/Lokad.Stack.dll&quot;"  />
+		
 		<Exec Command="$(ILMerge) &quot;$(RawPath)\Lokad.Testing.dll&quot; &quot;$(RawPath)/Rhino.Mocks.dll&quot; /out:&quot;$(StackPath)/Lokad.Testing.dll&quot; /keyfile:SharedKey.snk /xmldocs=true /ver:$(Version)  /attr:&quot;$(RawPath)/Lokad.Testing.dll&quot;" />
 		<!--Update references-->
 		<Exec Command="$(Linker) &quot;$(StackPath)\Lokad.Stack.dll&quot; &quot;$(RawPath)\Lokad.Logging.dll&quot; &quot;$(StackPath)\Lokad.Shared.dll&quot; &quot;$(StackPath)\Lokad.Stack.dll&quot;" />
@@ -108,7 +110,10 @@
 		<Exec Command="sn.exe -Ra &quot;$(StackPath)\Lokad.Stack.dll&quot; SharedKey.snk" />
 		<Exec Command="$(Linker) &quot;$(StackPath)\Lokad.Testing.dll&quot; &quot;$(RawPath)\Autofac.dll&quot; &quot;$(StackPath)\Lokad.Stack.dll&quot; &quot;$(StackPath)\Lokad.Testing.dll&quot;" />
 		<Exec Command="sn.exe -Ra &quot;$(StackPath)\Lokad.Testing.dll&quot; SharedKey.snk" />
-				
+
+		<Exec Command="$(Linker) &quot;$(StackPath)\Lokad.Stack.Mef.dll&quot; &quot;$(RawPath)\Autofac.dll&quot; &quot;$(StackPath)\Lokad.Stack.dll&quot; &quot;$(StackPath)\Lokad.Stack.Mef.dll&quot;" />
+		<Exec Command="$(Linker) &quot;$(StackPath)\Lokad.Stack.Mef.dll&quot; &quot;$(RawPath)\System.ComponentModel.Composition.dll&quot; &quot;$(StackPath)\Lokad.Stack.Mef.dll&quot; &quot;$(StackPath)\Lokad.Stack.Mef.dll&quot;" />
+		<Exec Command="sn.exe -Ra &quot;$(StackPath)\Lokad.Stack.Mef.dll&quot; SharedKey.snk" />
 		
 		<!--All Tests-->
 		<CreateItem Include="Test\**\bin\$(Configuration)\*.*" Exclude="Test\**\bin\$(Configuration)\*.xml;Test\**\bin\$(Configuration)\*.pdb;">
