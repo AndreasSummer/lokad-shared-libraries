@@ -1,5 +1,6 @@
 using Lokad.Rules;
 using NUnit.Framework;
+using Lokad.Diagnostics.Persist;
 
 #if !SILVERLIGHT2
 
@@ -38,6 +39,17 @@ namespace Lokad.Diagnostics
 				s => s.RunningTime > 0,
 				s => s.Counters[0] == 5,
 				s => s.Counters[1] == 5);
+		}
+
+		[Test]
+		public void Conversion()
+		{
+			var c = Create();
+			var timer = c.Open();
+
+			var statistics = new[]{c.ToStatistics()};
+			XmlUtil.TestXmlSerialization(statistics.ToPersistence());
+
 		}
 
 		static ExecutionCounter Create()

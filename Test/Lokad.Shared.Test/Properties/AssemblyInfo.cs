@@ -8,6 +8,7 @@
 
 using System.Reflection;
 using System.Runtime.InteropServices;
+using Lokad.Properties;
 
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
@@ -15,7 +16,7 @@ using System.Runtime.InteropServices;
 
 [assembly : AssemblyTitle("Lokad.Shared.Test")]
 [assembly : AssemblyDescription("Test Assembly")]
-[assembly : AssemblyConfiguration("TestConfig")]
+[assembly : AssemblyConfiguration(AssemblyLocals.Configuration)]
 [assembly : AssemblyCompany("Lokad")]
 [assembly : AssemblyProduct("Lokad.Shared.Test")]
 [assembly : AssemblyCopyright("Copyright © Lokad 2008")]
@@ -45,3 +46,11 @@ using System.Runtime.InteropServices;
 
 [assembly : AssemblyVersion("1.0.0.0")]
 [assembly : AssemblyFileVersion("1.0.0.0")]
+
+namespace Lokad.Properties
+{
+	internal static class AssemblyLocals
+	{
+		public const string Configuration = "TestConfig";
+	}
+}

@@ -10,6 +10,7 @@
 using System;
 using System.Linq;
 using NUnit.Framework;
+using Lokad.Diagnostics.Persist;
 
 namespace Lokad.Diagnostics
 {
@@ -82,6 +83,17 @@ namespace Lokad.Diagnostics
 
 			counter.Clear();
 			Assert.AreEqual(0, counter.GetHistory().Count);
+		}
+
+		[Test]
+		public void Conversion()
+		{
+			var counter = new ExceptionCounters();
+			counter.Add(Ex1);
+			counter.Add(Ex1);
+
+			var data = counter.GetHistory().ToArray().ToPersistence();
+			XmlUtil.TestXmlSerialization(data);
 		}
 
 		[Test]
