@@ -7,8 +7,8 @@
 #endregion
 
 using System;
+using System.Diagnostics;
 using System.Linq;
-using Lokad.Container;
 using Lokad.Testing;
 using Mono.Cecil;
 using NUnit.Framework;
@@ -19,8 +19,7 @@ namespace Lokad.Quality.Test
 	public class CecilExtensionsTest
 	{
 // ReSharper disable RedundantExtendsListEntry
-		[Serializable]
-		[Component]
+		[ImmutableAttribute]
 		abstract class B : IA, IB
 // ReSharper restore RedundantExtendsListEntry
 		{
@@ -65,8 +64,8 @@ namespace Lokad.Quality.Test
 		[Test]
 		public void Has()
 		{
-			Assert.IsTrue(_b.Has<ComponentAttribute>());
-			Assert.IsFalse(_b.Has<ImmutableAttribute>());
+			Assert.IsTrue(_b.Has<ImmutableAttribute>());
+			Assert.IsFalse(_b.Has<DebuggableAttribute>());
 		}
 	}
 }
