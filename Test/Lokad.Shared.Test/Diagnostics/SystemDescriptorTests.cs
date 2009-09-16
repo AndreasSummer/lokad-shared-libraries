@@ -7,10 +7,9 @@
 #endregion
 
 using System.Reflection;
-using Lokad.Properties;
-using Lokad.Testing;
-using NUnit.Framework;
 using Lokad.Diagnostics.Persist;
+using Lokad.Properties;
+using NUnit.Framework;
 
 namespace Lokad.Diagnostics
 {
@@ -28,7 +27,7 @@ namespace Lokad.Diagnostics
 			var assembly = Assembly.GetExecutingAssembly();
 			var name = assembly.GetName();
 
-			
+
 			Assert.AreEqual(name.Name, descriptor.Name, "Name");
 			Assert.AreEqual(name.Version, descriptor.Version, "Version");
 			Assert.That(!string.IsNullOrEmpty(descriptor.Instance), "Instance");
@@ -38,10 +37,11 @@ namespace Lokad.Diagnostics
 		[Test]
 		public void Custom_descriptor()
 		{
-			var d = new SystemDescriptor(typeof(MockContainer).Assembly);
+			var d = new SystemDescriptor(typeof (Enforce).Assembly);
 			SystemDescriptor.InitializeDefault(d);
 			Assert.AreSame(d, SystemDescriptor.Default);
 		}
+#if !SILVERLIGHT2
 
 		[Test]
 		public void Conversion()
@@ -49,5 +49,6 @@ namespace Lokad.Diagnostics
 			var data = SystemDescriptor.Default.ToPersistence();
 			XmlUtil.TestXmlSerialization(data);
 		}
+#endif
 	}
 }
