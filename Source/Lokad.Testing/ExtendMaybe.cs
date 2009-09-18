@@ -63,6 +63,18 @@ namespace Lokad.Testing
 		}
 
 		/// <summary>
+		/// Checks that the optional does not have any value
+		/// </summary>
+		/// <typeparam name="TValue">The type of the value.</typeparam>
+		/// <param name="maybe">The maybe.</param>
+		/// <returns>same instance for inlining</returns>
+		public static Maybe<TValue> ShouldFail<TValue>(this Maybe<TValue> maybe)
+		{
+			Assert.IsFalse(maybe.HasValue, "Maybe should not have value");
+			return maybe;
+		}
+
+		/// <summary>
 		/// Checks that optional has value matching to the provided value in tests.
 		/// </summary>
 		/// <typeparam name="TValue">The type of the value.</typeparam>
