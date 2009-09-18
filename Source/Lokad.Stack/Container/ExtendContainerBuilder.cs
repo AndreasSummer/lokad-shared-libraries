@@ -6,7 +6,10 @@
 
 #endregion
 
-namespace Autofac.Builder
+using Autofac;
+using Autofac.Builder;
+
+namespace Lokad.Container
 {
 	/// <summary>
 	/// Extensions for the <see cref="ContainerBuilder"/>
