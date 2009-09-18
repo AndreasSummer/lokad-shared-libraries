@@ -57,6 +57,12 @@
     <Compile Include="..\VersionAssemblyInfo.cs">
       <Link>Properties\VersionAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="Assert.cs" />
+    <Compile Include="ExtendIEquatable.cs" />
+    <Compile Include="ExtendMaybe.cs" />
+    <Compile Include="ExtendResult1.cs" />
+    <Compile Include="ExtendResult2.cs" />
+    <Compile Include="FailedAssertException.cs" />
     <Compile Include="MockContainer.1.cs" />
     <Compile Include="MockContainer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -64,6 +64,7 @@
       <Link>Properties\VersionAssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="ContainerFixture.cs" />
+    <Compile Include="ExtendOptionalTests.cs" />
     <Compile Include="MockContainerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
