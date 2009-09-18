@@ -61,5 +61,17 @@ namespace Lokad.Testing
 			Assert.IsTrue(result.HasValue, "Maybe should have value");
 			return result;
 		}
+
+		/// <summary>
+		/// Checks that optional has value matching to the provided value in tests.
+		/// </summary>
+		/// <typeparam name="TValue">The type of the value.</typeparam>
+		/// <param name="maybe">The maybe.</param>
+		/// <param name="value">The value.</param>
+		/// <returns>same instance for inlining</returns>
+		public static Maybe<TValue> ShouldBe<TValue>(this Maybe<TValue> maybe, TValue value)
+		{
+			return ShouldPassWith(maybe, value);
+		}
 	}
 }

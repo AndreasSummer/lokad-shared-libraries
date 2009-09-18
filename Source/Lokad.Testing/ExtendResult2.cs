@@ -35,6 +35,36 @@ namespace Lokad.Testing
 			return result;
 		}
 
+
+		/// <summary>
+		/// Asserts that the result is equal to some error
+		/// </summary>
+		/// <typeparam name="TValue">The type of the value.</typeparam>
+		/// <typeparam name="TError">The type of the error.</typeparam>
+		/// <param name="result">The result.</param>
+		/// <param name="error">The error.</param>
+		/// <returns>same result instance for further inlining</returns>
+		public static Result<TValue, TError> ShouldBe<TValue, TError>(this Result<TValue, TError> result, TError error)
+		{
+			return ShouldFailWith(result, error);
+		}
+
+
+		/// <summary>
+		/// Asserts that the result is valid and equal to some value
+		/// </summary>
+		/// <typeparam name="TValue">The type of the value.</typeparam>
+		/// <typeparam name="TError">The type of the error.</typeparam>
+		/// <param name="result">The result.</param>
+		/// <param name="value">The value.</param>
+		/// <returns>
+		/// same result instance for further inlining
+		/// </returns>
+		public static Result<TValue, TError> ShouldBe<TValue, TError>(this Result<TValue, TError> result, TValue value)
+		{
+			return ShouldPassWith(result, value);
+		}
+
 		/// <summary>
 		/// Asserts that the result is equal to some error
 		/// </summary>
@@ -63,7 +93,16 @@ namespace Lokad.Testing
 		public static Result<TValue, TError> ShouldPassWith<TValue, TError>(this Result<TValue, TError> result, TValue value)
 		{
 			Assert.IsTrue(result.IsSuccess, "Result should be a success");
-			Assert.IsTrue(result.Value.Equals(value), "Result should have value: {0}", value);
+
+			var equatable = value as IEquatable<TValue>;
+			if (equatable != null)
+			{
+				Assert.IsTrue(equatable.EqualsTo(result.Value), "Result should be equal to: '{0}'", value);
+			}
+			else
+			{
+				Assert.IsTrue(result.Value.Equals(value), "Result should have value: {0}", value);
+			}
 
 			return result;
 		}
