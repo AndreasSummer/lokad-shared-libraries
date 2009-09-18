@@ -23,25 +23,30 @@ namespace Lokad.Testing.Test
 			ResultGood
 				.ShouldPass()
 				.ShouldPassCheck(i => i == "Good")
-				.ShouldPassWith("Good");
+				.ShouldPassWith("Good")
+				.ShouldBe("Good");
 
 			Result11
 				.ShouldFailWith(11)
-				.ShouldFail();
+				.ShouldFail()
+				.ShouldBe(11);
 
 			Result10
 				.ShouldPass()
 				.ShouldPassWith(10)
-				.ShouldPassCheck(i => i == 10);
+				.ShouldPassCheck(i => i == 10)
+				.ShouldBe(10);
 
 			ResultError
 				.ShouldFail()
-				.ShouldFailWith("Error");
+				.ShouldFailWith("Error")
+				.ShouldBe("Error");
 
 			Maybe10
 				.ShouldPass()
 				.ShouldPassCheck(i => i == 10)
-				.ShouldPassWith(10);
+				.ShouldPassWith(10)
+				.ShouldBe(10);
 		}
 
 		[Test]
