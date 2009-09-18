@@ -46,10 +46,12 @@ namespace Lokad.Testing.Test
 				.ShouldPass()
 				.ShouldPassCheck(i => i == 10)
 				.ShouldPassWith(10)
-				.ShouldBe(10);
+				.ShouldBe(10)
+				.ShouldBe(true);
 
 			MaybeNot
-				.ShouldFail();
+				.ShouldFail()
+				.ShouldBe(false);
 		}
 
 		[Test]
