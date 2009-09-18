@@ -116,8 +116,6 @@
     <Compile Include="Tuples\ExtendTuple.cs" />
     <Compile Include="Utils\ArrayUtil.cs" />
     <Compile Include="Utils\AssemblyUtil.cs" />
-    <Compile Include="Container\ComponentAttribute.cs" />
-    <Compile Include="Container\RegistrationScope.cs" />
     <Compile Include="Diagnostics\ExceptionCounter.cs" />
     <Compile Include="Diagnostics\ExecutionCounters.cs" />
     <Compile Include="Extensions\ExtendDouble.cs" />
@@ -175,7 +173,6 @@
     <Compile Include="INamedProvider.cs" />
     <Compile Include="Diagnostics\ExecutionStatistics.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Container\RegistrationType.cs" />
     <Compile Include="Extensions\ExtendStream.cs" />
     <Compile Include="Utils\SystemUtil.cs" />
     <Compile Include="Utils\VersionUtil.cs" />
@@ -199,6 +196,9 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>RuleResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Container\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" Condition="($(MSBuildTargets) == '') Or ($(MSBuildTargets) == 'CSharp')" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\Silverlight\v2.0\Microsoft.Silverlight.CSharp.targets" Condition="$(MSBuildTargets) == 'Silverlight 2.0'" />

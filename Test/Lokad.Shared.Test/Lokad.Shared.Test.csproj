@@ -78,7 +78,6 @@
     <Compile Include="Threading\WaitForTests.cs" />
     <Compile Include="Utils\ArrayUtilTests.cs" />
     <Compile Include="Utils\AssemblyUtilTests.cs" />
-    <Compile Include="Container\ComponentAttributeTests.cs" />
     <Compile Include="Diagnostics\ExceptionCounterTests.cs" />
     <Compile Include="Diagnostics\SystemDescriptorTests.cs" />
     <Compile Include="Utils\BufferUtilTests.cs" />

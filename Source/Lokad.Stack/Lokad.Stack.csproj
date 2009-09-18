@@ -58,7 +58,6 @@
     <Compile Include="..\VersionAssemblyInfo.cs">
       <Link>Properties\VersionAssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="Container\AutoRegistrationModule.cs" />
     <Compile Include="Container\ExtendContainerBuilder.cs" />
     <Compile Include="Logging\ConfiguratorHelper.cs" />
     <Compile Include="Logging\LoggingModule.cs" />
