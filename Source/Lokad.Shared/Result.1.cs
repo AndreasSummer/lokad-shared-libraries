@@ -224,7 +224,7 @@ namespace Lokad
 			{
 				if (!_isSuccess)
 					throw Errors.InvalidOperation(ResultResources.Dont_access_result_on_error_X, _error);
-				
+
 				return _value;
 			}
 		}
@@ -238,7 +238,7 @@ namespace Lokad
 			{
 				if (_isSuccess)
 					throw Errors.InvalidOperation(ResultResources.Dont_access_error_on_valid_result);
-				
+
 				return _error;
 			}
 		}
@@ -271,6 +271,20 @@ namespace Lokad
 			if (null == error) throw new ArgumentNullException("error");
 			// ReSharper restore CompareNonConstrainedGenericWithNull
 			return CreateError(error);
+		}
+
+		/// <summary>
+		/// Returns a <see cref="System.String"/> that represents this instance.
+		/// </summary>
+		/// <returns>
+		/// A <see cref="System.String"/> that represents this instance.
+		/// </returns>
+		public override string ToString()
+		{
+			if (!_isSuccess)
+				return "<Error: '" + _error + "'>";
+
+			return "<Value: '" + _value + "'>";
 		}
 	}
 }

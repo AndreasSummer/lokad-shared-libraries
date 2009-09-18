@@ -256,5 +256,19 @@ namespace Lokad
 
 			return converter(_value);
 		}
+
+		/// <summary>
+		/// Returns a <see cref="System.String"/> that represents this instance.
+		/// </summary>
+		/// <returns>
+		/// A <see cref="System.String"/> that represents this instance.
+		/// </returns>
+		public override string ToString()
+		{
+			if (!_isSuccess)
+				return "<Error: '" + _error + "'>";
+
+			return "<Value: '" + _value + "'>";
+		}
 	}
 }
