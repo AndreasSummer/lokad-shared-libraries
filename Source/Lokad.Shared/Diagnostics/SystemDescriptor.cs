@@ -99,15 +99,13 @@ namespace Lokad.Diagnostics
 			var configuration = AssemblyUtil.GetAssemblyConfiguration(assembly);
 #if !SILVERLIGHT2
 			_name = (Assembly.GetEntryAssembly() ?? assembly).GetName().Name;
-			_version = assembly.GetName().Version;
-			_configuration = configuration.IsSuccess ? configuration.Value : "Default";
 			_instance = Environment.CommandLine + " @ " + Environment.MachineName;
 #else
-			_name = (Assembly.GetCallingAssembly() ?? assembly).GetName().Name;
-			_version = assembly.GetName().Version;
-			_configuration = configuration.IsSuccess ? configuration.Value : "Default";
+			_name = assembly.GetName().Name;
 			_instance = "Silverlight";
 #endif
+			_version = assembly.GetName().Version;
+			_configuration = configuration.IsSuccess ? configuration.Value : "Default";
 		}
 
 		/// <summary>
@@ -125,6 +123,7 @@ namespace Lokad.Diagnostics
 		/// <see cref="SystemDescriptor"/> that derives its values from the calling
 		/// assembly.
 		/// </summary>
+		
 		public static void InitializeDefault()
 		{
 			var assembly = Assembly.GetCallingAssembly();
