@@ -55,9 +55,11 @@
     <Compile Include="..\VersionAssemblyInfo.cs">
       <Link>Properties\VersionAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="Diagnostics\Monitoring\IMonitoringApi.cs" />
     <Compile Include="Diagnostics\Persist\ConversionExtensions.cs" />
     <Compile Include="Diagnostics\Persist\ExceptionData.cs" />
     <Compile Include="Diagnostics\Persist\ExecutionData.cs" />
+    <Compile Include="Diagnostics\Persist\MonitoringData.cs" />
     <Compile Include="Diagnostics\Persist\SystemData.cs" />
     <Compile Include="Extensions\ExtendAction.cs" />
     <Compile Include="Extensions\ExtendArray.cs" />
