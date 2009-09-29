@@ -12,7 +12,7 @@ using System.Xml.Serialization;
 namespace Lokad.Diagnostics.Persist
 {
 	/// <summary>
-	/// Class to persist information data in XML form
+	/// Diagnostics: Persistence class for system information data
 	/// </summary>
 	[Serializable]
 	public sealed class SystemData

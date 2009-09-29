@@ -8,14 +8,16 @@
 
 using System;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Xml.Serialization;
 
 namespace Lokad.Diagnostics.Persist
 {
 	/// <summary>
-	/// XML-serializable object for retrieving exception info
+	/// Diagnostics: Persistence class for aggregated exception info.
 	/// </summary>
 	[Serializable]
+	[DebuggerDisplay("{Name}: {Count}")]
 	public sealed class ExceptionData
 	{
 		/// <summary>
@@ -45,9 +47,9 @@ namespace Lokad.Diagnostics.Persist
 		public string Text { get; set; }
 
 		/// <summary>
-		/// Gets or sets the number of times this exception has occured.
+		/// Gets or sets the number of times this exception has occurred.
 		/// </summary>
-		/// <value>The number of times this exception has occured.</value>
+		/// <value>The number of times this exception has occurred.</value>
 		[XmlAttribute, DefaultValue(0)]
 		public long Count { get; set; }
 	}

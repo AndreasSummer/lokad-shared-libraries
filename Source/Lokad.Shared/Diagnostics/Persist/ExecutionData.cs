@@ -8,15 +8,17 @@
 
 using System;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Xml.Serialization;
 
 namespace Lokad.Diagnostics.Persist
 {
 	/// <summary>
-	/// Class to persist aggregate performance for method calls
+	/// Diagnostics: Persistence class for aggregated method calls and timing.
 	/// </summary>
 	[Serializable]
-	public class ExecutionData
+	[DebuggerDisplay("{Name}: {OpenCount}, {RunningTime}")]
+	public sealed class ExecutionData
 	{
 		/// <summary>
 		/// Name of the executing method
