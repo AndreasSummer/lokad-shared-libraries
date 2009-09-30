@@ -16,7 +16,7 @@ namespace Lokad.Logging
 	/// Wrapper around <see cref="log4net.ILog"/>
 	/// </summary>
 	[NoCodeCoverage]
-	sealed class LogWrapper : ILog
+	public sealed class LogWrapper : ILog
 	{
 		readonly log4net.ILog _inner;
 

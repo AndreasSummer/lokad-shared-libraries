@@ -14,7 +14,7 @@ namespace Lokad.Logging
 	/// <summary>
 	/// Syntax for configuring logging within the logging stack
 	/// </summary>
-	public sealed class LogSyntax : Syntax
+	public class LogSyntax : Syntax
 	{
 		readonly AppenderSkeleton _skeleton;
 

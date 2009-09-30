@@ -11,7 +11,7 @@ namespace Lokad.Logging
 	/// <summary>
 	/// Uses <see cref="log4net"/> as the logging backend
 	/// </summary>
-	sealed class LogProviderWrapper : ILogProvider
+	public sealed class LogProviderWrapper : ILogProvider
 	{
 		/// <summary>
 		/// Singleton instance of the <see cref="INamedProvider{TValue}"/> for <see cref="ILog"/>
