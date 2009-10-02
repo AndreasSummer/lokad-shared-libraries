@@ -15,6 +15,8 @@ namespace Lokad.Rules
 	[TestFixture]
 	public sealed class RuleAssertTests
 	{
+		// ReSharper disable InconsistentNaming
+
 		[Test]
 		public void UseCases()
 		{
@@ -45,6 +47,10 @@ namespace Lokad.Rules
 			//    "visitor should have at least one active program");
 
 			RuleAssert.That(() => visitor,
+				v => v.Programs.Exists(p => p.Active),
+				v => v.Programs.Length > 1);
+
+			RuleAssert.That(visitor,
 				v => v.Programs.Exists(p => p.Active),
 				v => v.Programs.Length > 1);
 		}

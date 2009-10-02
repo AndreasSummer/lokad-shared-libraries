@@ -168,6 +168,21 @@ namespace Lokad.Rules
 			Enforce.That(argumentReference, expressions.Convert(e => Is.True(e)));
 		}
 
+
+		/// <summary>
+		/// Checks that the specified <paramref name="item"/> 
+		/// passes the check specified in <paramref name="expressions"/>
+		/// </summary>
+		/// <typeparam name="TTarget">The type of the target.</typeparam>
+		/// <param name="item">The argument reference.</param>
+		/// <param name="expressions">The expressions to check against.</param>
+		/// <exception cref="RuleException">If the check fails</exception>
+		public static void That<TTarget>(TTarget item,
+			params Expression<Predicate<TTarget>>[] expressions)
+		{
+			Enforce.That(item, expressions.Convert(e => Is.True(e)));
+		}
+
 		/// <summary>
 		/// Determines whether the specified expression is true.
 		/// </summary>
