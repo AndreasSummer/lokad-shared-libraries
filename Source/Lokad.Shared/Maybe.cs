@@ -46,5 +46,14 @@ namespace Lokad
 
 			return new Maybe<TSource>(item);
 		}
+
+		/// <summary>
+		/// Optional empty boolean
+		/// </summary>
+		public static readonly Maybe<bool> Bool = Maybe<bool>.Empty;
+		/// <summary>
+		/// Optional empty string
+		/// </summary>
+		public static readonly Maybe<string> String = Maybe<string>.Empty;
 	}
 }
