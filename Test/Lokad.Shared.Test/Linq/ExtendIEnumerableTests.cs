@@ -15,8 +15,9 @@ using NUnit.Framework;
 namespace Lokad.Linq
 {
 	[TestFixture]
-	public sealed class IEnumerableExtensionsTests
+	public sealed class ExtendIEnumerableTests
 	{
+		// ReSharper disable InconsistentNaming
 		[Test]
 		public void ForEach_Works()
 		{
@@ -270,6 +271,13 @@ namespace Lokad.Linq
 				Assert.AreEqual(indexer.Index, indexer.Value);
 				Assert.AreEqual(indexer.IsFirst, indexer.Index == 0);
 			}
+		}
+
+		[Test]
+		public void SelectValues()
+		{
+			var array = Range.Array(10, i => Rand.NextMaybe(i));
+			Assert.AreEqual(array.Sum(s => s.GetValue(0)), array.SelectValues().Sum());
 		}
 	}
 }

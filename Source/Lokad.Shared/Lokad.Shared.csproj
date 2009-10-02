@@ -171,7 +171,7 @@
     <Compile Include="Enforce.cs" />
     <Compile Include="Extensions\ExtendICollection.cs" />
     <Compile Include="ICommand.cs" />
-    <Compile Include="Linq\IEnumerableExtensions.cs" />
+    <Compile Include="Linq\ExtendIEnumerable.cs" />
     <Compile Include="Diagnostics\ExecutionCounter.cs" />
     <Compile Include="INamedProvider.cs" />
     <Compile Include="Diagnostics\ExecutionStatistics.cs" />

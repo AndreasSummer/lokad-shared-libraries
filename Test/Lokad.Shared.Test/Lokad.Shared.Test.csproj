@@ -84,7 +84,7 @@
     <Compile Include="Utils\EnumUtilTests.cs" />
     <Compile Include="CodeQualityTests.cs" />
     <Compile Include="Extensions\ExtendICollectionTests.cs" />
-    <Compile Include="Linq\IEnumerableExtensionsTests.cs" />
+    <Compile Include="Linq\ExtendIEnumerableTests.cs" />
     <Compile Include="NamedProviderTests.cs" />
     <Compile Include="Tuples\PairTests.cs" />
     <Compile Include="ProviderTests.cs" />

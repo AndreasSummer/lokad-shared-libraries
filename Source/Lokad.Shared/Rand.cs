@@ -142,6 +142,17 @@ namespace Lokad
 		}
 
 		/// <summary>
+		/// Creates random optional that might have the value
+		/// </summary>
+		/// <typeparam name="TValue">The type of the value.</typeparam>
+		/// <param name="value">The value.</param>
+		/// <returns>optional that might have the value</returns>
+		public static Maybe<TValue> NextMaybe<TValue>(TValue value)
+		{
+			return NextBool() ? Maybe<TValue>.Empty : value;
+		}
+
+		/// <summary>
 		/// Picks random <see cref="Guid"/>
 		/// </summary>
 		/// <returns>random value</returns>

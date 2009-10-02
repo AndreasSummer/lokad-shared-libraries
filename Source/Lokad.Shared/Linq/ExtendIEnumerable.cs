@@ -16,7 +16,7 @@ namespace System.Linq
 	/// <summary>
 	/// Helper methods for the <see cref="IEnumerable{T}"/>
 	/// </summary>
-	public static class IEnumerableExtensions
+	public static class ExtendIEnumerable
 	{
 		/// <summary>
 		/// Performs the specified <see cref="Action{T}"/> against every element of <see cref="IEnumerable{T}"/>
@@ -526,6 +526,17 @@ namespace System.Linq
 				yield return new Indexer<TSource>(index, item);
 				index += 1;
 			}
+		}
+
+		/// <summary>
+		/// Selects the values from a sequence of optionals.
+		/// </summary>
+		/// <typeparam name="TValue">The type of the value.</typeparam>
+		/// <param name="sequence">The sequence.</param>
+		/// <returns>enumerable that contains values</returns>
+		public static IEnumerable<TValue> SelectValues<TValue>(this IEnumerable<Maybe<TValue>> sequence)
+		{
+			return sequence.Where(s => s.HasValue).Select(s => s.Value);
 		}
 	}
 }
