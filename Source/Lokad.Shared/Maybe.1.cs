@@ -149,6 +149,18 @@ namespace Lokad
 		}
 
 		/// <summary>
+		/// Combines this optional with the pipeline function
+		/// </summary>
+		/// <typeparam name="TTarget">The type of the target.</typeparam>
+		/// <param name="combinator">The combinator (pipeline funcion).</param>
+		/// <returns>optional result</returns>
+		public Maybe<TTarget> Combine<TTarget>(Func<T, Maybe<TTarget>> combinator)
+		{
+			if (!HasValue) return Maybe<TTarget>.Empty;
+			return combinator(Value);
+		}
+
+		/// <summary>
 		/// Determines whether the specified <see cref="Maybe{T}"/> is equal to the current <see cref="Maybe{T}"/>.
 		/// </summary>
 		/// <param name="maybe">The <see cref="Maybe"/> to compare with.</param>

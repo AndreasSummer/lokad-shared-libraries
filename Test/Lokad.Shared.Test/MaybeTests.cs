@@ -77,6 +77,20 @@ namespace Lokad
 		}
 
 		[Test]
+		public void Combine()
+		{
+			Maybe10.Combine(v => SayHi(v)).ShouldFail();
+			MaybeEmpty.Combine(v => SayHi(v)).ShouldFail();
+			Maybe.From(2).Combine(v => SayHi(v)).ShouldBe("Hi x 2");
+		}
+
+		static Maybe<string> SayHi(int value)
+		{
+			if (value > 3) return Maybe<string>.Empty;
+			return "Hi x " + value;
+		}
+
+		[Test]
 		public void Equals()
 		{
 			Assert.IsTrue(Maybe10 == Maybe.From(10));
