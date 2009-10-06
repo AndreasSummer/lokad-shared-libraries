@@ -13,6 +13,8 @@ namespace Lokad
 	[TestFixture]
 	public sealed class EnumUtilTests
 	{
+		// ReSharper disable InconsistentNaming
+
 		enum Tri
 		{
 			None,
@@ -31,6 +33,12 @@ namespace Lokad
 		public void Test_Values()
 		{
 			Assert.AreEqual(new[] {Tri.None, Tri.True, Tri.False}, EnumUtil<Tri>.Values);
+		}
+
+		[Test]
+		public void ToIdentifier()
+		{
+			Assert.AreEqual("Tri_None", EnumUtil.ToIdentifier(Tri.None));
 		}
 	}
 }

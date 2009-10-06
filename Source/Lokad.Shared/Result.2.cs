@@ -234,8 +234,9 @@ namespace Lokad
 		/// <typeparam name="TTarget">The type of the target.</typeparam>
 		/// <param name="converter">The converter.</param>
 		/// <returns>Combined result.</returns>
-		public Result<TTarget, TError> Combine<TTarget>(Func<TValue, Result<TTarget, TError>> converter)
+		public Result<TTarget, TError> Combine<TTarget>([NotNull] Func<TValue, Result<TTarget, TError>> converter)
 		{
+			if (converter == null) throw new ArgumentNullException("converter");
 			if (!_isSuccess)
 				return Result<TTarget, TError>.CreateError(_error);
 
@@ -249,12 +250,28 @@ namespace Lokad
 		/// <typeparam name="TTarget">The type of the target.</typeparam>
 		/// <param name="converter">The reflector.</param>
 		/// <returns><see cref="Maybe{T}"/> that represents the original value behind the <see cref="Result{T}"/> after the conversion</returns>
-		public Maybe<TTarget> ToMaybe<TTarget>(Func<TValue, TTarget> converter)
+		public Maybe<TTarget> ToMaybe<TTarget>([NotNull] Func<TValue, TTarget> converter)
 		{
+			if (converter == null) throw new ArgumentNullException("converter");
 			if (!_isSuccess)
 				return Maybe<TTarget>.Empty;
 
 			return converter(_value);
+		}
+
+		/// <summary>
+		/// Exposes result failure as the exception (providing compatibility, with the exception -expecting code).
+		/// </summary>
+		/// <param name="exception">The function to generate exception, provided the error string.</param>
+		/// <returns>result value</returns>
+		public TValue ExposeException([NotNull] Func<TError, Exception> exception)
+		{
+			if (exception == null) throw new ArgumentNullException("exception");
+			if (!IsSuccess)
+				throw exception(Error);
+
+			// abdullin: we can return value here, since failure chain ends here
+			return Value;
 		}
 
 		/// <summary>

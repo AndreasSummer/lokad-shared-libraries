@@ -250,12 +250,28 @@ namespace Lokad
 		/// <typeparam name="TTarget">The type of the target.</typeparam>
 		/// <param name="converter">The reflector.</param>
 		/// <returns><see cref="Maybe{T}"/> that represents the original value behind the <see cref="Result{T}"/> after the conversion</returns>
-		public Maybe<TTarget> ToMaybe<TTarget>(Func<T, TTarget> converter)
+		public Maybe<TTarget> ToMaybe<TTarget>([NotNull] Func<T, TTarget> converter)
 		{
+			if (converter == null) throw new ArgumentNullException("converter");
 			if (!_isSuccess)
 				return Maybe<TTarget>.Empty;
 
 			return converter(_value);
+		}
+
+		/// <summary>
+		/// Exposes result failure as the exception (providing compatibility, with the exception -expecting code).
+		/// </summary>
+		/// <param name="exception">The function to generate exception, provided the error string.</param>
+		/// <returns>result value</returns>
+		public T ExposeException([NotNull] Func<string, Exception> exception)
+		{
+			if (exception == null) throw new ArgumentNullException("exception");
+			if (!IsSuccess)
+				throw exception(Error);
+
+			// abdullin: we can return value here, since failure chain ends here
+			return Value;
 		}
 
 
@@ -267,9 +283,7 @@ namespace Lokad
 		/// <exception cref="ArgumentNullException">If value is a null reference type</exception>
 		public static implicit operator Result<T>(string error)
 		{
-			// ReSharper disable CompareNonConstrainedGenericWithNull
 			if (null == error) throw new ArgumentNullException("error");
-			// ReSharper restore CompareNonConstrainedGenericWithNull
 			return CreateError(error);
 		}
 

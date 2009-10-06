@@ -160,6 +160,8 @@ namespace Lokad
 			return combinator(Value);
 		}
 
+		
+
 		/// <summary>
 		/// Determines whether the specified <see cref="Maybe{T}"/> is equal to the current <see cref="Maybe{T}"/>.
 		/// </summary>

@@ -27,6 +27,18 @@ namespace Lokad
 		{
 			return (TEnum) Enum.Parse(typeof (TEnum), value, true);
 		}
+
+		/// <summary>
+		/// Unwraps the enum by creating a string usable for identifiers and resource lookups.
+		/// </summary>
+		/// <typeparam name="TEnum">The type of the enum.</typeparam>
+		/// <param name="enumItem">The enum item.</param>
+		/// <returns>a string usable for identifiers and resource lookups</returns>
+		public static string ToIdentifier<TEnum>(TEnum enumItem)
+			where TEnum : struct
+		{
+			return EnumUtil<TEnum>.EnumPrefix + enumItem;
+		}
 	}
 
 	/// <summary>
@@ -39,12 +51,12 @@ namespace Lokad
 		/// Values of the <typeparamref name="TEnum"/>
 		/// </summary>
 		public static readonly TEnum[] Values;
+		internal static readonly string EnumPrefix = typeof (TEnum).Name + "_";
 
 		static EnumUtil()
 		{
 			Values = GetValues();
 		}
-
 
 		static TEnum[] GetValues()
 		{

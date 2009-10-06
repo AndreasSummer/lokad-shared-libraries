@@ -139,5 +139,17 @@ namespace Lokad
 				.Handle(Throw);
 		}
 
+		[Test]
+		public void ExposeException()
+		{
+			var exception = ResultSuccess.ExposeException(s => Errors.InvalidOperation("should not fail"));
+			Assert.AreEqual(exception, ResultSuccess.Value);
+		}
+
+		[Test, Expects.InvalidOperationException]
+		public void ExposeException_with_failure()
+		{
+			ResultError.ExposeException(s => Errors.InvalidOperation(s));
+		}
 	}
 }
