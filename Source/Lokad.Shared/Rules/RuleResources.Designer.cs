@@ -115,6 +115,15 @@ namespace Lokad.Rules {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Optional &apos;{0}&apos; should not be empty..
+        /// </summary>
+        internal static string Maybe_X_cant_be_empty {
+            get {
+                return ResourceManager.GetString("Maybe_X_cant_be_empty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Object should be same as the provided reference..
         /// </summary>
         internal static string Object_must_be_same_as_reference {

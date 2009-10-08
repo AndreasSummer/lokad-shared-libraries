@@ -66,22 +66,23 @@
     <Compile Include="Collections\Generic\ProjectionComparer.cs" />
     <Compile Include="Diagnostics\ExceptionStatistics.cs" />
     <Compile Include="IStartable.cs" />
-    <Compile Include="Maybe.1.cs" />
+    <Compile Include="Monads\Maybe.1.cs" />
     <Compile Include="Rand.String.cs" />
-    <Compile Include="Result.1.cs" />
-    <Compile Include="Result.2.cs" />
-    <Compile Include="ResultResources.Designer.cs">
+    <Compile Include="Monads\Result.1.cs" />
+    <Compile Include="Monads\Result.2.cs" />
+    <Compile Include="Monads\ResultResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ResultResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Rules\Common\BufferIs.cs" />
+    <Compile Include="Rules\Common\MaybeIs.cs" />
     <Compile Include="Silverlight\Stopwatch.cs" />
     <Compile Include="Syntax.1.cs" />
     <Compile Include="Testing\Equatable.cs" />
     <Compile Include="Linq\ArrayExtensionsForLinq.cs" />
     <Compile Include="Linq\Indexer.cs" />
-    <Compile Include="Maybe.cs" />
+    <Compile Include="Monads\Maybe.cs" />
     <Compile Include="Quality\ImmutableAttribute.cs" />
     <Compile Include="Quality\NoCodeCoverageAttribute.cs" />
     <Compile Include="Quality\ReSharper\AssertionConditionAttribute.cs" />
@@ -143,7 +144,7 @@
     <Compile Include="Resolver.cs" />
     <Compile Include="Utils\ResourceUtil.cs" />
     <Compile Include="Data\SqlClient\SqlServerGuidComparer.cs" />
-    <Compile Include="Result.cs" />
+    <Compile Include="Monads\Result.cs" />
     <Compile Include="Rules\Common\DoubleIs.cs" />
     <Compile Include="Rules\RuleMessages.cs" />
     <Compile Include="Rules\IScope.cs" />
@@ -155,7 +156,7 @@
     <Compile Include="Rules\RuleMessage.cs" />
     <Compile Include="Rules\Common\StringIs.cs" />
     <Compile Include="Rules\Scope.cs" />
-    <Compile Include="Rules\IScopeExtensions.cs" />
+    <Compile Include="Rules\ExtendIScope.cs" />
     <Compile Include="Rules\Scopes\TrackScope.cs" />
     <Compile Include="Utils\StringUtil.cs" />
     <Compile Include="Syntax.cs" />
@@ -191,9 +192,10 @@
     <Content Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="ResultResources.resx">
+    <EmbeddedResource Include="Monads\ResultResources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>ResultResources.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>Lokad</CustomToolNamespace>
     </EmbeddedResource>
     <EmbeddedResource Include="Rules\RuleResources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

@@ -1,3 +1,11 @@
+#region (c)2009 Lokad - New BSD license
+
+// Copyright (c) Lokad 2009 
+// Company: http://www.lokad.com
+// This code is released under the terms of the new BSD licence
+
+#endregion
+
 using System;
 using Lokad.Quality;
 
@@ -31,7 +39,7 @@ namespace Lokad
 			{
 				if (!_hasValue)
 					throw Errors.InvalidOperation(ResultResources.Dont_access_value_when_maybe_is_empty);
-				
+
 				return _value;
 			}
 		}
@@ -160,7 +168,6 @@ namespace Lokad
 			return combinator(Value);
 		}
 
-		
 
 		/// <summary>
 		/// Determines whether the specified <see cref="Maybe{T}"/> is equal to the current <see cref="Maybe{T}"/>.
@@ -194,7 +201,7 @@ namespace Lokad
 
 			var maybe = obj as Maybe<T>;
 			if (maybe == null) return false;
-			return this.Equals(maybe);
+			return Equals(maybe);
 		}
 
 		/// <summary>

@@ -18,7 +18,7 @@ namespace Lokad.Rules
 	/// of setting scopes, and calling validation rules.</para>
 	/// <para>Basically that's the class that links together scope 
 	/// and validation logics.</para></summary>
-	public static class IScopeExtensions
+	public static class ExtendIScope
 	{
 		/// <summary> Outputs formatted <see cref="RuleLevel.Error"/> 
 		/// message into the  <paramref name="scope"/> using the 

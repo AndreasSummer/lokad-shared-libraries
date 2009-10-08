@@ -63,6 +63,7 @@
     <Compile Include="Extensions\ExtendIDictionaryTests.cs" />
     <Compile Include="Result2Tests.cs" />
     <Compile Include="Rules\Common\BufferIsTests.cs" />
+    <Compile Include="Rules\Common\MaybeIsTests.cs" />
     <Compile Include="Testing\IEquatableExtensionsTests.cs" />
     <Compile Include="Linq\ArrayExtensionsTests.cs" />
     <Compile Include="MaybeTests.cs" />
