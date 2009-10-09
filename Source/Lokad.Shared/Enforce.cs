@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
 using Lokad.Quality;
+using Lokad.Reflection;
 using Lokad.Rules;
 
 namespace Lokad
@@ -282,7 +283,41 @@ namespace Lokad
 		{
 			if (value() == null)
 			{
-				throw Errors.InvalidOperation("'{0}' can not be null.", value);
+				throw Errors.InvalidOperation("'{0}' can not be null.", Reflect.VariableName(value));
+			}
+		}
+
+		/// <summary>
+		/// Throws proper exception if the class reference is null.
+		/// </summary>
+		/// <typeparam name="TValue"></typeparam>
+		/// <param name="value">Class reference to check.</param>
+		/// <exception cref="InvalidOperationException">If class reference is null.</exception>
+		[DebuggerNonUserCode]
+		[AssertionMethod]
+		public static void NotNull<TValue>(TValue value) where TValue : class
+		{
+			if (value == null)
+			{
+				throw Errors.InvalidOperation("Value of type '{0}' can not be null.", typeof(TValue).Name);
+			}
+		}
+
+		/// <summary>
+		/// Throws proper exception if the class reference is null.
+		/// </summary>
+		/// <typeparam name="TValue">The type of the value.</typeparam>
+		/// <param name="value">Class reference to check.</param>
+		/// <param name="name">The name.</param>
+		/// <exception cref="InvalidOperationException">If class reference is null.</exception>
+		[DebuggerNonUserCode]
+		[AssertionMethod]
+		public static void NotNull<TValue>(TValue value, [NotNull] string name) where TValue : class
+		{
+			if (name == null) throw new ArgumentNullException("name");
+			if (value == null)
+			{
+				throw Errors.InvalidOperation("Value '{1}' of type '{0}' can not be null.", typeof(TValue).Name, name);
 			}
 		}
 

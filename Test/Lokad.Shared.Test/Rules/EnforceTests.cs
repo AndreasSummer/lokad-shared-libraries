@@ -35,6 +35,9 @@ namespace Lokad.Rules
 
 			Enforce.That(param, rule);
 			Enforce.That(collection, rule);
+
+			var local = param;
+			Enforce.NotNull(() => local);
 		}
 
 		[Test]
@@ -43,6 +46,10 @@ namespace Lokad.Rules
 			Enforce.That(true);
 			Enforce.That(true, "Check");
 			Enforce.That(true, "Format {0}", 1);
+
+			object value = new object();
+			Enforce.NotNull(value);
+			Enforce.NotNull(value, "value");
 		}
 
 		static void ValueUsagePatterns<T>(T param, IEnumerable<T> collection, Rule<T> rule)
@@ -92,6 +99,13 @@ namespace Lokad.Rules
 			string v = null;
 			// ReSharper restore ConvertToConstant
 			Enforce.ArgumentNotEmpty(() => v);
+		}
+
+		[Test, Expects.InvalidOperationException]
+		public void NotNull_variable()
+		{
+			object arg = null;
+			Enforce.NotNull(() => arg);
 		}
 	}
 }
