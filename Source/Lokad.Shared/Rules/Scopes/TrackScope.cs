@@ -14,12 +14,15 @@ namespace Lokad.Rules
 	/// <see cref="IScope"/> that merely keeps track of the worst level. 
 	/// </summary>
 	[Serializable]
-	sealed class TrackScope : IScope
+	public sealed class TrackScope : IScope
 	{
 		RuleLevel _level;
 		readonly Action<RuleLevel> _report = level => { };
 
-		internal TrackScope()
+		/// <summary>
+		/// Initializes a new instance of the <see cref="TrackScope"/> class.
+		/// </summary>
+		public TrackScope()
 		{
 		}
 

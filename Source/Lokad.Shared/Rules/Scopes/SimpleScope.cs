@@ -16,8 +16,11 @@ namespace Lokad.Rules
 	/// <see cref="Messenger"/> delegate per every message.
 	/// </summary>
 	[Serializable]
-	sealed class SimpleScope : IScope
+	public sealed class SimpleScope : IScope
 	{
+		/// <summary>
+		/// Delegate for relaying scope messages
+		/// </summary>
 		public delegate void Messenger(string path, RuleLevel level, string message);
 
 		readonly string _name;
@@ -31,13 +34,18 @@ namespace Lokad.Rules
 			_dispose(_level);
 		}
 
-		public SimpleScope(string name, Messenger messenger, Action<RuleLevel> dispose)
+		internal SimpleScope(string name, Messenger messenger, Action<RuleLevel> dispose)
 		{
 			_name = name;
 			_messenger = messenger;
 			_dispose = dispose;
 		}
 
+		/// <summary>
+		/// Initializes a new instance of the <see cref="SimpleScope"/> class.
+		/// </summary>
+		/// <param name="name">The name.</param>
+		/// <param name="messenger">The messenger.</param>
 		public SimpleScope(string name, Messenger messenger)
 		{
 			_name = name;
@@ -67,7 +75,7 @@ namespace Lokad.Rules
 			get { return _level; }
 		}
 
-		public static IScope ForEnforceArgument(string name, Predicate<RuleLevel> throwIf)
+		internal static IScope ForEnforceArgument(string name, Predicate<RuleLevel> throwIf)
 		{
 			return new SimpleScope(name, (path, level, message) =>
 				{
@@ -76,7 +84,7 @@ namespace Lokad.Rules
 				});
 		}
 
-		public static IScope ForEnforce(string name, Predicate<RuleLevel> throwIf)
+		internal static IScope ForEnforce(string name, Predicate<RuleLevel> throwIf)
 		{
 			return new SimpleScope(name, (path, level, message) =>
 				{
@@ -93,6 +101,12 @@ namespace Lokad.Rules
 				level => action(new RuleMessages(messages, level)));
 		}
 
+		/// <summary>
+		/// Gets the messages reported by the specified action to the scope.
+		/// </summary>
+		/// <param name="name">The name.</param>
+		/// <param name="action">The action.</param>
+		/// <returns>array of rule messages reported</returns>
 		public static RuleMessages GetMessages(string name, Action<IScope> action)
 		{
 			if (name == null) throw new ArgumentNullException("name");
@@ -105,7 +119,7 @@ namespace Lokad.Rules
 			return messages;
 		}
 
-		public static IScope ForValidation(string name, Predicate<RuleLevel> throwIf)
+		internal static IScope ForValidation(string name, Predicate<RuleLevel> throwIf)
 		{
 			return ForMessages(name, messages =>
 				{
