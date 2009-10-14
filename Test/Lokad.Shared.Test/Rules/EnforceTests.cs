@@ -122,7 +122,7 @@ namespace Lokad.Rules
 			Enforce.Argument(() => Value);
 		}
 
-		[Test]
+		[Test, Expects.ArgumentNullException]
 		public void ArgumentNotEmpty_handles_bad_references()
 		{
 			Enforce.ArgumentNotEmpty(() => Value);
