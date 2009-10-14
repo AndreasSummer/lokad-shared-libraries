@@ -1,11 +1,11 @@
 <Configuration>
   <NamespaceFolders>
     <SkipFolder>9C285BAA-786F-41E9-8CFB-C1FDDB3E6FE1/d:Extensions</SkipFolder>
+    <SkipFolder>9C285BAA-786F-41E9-8CFB-C1FDDB3E6FE1/d:Monads</SkipFolder>
     <SkipFolder>9C285BAA-786F-41E9-8CFB-C1FDDB3E6FE1/d:Quality/d:ReSharper</SkipFolder>
     <SkipFolder>9C285BAA-786F-41E9-8CFB-C1FDDB3E6FE1/d:Rules/d:Common</SkipFolder>
     <SkipFolder>9C285BAA-786F-41E9-8CFB-C1FDDB3E6FE1/d:Rules/d:Scopes</SkipFolder>
     <SkipFolder>9C285BAA-786F-41E9-8CFB-C1FDDB3E6FE1/d:Tuples</SkipFolder>
     <SkipFolder>9C285BAA-786F-41E9-8CFB-C1FDDB3E6FE1/d:Utils</SkipFolder>
-    <SkipFolder>9C285BAA-786F-41E9-8CFB-C1FDDB3E6FE1/d:Monads</SkipFolder>
   </NamespaceFolders>
 </Configuration>

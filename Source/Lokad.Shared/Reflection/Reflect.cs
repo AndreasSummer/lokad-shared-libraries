@@ -26,12 +26,22 @@ namespace Lokad.Reflection
 		static readonly byte CallVirt = (byte) OpCodes.Callvirt.Value;
 		static readonly byte Ret = (byte) OpCodes.Ret.Value;
 
-		internal static string MemberName<T>(Func<T> expression)
+		static Maybe<string> MemberNameSafely<T>(Func<T> expression)
 		{
 #if SILVERLIGHT2
-			return string.Format("Member of type '{0}'", typeof (T).Name);
+			return Maybe<string>.Empty;
 #else
-			var member = Member(expression);
+			return Member(expression).Combine(x => GetNameForMember(x));
+#endif
+		}
+
+		internal static string MemberName<T>(Func<T> expression)
+		{
+			return MemberNameSafely(expression).GetValue(ReflectCache<T>.ReferenceName);
+		}
+
+		static Maybe<string> GetNameForMember(MemberInfo member)
+		{
 			switch (member.MemberType)
 			{
 				case MemberTypes.Field:
@@ -39,22 +49,27 @@ namespace Lokad.Reflection
 				case MemberTypes.Method:
 					var name = member.Name;
 					if (!name.StartsWith("get_"))
-						throw new InvalidOperationException("Unexpected property getter");
+						return Maybe<string>.Empty;
 
 					return name.Remove(0, 4);
 				default:
-					throw new InvalidOperationException("Unexpected member");
+					return Maybe<string>.Empty;
 			}
-#endif
 		}
-
 
 		internal static string VariableName<T>(Func<T> expression)
 		{
+			return VariableNameSafely(expression).GetValue(ReflectCache<T>.ReferenceName);
+		}
+
+
+		internal static Maybe<string> VariableNameSafely<T>(Func<T> expression)
+		{
 #if SILVERLIGHT2
-			return string.Format("Variable of type '{0}'", typeof (T).Name);
+			return Maybe<string>.Empty;
 #else
-			return Variable(expression).Name;
+			return VariableSafely(expression)
+				.Convert(e => e.Name);
 #endif
 		}
 
@@ -70,8 +85,25 @@ namespace Lokad.Reflection
 		/// </summary>
 		/// <typeparam name="T"></typeparam>
 		/// <param name="expression">The expression containing the local variable to reflect.</param>
-		/// <returns>information about the variable</returns>
+		/// <returns>information about the variable (if able to retrieve)</returns>
+		/// <exception cref="ReflectLambdaException">if the provided expression is not a simple variable reference</exception>
 		public static FieldInfo Variable<T>(Func<T> expression)
+		{
+			return VariableSafely(expression)
+				.Expose(() => new ReflectLambdaException("Expected simple variable reference"));
+		}
+
+		/// <summary>
+		/// Retrieves via IL the information of the <b>local</b> variable passed in the expression.
+		/// <code>
+		/// var myVar = "string";
+		/// var info = Reflect.Variable(() =&gt; myVar)
+		/// </code>
+		/// </summary>
+		/// <typeparam name="T"></typeparam>
+		/// <param name="expression">The expression containing the local variable to reflect.</param>
+		/// <returns>information about the variable (if able to retrieve)</returns>
+		public static Maybe<FieldInfo> VariableSafely<T>(Func<T> expression)
 		{
 			Enforce.Argument(() => expression);
 			var method = expression.Method;
@@ -94,7 +126,7 @@ namespace Lokad.Reflection
 				//var genericMethodArguments = method.GetGenericArguments();
 				return module.ResolveField(fieldHandle, genericTypeArguments, Type.EmptyTypes);
 			}
-			throw new ArgumentException("Expected simple field reference");
+			return Maybe<FieldInfo>.Empty;
 		}
 
 		/// <summary>
@@ -111,19 +143,40 @@ namespace Lokad.Reflection
 		/// <typeparam name="T">type of the property to reflect</typeparam>
 		/// <param name="expression">The expression.</param>
 		/// <returns>getter method for the property.</returns>
+		/// <exception cref="ReflectLambdaException">if reference is not a simple property</exception>
 		public static MethodInfo Property<T>(Func<T> expression)
 		{
-			return DelegatedProperty(expression);
+			return PropertySafely(expression)
+				.Expose(() => new ReflectLambdaException("Expected simple property reference"));
 		}
 
-		static MemberInfo Member<T>(Func<T> expression)
+		/// <summary>
+		/// Retrieves via IL the <em>getter method</em> for the property being reflected.
+		/// <code>
+		/// var i2 = new
+		/// {
+		///   MyProperty = "Value"
+		/// }; 
+		/// var info = Reflect.Property(() => i2.Property);
+		/// // info will have name of "get_MyProperty"
+		/// </code>
+		/// </summary>
+		/// <typeparam name="T">type of the property to reflect</typeparam>
+		/// <param name="expression">The expression.</param>
+		/// <returns>getter method for the property.</returns>
+		public static Maybe<MethodInfo> PropertySafely<T>(Func<T> expression)
+		{
+			return DelegatedPropertySafely(expression);
+		}
+
+		static Maybe<MemberInfo> Member<T>(Func<T> expression)
 		{
 			return DelegatedMember(expression);
 		}
 
 		// in DEBUG we end up with stack
 		// in release, there is a ret at the end
-		static MethodInfo DelegatedProperty(Delegate expression)
+		static Maybe<MethodInfo> DelegatedPropertySafely(Delegate expression)
 		{
 			var method = expression.Method;
 			var il = method.GetMethodBody().GetILAsByteArray();
@@ -141,10 +194,11 @@ namespace Lokad.Reflection
 
 				return (MethodInfo) method.Module.ResolveMethod(getHandle);
 			}
-			throw new ArgumentException("Expected simple property reference");
+			return Maybe<MethodInfo>.Empty;
+			//throw new ArgumentException("Expected simple property reference");
 		}
 
-		internal static MemberInfo DelegatedMember(Delegate expression)
+		internal static Maybe<MemberInfo> DelegatedMember(Delegate expression)
 		{
 			var method = expression.Method;
 			var il = method.GetMethodBody().GetILAsByteArray();
@@ -156,7 +210,8 @@ namespace Lokad.Reflection
 
 				return method.Module.ResolveMember(getHandle);
 			}
-			throw new ArgumentException("Expected simple member reference");
+			return Maybe<MemberInfo>.Empty;
+			//throw new ArgumentException("Expected simple member reference");
 		}
 
 #endif

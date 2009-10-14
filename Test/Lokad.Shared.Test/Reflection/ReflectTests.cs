@@ -9,7 +9,6 @@
 #if !SILVERLIGHT2
 
 using System;
-using Lokad.Testing;
 using NUnit.Framework;
 
 namespace Lokad.Reflection
@@ -17,6 +16,8 @@ namespace Lokad.Reflection
 	[TestFixture]
 	public sealed class ReflectTests
 	{
+		// ReSharper disable InconsistentNaming
+
 		static void AssertVariable<T>(Func<T> func, string name)
 		{
 			var info = Reflect.Variable(func);
@@ -80,7 +81,7 @@ namespace Lokad.Reflection
 			AssertVariable(() => myVar, "myVar");
 		}
 
-		[Test, Expects.ArgumentException]
+		[Test, ExpectedException(typeof(ReflectLambdaException))]
 		public void Variable_Fails_On_Property()
 		{
 			var i = new
@@ -90,7 +91,7 @@ namespace Lokad.Reflection
 			Reflect.Variable(() => i.i);
 		}
 
-		[Test, Expects.ArgumentException]
+		[Test, ExpectedException(typeof(ReflectLambdaException))]
 		public void Variable_Fails_On_Constant()
 		{
 			Reflect.Variable(() => 1);

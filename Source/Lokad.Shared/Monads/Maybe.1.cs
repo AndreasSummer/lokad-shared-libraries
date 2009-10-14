@@ -109,6 +109,21 @@ namespace Lokad
 		}
 
 		/// <summary>
+		/// Exposes the specified exception if maybe does not have value.
+		/// </summary>
+		/// <param name="exception">The exception.</param>
+		/// <returns>actual value</returns>
+		/// <exception cref="Exception">if maybe does not have value</exception>
+		public T Expose(Func<Exception> exception)
+		{
+			if (!_hasValue)
+			{
+				throw exception();
+			}
+			return _value;
+		}
+
+		/// <summary>
 		/// Retrieves value from this instance, using a 
 		/// <paramref name="defaultValue"/> if it is absent.
 		/// </summary>

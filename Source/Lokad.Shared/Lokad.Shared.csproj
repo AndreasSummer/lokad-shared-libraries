@@ -75,8 +75,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ResultResources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Reflection\ReflectLambdaException.cs" />
     <Compile Include="Rules\Common\BufferIs.cs" />
     <Compile Include="Rules\Common\MaybeIs.cs" />
+    <Compile Include="Reflection\ReflectCache.cs" />
     <Compile Include="Silverlight\Stopwatch.cs" />
     <Compile Include="Syntax.1.cs" />
     <Compile Include="Testing\Equatable.cs" />

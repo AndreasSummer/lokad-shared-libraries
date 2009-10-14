@@ -47,7 +47,7 @@ namespace Lokad.Rules
 			Enforce.That(true, "Check");
 			Enforce.That(true, "Format {0}", 1);
 
-			object value = new object();
+			var value = new object();
 			Enforce.NotNull(value);
 			Enforce.NotNull(value, "value");
 		}
@@ -106,6 +106,26 @@ namespace Lokad.Rules
 		{
 			object arg = null;
 			Enforce.NotNull(() => arg);
+		}
+
+		const string Value = null;
+
+		[Test, Expects.InvalidOperationException]
+		public void NotNull_handles_bad_arguments()
+		{
+			Enforce.NotNull(() => Value);
+		}
+
+		[Test, Expects.ArgumentNullException]
+		public void Argument_handles_bad_references()
+		{
+			Enforce.Argument(() => Value);
+		}
+
+		[Test]
+		public void ArgumentNotEmpty_handles_bad_references()
+		{
+			Enforce.ArgumentNotEmpty(() => Value);
 		}
 	}
 }
