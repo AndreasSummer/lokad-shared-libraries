@@ -76,6 +76,17 @@ namespace Lokad
 		}
 
 		/// <summary>
+		/// Writes a message followed by the line terminator to the <see cref="Debug.Listeners"/> collection.
+		/// </summary>
+		/// <param name="message">The message.</param>
+		[Conditional("DEBUG")]
+		[UsedImplicitly]
+		public static void WriteLine<T>(Func<T> message)
+		{
+			Debug.WriteLine(message().ToString());
+		}
+
+		/// <summary>
 		/// Writes a message to the <see cref="Debug.Listeners"/> collection.
 		/// </summary>
 		/// <param name="message">The message.</param>
@@ -85,6 +96,19 @@ namespace Lokad
 		{
 			Debug.Write(message.ToString());
 		}
+
+		/// <summary>
+		/// Writes a message to the <see cref="Debug.Listeners"/> collection.
+		/// </summary>
+		/// <param name="message">The message.</param>
+		[Conditional("DEBUG")]
+		[UsedImplicitly]
+		public static void Write<T>(Func<T> message)
+		{
+			Debug.Write(message().ToString());
+		}
+
+
 
 		/// <summary>
 		/// Loads the graph from the specified path.
