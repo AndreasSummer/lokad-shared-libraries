@@ -63,7 +63,7 @@ namespace Lokad.Reflection
 		}
 
 
-		internal static Maybe<string> VariableNameSafely<T>(Func<T> expression)
+		static Maybe<string> VariableNameSafely<T>(Func<T> expression)
 		{
 #if SILVERLIGHT2
 			return Maybe<string>.Empty;
@@ -90,7 +90,7 @@ namespace Lokad.Reflection
 		public static FieldInfo Variable<T>(Func<T> expression)
 		{
 			return VariableSafely(expression)
-				.Expose(() => new ReflectLambdaException("Expected simple variable reference"));
+				.ExposeException(() => new ReflectLambdaException("Expected simple variable reference"));
 		}
 
 		/// <summary>
@@ -107,7 +107,9 @@ namespace Lokad.Reflection
 		{
 			Enforce.Argument(() => expression);
 			var method = expression.Method;
-			var il = method.GetMethodBody().GetILAsByteArray();
+			var body = method.GetMethodBody();
+			if (null == body) return Maybe<FieldInfo>.Empty;
+			var il = body.GetILAsByteArray();
 			// in DEBUG we end up with stack
 			// in release, there is a ret at the end
 			if ((il[0] == Ldarg_0) && (il[1] == Ldfld) && ((il[6] == Stloc_0) || (il[6] == Ret)))
@@ -147,7 +149,7 @@ namespace Lokad.Reflection
 		public static MethodInfo Property<T>(Func<T> expression)
 		{
 			return PropertySafely(expression)
-				.Expose(() => new ReflectLambdaException("Expected simple property reference"));
+				.ExposeException(() => new ReflectLambdaException("Expected simple property reference"));
 		}
 
 		/// <summary>
@@ -179,7 +181,9 @@ namespace Lokad.Reflection
 		static Maybe<MethodInfo> DelegatedPropertySafely(Delegate expression)
 		{
 			var method = expression.Method;
-			var il = method.GetMethodBody().GetILAsByteArray();
+			var body = method.GetMethodBody();
+			if (null == body) return Maybe<MethodInfo>.Empty;
+			var il = body.GetILAsByteArray();
 
 			if ((il[0] == Ldarg_0) && (il[1] == Ldfld) && (il[6] == CallVirt) && ((il[11] == Stloc_0) || (il[11] == Ret)))
 			{
@@ -198,10 +202,12 @@ namespace Lokad.Reflection
 			//throw new ArgumentException("Expected simple property reference");
 		}
 
-		internal static Maybe<MemberInfo> DelegatedMember(Delegate expression)
+		static Maybe<MemberInfo> DelegatedMember(Delegate expression)
 		{
 			var method = expression.Method;
-			var il = method.GetMethodBody().GetILAsByteArray();
+			var body = method.GetMethodBody();
+			if (null == body) return Maybe<MemberInfo>.Empty;
+			var il = body.GetILAsByteArray();
 
 			if ((il[0] == Ldarg_0) && (il[1] == Ldfld) && ((il[6] == CallVirt) || (il[6] == Ldfld)) &&
 				((il[11] == Stloc_0) || (il[11] == Ret)))

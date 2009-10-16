@@ -114,7 +114,7 @@ namespace Lokad
 		/// <param name="exception">The exception.</param>
 		/// <returns>actual value</returns>
 		/// <exception cref="Exception">if maybe does not have value</exception>
-		public T Expose(Func<Exception> exception)
+		public T ExposeException(Func<Exception> exception)
 		{
 			if (!_hasValue)
 			{
