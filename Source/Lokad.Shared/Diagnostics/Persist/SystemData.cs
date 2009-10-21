@@ -24,7 +24,6 @@ namespace Lokad.Diagnostics.Persist
 		[XmlIgnore]
 		public Version Version { get; set; }
 
-
 		/// <summary>
 		/// Gets or sets the version as string.
 		/// </summary>
@@ -77,10 +76,5 @@ namespace Lokad.Diagnostics.Persist
 		{
 			return StringUtil.FormatInvariant("{0} (v.{1}/{2}) @ {3}", Name, Version, Configuration, Instance);
 		}
-
-		/// <summary>
-		/// Initialization time of the descriptor
-		/// </summary>
-		public static readonly DateTime Initialized = SystemUtil.Now;
 	}
 }

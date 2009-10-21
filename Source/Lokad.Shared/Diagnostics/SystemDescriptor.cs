@@ -54,6 +54,16 @@ namespace Lokad.Diagnostics
 		readonly string _instance;
 
 		/// <summary>
+		/// Initialization time of the descriptor
+		/// </summary>
+		public DateTimeOffset Initialized
+		{
+			get { return _initialized; }
+		}
+
+		readonly DateTimeOffset _initialized;
+
+		/// <summary>
 		/// Initializes a new instance of the <see cref="SystemDescriptor"/> class.
 		/// </summary>
 		/// <param name="name">The name.</param>
@@ -68,6 +78,7 @@ namespace Lokad.Diagnostics
 			_instance = instance;
 			_version = version;
 			_configuration = configuration;
+			_initialized = SystemUtil.NowOffset;
 		}
 
 
@@ -106,6 +117,7 @@ namespace Lokad.Diagnostics
 #endif
 			_version = assembly.GetName().Version;
 			_configuration = configuration.IsSuccess ? configuration.Value : "Default";
+			_initialized = SystemUtil.NowOffset;
 		}
 
 		/// <summary>
