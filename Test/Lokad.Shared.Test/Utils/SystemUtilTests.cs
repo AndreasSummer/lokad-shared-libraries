@@ -43,6 +43,21 @@ namespace Lokad
 		}
 
 		[Test]
+		public void Utc_diff_offset()
+		{
+			var now1Local = DateTime.Now;
+			var diff1 = now1Local - now1Local.ToUniversalTime();
+
+			var now2 = SystemUtil.NowOffset;
+			var now2Local = now2.DateTime;
+			var now2Utc = now2.UtcDateTime;
+			Assert.AreEqual(diff1, now2Local - now2Utc);
+			Assert.AreEqual(TimeSpan.Zero, new DateTimeOffset(now2Local) - new DateTimeOffset(now2Utc));
+			Assert.AreEqual(now2, new DateTimeOffset(now2Local));
+			Assert.AreEqual(now2, new DateTimeOffset(now2Utc));
+		}
+
+		[Test]
 		public void Normal_Now()
 		{
 			var time0 = DateTime.Now;

@@ -42,6 +42,14 @@ namespace Lokad
 			get { return Now.ToUniversalTime(); }
 		}
 
+		/// <summary>
+		/// Unambiguous date and time with UTC offset, <see cref="DateTimeOffset.Now"/>.
+		/// </summary>
+		public static DateTimeOffset NowOffset
+		{
+			get { return new DateTimeOffset(Now); }
+		}
+
 		static SystemUtil()
 		{
 			Reset();
