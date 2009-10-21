@@ -8,6 +8,7 @@
 
 using System;
 using System.Diagnostics;
+using System.Runtime.Serialization;
 using System.Xml.Serialization;
 
 namespace Lokad.Diagnostics.Persist
@@ -16,6 +17,7 @@ namespace Lokad.Diagnostics.Persist
 	/// Diagnostics: Persistence class for custom monitoring data in any supported form
 	/// </summary>
 	[Serializable]
+	[DataContract]
 	[DebuggerDisplay("{Name}: {Value}")]
 	public sealed class MonitoringData
 	{
@@ -24,6 +26,7 @@ namespace Lokad.Diagnostics.Persist
 		/// </summary>
 		/// <value>The name.</value>
 		[XmlAttribute]
+		[DataMember(Order = 1)]
 		public string Name { get; set; }
 
 		/// <summary>
@@ -31,12 +34,14 @@ namespace Lokad.Diagnostics.Persist
 		/// </summary>
 		/// <value>The type.</value>
 		[XmlAttribute]
+		[DataMember(Order = 2)]
 		public string Type { get; set; }
 
 		/// <summary>
 		/// Gets or sets the string representation of the data.
 		/// </summary>
 		/// <value>The value.</value>
+		[DataMember(Order = 3)]
 		public string Value { get; set; }
 	}
 }

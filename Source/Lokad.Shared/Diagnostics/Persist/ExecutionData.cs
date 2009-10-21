@@ -9,6 +9,7 @@
 using System;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Runtime.Serialization;
 using System.Xml.Serialization;
 
 namespace Lokad.Diagnostics.Persist
@@ -17,6 +18,7 @@ namespace Lokad.Diagnostics.Persist
 	/// Diagnostics: Persistence class for aggregated method calls and timing.
 	/// </summary>
 	[Serializable]
+	[DataContract]
 	[DebuggerDisplay("{Name}: {OpenCount}, {RunningTime}")]
 	public sealed class ExecutionData
 	{
@@ -24,12 +26,14 @@ namespace Lokad.Diagnostics.Persist
 		/// Name of the executing method
 		/// </summary>
 		[XmlAttribute]
+		[DataMember(Order = 1)]
 		public string Name { get; set; }
 
 		/// <summary>
 		/// Number of times the counter has been opened
 		/// </summary>
 		[XmlAttribute, DefaultValue(0)]
+		[DataMember(Order = 2)]
 		public long OpenCount { get; set; }
 
 		/// <summary>
@@ -37,17 +41,20 @@ namespace Lokad.Diagnostics.Persist
 		/// </summary>
 		/// <value>The close count.</value>
 		[XmlAttribute, DefaultValue(0)]
+		[DataMember(Order = 3)]
 		public long CloseCount { get; set; }
 
 		/// <summary>
 		/// Total execution count of the method in ticks
 		/// </summary>
 		[XmlAttribute, DefaultValue(0)]
+		[DataMember(Order = 4)]
 		public long RunningTime { get; set; }
 
 		/// <summary>
 		/// Method-specific counters
 		/// </summary>
+		[DataMember(Order = 5)]
 		public long[] Counters { get; set; }
 
 		/// <summary>

@@ -7,7 +7,9 @@
 #endregion
 
 using System;
+using System.Runtime.Serialization;
 using System.Xml.Serialization;
+using System.Diagnostics;
 
 namespace Lokad.Diagnostics.Persist
 {
@@ -15,6 +17,8 @@ namespace Lokad.Diagnostics.Persist
 	/// Diagnostics: Persistence class for system information data
 	/// </summary>
 	[Serializable]
+	[DataContract]
+	[DebuggerDisplay("{Name} (v.{Version}/{Configuration}) @ {Instance}")]
 	public sealed class SystemData
 	{
 		/// <summary>
@@ -29,6 +33,7 @@ namespace Lokad.Diagnostics.Persist
 		/// </summary>
 		/// <value>The version as string.</value>
 		[XmlAttribute]
+		[DataMember(Order = 2)]
 		public string VersionAsString
 		{
 			get
@@ -50,6 +55,7 @@ namespace Lokad.Diagnostics.Persist
 		/// </summary>
 		/// <value>The name.</value>
 		[XmlAttribute]
+		[DataMember(Order = 1)]
 		public string Name { get; set; }
 
 		/// <summary>
@@ -57,6 +63,7 @@ namespace Lokad.Diagnostics.Persist
 		/// </summary>
 		/// <value>The configuration.</value>
 		[XmlAttribute]
+		[DataMember(Order = 3)]
 		public string Configuration { get; set; }
 
 		/// <summary>
@@ -64,6 +71,7 @@ namespace Lokad.Diagnostics.Persist
 		/// </summary>
 		/// <value>The instance identifier.</value>
 		[XmlAttribute]
+		[DataMember(Order = 4)]
 		public string Instance { get; set; }
 
 		/// <summary>
