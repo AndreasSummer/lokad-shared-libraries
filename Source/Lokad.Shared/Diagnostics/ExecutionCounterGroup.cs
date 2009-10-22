@@ -31,6 +31,14 @@ namespace Lokad.Diagnostics
 		}
 
 		/// <summary>
+		/// Registers the counters in the specified cache
+		/// </summary>
+		protected void Register(ExecutionCounters context)
+		{
+			context.RegisterRange(_counters);
+		}
+
+		/// <summary>
 		/// Creates the counter and adds it to the internal collection.
 		/// </summary>
 		/// <param name="name">The name for the new counter.</param>
