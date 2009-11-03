@@ -266,6 +266,7 @@ namespace Lokad.Rules
 		/// <summary>
 		/// Rule path separator char
 		/// </summary>
+		[UsedImplicitly]
 		public const char RulePathSeprator = '.';
 
 		[NoCodeCoverage]
