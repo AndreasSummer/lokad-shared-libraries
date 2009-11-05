@@ -12,7 +12,7 @@ using Lokad.Quality;
 namespace Lokad.Diagnostics
 {
 	/// <summary>
-	/// Statistics about some exection counter
+	/// Statistics about some execution counter
 	/// </summary>
 	[Serializable]
 	[Immutable]

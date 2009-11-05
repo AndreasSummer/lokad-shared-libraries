@@ -31,6 +31,22 @@ namespace Lokad.Diagnostics.Persist
 		}
 
 		/// <summary>
+		/// Converts persistence objects to immutable statistics objects
+		/// </summary>
+		/// <param name="dataArray">The persistence data objects.</param>
+		/// <returns>array of statistics objects</returns>
+		public static ExecutionStatistics[] FromPersistence(this ExecutionData[] dataArray)
+		{
+			return dataArray.Convert(
+				d => new ExecutionStatistics(
+					d.Name,
+					d.OpenCount,
+					d.CloseCount,
+					d.Counters,
+					d.RunningTime));
+		}
+
+		/// <summary>
 		/// Converts statistics classes to the data objects.
 		/// </summary>
 		/// <param name="statisticsArray">The statistics array.</param>
@@ -47,9 +63,24 @@ namespace Lokad.Diagnostics.Persist
 				});
 		}
 
+		/// <summary>
+		/// Converts data objects to statistics classes.
+		/// </summary>
+		/// <param name="dataArray">The persistence data array.</param>
+		/// <returns>array of statistics objects</returns>
+		public static ExceptionStatistics[] FromPersistence(this ExceptionData[] dataArray)
+		{
+			return dataArray.Convert(
+				d => new ExceptionStatistics(
+					d.ID,
+					d.Count,
+					d.Name,
+					d.Message,
+					d.Text));
+		}
 
 		/// <summary>
-		/// Converts the descriptor instance to persistance object
+		/// Converts the descriptor instance to persistence object
 		/// </summary>
 		/// <param name="descriptor">The descriptor.</param>
 		/// <returns>new persistence object</returns>
@@ -62,6 +93,20 @@ namespace Lokad.Diagnostics.Persist
 					Name = descriptor.Name,
 					Version = descriptor.Version
 				};
+		}
+
+		/// <summary>
+		/// Converts the descriptor instance to persistence object
+		/// </summary>
+		/// <param name="data">The persistence data.</param>
+		/// <returns>new descriptor object</returns>
+		public static SystemDescriptor FromPersistence(this SystemData data)
+		{
+			return new SystemDescriptor(
+				data.Name,
+				data.Version,
+				data.Configuration,
+				data.Instance);
 		}
 	}
 }

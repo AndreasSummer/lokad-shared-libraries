@@ -17,7 +17,7 @@ namespace Lokad.Diagnostics
 {
 	/// <summary>
 	/// Exception counter that persists unique information about exceptions being entered in an internal dictionary. 
-	/// Once it gets filled, exceptions with the least number of occurences are discarded.
+	/// Once it gets filled, exceptions with the least number of occurrences are discarded.
 	/// </summary>
 	/// <remarks>The class <see cref="ExceptionCounters"/> is designed as <strong>thread-safe</strong>.</remarks>
 	public sealed class ExceptionCounters
