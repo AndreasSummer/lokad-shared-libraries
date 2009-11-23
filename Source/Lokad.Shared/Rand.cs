@@ -152,13 +152,33 @@ namespace Lokad
 			return NextBool() ? Maybe<TValue>.Empty : value;
 		}
 
-		/// <summary>
-		/// Picks random <see cref="Guid"/>
-		/// </summary>
+		/// <summary> Picks random <see cref="Guid"/>  </summary>
 		/// <returns>random value</returns>
 		public static Guid NextGuid()
 		{
 			return new Guid(Range.Array(16, i => (byte) Next(byte.MaxValue + 1)));
+		}
+
+		/// <summary>
+		/// Creates an array of random <see cref="Guid"/>
+		/// </summary>
+		/// <param name="count">Number of items in the array.</param>
+		/// <returns>random value</returns>
+		public static Guid[] NextGuids(int count)
+		{
+			return Range.Array(count, x => NextGuid());
+		}
+
+		/// <summary>
+		/// Creates an array of random <see cref="Guid"/> and random length.
+		/// </summary>
+		/// <param name="lowerBound">The lower bound.</param>
+		/// <param name="upperBound">The upper bound.</param>
+		/// <returns></returns>
+		public static Guid[] NextGuids(int lowerBound, int upperBound)
+		{
+			int count = Rand.Next(lowerBound, upperBound);
+			return Range.Array(count, x => NextGuid());
 		}
 
 		/// <summary> Returns random double value with lowered precision </summary>

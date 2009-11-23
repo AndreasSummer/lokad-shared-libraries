@@ -65,6 +65,21 @@ namespace Lokad
 			Assert.IsTrue(actual.Contains(Environment.NewLine));
 			Assert.AreEqual(537, actual.Length);
 			Assert.AreEqual(87, actual.Count(c => c==' '));
+
+
+			Assert.AreEqual(new[]
+				{
+					new Guid("df4ddcf6-69a5-8870-5860-e15353afd241"),
+					new Guid("276152fa-f318-d27b-3871-ca2c3c022647"),
+					new Guid("7e1926f3-d485-71aa-6ff0-f25ceb0e691c"),
+				}, Rand.NextGuids(3));
+
+			Assert.AreEqual(new[]
+				{
+					new Guid("820f5bd2-a0e3-6002-7ba6-339e434b553a"),
+					new Guid("962d5f99-bb54-a826-f0b8-27011ee62907"),
+					new Guid("a66a7dad-c516-850f-161d-0a2d76d22ca4"),
+				}, Rand.NextGuids(1, 4));
 		}
 
 		[Test]
