@@ -31,6 +31,17 @@ namespace Lokad.Logging
 		}
 
 		/// <summary>
+		/// Configures the logging system to write to console with colors
+		/// </summary>
+		/// <returns></returns>
+		public static LogSyntax UseColoredConsole()
+		{
+			var appender = ConfiguratorHelper.GetColoredConsoleLog();
+			Configure(appender);
+			return new LogSyntax(appender);
+		}
+
+		/// <summary>
 		/// Logging system is configured from App.config
 		/// </summary>
 		public static void UseConfig()

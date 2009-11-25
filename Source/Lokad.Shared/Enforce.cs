@@ -356,7 +356,7 @@ namespace Lokad
 		[AssertionMethod]
 		public static void Argument<T>(Func<T> argumentReference, params Rule<T>[] rules)
 		{
-			using (var scope = DelayedScope.ForEnforceArgument(argumentReference, Scope.WhenError))
+			using (var scope = ScopeFactory.ForEnforceArgument(argumentReference, Scope.WhenError))
 			{
 				scope.ValidateInScope(argumentReference(), rules);
 			}
@@ -373,7 +373,7 @@ namespace Lokad
 		[DebuggerNonUserCode]
 		public static void Argument<T>(Func<IEnumerable<T>> items, params Rule<T>[] rules)
 		{
-			using (var scope = DelayedScope.ForEnforceArgument(items, Scope.WhenError))
+			using (var scope = ScopeFactory.ForEnforceArgument(items, Scope.WhenError))
 			{
 				scope.ValidateInScope(items(), rules);
 			}

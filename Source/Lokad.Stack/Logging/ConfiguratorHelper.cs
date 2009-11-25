@@ -13,6 +13,8 @@ using log4net.Layout;
 
 namespace Lokad.Logging
 {
+	using Colors = ColoredConsoleAppender.Colors;
+
 	static class ConfiguratorHelper
 	{
 		internal static Level ToLog4Net(this LogLevel level)
@@ -102,6 +104,37 @@ namespace Lokad.Logging
 				};
 			appender.ActivateOptions();
 			return appender;
+		}
+
+		internal static ColoredConsoleAppender GetColoredConsoleLog()
+		{
+			var layout = new PatternLayout
+			{
+				ConversionPattern = "%timestamp [%thread] %-5level %logger - %message%newline"
+			};
+			layout.ActivateOptions();
+			var appender = new ColoredConsoleAppender
+			{
+				Layout = layout
+			};
+
+			Map(appender, Colors.Red, Level.Alert, Level.Critical, Level.Emergency, Level.Error, Level.Fatal, Level.Severe);
+			Map(appender, Colors.Cyan | Colors.HighIntensity, Level.Info, Level.Notice);
+			Map(appender, Colors.Yellow, Level.Warn);
+
+			appender.ActivateOptions();
+			return appender;
+		}
+		static void Map(ColoredConsoleAppender appender, Colors fore, params Level[] levels)
+		{
+			foreach (var level in levels)
+			{
+				appender.AddMapping(new ColoredConsoleAppender.LevelColors()
+					{
+						ForeColor = fore,
+						Level = level
+					});
+			}
 		}
 	}
 }

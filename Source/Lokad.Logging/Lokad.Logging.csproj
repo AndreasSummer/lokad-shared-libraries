@@ -57,6 +57,7 @@
     <Compile Include="ILogProvider.cs" />
     <Compile Include="ILogProviderExtensions.cs" />
     <Compile Include="LogLevel.cs" />
+    <Compile Include="LogScope.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

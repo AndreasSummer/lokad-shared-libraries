@@ -20,7 +20,7 @@ namespace Lokad.Rules
 			var Test = 1;
 			try
 			{
-				using (var t = DelayedScope.ForEnforce(() => Test, Scope.WhenError))
+				using (var t = ScopeFactory.ForEnforce(() => Test, Scope.WhenError))
 				{
 					ScopeTestHelper.FireErrors(t);
 				}

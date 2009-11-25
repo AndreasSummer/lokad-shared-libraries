@@ -7,7 +7,6 @@
 #endregion
 
 using System;
-using System.Collections.Generic;
 
 namespace Lokad.Rules
 {
@@ -42,7 +41,7 @@ namespace Lokad.Rules
 			_messenger = action;
 		}
 
-		DelayedScope(Func<string> name, Messenger action, Action<RuleLevel> dispose)
+		internal DelayedScope(Func<string> name, Messenger action, Action<RuleLevel> dispose)
 		{
 			_name = name;
 			_messenger = action;
@@ -74,50 +73,6 @@ namespace Lokad.Rules
 		RuleLevel IScope.Level
 		{
 			get { return _level; }
-		}
-
-		public static IScope ForEnforceArgument<T>(Func<T> argumentReference, Predicate<RuleLevel> predicate)
-		{
-			return new DelayedScope(
-				() => Reflection.Reflect.VariableName(argumentReference),
-				(func, level, s) =>
-					{
-						if (predicate(level))
-							throw new ArgumentException(s, func());
-					}
-				);
-		}
-
-		public static IScope ForEnforce<T>(Func<T> reference, Predicate<RuleLevel> predicate)
-		{
-			return new DelayedScope(
-				() => Reflection.Reflect.VariableName(reference),
-				(func, level, s) =>
-					{
-						if (predicate(level))
-							throw new RuleException(s, func());
-					}
-				);
-		}
-
-		static IScope ForMessages<T>(Func<T> reference, Action<RuleMessages> action)
-		{
-			var messages = new List<RuleMessage>();
-			return new DelayedScope(
-				() => Reflection.Reflect.VariableName(reference),
-				(func, level, message) => messages.Add(new RuleMessage(func(), level, message)),
-				level => action(new RuleMessages(messages, level)));
-		}
-
-
-		public static RuleMessages GetMessages<T>(Func<T> reference, Action<IScope> action)
-		{
-			var messages = RuleMessages.Empty;
-			using (var scope = ForMessages(reference, m => messages = m))
-			{
-				action(scope);
-			}
-			return messages;
 		}
 	}
 }

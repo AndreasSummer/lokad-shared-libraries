@@ -78,7 +78,7 @@ namespace Lokad.Rules
 		/// <returns>new scope instance</returns>
 		public static IScope ForValidation(string name, Predicate<RuleLevel> predicate)
 		{
-			return SimpleScope.ForValidation(name, predicate);
+			return ScopeFactory.ForValidation(name, predicate);
 		}
 
 		/// <summary>
@@ -90,7 +90,7 @@ namespace Lokad.Rules
 		/// <returns>new scope instance</returns>
 		public static IScope ForEnforce(string scopeName, Predicate<RuleLevel> predicate)
 		{
-			return SimpleScope.ForEnforce(scopeName, predicate);
+			return ScopeFactory.ForEnforce(scopeName, predicate);
 		}
 
 		/// <summary>
@@ -102,7 +102,7 @@ namespace Lokad.Rules
 		/// <returns>new scope instance</returns>
 		public static IScope ForEnforceArgument(string scopeName, Predicate<RuleLevel> predicate)
 		{
-			return SimpleScope.ForEnforceArgument(scopeName, predicate);
+			return ScopeFactory.ForEnforceArgument(scopeName, predicate);
 		}
 
 
@@ -196,7 +196,7 @@ namespace Lokad.Rules
 		public static RuleMessages GetMessages<TItem>(Func<TItem> itemReference, params Rule<TItem>[] rules)
 		{
 			if (itemReference == null) throw new ArgumentNullException("itemReference");
-			return DelayedScope.GetMessages(itemReference, scope => scope.ValidateInScope(itemReference(), rules));
+			return ScopeFactory.GetMessages(itemReference, scope => scope.ValidateInScope(itemReference(), rules));
 		}
 
 
@@ -212,7 +212,7 @@ namespace Lokad.Rules
 			params Rule<TItem>[] rules)
 		{
 			if (sequenceReference == null) throw new ArgumentNullException("sequenceReference");
-			return DelayedScope.GetMessages(sequenceReference, scope => scope.ValidateInScope(sequenceReference(), rules));
+			return ScopeFactory.GetMessages(sequenceReference, scope => scope.ValidateInScope(sequenceReference(), rules));
 		}
 
 
@@ -241,7 +241,7 @@ namespace Lokad.Rules
 		[DebuggerNonUserCode]
 		public static void Validate<T>(T item, params Rule<T>[] rules)
 		{
-			using (var scope = SimpleScope.ForValidation(typeof (T).Name, WhenAny))
+			using (var scope = ScopeFactory.ForValidation(typeof (T).Name, WhenAny))
 			{
 				scope.ValidateInScope(item, rules);
 			}
@@ -257,7 +257,7 @@ namespace Lokad.Rules
 		[DebuggerNonUserCode]
 		public static void ValidateMany<T>(IEnumerable<T> items, params Rule<T>[] rules)
 		{
-			using (var scope = SimpleScope.ForValidation(typeof (T).Name, WhenAny))
+			using (var scope = ScopeFactory.ForValidation(typeof (T).Name, WhenAny))
 			{
 				scope.ValidateInScope(items, rules);
 			}

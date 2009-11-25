@@ -7,7 +7,6 @@
 #endregion
 
 using System;
-using System.Collections.Generic;
 
 namespace Lokad.Rules
 {
@@ -75,32 +74,6 @@ namespace Lokad.Rules
 			get { return _level; }
 		}
 
-		internal static IScope ForEnforceArgument(string name, Predicate<RuleLevel> throwIf)
-		{
-			return new SimpleScope(name, (path, level, message) =>
-				{
-					if (throwIf(level))
-						throw new ArgumentException(message, path);
-				});
-		}
-
-		internal static IScope ForEnforce(string name, Predicate<RuleLevel> throwIf)
-		{
-			return new SimpleScope(name, (path, level, message) =>
-				{
-					if (throwIf(level))
-						throw new RuleException(message, path);
-				});
-		}
-
-		static IScope ForMessages(string name, Action<RuleMessages> action)
-		{
-			var messages = new List<RuleMessage>();
-			return new SimpleScope(name,
-				(path, level, message) => messages.Add(new RuleMessage(path, level, message)),
-				level => action(new RuleMessages(messages, level)));
-		}
-
 		/// <summary>
 		/// Gets the messages reported by the specified action to the scope.
 		/// </summary>
@@ -112,20 +85,11 @@ namespace Lokad.Rules
 			if (name == null) throw new ArgumentNullException("name");
 
 			var messages = RuleMessages.Empty;
-			using (var scope = ForMessages(name, m => messages = m))
+			using (var scope = ScopeFactory.ForMessages(name, m => messages = m))
 			{
 				action(scope);
 			}
 			return messages;
-		}
-
-		internal static IScope ForValidation(string name, Predicate<RuleLevel> throwIf)
-		{
-			return ForMessages(name, messages =>
-				{
-					if (throwIf(messages.Level))
-						throw new RuleException(messages);
-				});
 		}
 	}
 }

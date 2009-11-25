@@ -7,4 +7,5 @@
     <SkipFolder>76BE68DD-B0AB-4CF6-B119-3C493F11B06D/d:Tuples</SkipFolder>
     <SkipFolder>76BE68DD-B0AB-4CF6-B119-3C493F11B06D/d:Utils</SkipFolder>
   </NamespaceFolders>
+  <Localizable>No</Localizable>
 </Configuration>
