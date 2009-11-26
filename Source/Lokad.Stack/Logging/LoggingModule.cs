@@ -56,7 +56,7 @@ namespace Lokad.Logging
 			switch (_mode)
 			{
 				case LoggingMode.Console:
-					LoggingStack.UseConsole();
+					LoggingStack.UseConsoleLog();
 					break;
 				case LoggingMode.Config:
 					LoggingStack.UseConfig();

@@ -75,12 +75,10 @@ namespace Lokad
 				buffer = stream.ToArray();
 			}
 			using (var stream = new MemoryStream(buffer))
+			using (var decompress = stream.Decompress())
 			{
-				using (var decompress = stream.Decompress())
-				{
-					var i = XmlUtil<int[]>.Deserialize(decompress);
-					CollectionAssert.AreEqual(array, i);
-				}
+				var i = XmlUtil<int[]>.Deserialize(decompress);
+				CollectionAssert.AreEqual(array, i);
 			}
 		}
 	}

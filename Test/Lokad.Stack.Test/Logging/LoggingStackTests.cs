@@ -54,7 +54,7 @@ namespace Lokad.Logging
 			using (var writer = new StringWriter())
 			{
 				Console.SetOut(writer);
-				LoggingStack.UseConsole();
+				LoggingStack.UseConsoleLog();
 				LoggingStack.GetLog().Error(new Exception(), "Some exception");
 				Enforce.That(writer.ToString(), StringIs.NotEmpty);
 			}

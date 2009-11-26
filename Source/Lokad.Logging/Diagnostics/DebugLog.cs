@@ -15,9 +15,10 @@ using Lokad.Quality;
 namespace Lokad.Diagnostics
 {
 	/// <summary>
-	/// <see cref="ILog"/> that writes to the <see cref="Trace.Listeners"/>, if the
+	/// Simple <see cref="ILog"/> that writes to the <see cref="Trace.Listeners"/>, if the
 	/// <em>DEBUG</em> symbol is defined
 	/// </summary>
+	/// <remarks>Use Logging stack, if more flexibility is needed</remarks>
 	[Serializable]
 	[NoCodeCoverage, Immutable, UsedImplicitly]
 	public sealed class DebugLog : ILog
@@ -42,39 +43,16 @@ namespace Lokad.Diagnostics
 			_logName = logName;
 		}
 
-
 		void ILog.Log(LogLevel level, object message)
 		{
-			if (string.IsNullOrEmpty(_logName))
-			{
-				Debug.WriteLine(message, string.Format("[{0,-5}]", level));
-			}
-			else
-			{
-				Debug.WriteLine(message, string.Format("[{1,-5}] {0}", _logName, level));
-			}
-
+			Debug.WriteLine("[" + level + "] " + message, _logName);
 			Debug.Flush();
 		}
 
 		void ILog.Log(LogLevel level, Exception ex, object message)
 		{
-
-			if (string.IsNullOrEmpty(_logName))
-			{
-				var category = string.Format("[{0,-5}]", level);
-
-				Debug.WriteLine(message, category);
-				Debug.WriteLine(ex, category);
-			}
-			else
-			{
-				var category = string.Format("[{1,-5}] {0}", _logName, level);
-
-				Debug.WriteLine(message, category);
-				Debug.WriteLine(ex, category);
-			}
-
+			Debug.WriteLine("[" + level + "] " + message, _logName);
+			Debug.WriteLine("[" + level + "] " + ex, _logName);
 			Debug.Flush();
 		}
 

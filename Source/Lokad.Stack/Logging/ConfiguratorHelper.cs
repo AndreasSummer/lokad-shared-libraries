@@ -106,12 +106,54 @@ namespace Lokad.Logging
 			return appender;
 		}
 
-		internal static LogOptions GetConsoleOptions()
+
+		internal static TraceAppender BuildTraceLog(ListeningLogOptions options)
+		{
+			var layout = new PatternLayout
+			{
+				ConversionPattern = options.Pattern
+			};
+			layout.ActivateOptions();
+			var appender = new TraceAppender
+			{
+				Layout = layout,
+				ImmediateFlush = options.ImmediateFlush
+			};
+			appender.ActivateOptions();
+			return appender;
+		}
+
+
+		internal static DebugAppender BuildDebugLog(ListeningLogOptions options)
+		{
+			var layout = new PatternLayout
+			{
+				ConversionPattern = options.Pattern
+			};
+			layout.ActivateOptions();
+			var appender = new DebugAppender
+			{
+				Layout = layout,
+				ImmediateFlush = options.ImmediateFlush
+			};
+			appender.ActivateOptions();
+			return appender;
+		}
+
+		internal static LogOptions GetDefaultOptions()
 		{
 			return new LogOptions
 				{
 					Pattern = PatternLayout.DetailConversionPattern
 				};
+		}
+
+		internal static ListeningLogOptions GetDefaultListeningOptions()
+		{
+			return new ListeningLogOptions()
+			{
+				Pattern = PatternLayout.DetailConversionPattern
+			};
 		}
 
 		internal static ColoredConsoleAppender BuildColoredConsoleLog(LogOptions options)

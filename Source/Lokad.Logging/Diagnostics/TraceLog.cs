@@ -14,8 +14,9 @@ using Lokad.Quality;
 namespace Lokad.Diagnostics
 {
 	/// <summary>
-	/// <see cref="ILog"/> that writes to the <see cref="Trace.Listeners"/>
+	/// Simple <see cref="ILog"/> that writes to the <see cref="Trace.Listeners"/>
 	/// </summary>
+	/// <remarks>Use Logging stack, if more flexibility is needed</remarks>
 	[Serializable]
 	[NoCodeCoverage, Immutable, UsedImplicitly]
 	public sealed class TraceLog : ILog
@@ -40,38 +41,17 @@ namespace Lokad.Diagnostics
 			_logName = logName;
 		}
 
+
 		void ILog.Log(LogLevel level, object message)
 		{
-			var text = "[" + level + "] " + message;
-
-			if (string.IsNullOrEmpty(_logName))
-			{
-				Trace.WriteLine(text);
-			}
-			else
-			{
-				Trace.WriteLine(text, _logName);
-			}
-			
+			Trace.WriteLine("[" + level + "] " + message, _logName);
 			Trace.Flush();
 		}
 
 		void ILog.Log(LogLevel level, Exception ex, object message)
 		{
-			var text = "[" + level + "] " + message;
-			var exText = "[" + level + "] " + ex;
-
-			if (string.IsNullOrEmpty(_logName))
-			{
-				Trace.WriteLine(text);
-				Trace.WriteLine(exText);
-			}
-			else
-			{
-				Trace.WriteLine(text, _logName);
-				Trace.WriteLine(exText, _logName);
-			}
-			
+			Trace.WriteLine("[" + level + "] " + message, _logName);
+			Trace.WriteLine("[" + level + "] " + ex, _logName);
 			Trace.Flush();
 		}
 

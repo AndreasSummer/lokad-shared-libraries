@@ -27,10 +27,10 @@ namespace Lokad.Logging
 		/// </summary>
 		/// <param name="configure">The configuration option.</param>
 		/// <returns>log syntax</returns>
-		public static LogSyntax UseConsole([NotNull] Action<LogOptions> configure)
+		public static LogSyntax UseConsoleLog([NotNull] Action<LogOptions> configure)
 		{
 			Enforce.Argument(() => configure);
-			var options = ConfiguratorHelper.GetConsoleOptions();
+			var options = ConfiguratorHelper.GetDefaultOptions();
 			configure(options);
 			var appender = ConfiguratorHelper.BuildConsoleLog(options);
 			Configure(appender);
@@ -39,12 +39,62 @@ namespace Lokad.Logging
 
 
 		/// <summary>
+		/// Configures the logging system to write to trace
+		/// </summary>
+		/// <param name="configure">The configuration option.</param>
+		/// <returns>log syntax</returns>
+		public static LogSyntax UseTraceLog([NotNull] Action<ListeningLogOptions> configure)
+		{
+			Enforce.Argument(() => configure);
+			var options = ConfiguratorHelper.GetDefaultListeningOptions();
+			configure(options);
+			var appender = ConfiguratorHelper.BuildTraceLog(options);
+			Configure(appender);
+			return new LogSyntax(appender);
+		}
+
+
+		/// <summary>
+		/// Configures the logging system to write to the debug listeners
+		/// </summary>
+		/// <param name="configure">The configuration option.</param>
+		/// <returns>log syntax</returns>
+		public static LogSyntax UseDebugLog([NotNull] Action<ListeningLogOptions> configure)
+		{
+			Enforce.Argument(() => configure);
+			var options = ConfiguratorHelper.GetDefaultListeningOptions();
+			configure(options);
+			var appender = ConfiguratorHelper.BuildDebugLog(options);
+			Configure(appender);
+			return new LogSyntax(appender);
+		}
+
+		/// <summary>
 		/// Configures the logging system to write to console
 		/// </summary>
 		/// <returns>log syntax</returns>
-		public static LogSyntax UseConsole()
+		public static LogSyntax UseTraceLog()
 		{
-			return UseConsole(c => { });
+			return UseTraceLog(c => { });
+		}
+
+
+		/// <summary>
+		/// Configures the logging system to write to console
+		/// </summary>
+		/// <returns>log syntax</returns>
+		public static LogSyntax UseDebugLog()
+		{
+			return UseTraceLog(c => { });
+		}
+
+		/// <summary>
+		/// Configures the logging system to write to console
+		/// </summary>
+		/// <returns>log syntax</returns>
+		public static LogSyntax UseConsoleLog()
+		{
+			return UseConsoleLog(c => { });
 		}
 
 		/// <summary>
@@ -52,10 +102,10 @@ namespace Lokad.Logging
 		/// </summary>
 		/// <param name="configure">The configuration options.</param>
 		/// <returns>log syntax</returns>
-		public static LogSyntax UseColoredConsole([NotNull] Action<LogOptions> configure)
+		public static LogSyntax UseColoredConsoleLog([NotNull] Action<LogOptions> configure)
 		{
 			Enforce.Argument(() => configure);
-			var options = ConfiguratorHelper.GetConsoleOptions();
+			var options = ConfiguratorHelper.GetDefaultOptions();
 			configure(options);
 			var appender = ConfiguratorHelper.BuildColoredConsoleLog(options);
 			Configure(appender);
@@ -67,9 +117,9 @@ namespace Lokad.Logging
 		/// Configures the logging system to write to console with colors
 		/// </summary>
 		/// <returns>log syntax</returns>
-		public static LogSyntax UseColoredConsole()
+		public static LogSyntax UseColoredConsoleLog()
 		{
-			return UseColoredConsole(l => { });
+			return UseColoredConsoleLog(l => { });
 		}
 
 		/// <summary>
