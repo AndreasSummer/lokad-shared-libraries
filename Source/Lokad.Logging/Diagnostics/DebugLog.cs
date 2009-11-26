@@ -15,36 +15,67 @@ using Lokad.Quality;
 namespace Lokad.Diagnostics
 {
 	/// <summary>
-	/// <see cref="ILog"/> that writes to the <see cref="Debug.Listeners"/>
+	/// <see cref="ILog"/> that writes to the <see cref="Trace.Listeners"/>, if the
+	/// <em>DEBUG</em> symbol is defined
 	/// </summary>
 	[Serializable]
 	[NoCodeCoverage, Immutable, UsedImplicitly]
 	public sealed class DebugLog : ILog
 	{
-		/// <summary>
-		/// Singleton instance of the <see cref="DebugLog"/>
-		/// </summary>
-		public static readonly ILog Instance = new DebugLog();
+		/// <summary>  Singleton instance </summary>
+		[UsedImplicitly] public static readonly ILog Instance = new DebugLog("");
 
 		/// <summary>
 		/// Named provider for the <see cref="DebugLog"/>
 		/// </summary>
-		public static readonly INamedProvider<ILog> Provider =
-			new NamedProvider<ILog>(s => Instance);
+		[UsedImplicitly] public static readonly ILogProvider Provider =
+			new LambdaLogProvider(s => new DebugLog(s));
 
-		DebugLog()
+		readonly string _logName;
+
+		/// <summary>
+		/// Initializes a new instance of the <see cref="DebugLog"/> class.
+		/// </summary>
+		/// <param name="logName">Name of the log.</param>
+		public DebugLog(string logName)
 		{
+			_logName = logName;
 		}
+
 
 		void ILog.Log(LogLevel level, object message)
 		{
-			Debug.WriteLine(message, level.ToString());
+			if (string.IsNullOrEmpty(_logName))
+			{
+				Debug.WriteLine(message, string.Format("[{0,-5}]", level));
+			}
+			else
+			{
+				Debug.WriteLine(message, string.Format("[{1,-5}] {0}", _logName, level));
+			}
+
+			Debug.Flush();
 		}
 
 		void ILog.Log(LogLevel level, Exception ex, object message)
 		{
-			Debug.WriteLine(message, level.ToString());
-			Debug.WriteLine(ex, level.ToString());
+
+			if (string.IsNullOrEmpty(_logName))
+			{
+				var category = string.Format("[{0,-5}]", level);
+
+				Debug.WriteLine(message, category);
+				Debug.WriteLine(ex, category);
+			}
+			else
+			{
+				var category = string.Format("[{1,-5}] {0}", _logName, level);
+
+				Debug.WriteLine(message, category);
+				Debug.WriteLine(ex, category);
+			}
+
+			Debug.Flush();
 		}
 
 		bool ILog.IsEnabled(LogLevel level)

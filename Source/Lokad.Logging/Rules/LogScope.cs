@@ -8,9 +8,8 @@
 
 using System;
 using Lokad.Quality;
-using Lokad.Rules;
 
-namespace Lokad
+namespace Lokad.Rules
 {
 	/// <summary> <see cref="IScope"/> that maintains scope path and writes inner messages 
 	/// to the log  with the proper path

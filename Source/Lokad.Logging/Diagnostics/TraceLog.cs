@@ -21,27 +21,58 @@ namespace Lokad.Diagnostics
 	public sealed class TraceLog : ILog
 	{
 		/// <summary>  Singleton instance </summary>
-		public static readonly ILog Instance = new TraceLog();
+		[UsedImplicitly] public static readonly ILog Instance = new TraceLog("");
 
 		/// <summary>
 		/// Named provider for the <see cref="TraceLog"/>
 		/// </summary>
-		public static readonly INamedProvider<ILog> Provider =
-			new NamedProvider<ILog>(s => Instance);
+		[UsedImplicitly] public static readonly ILogProvider Provider =
+			new LambdaLogProvider(s => new TraceLog(s));
 
-		TraceLog()
+		readonly string _logName;
+
+		/// <summary>
+		/// Initializes a new instance of the <see cref="TraceLog"/> class.
+		/// </summary>
+		/// <param name="logName">Name of the log.</param>
+		public TraceLog(string logName)
 		{
+			_logName = logName;
 		}
 
 		void ILog.Log(LogLevel level, object message)
 		{
-			Trace.WriteLine(message, level.ToString());
+			var text = "[" + level + "] " + message;
+
+			if (string.IsNullOrEmpty(_logName))
+			{
+				Trace.WriteLine(text);
+			}
+			else
+			{
+				Trace.WriteLine(text, _logName);
+			}
+			
+			Trace.Flush();
 		}
 
 		void ILog.Log(LogLevel level, Exception ex, object message)
 		{
-			Trace.WriteLine(message, level.ToString());
-			Trace.WriteLine(ex, level.ToString());
+			var text = "[" + level + "] " + message;
+			var exText = "[" + level + "] " + ex;
+
+			if (string.IsNullOrEmpty(_logName))
+			{
+				Trace.WriteLine(text);
+				Trace.WriteLine(exText);
+			}
+			else
+			{
+				Trace.WriteLine(text, _logName);
+				Trace.WriteLine(exText, _logName);
+			}
+			
+			Trace.Flush();
 		}
 
 		bool ILog.IsEnabled(LogLevel level)

@@ -26,8 +26,8 @@ namespace Lokad.Diagnostics
 		/// <summary>
 		/// Named provider for the <see cref="NullLog"/>
 		/// </summary>
-		public static readonly INamedProvider<ILog> Provider =
-			new NamedProvider<ILog>(s => Instance);
+		[UsedImplicitly] public static readonly ILogProvider Provider =
+			new LambdaLogProvider(s => Instance);
 
 		NullLog()
 		{

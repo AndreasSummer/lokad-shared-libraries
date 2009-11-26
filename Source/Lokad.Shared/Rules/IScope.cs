@@ -49,11 +49,9 @@ namespace Lokad.Rules
 		/// <value>The level.</value>
 		RuleLevel Level { get; }
 
-		// extensibility methods, or it could be simply turned into ILog with the nesting methods
-		// void Write(LogLevel level, string message); (with shorthands just like in ILog)
-		// LogLevel Current { get;} (
-
 		// used for complex multi-step integration scenarios 
 		// IScope CreateDetached(string name)
 	}
+
+
 }

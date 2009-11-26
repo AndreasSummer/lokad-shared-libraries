@@ -6,12 +6,14 @@
 
 #endregion
 
+using System;
 using System.IO;
 using System.Reflection;
 using log4net;
 using log4net.Appender;
 using log4net.Config;
 using log4net.Repository;
+using Lokad.Quality;
 
 namespace Lokad.Logging
 {
@@ -23,22 +25,51 @@ namespace Lokad.Logging
 		/// <summary>
 		/// Configures the logging system to write to console
 		/// </summary>
-		public static LogSyntax UseConsole()
+		/// <param name="configure">The configuration option.</param>
+		/// <returns>log syntax</returns>
+		public static LogSyntax UseConsole([NotNull] Action<LogOptions> configure)
 		{
-			var appender = ConfiguratorHelper.GetConsoleLog();
+			Enforce.Argument(() => configure);
+			var options = ConfiguratorHelper.GetConsoleOptions();
+			configure(options);
+			var appender = ConfiguratorHelper.BuildConsoleLog(options);
 			Configure(appender);
 			return new LogSyntax(appender);
+		}
+
+
+		/// <summary>
+		/// Configures the logging system to write to console
+		/// </summary>
+		/// <returns>log syntax</returns>
+		public static LogSyntax UseConsole()
+		{
+			return UseConsole(c => { });
 		}
 
 		/// <summary>
 		/// Configures the logging system to write to console with colors
 		/// </summary>
-		/// <returns></returns>
-		public static LogSyntax UseColoredConsole()
+		/// <param name="configure">The configuration options.</param>
+		/// <returns>log syntax</returns>
+		public static LogSyntax UseColoredConsole([NotNull] Action<LogOptions> configure)
 		{
-			var appender = ConfiguratorHelper.GetColoredConsoleLog();
+			Enforce.Argument(() => configure);
+			var options = ConfiguratorHelper.GetConsoleOptions();
+			configure(options);
+			var appender = ConfiguratorHelper.BuildColoredConsoleLog(options);
 			Configure(appender);
 			return new LogSyntax(appender);
+		}
+
+
+		/// <summary>
+		/// Configures the logging system to write to console with colors
+		/// </summary>
+		/// <returns>log syntax</returns>
+		public static LogSyntax UseColoredConsole()
+		{
+			return UseColoredConsole(l => { });
 		}
 
 		/// <summary>

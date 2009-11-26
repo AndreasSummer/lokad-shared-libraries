@@ -62,6 +62,7 @@
     <Compile Include="Logging\ConfiguratorHelper.cs" />
     <Compile Include="Logging\LoggingModule.cs" />
     <Compile Include="Logging\LoggingMode.cs" />
+    <Compile Include="Logging\LogOptions.cs" />
     <Compile Include="Logging\LogProviderWrapper.cs" />
     <Compile Include="Logging\LogSyntax.cs" />
     <Compile Include="Logging\LogWrapper.cs" />

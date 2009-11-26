@@ -77,7 +77,7 @@ namespace Lokad.Logging
 			var layout = new PatternLayout("%date [%thread] %-5level %logger [%property{NDC}] - %message%newline");
 			layout.ActivateOptions();
 
-			var log = new RollingFileAppender()
+			var log = new RollingFileAppender
 				{
 					File = path,
 					AppendToFile = true,
@@ -91,11 +91,11 @@ namespace Lokad.Logging
 			return log;
 		}
 
-		internal static ConsoleAppender GetConsoleLog()
+		internal static ConsoleAppender BuildConsoleLog(LogOptions options)
 		{
 			var layout = new PatternLayout
 				{
-					ConversionPattern = "%timestamp [%thread] %level %logger %ndc - %message%newline"
+					ConversionPattern = options.Pattern
 				};
 			layout.ActivateOptions();
 			var appender = new ConsoleAppender
@@ -106,11 +106,19 @@ namespace Lokad.Logging
 			return appender;
 		}
 
-		internal static ColoredConsoleAppender GetColoredConsoleLog()
+		internal static LogOptions GetConsoleOptions()
+		{
+			return new LogOptions
+				{
+					Pattern = PatternLayout.DetailConversionPattern
+				};
+		}
+
+		internal static ColoredConsoleAppender BuildColoredConsoleLog(LogOptions options)
 		{
 			var layout = new PatternLayout
 			{
-				ConversionPattern = "%timestamp [%thread] %-5level %logger - %message%newline"
+				ConversionPattern = options.Pattern
 			};
 			layout.ActivateOptions();
 			var appender = new ColoredConsoleAppender
@@ -118,9 +126,9 @@ namespace Lokad.Logging
 				Layout = layout
 			};
 
-			Map(appender, Colors.Red, Level.Alert, Level.Critical, Level.Emergency, Level.Error, Level.Fatal, Level.Severe);
+			Map(appender, Colors.Red | Colors.HighIntensity, Level.Alert, Level.Critical, Level.Emergency, Level.Error, Level.Fatal, Level.Severe);
 			Map(appender, Colors.Cyan | Colors.HighIntensity, Level.Info, Level.Notice);
-			Map(appender, Colors.Yellow, Level.Warn);
+			Map(appender, Colors.Yellow | Colors.HighIntensity, Level.Warn);
 
 			appender.ActivateOptions();
 			return appender;
