@@ -29,6 +29,22 @@ namespace Lokad
 			_hasValue = hasValue;
 		}
 
+		internal Maybe(T value)
+			: this(value, true)
+		{
+			// ReSharper disable CompareNonConstrainedGenericWithNull
+			if (value == null)
+			{
+				throw new ArgumentNullException("value");
+			}
+			// ReSharper restore CompareNonConstrainedGenericWithNull
+		}
+
+		/// <summary>
+		/// Default empty instance.
+		/// </summary>
+		public static readonly Maybe<T> Empty = new Maybe<T>(default(T), false);
+
 		/// <summary>
 		/// Gets the underlying value.
 		/// </summary>
@@ -38,18 +54,12 @@ namespace Lokad
 			get
 			{
 				if (!_hasValue)
+				{
 					throw Errors.InvalidOperation(ResultResources.Dont_access_value_when_maybe_is_empty);
+				}
 
 				return _value;
 			}
-		}
-
-		internal Maybe(T value)
-			: this(value, true)
-		{
-			// ReSharper disable CompareNonConstrainedGenericWithNull
-			if (value == null) throw new ArgumentNullException("value");
-			// ReSharper restore CompareNonConstrainedGenericWithNull
 		}
 
 		/// <summary>
@@ -62,22 +72,25 @@ namespace Lokad
 		}
 
 		/// <summary>
-		/// Default empty instance.
+		/// Retrieves value from this instance, using a 
+		/// <paramref name="defaultValue"/> if it is absent.
 		/// </summary>
-		public static readonly Maybe<T> Empty = new Maybe<T>(default(T), false);
+		/// <param name="defaultValue">The default value.</param>
+		/// <returns>value</returns>
+		public T GetValue(Func<T> defaultValue)
+		{
+			return _hasValue ? _value : defaultValue();
+		}
 
 		/// <summary>
-		/// Converts this instance to <see cref="Maybe{T}"/>, 
-		/// while applying <paramref name="converter"/> if there is a value.
+		/// Retrieves value from this instance, using a 
+		/// <paramref name="defaultValue"/> if it is absent.
 		/// </summary>
-		/// <typeparam name="TTarget">The type of the target.</typeparam>
-		/// <param name="converter">The converter.</param>
-		/// <returns></returns>
-		public Maybe<TTarget> Convert<TTarget>(Func<T, TTarget> converter) where TTarget : class
+		/// <param name="defaultValue">The default value.</param>
+		/// <returns>value</returns>
+		public T GetValue(T defaultValue)
 		{
-			return _hasValue
-				? converter(_value)
-				: Maybe<TTarget>.Empty;
+			return _hasValue ? _value : defaultValue;
 		}
 
 		/// <summary>
@@ -91,6 +104,7 @@ namespace Lokad
 			{
 				action(_value);
 			}
+
 			return this;
 		}
 
@@ -105,6 +119,7 @@ namespace Lokad
 			{
 				action();
 			}
+
 			return this;
 		}
 
@@ -120,29 +135,31 @@ namespace Lokad
 			{
 				throw exception();
 			}
+
 			return _value;
 		}
 
 		/// <summary>
-		/// Retrieves value from this instance, using a 
-		/// <paramref name="defaultValue"/> if it is absent.
+		/// Combines this optional with the pipeline function
 		/// </summary>
-		/// <param name="defaultValue">The default value.</param>
-		/// <returns>value</returns>
-		public T GetValue(Func<T> defaultValue)
+		/// <typeparam name="TTarget">The type of the target.</typeparam>
+		/// <param name="combinator">The combinator (pipeline funcion).</param>
+		/// <returns>optional result</returns>
+		public Maybe<TTarget> Combine<TTarget>(Func<T, Maybe<TTarget>> combinator)
 		{
-			return HasValue ? Value : defaultValue();
+			return _hasValue ? combinator(_value) : Maybe<TTarget>.Empty;
 		}
 
 		/// <summary>
-		/// Retrieves value from this instance, using a 
-		/// <paramref name="defaultValue"/> if it is absent.
+		/// Converts this instance to <see cref="Maybe{T}"/>, 
+		/// while applying <paramref name="converter"/> if there is a value.
 		/// </summary>
-		/// <param name="defaultValue">The default value.</param>
-		/// <returns>value</returns>
-		public T GetValue(T defaultValue)
+		/// <typeparam name="TTarget">The type of the target.</typeparam>
+		/// <param name="converter">The converter.</param>
+		/// <returns></returns>
+		public Maybe<TTarget> Convert<TTarget>(Func<T, TTarget> converter)
 		{
-			return HasValue ? Value : defaultValue;
+			return _hasValue ? converter(_value) : Maybe<TTarget>.Empty;
 		}
 
 		/// <summary>
@@ -155,7 +172,7 @@ namespace Lokad
 		/// <returns>value</returns>
 		public TTarget Convert<TTarget>(Func<T, TTarget> converter, Func<TTarget> defaultValue)
 		{
-			return HasValue ? converter(Value) : defaultValue();
+			return _hasValue ? converter(_value) : defaultValue();
 		}
 
 		/// <summary>
@@ -168,21 +185,8 @@ namespace Lokad
 		/// <returns>value</returns>
 		public TTarget Convert<TTarget>(Func<T, TTarget> converter, TTarget defaultValue)
 		{
-			return HasValue ? converter(Value) : defaultValue;
+			return _hasValue ? converter(_value) : defaultValue;
 		}
-
-		/// <summary>
-		/// Combines this optional with the pipeline function
-		/// </summary>
-		/// <typeparam name="TTarget">The type of the target.</typeparam>
-		/// <param name="combinator">The combinator (pipeline funcion).</param>
-		/// <returns>optional result</returns>
-		public Maybe<TTarget> Combine<TTarget>(Func<T, Maybe<TTarget>> combinator)
-		{
-			if (!HasValue) return Maybe<TTarget>.Empty;
-			return combinator(Value);
-		}
-
 
 		/// <summary>
 		/// Determines whether the specified <see cref="Maybe{T}"/> is equal to the current <see cref="Maybe{T}"/>.
@@ -293,7 +297,9 @@ namespace Lokad
 		public override string ToString()
 		{
 			if (_hasValue)
+			{
 				return "<" + _value + ">";
+			}
 
 			return "<Empty>";
 		}
