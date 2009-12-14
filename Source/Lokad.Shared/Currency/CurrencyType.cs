@@ -17,7 +17,7 @@ namespace Lokad
 	public enum CurrencyType
 	{
 #pragma warning disable 1591
-		Undefined = 0x00,
+		None = 0x00,
 		Eur,
 		Usd,
 		Aud,
