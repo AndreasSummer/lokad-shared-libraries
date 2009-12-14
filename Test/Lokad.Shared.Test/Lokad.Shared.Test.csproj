@@ -57,6 +57,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Currency\CurrencyAmountTests.cs" />
     <Compile Include="Extensions\ExtendActionTests.cs" />
     <Compile Include="Diagnostics\ExecutionCounterTests.cs" />
     <Compile Include="Expects.cs" />

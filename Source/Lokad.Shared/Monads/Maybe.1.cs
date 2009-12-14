@@ -140,6 +140,39 @@ namespace Lokad
 		}
 
 		/// <summary>
+		/// Throws the exception if maybe does not have value.
+		/// </summary>
+		/// <returns>actual value</returns>
+		/// <exception cref="InvalidOperationException">if maybe does not have value</exception>
+		public T ExposeException([NotNull] string message)
+		{
+			if (message == null) throw new ArgumentNullException(@"message");
+			if (!_hasValue)
+			{
+				throw new InvalidOperationException(message);
+			}
+
+			return _value;
+		}
+
+		/// <summary>
+		/// Throws the exception if maybe does not have value.
+		/// </summary>
+		/// <returns>actual value</returns>
+		/// <exception cref="InvalidOperationException">if maybe does not have value</exception>
+		public T ExposeException([NotNull] string message, params object[] args)
+		{
+			if (message == null) throw new ArgumentNullException(@"message");
+			if (!_hasValue)
+			{
+				var text = string.Format(message, args);
+				throw new InvalidOperationException(text);
+			}
+
+			return _value;
+		}
+
+		/// <summary>
 		/// Combines this optional with the pipeline function
 		/// </summary>
 		/// <typeparam name="TTarget">The type of the target.</typeparam>

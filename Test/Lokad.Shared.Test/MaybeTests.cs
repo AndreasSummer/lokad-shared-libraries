@@ -119,5 +119,29 @@ namespace Lokad
 
 			Assert.AreEqual(Maybe10.Value, i);
 		}
+
+		[Test, Expects.InvalidOperationException]
+		public void Exposing1()
+		{
+			MaybeEmpty.ExposeException("Fail");
+		}
+
+		[Test, ExpectedException(typeof(KeyInvalidException))]
+		public void Exposing2()
+		{
+			MaybeEmpty.ExposeException(Errors.KeyInvalid);
+		}
+
+		[Test]
+		public void Exposing_Valid()
+		{
+			Maybe10
+				.ExposeException("Fail")
+				.ShouldBeEqualTo(10);
+
+			Maybe10
+				.ExposeException(Errors.KeyInvalid)
+				.ShouldBeEqualTo(10);
+		}
 	}
 }

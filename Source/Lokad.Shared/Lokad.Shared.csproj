@@ -59,6 +59,10 @@
     <Compile Include="..\VersionAssemblyInfo.cs">
       <Link>Properties\VersionAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="Currency\CurrencyAmount.cs" />
+    <Compile Include="Currency\CurrencyMismatchException.cs" />
+    <Compile Include="Currency\CurrencyType.cs" />
+    <Compile Include="Currency\ExtendDecimal.cs" />
     <Compile Include="Diagnostics\Persist\ConversionExtensions.cs" />
     <Compile Include="Diagnostics\Persist\ExceptionData.cs" />
     <Compile Include="Diagnostics\Persist\ExecutionData.cs" />
