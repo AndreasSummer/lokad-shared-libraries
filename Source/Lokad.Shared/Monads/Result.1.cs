@@ -260,6 +260,19 @@ namespace Lokad
 		}
 
 		/// <summary>
+		/// Converts this <see cref="Result{T}"/> to <see cref="Maybe{T}"/>, 
+		/// with the original value reference, if there is any.
+		/// </summary>
+		/// <returns><see cref="Maybe{T}"/> that represents the original value behind the <see cref="Result{T}"/>.</returns>
+		public Maybe<T> ToMaybe()
+		{
+			if (!_isSuccess)
+				return Maybe<T>.Empty;
+
+			return _value;
+		}
+
+		/// <summary>
 		/// Exposes result failure as the exception (providing compatibility, with the exception -expecting code).
 		/// </summary>
 		/// <param name="exception">The function to generate exception, provided the error string.</param>

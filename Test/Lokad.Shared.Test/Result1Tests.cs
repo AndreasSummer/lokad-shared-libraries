@@ -92,6 +92,9 @@ namespace Lokad
 		[Test]
 		public void ToMaybe()
 		{
+			Assert.AreEqual(Maybe<int>.Empty, ResultError.ToMaybe());
+			Assert.AreEqual(Maybe.From(10), ResultSuccess.ToMaybe());
+
 			Assert.AreEqual(Maybe<int>.Empty, ResultError.ToMaybe(i => i));
 			Assert.AreEqual(Maybe.From(10), ResultSuccess.ToMaybe(i => i));
 		}
