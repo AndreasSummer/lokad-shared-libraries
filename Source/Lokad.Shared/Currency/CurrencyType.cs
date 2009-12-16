@@ -12,12 +12,12 @@ namespace Lokad
 	///	Currency types supported by the Lokad business
 	///</summary>
 	///<remarks>
-	///	Hardcoded for simplicity, but could be switched to string codes, if needed
+	///	Hardcoded for simplicity, but could be switched to string codes, if needed.
 	///</remarks>
 	public enum CurrencyType
 	{
 #pragma warning disable 1591
-		None = 0x00,
+		None = 0x00,// this must be default!
 		Eur,
 		Usd,
 		Aud,
@@ -25,5 +25,6 @@ namespace Lokad
 		Chf,
 		Gbp,
 		Jpy,
+		Rur
 	}
 }

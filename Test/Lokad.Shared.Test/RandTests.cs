@@ -112,6 +112,15 @@ namespace Lokad
 			Assert.Greater(new DateTime(2008,1,1), Rand.NextDate(1900,2008));
 		}
 
+		[Test]
+		public void NextEnumWithoutDefault_never_returns_default()
+		{
+			for (int i = 0; i < 10; i++)
+			{
+				Assert.AreNotEqual(Option.No, Rand.NextEnumExceptDefault<Option>());
+			}
+		}
+
 #if !SILVERLIGHT2
 
 		

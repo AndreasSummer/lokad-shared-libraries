@@ -47,6 +47,24 @@ namespace Lokad.Testing
 			return result;
 		}
 
+		/// <summary>
+		/// Asserts that the result is equal to some error
+		/// </summary>
+		/// <typeparam name="TValue">The type of the value.</typeparam>
+		/// <typeparam name="TEnum">The type of the enum describing the failure.</typeparam>
+		/// <param name="result">The result.</param>
+		/// <param name="enum">The @enum.</param>
+		/// <returns>
+		/// same result instance for further inlining
+		/// </returns>
+		public static Result<TValue> ShouldFailWith<TValue, TEnum>(this Result<TValue> result, TEnum @enum)
+			where TEnum : struct
+		{	
+			var s = EnumUtil.ToIdentifier(@enum);
+			return result.ShouldFailWith(s);
+		}
+
+
 		///// <summary>
 		///// Asserts that the result is equal to some error
 		///// </summary>

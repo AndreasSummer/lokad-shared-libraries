@@ -122,6 +122,15 @@ namespace Lokad
 			return NextItem(EnumUtil<TEnum>.Values);
 		}
 
+		/// <summary> Picks random <see cref="Enum"/> where the item is not equal to
+		/// default(TEnum)</summary>
+		/// <typeparam name="TEnum">The type of the enum.</typeparam>
+		/// <returns>random Enum value</returns>
+		public static TEnum NextEnumExceptDefault<TEnum>() where TEnum : struct
+		{
+			return NextItem(EnumUtil<TEnum>.ValuesWithoutDefault);
+		}
+
 		/// <summary>
 		/// Returns <em>true</em> with the specified probability.
 		/// </summary>

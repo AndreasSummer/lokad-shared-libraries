@@ -4,12 +4,12 @@ namespace Lokad
 {
 	/// <summary>
 	/// 	Decimal that also has currency type assotiated. It is used
-	/// 	for enforcing logical consistency within the Lokad Billing.
+	/// 	for enforcing logical consistency within the billing.
 	/// 
 	/// 	We want to reduce chances of messing up by mixing different
 	/// 	currencies together.
 	/// </summary>
-	public sealed class CurrencyAmount : IEquatable<CurrencyAmount>
+	public struct CurrencyAmount : IEquatable<CurrencyAmount>
 	{
 		/// <summary>Currency type</summary>
 		public readonly CurrencyType Currency;
@@ -270,11 +270,11 @@ namespace Lokad
 		public static bool operator <=(CurrencyAmount originalValue, CurrencyAmount amount)
 		{
 			ThrowIfMismatch(originalValue, amount, "<=");
-			return originalValue.Value >= amount.Value;
+			return originalValue.Value <= amount.Value;
 		}
 
 		/// <summary>
-		/// 	Implements the operator &gt;.
+		/// 	Implements the operator &lt;.
 		/// </summary>
 		/// <param name="originalValue">The original value.</param>
 		/// <param name="amount">
@@ -290,6 +290,39 @@ namespace Lokad
 		{
 			ThrowIfMismatch(originalValue, amount, "<");
 			return originalValue.Value < amount.Value;
+		}
+
+		/// <summary>
+		/// Implements the operator ==.
+		/// </summary>
+		/// <param name="originalValue">The original value.</param>
+		/// <param name="amount">The amount.</param>
+		/// <returns>The result of the operator.</returns>
+		public static bool operator ==(CurrencyAmount originalValue, CurrencyAmount amount)
+		{
+			return originalValue.Equals(amount);
+		}
+
+		/// <summary>
+		/// Implements the operator !=.
+		/// </summary>
+		/// <param name="originalValue">The original value.</param>
+		/// <param name="amount">The amount.</param>
+		/// <returns>The result of the operator.</returns>
+		public static bool operator !=(CurrencyAmount originalValue, CurrencyAmount amount)
+		{
+			return !(originalValue == amount);
+		}
+
+
+		/// <summary>
+		/// Implements the operator -.
+		/// </summary>
+		/// <param name="originalValue">The original value.</param>
+		/// <returns>The result of the operator.</returns>
+		public static CurrencyAmount operator -(CurrencyAmount originalValue)
+		{
+			return new CurrencyAmount(originalValue.Currency, -originalValue.Value);
 		}
 
 		static void ThrowIfMismatch(CurrencyAmount originalValue, CurrencyAmount amount, string operationName)

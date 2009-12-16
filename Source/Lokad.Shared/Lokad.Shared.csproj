@@ -88,6 +88,12 @@
     <Compile Include="Rules\Common\MaybeIs.cs" />
     <Compile Include="Reflection\ReflectCache.cs" />
     <Compile Include="Rules\Scopes\ScopeFactory.cs" />
+    <Compile Include="Settings\ISettingsRepository.cs" />
+    <Compile Include="Settings\DictionarySettingsProvider.cs" />
+    <Compile Include="Settings\ExtendISettingsProvider.cs" />
+    <Compile Include="Settings\ISettingsKeyFilter.cs" />
+    <Compile Include="Settings\ISettingsProvider.cs" />
+    <Compile Include="Settings\PrefixTruncatingKeyFilter.cs" />
     <Compile Include="Silverlight\Stopwatch.cs" />
     <Compile Include="Syntax.1.cs" />
     <Compile Include="Testing\Equatable.cs" />

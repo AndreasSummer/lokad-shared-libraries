@@ -39,6 +39,27 @@ namespace Lokad
 		{
 			return EnumUtil<TEnum>.EnumPrefix + enumItem;
 		}
+
+		/// <summary>
+		/// Gets the values associated with the specified enum.
+		/// </summary>
+		/// <typeparam name="TEnum">The type of the enum.</typeparam>
+		/// <returns>array instance of the enum values</returns>
+		public static TEnum[] GetValues<TEnum>() where TEnum :struct
+		{
+			return EnumUtil<TEnum>.Values;
+		}
+
+		/// <summary>
+		/// Gets the values associated with the specified enum, 
+		/// with the exception of the default value
+		/// </summary>
+		/// <typeparam name="TEnum">The type of the enum.</typeparam>
+		/// <returns>array instance of the enum values</returns>
+		public static TEnum[] GetValuesWithoutDefault<TEnum>() where TEnum : struct
+		{
+			return EnumUtil<TEnum>.ValuesWithoutDefault;
+		}
 	}
 
 	/// <summary>
@@ -51,11 +72,17 @@ namespace Lokad
 		/// Values of the <typeparamref name="TEnum"/>
 		/// </summary>
 		public static readonly TEnum[] Values;
+		/// <summary>
+		/// Values of the <typeparamref name="TEnum"/> without the default value.
+		/// </summary>
+		public static readonly TEnum[] ValuesWithoutDefault;
 		internal static readonly string EnumPrefix = typeof (TEnum).Name + "_";
 
 		static EnumUtil()
 		{
 			Values = GetValues();
+			var def = default(TEnum);
+			ValuesWithoutDefault = Values.Where(x => !def.Equals(x)).ToArray();
 		}
 
 		static TEnum[] GetValues()
