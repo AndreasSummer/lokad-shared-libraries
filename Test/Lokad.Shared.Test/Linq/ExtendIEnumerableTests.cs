@@ -254,9 +254,19 @@ namespace Lokad.Linq
 			var obj3 = new object();
 
 			var seq1 = new[] {obj1, obj2, obj3};
+			var seq2 = new object[0];
 
-			Assert.AreEqual(Maybe.From(obj3), seq1.FirstOrEmpty(o => o == obj3));
-			Assert.AreEqual(Maybe<object>.Empty, seq1.FirstOrEmpty(o => o == null));
+			seq1.FirstOrEmpty(o => o == obj3)
+				.ShouldBe(obj3);
+
+			seq1.FirstOrEmpty(o => o == null)
+				.ShouldFail();
+			
+			seq1.FirstOrEmpty()
+				.ShouldBe(obj1);
+
+			seq2.FirstOrEmpty()
+				.ShouldFail();
 		}
 
 		[Test]

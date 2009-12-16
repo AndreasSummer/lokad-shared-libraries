@@ -499,14 +499,36 @@ namespace System.Linq
 		/// <param name="sequence">The source.</param>
 		/// <param name="predicate">The predicate.</param>
 		/// <returns>first value</returns>
-		public static Maybe<TSource> FirstOrEmpty<TSource>(this IEnumerable<TSource> sequence, Func<TSource, bool> predicate)
-			where TSource : class
-		{
-			var item = sequence.FirstOrDefault(predicate);
-			if (null == item)
-				return Maybe<TSource>.Empty;
+		public static Maybe<TSource> FirstOrEmpty<TSource>(
+			[NotNull] this IEnumerable<TSource> sequence, 
+			[NotNull] Func<TSource, bool> predicate)
 
-			return item;
+		{
+			if (sequence == null) throw new ArgumentNullException("sequence");
+			if (predicate == null) throw new ArgumentNullException("predicate");
+
+			foreach (var source in sequence)
+			{
+				if (predicate(source))
+					return source;
+			}
+			return Maybe<TSource>.Empty;
+		}
+
+		/// <summary>
+		/// Retrieves first value from the <paramref name="sequence"/>
+		/// </summary>
+		/// <typeparam name="TSource">The type of the source sequence.</typeparam>
+		/// <param name="sequence">The source.</param>
+		/// <returns>first value or empty result, if it is not found</returns>
+		public static Maybe<TSource> FirstOrEmpty<TSource>([NotNull] this IEnumerable<TSource> sequence)
+		{
+			if (sequence == null) throw new ArgumentNullException("sequence");
+			foreach (var source in sequence)
+			{
+				return source;
+			}
+			return Maybe<TSource>.Empty;
 		}
 
 		/// <summary>
