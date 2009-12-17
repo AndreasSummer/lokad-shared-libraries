@@ -7,6 +7,8 @@
 #endregion
 
 using System;
+using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 
 namespace Lokad
@@ -76,6 +78,54 @@ namespace Lokad
 	}
 
 	/// <summary>
+	/// Ensures that enums can be converted between each other
+	/// </summary>
+	/// <typeparam name="TFromEnum">The type of from enum.</typeparam>
+	/// <typeparam name="TToEnum">The type of to enum.</typeparam>
+	static class EnumUtil<TFromEnum,TToEnum> 
+		where TFromEnum : struct
+		where TToEnum : struct
+	{
+		static readonly Dictionary<TFromEnum, TToEnum> Enums = new Dictionary<TFromEnum, TToEnum>();
+		static readonly TFromEnum[] Unmatched;
+		static EnumUtil()
+		{
+			var fromEnums = EnumUtil.GetValues<TFromEnum>();
+
+			var unmatched = new List<TFromEnum>();
+
+			foreach (var fromEnum in fromEnums)
+			{
+				var @enum = fromEnum;
+				MaybeParse
+					.Enum<TToEnum>(fromEnum.ToString())
+					.Handle(() => unmatched.Add(@enum))
+					.Apply(match => Enums.Add(@enum, match));
+			}
+
+			Unmatched = unmatched.ToArray();
+		}
+
+		public static TToEnum Convert(TFromEnum  from)
+		{
+			ThrowIfInvalid();
+			return Enums[from];
+		}
+
+		static void ThrowIfInvalid()
+		{
+			if (Unmatched.Length > 0)
+			{
+				var list = Unmatched.Select(e => e.ToString()).Join(", ");
+				var message = string.Format(CultureInfo.InvariantCulture,
+					"Can't convert from {0} to {1} because of unmatched entries: {2}",
+					typeof (TFromEnum), typeof (TToEnum), list);
+				throw new ArgumentException(message);
+			}
+		}
+	}
+
+	/// <summary>
 	/// Strongly-typed enumeration util
 	/// </summary>
 	/// <typeparam name="TEnum">The type of the enum.</typeparam>
@@ -96,6 +146,19 @@ namespace Lokad
 			Values = GetValues();
 			var def = default(TEnum);
 			ValuesWithoutDefault = Values.Where(x => !def.Equals(x)).ToArray();
+		}
+
+		/// <summary>
+		/// Converts the safely from.
+		/// </summary>
+		/// <typeparam name="TSourceEnum">The type of the source enum.</typeparam>
+		/// <param name="enum">The @enum to convert from.</param>
+		/// <returns>converted enum</returns>
+		/// <exception cref="ArgumentException"> when conversion is not possible</exception>
+		public static TEnum ConvertSafelyFrom<TSourceEnum>(TSourceEnum @enum)
+			where TSourceEnum : struct
+		{
+			return EnumUtil<TSourceEnum, TEnum>.Convert(@enum);
 		}
 
 		static TEnum[] GetValues()

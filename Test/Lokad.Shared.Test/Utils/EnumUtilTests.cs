@@ -23,6 +23,32 @@ namespace Lokad
 			False
 		}
 
+		enum Quad
+		{
+			None, True,False, Other
+		}
+
+		[Test]
+		public void Conversion_is_good()
+		{
+			var quad = EnumUtil<Quad>.ConvertSafelyFrom(Tri.None);
+			Assert.AreEqual(Quad.None, quad);
+		}
+
+		[Test, Expects.ArgumentException]
+		public void Conversion_possible_but_unsafe()
+		{
+			EnumUtil<Tri>.ConvertSafelyFrom(Quad.False);
+		}
+
+
+		[Test, Expects.ArgumentException]
+		public void Conversion_impossible()
+		{
+			EnumUtil<Tri>.ConvertSafelyFrom(Quad.Other);
+
+		}
+
 		[Test]
 		public void Test_Parse()
 		{

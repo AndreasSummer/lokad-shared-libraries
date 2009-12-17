@@ -98,6 +98,7 @@ namespace Lokad
 			NumberStyles numberStyles,
 			IFormatProvider formatProvider)
 		{
+
 			decimal result;
 			if (!decimal.TryParse(value, numberStyles, formatProvider, out result))
 				return Maybe<decimal>.Empty;

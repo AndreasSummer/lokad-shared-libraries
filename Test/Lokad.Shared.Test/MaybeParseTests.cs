@@ -6,6 +6,7 @@
 
 #endregion
 
+using System.Globalization;
 using Lokad.Testing;
 using NUnit.Framework;
 
@@ -39,6 +40,16 @@ namespace Lokad
 		{
 			MaybeParse.Decimal("12.1").ShouldBe(12.1m);
 			MaybeParse.Decimal("???").ShouldFail();
+			MaybeParse.Decimal(null).ShouldFail();
+
+			var styles = NumberStyles.Number;
+			var info = CultureInfo.InvariantCulture;
+
+			MaybeParse.Decimal(null, styles, info).ShouldFail();
+
+			MaybeParse.Decimal("??", styles, info).ShouldFail();
+			MaybeParse.Decimal("12.1", styles, info).ShouldBe(12.1m);
+
 		}
 
 		[Test]
