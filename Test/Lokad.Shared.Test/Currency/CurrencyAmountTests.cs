@@ -64,6 +64,36 @@ namespace Lokad
 			var result = 10m.In(CurrencyType.Aud) > 1m.In(CurrencyType.Cad);
 		}
 
+		[Test]
+		public void Format_zero()
+		{
+			Assert.AreEqual("0.00", CurrencyAmount.Zero.ToString());
+		}
+
+		[Test]
+		public void Format_negative()
+		{
+			Assert.AreEqual("-1.12", (-1.123m.In(CurrencyType.None)).ToString());
+		}
+
+		[Test]
+		public void Format_zero_aud()
+		{
+			Assert.AreEqual("0.00 AUD", 0m.In(CurrencyType.Aud).ToString());
+		}
+
+		[Test]
+		public void Format_posizitive_aud()
+		{
+			Assert.AreEqual("10.00 AUD", 10m.In(CurrencyType.Aud).ToString());
+		}
+
+		[Test]
+		public void Format_positive_with_rounding()
+		{
+			Assert.AreEqual("12.35 USD", 12.347m.In(CurrencyType.Usd).ToString());
+		}
+
 
 		sealed class ExpectCurrencyMismatchAttribute : ExpectedExceptionAttribute
 		{

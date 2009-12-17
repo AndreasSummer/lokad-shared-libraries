@@ -1,4 +1,13 @@
-﻿using System;
+﻿#region (c)2009 Lokad - New BSD license
+
+// Copyright (c) Lokad 2009 
+// Company: http://www.lokad.com
+// This code is released under the terms of the new BSD licence
+
+#endregion
+
+using System;
+using System.Globalization;
 
 namespace Lokad
 {
@@ -9,8 +18,13 @@ namespace Lokad
 	/// 	We want to reduce chances of messing up by mixing different
 	/// 	currencies together.
 	/// </summary>
-	public struct CurrencyAmount : IEquatable<CurrencyAmount>
+	public struct CurrencyAmount : IEquatable<CurrencyAmount>, IFormattable
 	{
+		/// <summary>
+		/// Default empty currency amount with undefined currency type
+		/// </summary>
+		public static readonly CurrencyAmount Zero = default(CurrencyAmount);
+
 		/// <summary>Currency type</summary>
 		public readonly CurrencyType Currency;
 
@@ -46,8 +60,6 @@ namespace Lokad
 		/// </returns>
 		public bool Equals(CurrencyAmount other)
 		{
-			if (ReferenceEquals(null, other)) return false;
-			if (ReferenceEquals(this, other)) return true;
 			return Equals(other.Currency, Currency) && other.Value == Value;
 		}
 
@@ -77,9 +89,8 @@ namespace Lokad
 		public override bool Equals(object obj)
 		{
 			if (ReferenceEquals(null, obj)) return false;
-			if (ReferenceEquals(this, obj)) return true;
-			if (obj.GetType() != typeof(CurrencyAmount)) return false;
-			return Equals((CurrencyAmount)obj);
+			if (obj.GetType() != typeof (CurrencyAmount)) return false;
+			return Equals((CurrencyAmount) obj);
 		}
 
 		/// <summary>
@@ -92,8 +103,32 @@ namespace Lokad
 		{
 			unchecked
 			{
-				return (Currency.GetHashCode() * 397) ^ Value.GetHashCode();
+				return (Currency.GetHashCode()*397) ^ Value.GetHashCode();
 			}
+		}
+
+		/// <summary>
+		/// 	Returns a
+		/// 	<see cref="System.String" />
+		/// 	that represents this instance, using the 
+		/// 	provided format options to pass to the
+		/// 	<see cref="decimal.ToString(string,System.IFormatProvider)" />
+		/// </summary>
+		/// <param name="format">The format.</param>
+		/// <param name="formatProvider">The format provider.</param>
+		/// <returns>
+		/// 	A
+		/// 	<see cref="System.String" />
+		/// 	that represents this instance.
+		/// </returns>
+		public string ToString(string format, IFormatProvider formatProvider)
+		{
+			var amount = Value.ToString(format, formatProvider);
+
+			if (Currency == CurrencyType.None)
+				return amount;
+
+			return string.Format("{0} {1}", amount, Currency.ToString().ToUpperInvariant());
 		}
 
 		/// <summary>
@@ -108,7 +143,7 @@ namespace Lokad
 		/// </returns>
 		public override string ToString()
 		{
-			return string.Format(@"{1} {0}", Currency, Value);
+			return ToString("0.00;-0.00;0.00", CultureInfo.InvariantCulture);
 		}
 
 		// extensions
@@ -145,7 +180,7 @@ namespace Lokad
 		/// </returns>
 		public static CurrencyAmount operator /(CurrencyAmount originalValue, decimal value)
 		{
-			return new CurrencyAmount(originalValue.Currency, originalValue.Value / value);
+			return new CurrencyAmount(originalValue.Currency, originalValue.Value/value);
 		}
 
 
@@ -159,7 +194,7 @@ namespace Lokad
 		/// </returns>
 		public static CurrencyAmount operator *(CurrencyAmount originalValue, decimal value)
 		{
-			return new CurrencyAmount(originalValue.Currency, originalValue.Value * value);
+			return new CurrencyAmount(originalValue.Currency, originalValue.Value*value);
 		}
 
 		/// <summary>
@@ -234,7 +269,6 @@ namespace Lokad
 		}
 
 
-
 		/// <summary>
 		/// 	Implements the operator &gt;=.
 		/// </summary>
@@ -293,22 +327,26 @@ namespace Lokad
 		}
 
 		/// <summary>
-		/// Implements the operator ==.
+		/// 	Implements the operator ==.
 		/// </summary>
 		/// <param name="originalValue">The original value.</param>
 		/// <param name="amount">The amount.</param>
-		/// <returns>The result of the operator.</returns>
+		/// <returns>
+		/// 	The result of the operator.
+		/// </returns>
 		public static bool operator ==(CurrencyAmount originalValue, CurrencyAmount amount)
 		{
 			return originalValue.Equals(amount);
 		}
 
 		/// <summary>
-		/// Implements the operator !=.
+		/// 	Implements the operator !=.
 		/// </summary>
 		/// <param name="originalValue">The original value.</param>
 		/// <param name="amount">The amount.</param>
-		/// <returns>The result of the operator.</returns>
+		/// <returns>
+		/// 	The result of the operator.
+		/// </returns>
 		public static bool operator !=(CurrencyAmount originalValue, CurrencyAmount amount)
 		{
 			return !(originalValue == amount);
@@ -316,10 +354,12 @@ namespace Lokad
 
 
 		/// <summary>
-		/// Implements the operator -.
+		/// 	Implements the operator -.
 		/// </summary>
 		/// <param name="originalValue">The original value.</param>
-		/// <returns>The result of the operator.</returns>
+		/// <returns>
+		/// 	The result of the operator.
+		/// </returns>
 		public static CurrencyAmount operator -(CurrencyAmount originalValue)
 		{
 			return new CurrencyAmount(originalValue.Currency, -originalValue.Value);
