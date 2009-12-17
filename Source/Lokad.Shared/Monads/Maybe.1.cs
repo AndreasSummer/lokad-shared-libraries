@@ -7,6 +7,7 @@
 #endregion
 
 using System;
+using System.Globalization;
 using Lokad.Quality;
 
 namespace Lokad
@@ -319,6 +320,33 @@ namespace Lokad
 			if (!item.HasValue) throw new ArgumentException("May be must have value");
 
 			return item.Value;
+		}
+
+
+		/// <summary>
+		/// Converts maybe into result, using the specified error as the failure
+		/// descriptor
+		/// </summary>
+		/// <typeparam name="TError">The type of the failure.</typeparam>
+		/// <param name="error">The error.</param>
+		/// <returns>result describing current maybe</returns>
+		public Result<T, TError> Join<TError>(TError error)
+		{
+			if (_hasValue)
+				return _value;
+			return error;
+		}
+
+		/// <summary>
+		/// Converts maybe into result, using the specified error as the failure
+		/// descriptor
+		/// </summary>
+		/// <returns>result describing current maybe</returns>
+		public Result<T> JoinMessage(string error)
+		{
+			if (_hasValue)
+				return _value;
+			return error;
 		}
 
 		/// <summary>

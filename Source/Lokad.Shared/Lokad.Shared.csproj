@@ -74,6 +74,7 @@
     <Compile Include="Diagnostics\ExceptionStatistics.cs" />
     <Compile Include="IStartable.cs" />
     <Compile Include="Monads\Maybe.1.cs" />
+    <Compile Include="Monads\MaybeParse.cs" />
     <Compile Include="Quality\ReSharper\LocalizableAttribute.cs" />
     <Compile Include="Rand.String.cs" />
     <Compile Include="Monads\Result.1.cs" />

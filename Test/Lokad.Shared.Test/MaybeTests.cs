@@ -143,5 +143,20 @@ namespace Lokad
 				.ExposeException(Errors.KeyInvalid)
 				.ShouldBeEqualTo(10);
 		}
+
+		[Test]
+		public void Join()
+		{
+			Maybe10.JoinMessage("Failed").ShouldBe(10);
+			MaybeEmpty.JoinMessage("Failed").ShouldBe("Failed");
+
+			Maybe10.Join(SomeFailure.Fail).ShouldBe(10);
+			MaybeEmpty.Join(SomeFailure.Fail).ShouldBe(SomeFailure.Fail);
+		}
+
+		enum SomeFailure
+		{
+			None,Fail
+		}
 	}
 }

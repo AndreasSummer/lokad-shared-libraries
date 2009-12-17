@@ -62,6 +62,7 @@
     <Compile Include="Diagnostics\ExecutionCounterTests.cs" />
     <Compile Include="Expects.cs" />
     <Compile Include="Extensions\ExtendIDictionaryTests.cs" />
+    <Compile Include="MaybeParseTests.cs" />
     <Compile Include="Result2Tests.cs" />
     <Compile Include="Rules\Common\BufferIsTests.cs" />
     <Compile Include="Rules\Common\MaybeIsTests.cs" />

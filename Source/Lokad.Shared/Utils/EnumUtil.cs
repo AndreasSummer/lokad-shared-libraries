@@ -29,6 +29,19 @@ namespace Lokad
 		}
 
 		/// <summary>
+		/// Parses the specified string into the <typeparamref name="TEnum"/>, ignoring the case
+		/// </summary>
+		/// <typeparam name="TEnum">The type of the enum.</typeparam>
+		/// <param name="value">The value.</param>
+		/// <param name="ignoreCase">if set to <c>true</c> [ignore case].</param>
+		/// <returns>Parsed enum</returns>
+		/// <exception cref="ArgumentNullException">If <paramref name="value"/> is null</exception>
+		public static TEnum Parse<TEnum>(string value, bool ignoreCase) where TEnum : struct
+		{
+			return (TEnum)Enum.Parse(typeof(TEnum), value, ignoreCase);
+		}
+
+		/// <summary>
 		/// Unwraps the enum by creating a string usable for identifiers and resource lookups.
 		/// </summary>
 		/// <typeparam name="TEnum">The type of the enum.</typeparam>
