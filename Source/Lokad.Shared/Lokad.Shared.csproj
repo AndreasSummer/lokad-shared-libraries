@@ -95,6 +95,7 @@
     <Compile Include="Settings\ISettingsKeyFilter.cs" />
     <Compile Include="Settings\ISettingsProvider.cs" />
     <Compile Include="Settings\PrefixTruncatingKeyFilter.cs" />
+    <Compile Include="Silverlight\ExtendString.cs" />
     <Compile Include="Silverlight\Stopwatch.cs" />
     <Compile Include="Syntax.1.cs" />
     <Compile Include="Testing\Equatable.cs" />

@@ -42,12 +42,16 @@ namespace Lokad
 		{
 		}
 
+#if !SILVERLIGHT2
+
 		CurrencyMismatchException(
 			SerializationInfo info,
 			StreamingContext context)
 			: base(info, context)
 		{
 		}
+
+#endif
 
 		internal static CurrencyMismatchException Create(string format, params object[] args)
 		{
