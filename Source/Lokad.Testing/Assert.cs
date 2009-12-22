@@ -10,6 +10,10 @@ namespace Lokad.Testing
 {
 	static class Assert
 	{
+		public static void Fail(string message, params object[] args)
+		{
+			throw new FailedAssertException(string.Format(message, args));
+		}
 		public static void IsTrue(bool expression, string message, params object[] args)
 		{
 			if (!expression)

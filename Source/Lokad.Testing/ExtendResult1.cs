@@ -27,7 +27,7 @@ namespace Lokad.Testing
 		/// <returns>same result instance for further inlining</returns>
 		public static Result<TValue> ShouldFail<TValue>(this Result<TValue> result)
 		{
-			Assert.IsFalse(result.IsSuccess, "result should be a failure");
+			Assert.IsFalse(result.IsSuccess, "Result should be a failure");
 			return result;
 		}
 
@@ -99,7 +99,8 @@ namespace Lokad.Testing
 		/// </returns>
 		public static Result<TValue> ShouldPassWith<TValue>(this Result<TValue> result, TValue value)
 		{
-			Assert.IsTrue(result.IsSuccess, "Result should be a success");
+			if (!result.IsSuccess)
+				Assert.Fail("Result should be valid. It had error instead: '{0}'", result.Error);
 
 			var equatable = value as IEquatable<TValue>;
 
@@ -154,7 +155,10 @@ namespace Lokad.Testing
 		public static Result<TValue> ShouldPassCheck<TValue>(this Result<TValue> result,
 			Expression<Func<TValue, bool>> expression)
 		{
-			Assert.IsTrue(result.IsSuccess, "result should be valid");
+			if (!result.IsSuccess)
+				Assert.Fail("Result should be valid. It had error instead: '{0}'", result.Error);
+
+			
 			var check = expression.Compile();
 			Assert.IsTrue(check(result.Value), "Expression should be true: '{0}'.", expression.Body.ToString());
 			return result;
@@ -169,7 +173,8 @@ namespace Lokad.Testing
 		/// <returns>same result instance for inlining</returns>
 		public static Result<TValue> ShouldPass<TValue>(this Result<TValue> result)
 		{
-			Assert.IsTrue(result.IsSuccess, "result should be valid");
+			if (!result.IsSuccess)
+				Assert.Fail("Result should be valid. It had error instead: '{0}'", result.Error);
 			
 			return result;
 		}
