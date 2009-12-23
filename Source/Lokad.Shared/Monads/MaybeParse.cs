@@ -98,11 +98,23 @@ namespace Lokad
 			NumberStyles numberStyles,
 			IFormatProvider formatProvider)
 		{
-
 			decimal result;
 			if (!decimal.TryParse(value, numberStyles, formatProvider, out result))
 				return Maybe<decimal>.Empty;
 			return result;
+		}
+
+		/// <summary>
+		/// 	Tries to parse the specified value into decimal, using the invariant culture
+		/// 	info and returning	empty result on failure.
+		/// </summary>
+		/// <param name="value">The value.</param>
+		/// <returns>
+		/// 	either parsed decimal or an empty result
+		/// </returns>
+		public static Maybe<decimal> DecimalInvariant(string value)
+		{
+			return Decimal(value, NumberStyles.Number, CultureInfo.InvariantCulture);
 		}
 
 
@@ -149,6 +161,77 @@ namespace Lokad
 		}
 
 		/// <summary>
+		/// 	Tries to parse the specified string value into Int32, 
+		/// 	using an invariant culture and returning empty result on failure.
+		/// </summary>
+		/// <param name="value">The value.</param>
+		/// <returns>
+		/// 	either parsed Int32 or an empty result
+		/// </returns>
+		/// <seealso cref="System.Int32.TryParse(string,System.Globalization.NumberStyles,System.IFormatProvider,out int)" />
+		public static Maybe<Int32> Int32Invariant(string value)
+		{
+			return Int32(value, NumberStyles.Integer, CultureInfo.InvariantCulture);
+		}
+
+		/// <summary>
+		/// 	Tries to parse the specified value into Int64, returning
+		/// 	empty result on failure.
+		/// </summary>
+		/// <param name="value">The value.</param>
+		/// <returns>
+		/// 	either parsed Int64 or an empty result
+		/// </returns>
+		/// <seealso cref="System.Int64.TryParse(string,out long)" />
+		public static Maybe<Int64> Int64(string value)
+		{
+			Int64 result;
+			if (!System.Int64.TryParse(value, out result))
+				return Maybe<Int64>.Empty;
+			return result;
+		}
+
+		/// <summary>
+		/// 	Tries to parse the specified value into Int64, returning
+		/// 	empty result on failure.
+		/// </summary>
+		/// <param name="value">The value.</param>
+		/// <param name="numberStyles">
+		/// 	The number styles to use.
+		/// </param>
+		/// <param name="formatProvider">
+		/// 	The format provider to use.
+		/// </param>
+		/// <returns>
+		/// 	either parsed Int64 or an empty result
+		/// </returns>
+		/// <seealso cref="System.Int64.TryParse(string,System.Globalization.NumberStyles,System.IFormatProvider,out long)" />
+		public static Maybe<Int64> Int64(string value,
+			NumberStyles numberStyles,
+			IFormatProvider formatProvider)
+		{
+			Int64 result;
+			if (!System.Int64.TryParse(value, numberStyles, formatProvider, out result))
+				return Maybe<Int64>.Empty;
+			return result;
+		}
+
+		/// <summary>
+		/// 	Tries to parse the specified string value into Int64, 
+		/// 	using an invariant culture and returning empty result on failure.
+		/// </summary>
+		/// <param name="value">The value.</param>
+		/// <returns>
+		/// 	either parsed Int64 or an empty result
+		/// </returns>
+		/// <seealso cref="System.Int64.TryParse(string,System.Globalization.NumberStyles,System.IFormatProvider,out long)" />
+		public static Maybe<Int64> Int64Invariant(string value)
+		{
+			return Int64(value, NumberStyles.Integer, CultureInfo.InvariantCulture);
+		}
+
+
+		/// <summary>
 		/// 	Tries to parse the specified value into Double, returning
 		/// 	empty result on failure.
 		/// </summary>
@@ -188,6 +271,24 @@ namespace Lokad
 			if (!System.Double.TryParse(value, numberStyles, formatProvider, out result))
 				return Maybe<Double>.Empty;
 			return result;
+		}
+
+
+		/// <summary>
+		/// 	Attempts to parse the specified value into Double, 
+		/// 	using invariant culture and returning
+		/// 	empty result on failure.
+		/// </summary>
+		/// <param name="value">The value.</param>
+		/// <returns>
+		/// 	either parsed Double or an empty result
+		/// </returns>
+		/// <seealso cref="System.Double.TryParse(string,System.Globalization.NumberStyles,System.IFormatProvider,out double)" />
+		public static Maybe<Double> DoubleInvariant(string value)
+		{
+			return Double(value,
+				NumberStyles.Float | NumberStyles.AllowThousands,
+				CultureInfo.InvariantCulture);
 		}
 
 		/// <summary>
@@ -230,6 +331,23 @@ namespace Lokad
 			if (!System.Single.TryParse(value, numberStyles, formatProvider, out result))
 				return Maybe<Single>.Empty;
 			return result;
+		}
+
+
+		/// <summary>
+		/// 	Tries to parse the specified value into Single, using invariant culture
+		/// 	and returning 	empty result on failure.
+		/// </summary>
+		/// <param name="value">The value.</param>
+		/// <returns>
+		/// 	either parsed Single or an empty result
+		/// </returns>
+		/// <seealso cref="System.Single.TryParse(string,System.Globalization.NumberStyles,System.IFormatProvider,out float)" />
+		public static Maybe<Single> SingleInvariant(string value)
+		{
+			return Single(value,
+				NumberStyles.Float | NumberStyles.AllowThousands,
+				CultureInfo.InvariantCulture);
 		}
 	}
 }

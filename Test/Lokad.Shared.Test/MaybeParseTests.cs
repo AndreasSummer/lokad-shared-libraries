@@ -42,13 +42,16 @@ namespace Lokad
 			MaybeParse.Decimal("???").ShouldFail();
 			MaybeParse.Decimal(null).ShouldFail();
 
-			var styles = NumberStyles.Number;
+			const NumberStyles styles = NumberStyles.Number;
 			var info = CultureInfo.InvariantCulture;
 
 			MaybeParse.Decimal(null, styles, info).ShouldFail();
-
 			MaybeParse.Decimal("??", styles, info).ShouldFail();
 			MaybeParse.Decimal("12.1", styles, info).ShouldBe(12.1m);
+
+			MaybeParse.DecimalInvariant(null).ShouldFail();
+			MaybeParse.DecimalInvariant("??").ShouldFail();
+			MaybeParse.DecimalInvariant("12.1").ShouldBe(12.1m);
 
 		}
 
@@ -59,6 +62,27 @@ namespace Lokad
 			MaybeParse.Int32("12.1").ShouldFail();
 			MaybeParse.Int32(null).ShouldFail();
 			MaybeParse.Int32("???").ShouldFail();
+
+
+			MaybeParse.Int32Invariant("12").ShouldBe(12);
+			MaybeParse.Int32Invariant("12.1").ShouldFail();
+			MaybeParse.Int32Invariant(null).ShouldFail();
+			MaybeParse.Int32Invariant("???").ShouldFail();
+		}
+
+		[Test]
+		public void Int64()
+		{
+			MaybeParse.Int64("12").ShouldBe(12);
+			MaybeParse.Int64("12.1").ShouldFail();
+			MaybeParse.Int64(null).ShouldFail();
+			MaybeParse.Int64("???").ShouldFail();
+
+
+			MaybeParse.Int64Invariant("12").ShouldBe(12);
+			MaybeParse.Int64Invariant("12.1").ShouldFail();
+			MaybeParse.Int64Invariant(null).ShouldFail();
+			MaybeParse.Int64Invariant("???").ShouldFail();
 		}
 
 		[Test]
@@ -67,6 +91,10 @@ namespace Lokad
 			MaybeParse.Single("12.1").ShouldBe(12.1f);
 			MaybeParse.Single("???").ShouldFail();
 			MaybeParse.Single(null).ShouldFail();
+
+			MaybeParse.SingleInvariant("12.1").ShouldBe(12.1f);
+			MaybeParse.SingleInvariant("???").ShouldFail();
+			MaybeParse.SingleInvariant(null).ShouldFail();
 		}
 
 		[Test]
@@ -75,6 +103,11 @@ namespace Lokad
 			MaybeParse.Double("12.1").ShouldBe(12.1d);
 			MaybeParse.Double("???").ShouldFail();
 			MaybeParse.Double(null).ShouldFail();
+
+
+			MaybeParse.DoubleInvariant("12.1").ShouldBe(12.1d);
+			MaybeParse.DoubleInvariant("???").ShouldFail();
+			MaybeParse.DoubleInvariant(null).ShouldFail();
 		}
 	}
 }
