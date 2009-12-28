@@ -144,6 +144,22 @@ namespace Lokad.Testing.Test
 			ModelAssert.AreEqual(m1, m2);
 		}
 
+		[Test, ExpectAssert]
+		public void With_properties_valid_reversed()
+		{
+			var m1 = new WithProperties("F1", 32);
+			var m2 = new WithProperties("F1", 32);
+			ModelAssert.AreNotEqual(m1, m2);
+		}
+
+		[Test]
+		public void With_properties_invalid_reversed()
+		{
+			var m1 = new WithProperties("F1", 33);
+			var m2 = new WithProperties("F1", 32);
+			ModelAssert.AreNotEqual(m1, m2);
+		}
+
 		[Test, ExpectedException(typeof (FailedAssertException))]
 		public void With_properties_invalid()
 		{
