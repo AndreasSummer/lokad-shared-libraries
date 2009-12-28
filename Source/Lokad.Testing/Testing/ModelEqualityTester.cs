@@ -8,6 +8,7 @@
 
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using Lokad.Quality;
@@ -38,6 +39,11 @@ namespace Lokad.Testing
 		/// <returns>result</returns>
 		public static bool TestEquality<T>(IScope scope, T firstModel, T secondModel)
 		{
+			return Cache<T>.TestEquality(scope, firstModel, secondModel);
+		}
+
+		internal static void ThrowIfNotModel<T>()
+		{
 			if (!Cache<T>.IsThisAModel)
 			{
 				var error = string.Format("Type '{0}' should have '{1}' with '{2}' tag.",
@@ -46,8 +52,6 @@ namespace Lokad.Testing
 					ModelTag);
 				throw new ArgumentException(error);
 			}
-
-			return Cache<T>.TestEquality(scope, firstModel, secondModel);
 		}
 
 		static bool TestEquality(IScope scope, Type type, object one, object two)
@@ -95,8 +99,26 @@ namespace Lokad.Testing
 
 			if (typeof(ICollection).IsAssignableFrom(type))
 			{
-				return (scope, one, two) => TestCollectionEquality(scope, (ICollection) one, (ICollection) two);
+				return (scope, one, two) =>
+					{
+						var first = (ICollection) one;
+						var second = (ICollection) two;
+						return TestCollectionEquality(scope, first, second, first.Count, second.Count);
+					};
 			}
+			if ((type.IsGenericType) && (type.GetGenericTypeDefinition() == typeof(ICollection<>)))
+			{
+				var elementType = type.GetGenericArguments()[0];
+				var count = type.GetProperty("Count");
+				
+				return (scope, one, two) =>
+					{
+						var firstCount = Convert.ToInt32(count.GetValue(one, null));
+						var secondCount = Convert.ToInt32(count.GetValue(two, null));
+						return TestCollectionEquality(scope, (IEnumerable) one, (IEnumerable) two, firstCount, secondCount);
+					};
+			}
+
 
 			return (scope1, one1, two1) => TestSimpleEquality(scope1, one1, two1);
 		}
@@ -147,15 +169,15 @@ namespace Lokad.Testing
 			return equals;
 		}
 
-		static bool TestCollectionEquality(IScope scope, ICollection first, ICollection second)
+		static bool TestCollectionEquality(IScope scope, IEnumerable first, IEnumerable second, int count1, int count2)
 		{
-			if (first.Count != second.Count)
+			if (count1 != count2)
 			{
-				scope.Error("Expected ICollection count {0} was {1}", first.Count, second.Count);
+				scope.Error("Expected ICollection count {0} was {1}", count1, count2);
 				return false;
 			}
 
-			if (first.Count == 0)
+			if (count1 == 0)
 			{
 				return true;
 			}
@@ -165,7 +187,7 @@ namespace Lokad.Testing
 			
 			bool equals = true;
 
-			for (int i = 0; i < first.Count; i++)
+			for (int i = 0; i < count1; i++)
 			{
 				e1.MoveNext();
 				e2.MoveNext();

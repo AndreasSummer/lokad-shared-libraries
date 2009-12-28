@@ -7,6 +7,7 @@
 #endregion
 
 using System;
+using System.Collections.Generic;
 using Lokad.Quality;
 using NUnit.Framework;
 
@@ -149,6 +150,57 @@ namespace Lokad.Testing.Test
 			var m1 = new WithProperties("F1", 32);
 			var m2 = new WithProperties("F1", 33);
 			ModelAssert.AreEqual(m1, m2);
+		}
+
+		[Test]
+		public void Collection_of_models()
+		{
+			var m1 = new List<WithProperties>
+				{
+					new WithProperties("F1", 1), 
+					new WithProperties("F2", 3)
+				};
+			var m2 = new List<WithProperties>
+				{
+					new WithProperties("F1", 1), 
+					new WithProperties("F2", 3)
+				};
+
+			ModelAssert.AreEqualMany(m1, m2);
+		}
+
+		[Test]
+		public void Array_of_models_valid()
+		{
+			var m1 = new []
+				{
+					new WithProperties("F1", 1), 
+					new WithProperties("F2", 3)
+				};
+			var m2 = new []
+				{
+					new WithProperties("F1", 1), 
+					new WithProperties("F2", 3)
+				};
+
+			ModelAssert.AreEqualMany(m1, m2);
+		}
+
+		[Test, ExpectAssert]
+		public void Array_of_models_invalid()
+		{
+			var m1 = new[]
+				{
+					new WithProperties("F1", 1), 
+					new WithProperties("F2", 4)
+				};
+			var m2 = new[]
+				{
+					new WithProperties("F1", 1), 
+					new WithProperties("F2", 3)
+				};
+
+			ModelAssert.AreEqualMany(m1, m2);
 		}
 
 		public sealed class ExpectAssertAttribute : ExpectedExceptionAttribute

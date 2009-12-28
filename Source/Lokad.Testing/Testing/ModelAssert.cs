@@ -6,9 +6,8 @@
 
 #endregion
 
+using System.Collections.Generic;
 using Lokad.Rules;
-
-#pragma warning disable 1591
 
 namespace Lokad.Testing
 {
@@ -34,6 +33,12 @@ namespace Lokad.Testing
 		/// <exception cref="FailedAssertException">When check fails</exception>
 		public static void AreEqual<TModel>(TModel expected, TModel actual, string format, params object[] args)
 		{
+			ModelEqualityTester.ThrowIfNotModel<TModel>();
+			RunEqualityCheck(expected, actual, string.Format(format, args));
+		}
+
+		static void RunEqualityCheck<TModel>(TModel expected, TModel actual, string text)
+		{
 			var name = typeof (TModel).Name;
 			var messages = Scope.GetMessages(name, scope =>
 				{
@@ -47,8 +52,7 @@ namespace Lokad.Testing
 			if (!messages.IsSuccess)
 			{
 				var rules = new RuleException(messages);
-				var message = string.Format(format, args);
-				throw new FailedAssertException(message, rules);
+				throw new FailedAssertException(text, rules);
 			}
 		}
 
@@ -63,7 +67,25 @@ namespace Lokad.Testing
 		/// <exception cref="FailedAssertException">When check fails</exception>
 		public static void AreEqual<TModel>(TModel expected, TModel actual)
 		{
-			AreEqual(expected, actual, "Models of type '{0}' should be equal.", typeof (TModel).Name);
+			ModelEqualityTester.ThrowIfNotModel<TModel>();
+			var message = string.Format("Models of type '{0}' should be equal.", typeof (TModel).Name);
+			RunEqualityCheck(expected, actual, message);
+		}
+
+		/// <summary>
+		/// 	Asserts that the two model collections are equal
+		/// </summary>
+		/// <typeparam name="TModel">
+		/// 	The type of the model.
+		/// </typeparam>
+		/// <param name="expected">The expected collection.</param>
+		/// <param name="actual">The actual collection.</param>
+		/// <exception cref="FailedAssertException">When check fails</exception>
+		public static void AreEqualMany<TModel>(ICollection<TModel> expected, ICollection<TModel> actual)
+		{
+			ModelEqualityTester.ThrowIfNotModel<TModel>();
+			var message = string.Format("Models of type '{0}' should be equal.", typeof(TModel).Name);
+			RunEqualityCheck(expected, actual, message);
 		}
 	}
 }
