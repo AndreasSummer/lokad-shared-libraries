@@ -70,7 +70,7 @@ namespace Lokad
 			if (ReferenceEquals(null, obj))
 				throw new NullReferenceException("obj is null");
 			if (ReferenceEquals(this, obj)) return true;
-			if (!(obj is Pair<T1, T2>)) return false;
+			if (!(obj is Tuple<T1, T2>)) return false;
 			return Equals((Tuple<T1, T2>) obj);
 		}
 
