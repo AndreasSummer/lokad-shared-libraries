@@ -1,6 +1,6 @@
-#region (c)2009 Lokad - New BSD license
+#region (c)2009-2010 Lokad - New BSD license
 
-// Copyright (c) Lokad 2009 
+// Copyright (c) Lokad 2009-2010 
 // Company: http://www.lokad.com
 // This code is released under the terms of the new BSD licence
 
@@ -15,16 +15,20 @@ using Lokad.Quality;
 namespace Lokad.Rules
 {
 	/// <summary>
-	/// Helper class to simplify testing of rules.
+	/// 	Helper class to simplify testing of rules.
 	/// </summary>
-	/// <typeparam name="TTarget">The type of the target for rules.</typeparam>
+	/// <typeparam name="TTarget">
+	/// 	The type of the target for rules.
+	/// </typeparam>
 	[Immutable]
 	public sealed class RuleAssert<TTarget>
 	{
 		readonly Rule<TTarget>[] _rules;
 
 		/// <summary>
-		/// Initializes a new instance of the <see cref="RuleAssert{TTarget}"/> class.
+		/// 	Initializes a new instance of the
+		/// 	<see cref="RuleAssert{TTarget}" />
+		/// 	class.
 		/// </summary>
 		/// <param name="rules">The rules.</param>
 		public RuleAssert(params Rule<TTarget>[] rules)
@@ -34,12 +38,19 @@ namespace Lokad.Rules
 		}
 
 		/// <summary>
-		/// Expects that every single item in <paramref name="testCases"/>
-		/// returns <see cref="RuleLevel.Error"/>.
+		/// 	Expects that every single item in
+		/// 	<paramref name="testCases" />
+		/// 	returns
+		/// 	<see cref="RuleLevel.Error" />
+		/// 	.
 		/// </summary>
 		/// <param name="testCases">The test cases.</param>
-		/// <returns>same instance for inlining</returns>
-		/// <exception cref="RuleException">when expectation is not met</exception>
+		/// <returns>
+		/// 	same instance for inlining
+		/// </returns>
+		/// <exception cref="RuleException">
+		/// 	when expectation is not met
+		/// </exception>
 		public RuleAssert<TTarget> ExpectError(params TTarget[] testCases)
 		{
 			Expect(RuleLevel.Error, testCases);
@@ -47,12 +58,19 @@ namespace Lokad.Rules
 		}
 
 		/// <summary>
-		/// Expects that every single item in <paramref name="testCases"/>
-		/// returns <see cref="RuleLevel.Warn"/>.
+		/// 	Expects that every single item in
+		/// 	<paramref name="testCases" />
+		/// 	returns
+		/// 	<see cref="RuleLevel.Warn" />
+		/// 	.
 		/// </summary>
 		/// <param name="testCases">The test cases.</param>
-		/// <returns>same instance for inlining</returns>
-		/// <exception cref="RuleException">when expectation is not met</exception>
+		/// <returns>
+		/// 	same instance for inlining
+		/// </returns>
+		/// <exception cref="RuleException">
+		/// 	when expectation is not met
+		/// </exception>
 		public RuleAssert<TTarget> ExpectWarn(params TTarget[] testCases)
 		{
 			Expect(RuleLevel.Warn, testCases);
@@ -60,12 +78,19 @@ namespace Lokad.Rules
 		}
 
 		/// <summary>
-		/// Expects that every single item in <paramref name="testCases"/>
-		/// returns <see cref="RuleLevel.None"/>.
+		/// 	Expects that every single item in
+		/// 	<paramref name="testCases" />
+		/// 	returns
+		/// 	<see cref="RuleLevel.None" />
+		/// 	.
 		/// </summary>
 		/// <param name="testCases">The test cases.</param>
-		/// <returns>same instance for inlining</returns>
-		/// <exception cref="RuleException">when expectation is not met</exception>
+		/// <returns>
+		/// 	same instance for inlining
+		/// </returns>
+		/// <exception cref="RuleException">
+		/// 	when expectation is not met
+		/// </exception>
 		public RuleAssert<TTarget> ExpectNone(params TTarget[] testCases)
 		{
 			Expect(RuleLevel.None, testCases);
@@ -99,15 +124,23 @@ namespace Lokad.Rules
 		}
 	}
 
-	/// <summary> Helper class to simplify testing with rules. </summary>
+	/// <summary>
+	/// 	Helper class to simplify testing with rules.
+	/// </summary>
 	public static class RuleAssert
 	{
 		/// <summary>
-		/// Initializes a new instance of the <see cref="RuleAssert{TTarget}"/> class.
+		/// 	Initializes a new instance of the
+		/// 	<see cref="RuleAssert{TTarget}" />
+		/// 	class.
 		/// </summary>
 		/// <param name="rules">The rules.</param>
-		/// <typeparam name="TTarget">The type of the target.</typeparam>
-		/// <returns>new instance of the rule tester.</returns>
+		/// <typeparam name="TTarget">
+		/// 	The type of the target.
+		/// </typeparam>
+		/// <returns>
+		/// 	new instance of the rule tester.
+		/// </returns>
 		public static RuleAssert<TTarget> For<TTarget>(params Rule<TTarget>[] rules)
 		{
 			Enforce.Argument(() => rules);
@@ -116,51 +149,89 @@ namespace Lokad.Rules
 
 
 		/// <summary>
-		/// Expects that the <paramref name="rules"/> return <see cref="RuleLevel.Error"/>,
-		/// when executed against the <paramref name="testCase"/>.
+		/// 	Expects that the
+		/// 	<paramref name="rules" />
+		/// 	return
+		/// 	<see cref="RuleLevel.Error" />
+		/// 	,
+		/// 	when executed against the
+		/// 	<paramref name="testCase" />
+		/// 	.
 		/// </summary>
-		/// <typeparam name="TTarget">The type of the target.</typeparam>
+		/// <typeparam name="TTarget">
+		/// 	The type of the target.
+		/// </typeparam>
 		/// <param name="testCase">The test case.</param>
 		/// <param name="rules">The rules.</param>
-		/// <exception cref="RuleException">when the expectation is not met.</exception>
+		/// <exception cref="RuleException">
+		/// 	when the expectation is not met.
+		/// </exception>
 		public static void IsError<TTarget>(TTarget testCase, params Rule<TTarget>[] rules)
 		{
 			For(rules).ExpectError(testCase);
 		}
 
 		/// <summary>
-		/// Expects that the <paramref name="rules"/> return <see cref="RuleLevel.None"/>,
-		/// when executed against the <paramref name="testCase"/>.
+		/// 	Expects that the
+		/// 	<paramref name="rules" />
+		/// 	return
+		/// 	<see cref="RuleLevel.None" />
+		/// 	,
+		/// 	when executed against the
+		/// 	<paramref name="testCase" />
+		/// 	.
 		/// </summary>
-		/// <typeparam name="TTarget">The type of the target.</typeparam>
+		/// <typeparam name="TTarget">
+		/// 	The type of the target.
+		/// </typeparam>
 		/// <param name="testCase">The test case.</param>
 		/// <param name="rules">The rules.</param>
-		/// <exception cref="RuleException">when the expectation is not met.</exception>
+		/// <exception cref="RuleException">
+		/// 	when the expectation is not met.
+		/// </exception>
 		public static void IsNone<TTarget>(TTarget testCase, params Rule<TTarget>[] rules)
 		{
 			For(rules).ExpectNone(testCase);
 		}
 
 		/// <summary>
-		/// Expects that the <paramref name="rules"/> return <see cref="RuleLevel.Warn"/>,
-		/// when executed against the <paramref name="testCase"/>.
+		/// 	Expects that the
+		/// 	<paramref name="rules" />
+		/// 	return
+		/// 	<see cref="RuleLevel.Warn" />
+		/// 	,
+		/// 	when executed against the
+		/// 	<paramref name="testCase" />
+		/// 	.
 		/// </summary>
-		/// <typeparam name="TTarget">The type of the target.</typeparam>
+		/// <typeparam name="TTarget">
+		/// 	The type of the target.
+		/// </typeparam>
 		/// <param name="testCase">The test case.</param>
 		/// <param name="rules">The rules.</param>
-		/// <exception cref="RuleException">when the expectation is not met.</exception>
+		/// <exception cref="RuleException">
+		/// 	when the expectation is not met.
+		/// </exception>
 		public static void IsWarn<TTarget>(TTarget testCase, params Rule<TTarget>[] rules)
 		{
 			For(rules).ExpectWarn(testCase);
 		}
 
 		/// <summary>
-		/// Checks that the specified <paramref name="argumentReference"/> 
-		/// passes the check specified in <paramref name="expressions"/>
+		/// 	Checks that the specified
+		/// 	<paramref name="argumentReference" />
+		/// 	passes the check specified in
+		/// 	<paramref name="expressions" />
 		/// </summary>
-		/// <typeparam name="TTarget">The type of the target.</typeparam>
-		/// <param name="argumentReference">The argument reference.</param>
-		/// <param name="expressions">The expressions to check against.</param>
+		/// <typeparam name="TTarget">
+		/// 	The type of the target.
+		/// </typeparam>
+		/// <param name="argumentReference">
+		/// 	The argument reference.
+		/// </param>
+		/// <param name="expressions">
+		/// 	The expressions to check against.
+		/// </param>
 		/// <exception cref="RuleException">If the check fails</exception>
 		public static void That<TTarget>(Func<TTarget> argumentReference,
 			params Expression<Predicate<TTarget>>[] expressions)
@@ -170,12 +241,20 @@ namespace Lokad.Rules
 
 
 		/// <summary>
-		/// Checks that the specified <paramref name="item"/> 
-		/// passes the check specified in <paramref name="expressions"/>
+		/// 	Checks that the specified
+		/// 	<paramref name="item" />
+		/// 	passes the check specified in
+		/// 	<paramref name="expressions" />
 		/// </summary>
-		/// <typeparam name="TTarget">The type of the target.</typeparam>
-		/// <param name="item">The argument reference.</param>
-		/// <param name="expressions">The expressions to check against.</param>
+		/// <typeparam name="TTarget">
+		/// 	The type of the target.
+		/// </typeparam>
+		/// <param name="item">
+		/// 	The argument reference.
+		/// </param>
+		/// <param name="expressions">
+		/// 	The expressions to check against.
+		/// </param>
 		/// <exception cref="RuleException">If the check fails</exception>
 		public static void That<TTarget>(TTarget item,
 			params Expression<Predicate<TTarget>>[] expressions)
@@ -184,7 +263,7 @@ namespace Lokad.Rules
 		}
 
 		/// <summary>
-		/// Determines whether the specified expression is true.
+		/// 	Determines whether the specified expression is true.
 		/// </summary>
 		/// <param name="expression">The expression.</param>
 		/// <exception cref="RuleException">if the check fails</exception>
@@ -194,7 +273,7 @@ namespace Lokad.Rules
 		}
 
 		/// <summary>
-		/// Determines whether the specified expression is true.
+		/// 	Determines whether the specified expression is true.
 		/// </summary>
 		/// <param name="expression">The expression.</param>
 		public static void IsFalse(Expression<Func<bool>> expression)

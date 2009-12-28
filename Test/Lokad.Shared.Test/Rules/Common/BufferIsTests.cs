@@ -7,6 +7,7 @@
 #endregion
 
 using System.Security.Cryptography;
+using Lokad.Testing;
 using NUnit.Framework;
 
 namespace Lokad.Rules

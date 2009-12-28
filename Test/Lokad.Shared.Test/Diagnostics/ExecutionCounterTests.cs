@@ -1,4 +1,5 @@
 using Lokad.Rules;
+using Lokad.Testing;
 using NUnit.Framework;
 using Lokad.Diagnostics.Persist;
 

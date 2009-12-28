@@ -52,7 +52,11 @@
       <Project>{9C285BAA-786F-41E9-8CFB-C1FDDB3E6FE1}</Project>
       <Name>Lokad.Shared</Name>
     </ProjectReference>
-  </ItemGroup>  
+    <ProjectReference Include="..\..\Source\Lokad.Testing\Lokad.Testing.csproj">
+      <Project>{CA5BC74E-E0DD-4F07-B29E-7B4F988F5E1F}</Project>
+      <Name>Lokad.Testing</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -9,6 +9,7 @@
 using System;
 using Lokad.Diagnostics;
 using Lokad.Rules;
+using Lokad.Testing;
 using NUnit.Framework;
 
 namespace Lokad

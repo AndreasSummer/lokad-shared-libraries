@@ -75,6 +75,9 @@
     <Compile Include="IStartable.cs" />
     <Compile Include="Monads\Maybe.1.cs" />
     <Compile Include="Monads\MaybeParse.cs" />
+    <Compile Include="Quality\ClassDesignAttribute.cs" />
+    <Compile Include="Quality\ClassDesignTag.cs" />
+    <Compile Include="Quality\DesignOfClass.cs" />
     <Compile Include="Quality\ReSharper\LocalizableAttribute.cs" />
     <Compile Include="Rand.String.cs" />
     <Compile Include="Monads\Result.1.cs" />
@@ -122,7 +125,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>RuleResources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Rules\RuleAssert.cs" />
     <Compile Include="Rules\Scopes\ModifierScope.cs" />
     <Compile Include="Rules\Scopes\DelayedScope.cs" />
     <Compile Include="Rules\Scopes\SimpleScope.cs" />

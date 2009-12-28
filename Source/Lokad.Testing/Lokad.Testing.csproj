@@ -8,7 +8,7 @@
     <ProjectGuid>{CA5BC74E-E0DD-4F07-B29E-7B4F988F5E1F}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Lokad.Testing</RootNamespace>
+    <RootNamespace>Lokad</RootNamespace>
     <AssemblyName>Lokad.Testing</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -57,16 +57,19 @@
     <Compile Include="..\VersionAssemblyInfo.cs">
       <Link>Properties\VersionAssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="Assert.cs" />
+    <Compile Include="Testing\ModelAssert.cs" />
+    <Compile Include="Testing\ModelEqualityTester.cs" />
+    <Compile Include="Rules\RuleAssert.cs" />
+    <Compile Include="Testing\Assert.cs" />
     <Compile Include="ExtendIEquatable.cs" />
     <Compile Include="ExtendMaybe.cs" />
     <Compile Include="ExtendResult1.cs" />
     <Compile Include="ExtendResult2.cs" />
-    <Compile Include="FailedAssertException.cs" />
-    <Compile Include="MockContainer.1.cs" />
-    <Compile Include="MockContainer.cs" />
+    <Compile Include="Testing\FailedAssertException.cs" />
+    <Compile Include="Testing\MockContainer\MockContainer.1.cs" />
+    <Compile Include="Testing\MockContainer\MockContainer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RegistrationSource.cs" />
+    <Compile Include="Testing\MockContainer\RegistrationSource.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Lokad.Shared\Lokad.Shared.csproj">

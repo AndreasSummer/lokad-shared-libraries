@@ -1,6 +1,6 @@
-#region (c)2009 Lokad - New BSD license
+#region (c)2009-2010 Lokad - New BSD license
 
-// Copyright (c) Lokad 2009 
+// Copyright (c) Lokad 2009-2010 
 // Company: http://www.lokad.com
 // This code is released under the terms of the new BSD licence
 
@@ -14,6 +14,7 @@ namespace Lokad.Testing
 		{
 			throw new FailedAssertException(string.Format(message, args));
 		}
+
 		public static void IsTrue(bool expression, string message, params object[] args)
 		{
 			if (!expression)
