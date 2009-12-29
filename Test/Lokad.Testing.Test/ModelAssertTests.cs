@@ -33,7 +33,7 @@ namespace Lokad.Testing.Test
 		}
 
 		[Test]
-		public void Should_be_equal_valid_simple()
+		public void With_fields_valid()
 		{
 			var m1 = new WithFields("F1", 2);
 			var m2 = new WithFields("F1", 2);
@@ -43,12 +43,26 @@ namespace Lokad.Testing.Test
 
 
 		[Test, ExpectAssert]
-		public void Should_be_equal_invalid_simple()
+		public void With_fields_invalid()
 		{
 			var m1 = new WithFields("F1", 2);
 			var m2 = new WithFields("F1", 3);
 
 			ModelAssert.AreEqual(m1, m2);
+		}
+
+		[Test, ExpectAssert]
+		public void With_fields_nullable_invalid()
+		{
+			var m1 = new WithFields("F1", 2);
+			ModelAssert.AreEqual(m1, null);
+		}
+
+		[Test]
+		public void With_properties_nullable_valid()
+		{
+			var m1 = new WithProperties("F1", 2);
+			ModelAssert.AreNotEqual(m1, null);
 		}
 
 		[DesignOfClass.ImmutableFieldsModel]
@@ -77,7 +91,7 @@ namespace Lokad.Testing.Test
 		[DesignOfClass.ImmutablePropertiesModel]
 		public sealed class WithArrayProperty
 		{
-			public WithFields[] Property { get; private set; }
+			public WithFields[] Property { get; set; }
 
 			public WithArrayProperty(params WithFields[] property)
 			{
@@ -96,6 +110,36 @@ namespace Lokad.Testing.Test
 
 			ModelAssert.AreEqual(m31, m32);
 		}
+
+
+		[Test]
+		public void With_array_property_nullable_entry_valid()
+		{
+			var m11 = new WithFields("F1", 2);
+			var m12 = new WithFields("F1", 2);
+
+			var m31 = new WithArrayProperty(m11, m11,null);
+			var m32 = new WithArrayProperty(m12, m12, null);
+
+			ModelAssert.AreEqual(m31, m32);
+		}
+
+		[Test, ExpectAssert]
+		public void With_array_property_null_array_invalid()
+		{
+			var m11 = new WithFields("F1", 2);
+			var m12 = new WithFields("F1", 2);
+
+			var m31 = new WithArrayProperty
+				{
+					Property = null
+				};
+			var m32 = new WithArrayProperty(m12, m12, null);
+
+			ModelAssert.AreEqual(m31,m32);
+		}
+
+
 
 		[Test, ExpectAssert]
 		public void With_array_property_invalid_length()

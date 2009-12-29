@@ -78,6 +78,7 @@
     <Compile Include="Quality\ClassDesignAttribute.cs" />
     <Compile Include="Quality\ClassDesignTag.cs" />
     <Compile Include="Quality\DesignOfClass.cs" />
+    <Compile Include="Quality\DesignUtil.cs" />
     <Compile Include="Quality\ReSharper\LocalizableAttribute.cs" />
     <Compile Include="Rand.String.cs" />
     <Compile Include="Monads\Result.1.cs" />

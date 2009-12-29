@@ -19,15 +19,7 @@ namespace Lokad.Quality
 	/// </summary>
 	public static class DesignOfClass
 	{
-		/// <summary>
-		/// Converts the tag to string.
-		/// </summary>
-		/// <param name="tag">The tag.</param>
-		/// <returns></returns>
-		public static string ConvertTagToString(ClassDesignTag tag)
-		{
-			return "Lokad.Class." + tag;
-		}
+	
 
 		/// <summary>
 		/// 	Indicates that a class is an immutable model with fields

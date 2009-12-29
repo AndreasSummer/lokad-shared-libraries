@@ -56,7 +56,7 @@ namespace Lokad.Quality
 		{
 			_classDesignTags = otherDesignTags
 				.Prepend(firstDesignTag)
-				.ToArray(p => DesignOfClass.ConvertTagToString(p));
+				.ToArray(p => DesignUtil.ConvertTagToString(p));
 		}
 	}
 }

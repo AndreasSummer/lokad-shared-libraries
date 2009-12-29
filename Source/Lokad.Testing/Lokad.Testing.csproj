@@ -57,8 +57,10 @@
     <Compile Include="..\VersionAssemblyInfo.cs">
       <Link>Properties\VersionAssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="Testing\ModelAssert.cs" />
-    <Compile Include="Testing\ModelEqualityTester.cs" />
+    <Compile Include="Testing\Models\TestModelEqualityCache.cs" />
+    <Compile Include="Testing\Models\ITestModelEqualityProvider.cs" />
+    <Compile Include="Testing\Models\ModelAssert.cs" />
+    <Compile Include="Testing\Models\TestModelEqualityBuilder.cs" />
     <Compile Include="Rules\RuleAssert.cs" />
     <Compile Include="Testing\Assert.cs" />
     <Compile Include="ExtendIEquatable.cs" />
@@ -70,6 +72,7 @@
     <Compile Include="Testing\MockContainer\MockContainer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Testing\MockContainer\RegistrationSource.cs" />
+    <Compile Include="Testing\Models\TestModelEqualityDelegate.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Lokad.Shared\Lokad.Shared.csproj">

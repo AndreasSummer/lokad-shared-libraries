@@ -6,7 +6,10 @@
 
 #endregion
 
+using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using Lokad.Quality;
 using Lokad.Rules;
 
 namespace Lokad.Testing
@@ -16,6 +19,18 @@ namespace Lokad.Testing
 	/// </summary>
 	public static class ModelAssert
 	{
+		static void ThrowIfNotModel<TModel>()
+		{
+			if (!DesignUtil.ClassCache<TModel>.IsModel)
+			{
+				var error = string.Format("Type '{0}' should have '{1}' with '{2}' tag.",
+					typeof(TModel),
+					typeof(ClassDesignAttribute),
+					DesignUtil.ConvertTagToString(ClassDesignTag.Model));
+				throw new ArgumentException(error);
+			}
+		}
+		
 		/// <summary>
 		/// 	Asserts that the two models are equal
 		/// </summary>
@@ -33,7 +48,7 @@ namespace Lokad.Testing
 		/// <exception cref="FailedAssertException">When check fails</exception>
 		public static void AreEqual<TModel>(TModel expected, TModel actual, string format, params object[] args)
 		{
-			ModelEqualityTester.ThrowIfNotModel<TModel>();
+			ThrowIfNotModel<TModel>();
 			var messages = GetEqualityMessages(expected, actual);
 
 			if (!messages.IsSuccess)
@@ -75,7 +90,7 @@ namespace Lokad.Testing
 		/// <exception cref="FailedAssertException">When check fails</exception>
 		public static void AreNotEqual<TModel>(TModel expected, TModel actual, string format, params object[] args)
 		{
-			ModelEqualityTester.ThrowIfNotModel<TModel>();
+			ThrowIfNotModel<TModel>();
 			var messages = GetEqualityMessages(expected, actual);
 
 			if (messages.IsSuccess)
@@ -98,12 +113,27 @@ namespace Lokad.Testing
 			AreNotEqual(expected, actual, "Models of type '{0}' should not be equal.", typeof(TModel).Name);
 		}
 
+		static readonly ITestModelEqualityProvider _provider;
+
+		static ModelAssert()
+		{
+			var dict = new TestModelEqualityCache();
+			_provider = new TestModelEqualityBuilder(dict);
+			dict.UnknownType = type =>
+				{
+					Debug.WriteLine("Building provider for " + type);
+					return _provider.GetEqualityTester(type);
+				};
+		}
+
 		static RuleMessages GetEqualityMessages<TModel>(TModel expected, TModel actual)
 		{
-			var name = typeof (TModel).Name;
+			var type = typeof (TModel);
+			var name = type.Name;
 			return Scope.GetMessages(name, scope =>
 				{
-					var result = ModelEqualityTester.TestEquality(scope, expected, actual);
+					var tester = _provider.GetEqualityTester(type);
+					var result = tester(scope, type, expected, actual);
 					if (!result)
 					{
 						scope.Error("Equality check has failed");
@@ -145,7 +175,7 @@ namespace Lokad.Testing
 			ICollection<TModel> actual,
 			string format, params object[] args)
 		{
-			ModelEqualityTester.ThrowIfNotModel<TModel>();
+			ThrowIfNotModel<TModel>();
 
 			var messages = GetEqualityMessages(expected, actual);
 

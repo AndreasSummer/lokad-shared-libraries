@@ -1,5 +1,6 @@
 <Configuration>
   <NamespaceFolders>
     <SkipFolder>CA5BC74E-E0DD-4F07-B29E-7B4F988F5E1F/d:Testing/d:MockContainer</SkipFolder>
+    <SkipFolder>CA5BC74E-E0DD-4F07-B29E-7B4F988F5E1F/d:Testing/d:Models</SkipFolder>
   </NamespaceFolders>
 </Configuration>
