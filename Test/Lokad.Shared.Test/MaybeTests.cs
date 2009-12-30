@@ -154,6 +154,19 @@ namespace Lokad
 			MaybeEmpty.Join(SomeFailure.Fail).ShouldBe(SomeFailure.Fail);
 		}
 
+		[Test]
+		public void Equations()
+		{
+			Maybe<DateTime> m1 = SystemUtil.UtcNow;
+			Maybe<DateTime> m2 = Maybe<DateTime>.Empty;
+
+			Assert.IsTrue(m1.EqualsTo(m1));
+			Assert.IsTrue(m2.EqualsTo(m2));
+			Assert.IsFalse(m1.EqualsTo(m2));
+			Assert.IsFalse(m2.EqualsTo(m1));
+
+		}
+
 		enum SomeFailure
 		{
 			None,Fail

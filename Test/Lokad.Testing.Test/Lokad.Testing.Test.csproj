@@ -66,6 +66,7 @@
     <Compile Include="ContainerFixture.cs" />
     <Compile Include="ExtendOptionalTests.cs" />
     <Compile Include="MockContainerTests.cs" />
+    <Compile Include="ModelAssertRegressions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ModelAssertTests.cs" />
   </ItemGroup>

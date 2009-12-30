@@ -76,8 +76,8 @@
     <Compile Include="Monads\Maybe.1.cs" />
     <Compile Include="Monads\MaybeParse.cs" />
     <Compile Include="Quality\ClassDesignAttribute.cs" />
-    <Compile Include="Quality\ClassDesignTag.cs" />
-    <Compile Include="Quality\DesignOfClass.cs" />
+    <Compile Include="Quality\DesignTag.cs" />
+    <Compile Include="DesignOfClass.cs" />
     <Compile Include="Quality\DesignUtil.cs" />
     <Compile Include="Quality\ReSharper\LocalizableAttribute.cs" />
     <Compile Include="Rand.String.cs" />

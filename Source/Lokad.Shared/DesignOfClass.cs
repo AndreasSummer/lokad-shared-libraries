@@ -11,8 +11,9 @@
 #endregion
 
 using System;
+using Lokad.Quality;
 
-namespace Lokad.Quality
+namespace Lokad
 {
 	/// <summary>
 	/// 	Class design markers for the Lokad namespace
@@ -33,7 +34,7 @@ namespace Lokad.Quality
 			/// 	class.
 			/// </summary>
 			public ImmutableFieldsModel()
-				: base(ClassDesignTag.Model, ClassDesignTag.ImmutableWithFields)
+				: base(DesignTag.Model, DesignTag.ImmutableWithFields)
 			{
 			}
 		}
@@ -49,7 +50,7 @@ namespace Lokad.Quality
 			/// 	<see cref="ImmutablePropertiesModel" />
 			/// 	class.
 			/// </summary>
-			public ImmutablePropertiesModel() : base(ClassDesignTag.Model, ClassDesignTag.ImmutableWithProperties)
+			public ImmutablePropertiesModel() : base(DesignTag.Model, DesignTag.ImmutableWithProperties)
 			{
 			}
 		}

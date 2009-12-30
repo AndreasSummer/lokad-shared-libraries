@@ -23,8 +23,8 @@ namespace Lokad.Testing
 	/// </summary>
 	sealed class TestModelEqualityBuilder : ITestModelEqualityProvider
 	{
-		static readonly string FieldTag = DesignUtil.ConvertTagToString(ClassDesignTag.ImmutableWithFields);
-		static readonly string PropertyTag = DesignUtil.ConvertTagToString(ClassDesignTag.ImmutableWithProperties);
+		static readonly string FieldTag = DesignUtil.ConvertTagToString(DesignTag.ImmutableWithFields);
+		static readonly string PropertyTag = DesignUtil.ConvertTagToString(DesignTag.ImmutableWithProperties);
 
 		readonly ITestModelEqualityProvider _provider;
 
@@ -37,9 +37,26 @@ namespace Lokad.Testing
 		{
 			var tags = DesignUtil.GetClassDesignTags(type, false);
 
+			var equatable = typeof(IEquatable<>).MakeGenericType(type);
+			if (equatable.IsAssignableFrom(type))
+			{
+				// horray, friendly type here
+				var methodInfo = equatable.GetMethod("Equals");
+				return (scope, t, expected, actual) =>
+				{
+					Enforce.That(t == type);
+					bool result;
+					if (TryReferenceCheck(scope, expected, actual, out result))
+					{
+						return result;
+					}
+					return TestGenericEquality(scope, methodInfo, expected, actual);
+				};
+			}
+
 			if (tags.Contains(FieldTag))
 			{
-				var fields = type.GetFields();
+				var fields = type.GetFields(BindingFlags.Instance | BindingFlags.Public);
 
 				return (scope, t, expected, actual) =>
 					{
@@ -55,7 +72,7 @@ namespace Lokad.Testing
 
 			if (tags.Contains(PropertyTag))
 			{
-				var props = type.GetProperties();
+				var props = type.GetProperties(BindingFlags.Instance | BindingFlags.Public);
 				return (scope, t, expected, actual) =>
 					{
 						Enforce.That(t == type);
@@ -65,23 +82,6 @@ namespace Lokad.Testing
 							return result;
 						}
 						return TestPropertyEquality(scope, expected, actual, props);
-					};
-			}
-
-			var equatable = typeof (IEquatable<>).MakeGenericType(type);
-			if (equatable.IsAssignableFrom(type))
-			{
-				// horray, friendly type here
-				var methodInfo = equatable.GetMethod("Equals");
-				return (scope, t, expected, actual) =>
-					{
-						Enforce.That(t == type);
-						bool result;
-						if (TryReferenceCheck(scope, expected, actual, out result))
-						{
-							return result;
-						}
-						return TestGenericEquality(scope, methodInfo, expected, actual);
 					};
 			}
 
@@ -138,7 +138,7 @@ namespace Lokad.Testing
 					if (!localEquality)
 					{
 						equals = false;
-						child.Error("Expected field '{0}' was '{1}'", v1, v2);
+						//child.Error("Expected field '{0}' was '{1}'", v1, v2);
 					}
 				}
 			}

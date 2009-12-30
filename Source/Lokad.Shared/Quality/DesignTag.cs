@@ -11,21 +11,21 @@ namespace Lokad.Quality
 	/// <summary>
 	/// 	Predefined class design tags
 	/// </summary>
-	public enum ClassDesignTag
+	public enum DesignTag
 	{
 		/// <summary>Undefined</summary>
 		Undefined,
 		/// <summary>
-		/// 	The class is a data model
+		/// 	The object is a data model
 		/// </summary>
 		Model,
 		/// <summary>
-		/// 	The class is immutable, using readonly fields
+		/// 	The object is immutable, using readonly fields
 		/// </summary>
 		ImmutableWithFields,
 		/// <summary>
-		/// 	The class is immutable, using properties with private setters
+		/// 	The object is immutable, using properties with private setters
 		/// </summary>
-		ImmutableWithProperties
+		ImmutableWithProperties,
 	}
 }

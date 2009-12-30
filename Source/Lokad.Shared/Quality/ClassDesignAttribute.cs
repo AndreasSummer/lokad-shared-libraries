@@ -23,6 +23,7 @@ namespace Lokad.Quality
 		/// Gets the class design tags.
 		/// </summary>
 		/// <value>The class design tags.</value>
+		[UsedImplicitly]
 		public string[] ClassDesignTags
 		{
 			get { return _classDesignTags; }
@@ -52,7 +53,7 @@ namespace Lokad.Quality
 		/// </summary>
 		/// <param name="firstDesignTag">The first design tag.</param>
 		/// <param name="otherDesignTags">The other design tags.</param>
-		public ClassDesignAttribute(ClassDesignTag firstDesignTag, params ClassDesignTag[] otherDesignTags)
+		public ClassDesignAttribute(DesignTag firstDesignTag, params DesignTag[] otherDesignTags)
 		{
 			_classDesignTags = otherDesignTags
 				.Prepend(firstDesignTag)

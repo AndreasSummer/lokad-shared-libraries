@@ -21,7 +21,7 @@ namespace Lokad.Quality
 		/// </summary>
 		/// <param name="tag">The tag.</param>
 		/// <returns></returns>
-		public static string ConvertTagToString(ClassDesignTag tag)
+		public static string ConvertTagToString(DesignTag tag)
 		{
 			return "Lokad.Class." + tag;
 		}
@@ -78,7 +78,7 @@ namespace Lokad.Quality
 			static ClassCache()
 			{
 				Tags = GetClassDesignTags(typeof (T), false);
-				IsModel = Tags.Contains(ConvertTagToString(ClassDesignTag.Model));
+				IsModel = Tags.Contains(ConvertTagToString(DesignTag.Model));
 			}
 		}
 	}

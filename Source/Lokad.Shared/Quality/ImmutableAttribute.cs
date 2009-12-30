@@ -17,7 +17,13 @@ namespace Lokad.Quality
 	/// </summary>
 	[AttributeUsage(AttributeTargets.Class | AttributeTargets.Struct, Inherited = false, AllowMultiple = false)]
 	[NoCodeCoverage]
-	public sealed class ImmutableAttribute : Attribute
+	public sealed class ImmutableAttribute : ClassDesignAttribute
 	{
+		/// <summary>
+		/// Initializes a new instance of the <see cref="ImmutableAttribute"/> class.
+		/// </summary>
+		public ImmutableAttribute() : base(DesignTag.ImmutableWithFields)
+		{
+		}
 	}
 }

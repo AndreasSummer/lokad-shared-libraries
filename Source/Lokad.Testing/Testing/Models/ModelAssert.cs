@@ -26,7 +26,7 @@ namespace Lokad.Testing
 				var error = string.Format("Type '{0}' should have '{1}' with '{2}' tag.",
 					typeof(TModel),
 					typeof(ClassDesignAttribute),
-					DesignUtil.ConvertTagToString(ClassDesignTag.Model));
+					DesignUtil.ConvertTagToString(DesignTag.Model));
 				throw new ArgumentException(error);
 			}
 		}
