@@ -284,6 +284,17 @@ namespace Lokad.Linq
 		}
 
 		[Test]
+		public void ToIndexDictionary()
+		{
+			var dict = Range.Create(10).ToIndexDictionary();
+
+			for (int i = 0; i < 10; i++)
+			{
+				Assert.AreEqual(i, dict[i]);
+			}
+		}
+
+		[Test]
 		public void SelectValues()
 		{
 			var array = Range.Array(10, i => Rand.NextMaybe(i));

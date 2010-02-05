@@ -532,7 +532,7 @@ namespace System.Linq
 		}
 
 		/// <summary>
-		/// Applies the integral indexer to the sequence
+		/// Applies the integral indexer to the sequence in a lazy manner
 		/// </summary>
 		/// <typeparam name="TSource">The type of the source.</typeparam>
 		/// <param name="source">The sequence.</param>
@@ -548,6 +548,29 @@ namespace System.Linq
 				yield return new Indexer<TSource>(index, item);
 				index += 1;
 			}
+		}
+
+		/// <summary>
+		/// Enumerates and returns a mapping that associated the items with their respective
+		/// indices (positions) within the enumeration.
+		/// </summary>
+		/// <typeparam name="TSource">The type of the source.</typeparam>
+		/// <param name="source">The source.</param>
+		/// <returns>a dictionary</returns>
+		/// <remarks>Typical usage is <c>coll.ToIndex()["foo"]</c> that returns
+		/// the position of the item <c>"foo"</c> in the initial collection.</remarks>
+		public static IDictionary<TSource, int> ToIndexDictionary<TSource>([NotNull] this IEnumerable<TSource> source)
+		{
+			if (source == null) throw new ArgumentNullException("source");
+			var dic = new Dictionary<TSource, int>(source.Count());
+
+			var i = 0;
+			foreach (var x in source)
+			{
+				dic.Add(x, i++);
+			}
+
+			return dic;
 		}
 
 		/// <summary>
