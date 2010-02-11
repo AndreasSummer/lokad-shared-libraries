@@ -1,50 +1,16 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 10.00
-# Visual Studio 2008
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lokad.Shared", "Source\Lokad.Shared\Lokad.Shared.csproj", "{9C285BAA-786F-41E9-8CFB-C1FDDB3E6FE1}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Source", "Source", "{5344E077-8212-47BA-8EA2-F92ECC2845A0}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lokad.Shared.Test", "Test\Lokad.Shared.Test\Lokad.Shared.Test.csproj", "{76BE68DD-B0AB-4CF6-B119-3C493F11B06D}"
-EndProject
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{758A6E18-B1E3-418F-94BE-D0F8DFC66FCD}"
 	ProjectSection(SolutionItems) = preProject
 		Lokad.Shared.License.txt = Lokad.Shared.License.txt
 		ReadMe.txt = ReadMe.txt
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lokad.Stack", "Source\Lokad.Stack\Lokad.Stack.csproj", "{5071C867-97B7-41BE-95A7-7B584B0C2F50}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lokad.Stack.Test", "Test\Lokad.Stack.Test\Lokad.Stack.Test.csproj", "{6DA4EA76-B037-4131-A39E-262E1FBAD19C}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lokad.Quality", "Source\Lokad.Quality\Lokad.Quality.csproj", "{855AE75B-E675-4F90-873F-CC3D3F9879BD}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{8EDA9E73-26B6-427B-9A2A-9898054C193F}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{FFFDA17A-CB7D-4DA1-BAFA-838E873F668A}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lokad.Quality.Test", "Test\Lokad.Quality.Test\Lokad.Quality.Test.csproj", "{D8AB1A43-FA5B-492A-9AEA-C1D177CD3C85}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Templates", "Templates", "{89452278-CC35-4A09-86FA-837DE7398573}"
 	ProjectSection(SolutionItems) = preProject
 		Resource\Files\index.template = Resource\Files\index.template
 	EndProjectSection
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lokad.Logging", "Source\Lokad.Logging\Lokad.Logging.csproj", "{F674D061-0355-4617-9A3C-9A4E6E12DEEF}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tool", "Tool", "{F6D2FFD3-20B7-42AD-8D6B-C8B4E56A30B4}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lokad.Linker", "Host\Lokad.Linker\Lokad.Linker.csproj", "{A7B85147-5434-4707-8733-8A10E999467A}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lokad.ActionPolicy", "Source\Lokad.ActionPolicy\Lokad.ActionPolicy.csproj", "{F8001D8A-6F14-463B-AA8E-00D31EFFBFA0}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lokad.ActionPolicy.Test", "Test\Lokad.ActionPolicy.Test\Lokad.ActionPolicy.Test.csproj", "{F8677A4E-D9A7-4AFD-9C29-A83B5C5C4A6B}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lokad.Logging.Test", "Test\Lokad.Logging.Test\Lokad.Logging.Test.csproj", "{4A323EA1-F1FE-4917-9D2A-C415A39A6E29}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lokad.Testing", "Source\Lokad.Testing\Lokad.Testing.csproj", "{CA5BC74E-E0DD-4F07-B29E-7B4F988F5E1F}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lokad.Testing.Test", "Test\Lokad.Testing.Test\Lokad.Testing.Test.csproj", "{D1A9180F-9F43-4724-B414-B3484858904A}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build Files", "Build Files", "{E3605A5A-77F7-4D73-A6CA-CC930FEBCA02}"
 	ProjectSection(SolutionItems) = preProject
@@ -59,6 +25,32 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared Assembly Files", "Sh
 		Source\GlobalAssemblyInfo.cs = Source\GlobalAssemblyInfo.cs
 		SharedKey.snk = SharedKey.snk
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lokad.Shared", "Source\Lokad.Shared\Lokad.Shared.csproj", "{9C285BAA-786F-41E9-8CFB-C1FDDB3E6FE1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lokad.Shared.Test", "Test\Lokad.Shared.Test\Lokad.Shared.Test.csproj", "{76BE68DD-B0AB-4CF6-B119-3C493F11B06D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lokad.Stack", "Source\Lokad.Stack\Lokad.Stack.csproj", "{5071C867-97B7-41BE-95A7-7B584B0C2F50}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lokad.Stack.Test", "Test\Lokad.Stack.Test\Lokad.Stack.Test.csproj", "{6DA4EA76-B037-4131-A39E-262E1FBAD19C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lokad.Quality", "Source\Lokad.Quality\Lokad.Quality.csproj", "{855AE75B-E675-4F90-873F-CC3D3F9879BD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lokad.Quality.Test", "Test\Lokad.Quality.Test\Lokad.Quality.Test.csproj", "{D8AB1A43-FA5B-492A-9AEA-C1D177CD3C85}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lokad.Logging", "Source\Lokad.Logging\Lokad.Logging.csproj", "{F674D061-0355-4617-9A3C-9A4E6E12DEEF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lokad.Linker", "Host\Lokad.Linker\Lokad.Linker.csproj", "{A7B85147-5434-4707-8733-8A10E999467A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lokad.ActionPolicy", "Source\Lokad.ActionPolicy\Lokad.ActionPolicy.csproj", "{F8001D8A-6F14-463B-AA8E-00D31EFFBFA0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lokad.ActionPolicy.Test", "Test\Lokad.ActionPolicy.Test\Lokad.ActionPolicy.Test.csproj", "{F8677A4E-D9A7-4AFD-9C29-A83B5C5C4A6B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lokad.Logging.Test", "Test\Lokad.Logging.Test\Lokad.Logging.Test.csproj", "{4A323EA1-F1FE-4917-9D2A-C415A39A6E29}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lokad.Testing", "Source\Lokad.Testing\Lokad.Testing.csproj", "{CA5BC74E-E0DD-4F07-B29E-7B4F988F5E1F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lokad.Testing.Test", "Test\Lokad.Testing.Test\Lokad.Testing.Test.csproj", "{D1A9180F-9F43-4724-B414-B3484858904A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -123,23 +115,9 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{5344E077-8212-47BA-8EA2-F92ECC2845A0} = {8EDA9E73-26B6-427B-9A2A-9898054C193F}
-		{FFFDA17A-CB7D-4DA1-BAFA-838E873F668A} = {8EDA9E73-26B6-427B-9A2A-9898054C193F}
-		{5071C867-97B7-41BE-95A7-7B584B0C2F50} = {5344E077-8212-47BA-8EA2-F92ECC2845A0}
-		{855AE75B-E675-4F90-873F-CC3D3F9879BD} = {5344E077-8212-47BA-8EA2-F92ECC2845A0}
-		{9C285BAA-786F-41E9-8CFB-C1FDDB3E6FE1} = {5344E077-8212-47BA-8EA2-F92ECC2845A0}
-		{F674D061-0355-4617-9A3C-9A4E6E12DEEF} = {5344E077-8212-47BA-8EA2-F92ECC2845A0}
-		{F8001D8A-6F14-463B-AA8E-00D31EFFBFA0} = {5344E077-8212-47BA-8EA2-F92ECC2845A0}
-		{CA5BC74E-E0DD-4F07-B29E-7B4F988F5E1F} = {5344E077-8212-47BA-8EA2-F92ECC2845A0}
-		{6DA4EA76-B037-4131-A39E-262E1FBAD19C} = {FFFDA17A-CB7D-4DA1-BAFA-838E873F668A}
-		{76BE68DD-B0AB-4CF6-B119-3C493F11B06D} = {FFFDA17A-CB7D-4DA1-BAFA-838E873F668A}
-		{D8AB1A43-FA5B-492A-9AEA-C1D177CD3C85} = {FFFDA17A-CB7D-4DA1-BAFA-838E873F668A}
-		{F8677A4E-D9A7-4AFD-9C29-A83B5C5C4A6B} = {FFFDA17A-CB7D-4DA1-BAFA-838E873F668A}
-		{4A323EA1-F1FE-4917-9D2A-C415A39A6E29} = {FFFDA17A-CB7D-4DA1-BAFA-838E873F668A}
-		{D1A9180F-9F43-4724-B414-B3484858904A} = {FFFDA17A-CB7D-4DA1-BAFA-838E873F668A}
 		{89452278-CC35-4A09-86FA-837DE7398573} = {758A6E18-B1E3-418F-94BE-D0F8DFC66FCD}
 		{E3605A5A-77F7-4D73-A6CA-CC930FEBCA02} = {758A6E18-B1E3-418F-94BE-D0F8DFC66FCD}
 		{DECF1CED-BABB-4934-A97B-87001B797BF4} = {758A6E18-B1E3-418F-94BE-D0F8DFC66FCD}
-		{A7B85147-5434-4707-8733-8A10E999467A} = {F6D2FFD3-20B7-42AD-8D6B-C8B4E56A30B4}
+		{A7B85147-5434-4707-8733-8A10E999467A} = {758A6E18-B1E3-418F-94BE-D0F8DFC66FCD}
 	EndGlobalSection
 EndGlobal
