@@ -6,6 +6,8 @@
 
 #endregion
 
+using System;
+
 namespace Lokad
 {
 	/// <summary>
@@ -25,6 +27,19 @@ namespace Lokad
 		public static CurrencyAmount In(this decimal value, CurrencyType currency)
 		{
 			return new CurrencyAmount(currency, value);
+		}
+
+		/// <summary>
+		/// Rounds the specified decimal with the provided number 
+		/// of fractional digits.
+		/// </summary>
+		/// <param name="value">The value to round.</param>
+		/// <param name="digits">The digits.</param>
+		/// <returns>rounded value</returns>
+		/// <remarks>We can't use "Round" since it will collide with <see cref="decimal.Round(decimal,int)"/></remarks>
+		public static Decimal RoundTo(this Decimal value, int digits)
+		{
+			return Math.Round(value, digits);
 		}
 	}
 }

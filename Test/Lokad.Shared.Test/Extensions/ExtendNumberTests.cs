@@ -7,6 +7,7 @@
 #endregion
 
 using NUnit.Framework;
+using Lokad;
 
 namespace Lokad
 {
@@ -32,6 +33,8 @@ namespace Lokad
 			1D.Days();
 
 			1D.Round(3);
+
+			1m.RoundTo(2);
 		}
 	}
 }
