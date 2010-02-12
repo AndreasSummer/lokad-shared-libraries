@@ -557,17 +557,27 @@ namespace System.Linq
 		/// <typeparam name="TSource">The type of the source.</typeparam>
 		/// <param name="source">The source.</param>
 		/// <returns>a dictionary</returns>
-		/// <remarks>Typical usage is <c>coll.ToIndex()["foo"]</c> that returns
-		/// the position of the item <c>"foo"</c> in the initial collection.</remarks>
+		/// <remarks><para>Typical usage is <c>coll.ToIndex()["foo"]</c> that returns
+		/// the position of the item <c>"foo"</c> in the initial collection.</para>
+		/// <para>if multiple similar entries are present in the original collection,
+		/// index of the first entry is recorded.
+		/// </para>
+		/// 
+		/// </remarks>
+		/// 
 		public static IDictionary<TSource, int> ToIndexDictionary<TSource>([NotNull] this IEnumerable<TSource> source)
 		{
 			if (source == null) throw new ArgumentNullException("source");
 			var dic = new Dictionary<TSource, int>(source.Count());
 
-			var i = 0;
+			var index = 0;
 			foreach (var x in source)
 			{
-				dic.Add(x, i++);
+				if (!dic.ContainsKey(x))
+				{
+					dic.Add(x, index);
+				}
+				index += 1;
 			}
 
 			return dic;

@@ -295,9 +295,18 @@ namespace Lokad.Linq
 		}
 
 		[Test]
+		public void ToIndexDictionary_works_with_duplicate_entries()
+		{
+			var dict = new[] { 1, 2, 3, 4, 1 }
+				.ToIndexDictionary();
+
+			Assert.AreEqual(0, dict[1]);
+		}
+
+		[Test]
 		public void SelectValues()
 		{
-			var array = Range.Array(10, i => Rand.NextMaybe(i));
+			var array = Range.Array(10, Rand.NextMaybe);
 			Assert.AreEqual(array.Sum(s => s.GetValue(0)), array.SelectValues().Sum());
 		}
 	}
