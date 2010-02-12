@@ -306,7 +306,7 @@ namespace Lokad.Linq
 		[Test]
 		public void SelectValues()
 		{
-			var array = Range.Array(10, Rand.NextMaybe);
+			var array = Range.Array(10, n => Rand.NextMaybe(n));
 			Assert.AreEqual(array.Sum(s => s.GetValue(0)), array.SelectValues().Sum());
 		}
 	}
