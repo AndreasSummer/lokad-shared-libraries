@@ -16,15 +16,47 @@ namespace Lokad
 	///</remarks>
 	public enum CurrencyType
 	{
-#pragma warning disable 1591
-		None = 0x00,// this must be default!
+
+		/// <summary>
+		/// Undefined currency
+		/// </summary>
+		/// <remarks>this must be default!</remarks>
+		None = 0x00,
+		/// <summary>
+		/// EUR
+		/// </summary>
 		Eur,
+		/// <summary>
+		/// American Dollar
+		/// </summary>
 		Usd,
+		/// <summary>
+		/// Australian dollar
+		/// </summary>
 		Aud,
+		/// <summary>
+		/// Canadian dollar
+		/// </summary>
 		Cad,
+		/// <summary>
+		/// Swiss franc
+		/// </summary>
 		Chf,
+		/// <summary>
+		/// Pound sterling
+		/// </summary>
 		Gbp,
+		/// <summary>
+		/// Japanese yen
+		/// </summary>
 		Jpy,
-		Rur
+		/// <summary>
+		/// Russian ruble
+		/// </summary>
+		Rub,
+		/// <summary>
+		/// Mexican Peso
+		/// </summary>
+		Mxn
 	}
 }
