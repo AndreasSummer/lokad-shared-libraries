@@ -1,7 +1,7 @@
 ﻿New BSD License
 ===============
 
-Copyright (c) Lokad 2009 
+Copyright (c) Lokad 2008-2010 
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without 
