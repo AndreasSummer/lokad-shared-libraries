@@ -8,7 +8,6 @@
 
 using System;
 using System.Linq;
-using Lokad.Diagnostics;
 using Lokad.Rules;
 using Lokad.Testing;
 using NUnit.Framework;
@@ -19,15 +18,6 @@ namespace Lokad
 	public sealed class Result1Tests
 	{
 		// ReSharper disable InconsistentNaming
-
-		[Test, Expects.InvalidOperationException]
-		public void Access_Success()
-		{
-			var result = Result.CreateSuccess(SystemDescriptor.Default.Version);
-			Assert.IsTrue(result.IsSuccess);
-			Assert.AreEqual(SystemDescriptor.Default.Version, result.Value);
-			Assert.IsNull(result.Error, "this should fail");
-		}
 
 		[Test, Expects.InvalidOperationException]
 		public void Access_Error()

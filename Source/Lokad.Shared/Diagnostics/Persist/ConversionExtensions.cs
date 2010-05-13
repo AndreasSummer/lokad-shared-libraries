@@ -45,35 +45,5 @@ namespace Lokad.Diagnostics.Persist
 					d.Counters,
 					d.RunningTime));
 		}
-
-		/// <summary>
-		/// Converts the descriptor instance to persistence object
-		/// </summary>
-		/// <param name="descriptor">The descriptor.</param>
-		/// <returns>new persistence object</returns>
-		public static SystemData ToPersistence(this SystemDescriptor descriptor)
-		{
-			return new SystemData
-				{
-					Configuration = descriptor.Configuration,
-					Instance = descriptor.Instance,
-					Name = descriptor.Name,
-					Version = descriptor.Version
-				};
-		}
-
-		/// <summary>
-		/// Converts the descriptor instance to persistence object
-		/// </summary>
-		/// <param name="data">The persistence data.</param>
-		/// <returns>new descriptor object</returns>
-		public static SystemDescriptor FromPersistence(this SystemData data)
-		{
-			return new SystemDescriptor(
-				data.Name,
-				data.Version,
-				data.Configuration,
-				data.Instance);
-		}
 	}
 }
