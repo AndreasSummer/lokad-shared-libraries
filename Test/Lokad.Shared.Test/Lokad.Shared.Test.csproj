@@ -18,6 +18,8 @@
     </FileUpgradeFlags>
     <OldToolsVersion>3.5</OldToolsVersion>
     <UpgradeBackupLocation />
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <TargetFrameworkProfile />
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -30,10 +32,8 @@
     <MapFileExtensions>true</MapFileExtensions>
     <ApplicationRevision>0</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
-    <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -102,7 +102,6 @@
     <Compile Include="Threading\WaitForTests.cs" />
     <Compile Include="Utils\ArrayUtilTests.cs" />
     <Compile Include="Utils\AssemblyUtilTests.cs" />
-    <Compile Include="Diagnostics\ExceptionCounterTests.cs" />
     <Compile Include="Diagnostics\SystemDescriptorTests.cs" />
     <Compile Include="Utils\BufferUtilTests.cs" />
     <Compile Include="Utils\EnumUtilTests.cs" />

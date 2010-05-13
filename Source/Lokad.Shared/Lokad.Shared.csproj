@@ -18,6 +18,7 @@
     </FileUpgradeFlags>
     <OldToolsVersion>3.5</OldToolsVersion>
     <UpgradeBackupLocation />
+    <IsWebBootstrapper>false</IsWebBootstrapper>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -30,7 +31,6 @@
     <MapFileExtensions>true</MapFileExtensions>
     <ApplicationRevision>0</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
-    <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
@@ -84,14 +84,12 @@
     <Compile Include="Currency\CurrencyType.cs" />
     <Compile Include="Currency\ExtendDecimal.cs" />
     <Compile Include="Diagnostics\Persist\ConversionExtensions.cs" />
-    <Compile Include="Diagnostics\Persist\ExceptionData.cs" />
     <Compile Include="Diagnostics\Persist\ExecutionData.cs" />
     <Compile Include="Diagnostics\Persist\MonitoringData.cs" />
     <Compile Include="Diagnostics\Persist\SystemData.cs" />
     <Compile Include="Extensions\ExtendAction.cs" />
     <Compile Include="Extensions\ExtendArray.cs" />
     <Compile Include="Collections\Generic\ProjectionComparer.cs" />
-    <Compile Include="Diagnostics\ExceptionStatistics.cs" />
     <Compile Include="IStartable.cs" />
     <Compile Include="Monads\Maybe.1.cs" />
     <Compile Include="Monads\MaybeParse.cs" />
@@ -162,7 +160,6 @@
     <Compile Include="Tuples\ExtendTuple.cs" />
     <Compile Include="Utils\ArrayUtil.cs" />
     <Compile Include="Utils\AssemblyUtil.cs" />
-    <Compile Include="Diagnostics\ExceptionCounter.cs" />
     <Compile Include="Diagnostics\ExecutionCounters.cs" />
     <Compile Include="Extensions\ExtendDouble.cs" />
     <Compile Include="Errors.cs" />
@@ -209,7 +206,6 @@
     <Compile Include="Tuples\Tuple.cs" />
     <Compile Include="Extensions\ExtendType.cs" />
     <Compile Include="Diagnostics\ExecutionCounterGroup.cs" />
-    <Compile Include="Diagnostics\ExceptionCounters.cs" />
     <Compile Include="Diagnostics\SystemDescriptor.cs" />
     <Compile Include="Enforce.cs" />
     <Compile Include="Extensions\ExtendICollection.cs" />

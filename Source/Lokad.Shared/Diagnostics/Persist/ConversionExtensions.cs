@@ -47,39 +47,6 @@ namespace Lokad.Diagnostics.Persist
 		}
 
 		/// <summary>
-		/// Converts statistics classes to the data objects.
-		/// </summary>
-		/// <param name="statisticsArray">The statistics array.</param>
-		/// <returns>array of data objects</returns>
-		public static ExceptionData[] ToPersistence(this ExceptionStatistics[] statisticsArray)
-		{
-			return statisticsArray.Convert(es => new ExceptionData
-				{
-					Count = es.Count,
-					ID = es.ID,
-					Message = es.Message,
-					Name = es.Name,
-					Text = es.Text
-				});
-		}
-
-		/// <summary>
-		/// Converts data objects to statistics classes.
-		/// </summary>
-		/// <param name="dataArray">The persistence data array.</param>
-		/// <returns>array of statistics objects</returns>
-		public static ExceptionStatistics[] FromPersistence(this ExceptionData[] dataArray)
-		{
-			return dataArray.Convert(
-				d => new ExceptionStatistics(
-					d.ID,
-					d.Count,
-					d.Name,
-					d.Message,
-					d.Text));
-		}
-
-		/// <summary>
 		/// Converts the descriptor instance to persistence object
 		/// </summary>
 		/// <param name="descriptor">The descriptor.</param>
