@@ -138,7 +138,7 @@ namespace Lokad.Threading
 
 			if (exception != null)
 			{
-				throw exception;
+				throw new Exception("Exception catched in SelectInParallel", exception);
 			}
 
 			return results;
