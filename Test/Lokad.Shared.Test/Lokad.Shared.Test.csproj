@@ -115,6 +115,7 @@
     <Compile Include="RangeTests.cs" />
     <Compile Include="Reflection\ReflectTests.cs" />
     <Compile Include="ResolverTests.cs" />
+    <Compile Include="Utils\FormatUtilTests.cs" />
     <Compile Include="Utils\ResourceUtilTests.cs" />
     <Compile Include="Data\SqlClient\SqlServerGuidComparerTest.cs" />
     <Compile Include="Result1Tests.cs" />
