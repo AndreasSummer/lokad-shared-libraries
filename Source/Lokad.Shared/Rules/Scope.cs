@@ -9,6 +9,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Text;
 using Lokad.Quality;
 
 namespace Lokad.Rules
@@ -290,6 +291,21 @@ namespace Lokad.Rules
 			if (string.IsNullOrEmpty(suffix)) throw new ArgumentException("suffix");
 
 			return ComposePathInternal(prefix, suffix);
+		}
+
+		/// <summary>
+		/// Creates new scope for logging into the provided string builder
+		/// </summary>
+		/// <param name="scopeName">Name of the scope.</param>
+		/// <param name="log">The builder to write to.</param>
+		/// <returns>composed scope</returns>
+		public static IScope ForLogging([NotNull] string scopeName, [NotNull] StringBuilder log)
+		{
+			if (log == null) throw new ArgumentNullException("log");
+			if (string.IsNullOrEmpty(scopeName)) throw new ArgumentException("scopeName");
+
+			var format = "{0} [{1}]: {2}" + Environment.NewLine;
+			return new SimpleScope(scopeName, (path, level, message) => log.AppendFormat(format, path, level, message));
 		}
 	}
 }
