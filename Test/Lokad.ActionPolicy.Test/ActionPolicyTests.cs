@@ -112,6 +112,19 @@ namespace Lokad
 			Expect<TimeoutException>(3, policy);
 		}
 
+		[Test]
+		public void From_is_similar_to_With()
+		{
+			var policy = ActionPolicy
+				.From(e => true)
+				.Retry(2);
+
+			// handled succeeds
+			Raise<TimeoutException>(2, policy);
+			// handled fails
+			Expect<TimeoutException>(3, policy);
+		}
+
 
 		[Test]
 		public void Retry_Once()

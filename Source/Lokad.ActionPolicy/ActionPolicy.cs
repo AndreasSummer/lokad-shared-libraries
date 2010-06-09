@@ -68,8 +68,22 @@ namespace Lokad
 		/// <paramref name="handler"/> </summary>
 		/// <param name="handler">The exception handler.</param>
 		/// <returns>syntax</returns>
-		public static Syntax<ExceptionHandler> With(ExceptionHandler handler)
+		public static Syntax<ExceptionHandler> With([NotNull] ExceptionHandler handler)
 		{
+			if (handler == null) throw new ArgumentNullException("handler");
+			return Syntax.For(handler);
+		}
+
+		/// <summary> Starts building <see cref="ActionPolicy"/> 
+		/// that can handle exceptions, as determined by 
+		/// <paramref name="doWeHandle"/> function</summary>
+		/// <param name="doWeHandle"> function that returns <em>true</em> if we can hande the specified exception.</param>
+		/// <returns>syntax</returns>
+		public static Syntax<ExceptionHandler> From([NotNull] Func<Exception, bool> doWeHandle)
+		{
+			if (doWeHandle == null) throw new ArgumentNullException("doWeHandle");
+
+			ExceptionHandler handler = exception => doWeHandle(exception);
 			return Syntax.For(handler);
 		}
 
