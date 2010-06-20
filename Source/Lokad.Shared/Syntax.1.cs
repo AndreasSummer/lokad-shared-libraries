@@ -7,19 +7,19 @@ namespace Lokad
 	/// <summary>
 	/// Helper class for creating fluent APIs
 	/// </summary>
-	/// <typeparam name="T">underlying type</typeparam>
+	/// <typeparam name="TSyntaxTarget">underlying type</typeparam>
 	[Immutable]
 	[Serializable]
 	[NoCodeCoverage]
-	public sealed class Syntax<T> : Syntax
+	public sealed class Syntax<TSyntaxTarget> : Syntax, ISyntax<TSyntaxTarget>
 	{
-		readonly T _inner;
+		readonly TSyntaxTarget _inner;
 
 		/// <summary>
 		/// Initializes a new instance of the <see cref="Syntax{T}"/> class.
 		/// </summary>
 		/// <param name="inner">The underlying instance.</param>
-		public Syntax(T inner)
+		public Syntax(TSyntaxTarget inner)
 		{
 			_inner = inner;
 		}
@@ -29,14 +29,14 @@ namespace Lokad
 		/// </summary>
 		/// <value>The underlying object.</value>
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public T Target
+		public TSyntaxTarget Target
 		{
 			get { return _inner; }
 		}
 
-		internal static Syntax<T> For(T item)
+		internal static Syntax<TSyntaxTarget> For(TSyntaxTarget item)
 		{
-			return new Syntax<T>(item);
+			return new Syntax<TSyntaxTarget>(item);
 		}
 	}
 }
