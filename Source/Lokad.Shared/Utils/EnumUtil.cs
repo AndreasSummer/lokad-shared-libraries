@@ -86,13 +86,12 @@ namespace Lokad
 		where TFromEnum : struct, IComparable
 		where TToEnum : struct,IComparable
 	{
-		static readonly Dictionary<TFromEnum, TToEnum> Enums;
+		static readonly IDictionary<TFromEnum, TToEnum> Enums;
 		static readonly TFromEnum[] Unmatched;
 		static EnumUtil()
 		{
 			var fromEnums = EnumUtil.GetValues<TFromEnum>();
 			Enums = new Dictionary<TFromEnum, TToEnum>(fromEnums.Length, EnumUtil<TFromEnum>.Comparer);
-
 			var unmatched = new List<TFromEnum>();
 
 			foreach (var fromEnum in fromEnums)
