@@ -181,6 +181,7 @@
     <Compile Include="ResolutionException.cs" />
     <Compile Include="Resolver.cs" />
     <Compile Include="Utils\FormatUtil.cs" />
+    <Compile Include="Utils\GuidUtil.cs" />
     <Compile Include="Utils\ResourceUtil.cs" />
     <Compile Include="Data\SqlClient\SqlServerGuidComparer.cs" />
     <Compile Include="Monads\Result.cs" />
