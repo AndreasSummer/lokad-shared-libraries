@@ -25,7 +25,7 @@ namespace Lokad
 		/// <param name="value">The value.</param>
 		/// <returns>Parsed enum</returns>
 		/// <exception cref="ArgumentNullException">If <paramref name="value"/> is null</exception>
-		public static TEnum Parse<TEnum>(string value) where TEnum : struct
+		public static TEnum Parse<TEnum>(string value) where TEnum : struct, IComparable
 		{
 			return (TEnum) Enum.Parse(typeof (TEnum), value, true);
 		}
@@ -50,7 +50,7 @@ namespace Lokad
 		/// <param name="enumItem">The enum item.</param>
 		/// <returns>a string usable for identifiers and resource lookups</returns>
 		public static string ToIdentifier<TEnum>(TEnum enumItem)
-			where TEnum : struct
+			where TEnum : struct, IComparable
 		{
 			return EnumUtil<TEnum>.EnumPrefix + enumItem;
 		}
@@ -60,7 +60,7 @@ namespace Lokad
 		/// </summary>
 		/// <typeparam name="TEnum">The type of the enum.</typeparam>
 		/// <returns>array instance of the enum values</returns>
-		public static TEnum[] GetValues<TEnum>() where TEnum :struct
+		public static TEnum[] GetValues<TEnum>() where TEnum : struct, IComparable
 		{
 			return EnumUtil<TEnum>.Values;
 		}
@@ -71,7 +71,7 @@ namespace Lokad
 		/// </summary>
 		/// <typeparam name="TEnum">The type of the enum.</typeparam>
 		/// <returns>array instance of the enum values</returns>
-		public static TEnum[] GetValuesWithoutDefault<TEnum>() where TEnum : struct
+		public static TEnum[] GetValuesWithoutDefault<TEnum>() where TEnum : struct, IComparable
 		{
 			return EnumUtil<TEnum>.ValuesWithoutDefault;
 		}
@@ -83,14 +83,15 @@ namespace Lokad
 	/// <typeparam name="TFromEnum">The type of from enum.</typeparam>
 	/// <typeparam name="TToEnum">The type of to enum.</typeparam>
 	static class EnumUtil<TFromEnum,TToEnum> 
-		where TFromEnum : struct
-		where TToEnum : struct
+		where TFromEnum : struct, IComparable
+		where TToEnum : struct,IComparable
 	{
-		static readonly Dictionary<TFromEnum, TToEnum> Enums = new Dictionary<TFromEnum, TToEnum>();
+		static readonly Dictionary<TFromEnum, TToEnum> Enums;
 		static readonly TFromEnum[] Unmatched;
 		static EnumUtil()
 		{
 			var fromEnums = EnumUtil.GetValues<TFromEnum>();
+			Enums = new Dictionary<TFromEnum, TToEnum>(fromEnums.Length, EnumUtil<TFromEnum>.Comparer);
 
 			var unmatched = new List<TFromEnum>();
 
@@ -129,7 +130,8 @@ namespace Lokad
 	/// Strongly-typed enumeration util
 	/// </summary>
 	/// <typeparam name="TEnum">The type of the enum.</typeparam>
-	public static class EnumUtil<TEnum> where TEnum : struct
+	public static class EnumUtil<TEnum> where TEnum : 
+		struct, IComparable
 	{
 		/// <summary>
 		/// Values of the <typeparamref name="TEnum"/>
@@ -141,11 +143,17 @@ namespace Lokad
 		public static readonly TEnum[] ValuesWithoutDefault;
 		internal static readonly string EnumPrefix = typeof (TEnum).Name + "_";
 
+		/// <summary>
+		/// Efficient comparer for the enum
+		/// </summary>
+		public static readonly IEqualityComparer<TEnum> Comparer;
+
 		static EnumUtil()
 		{
 			Values = GetValues();
 			var def = default(TEnum);
 			ValuesWithoutDefault = Values.Where(x => !def.Equals(x)).ToArray();
+			Comparer = EnumComparer<TEnum>.Instance;
 		}
 
 		/// <summary>
@@ -156,7 +164,7 @@ namespace Lokad
 		/// <returns>converted enum</returns>
 		/// <exception cref="ArgumentException"> when conversion is not possible</exception>
 		public static TEnum ConvertSafelyFrom<TSourceEnum>(TSourceEnum @enum)
-			where TSourceEnum : struct
+			where TSourceEnum : struct, IComparable
 		{
 			return EnumUtil<TSourceEnum, TEnum>.Convert(@enum);
 		}

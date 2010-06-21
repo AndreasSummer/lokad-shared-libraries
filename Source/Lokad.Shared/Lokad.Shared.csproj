@@ -167,6 +167,7 @@
     <Compile Include="DisposableAction.cs" />
     <Compile Include="Utils\BufferUtil.cs" />
     <Compile Include="Utils\DebugUtil.cs" />
+    <Compile Include="Utils\EnumComparer.cs" />
     <Compile Include="Utils\EnumUtil.cs" />
     <Compile Include="Extensions\ExtendInt32.cs" />
     <Compile Include="IProvider.cs" />

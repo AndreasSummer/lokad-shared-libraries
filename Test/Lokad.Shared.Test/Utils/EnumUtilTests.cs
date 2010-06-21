@@ -46,7 +46,6 @@ namespace Lokad
 		public void Conversion_impossible()
 		{
 			EnumUtil<Tri>.ConvertSafelyFrom(Quad.Other);
-
 		}
 
 		[Test]

@@ -117,7 +117,7 @@ namespace Lokad
 		/// <summary> Picks random <see cref="Enum"/> </summary>
 		/// <typeparam name="TEnum">The type of the enum.</typeparam>
 		/// <returns>random Enum value</returns>
-		public static TEnum NextEnum<TEnum>() where TEnum : struct
+		public static TEnum NextEnum<TEnum>() where TEnum : struct, IComparable
 		{
 			return NextItem(EnumUtil<TEnum>.Values);
 		}
@@ -126,7 +126,7 @@ namespace Lokad
 		/// default(TEnum)</summary>
 		/// <typeparam name="TEnum">The type of the enum.</typeparam>
 		/// <returns>random Enum value</returns>
-		public static TEnum NextEnumExceptDefault<TEnum>() where TEnum : struct
+		public static TEnum NextEnumExceptDefault<TEnum>() where TEnum : struct, IComparable
 		{
 			return NextItem(EnumUtil<TEnum>.ValuesWithoutDefault);
 		}

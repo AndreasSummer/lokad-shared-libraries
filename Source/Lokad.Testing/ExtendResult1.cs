@@ -58,7 +58,7 @@ namespace Lokad.Testing
 		/// same result instance for further inlining
 		/// </returns>
 		public static Result<TValue> ShouldFailWith<TValue, TEnum>(this Result<TValue> result, TEnum @enum)
-			where TEnum : struct
+			where TEnum : struct, IComparable
 		{	
 			var s = EnumUtil.ToIdentifier(@enum);
 			return result.ShouldFailWith(s);
