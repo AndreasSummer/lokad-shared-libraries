@@ -36,15 +36,23 @@ namespace Lokad.Threading
 
 
 		[Test]
-		[ExpectedException(typeof (InvalidOperationException))]
 		public void SelectInParallel_Exception()
 		{
-			Range.Array(10)
-				.SelectInParallel(i =>
-					{
-						if (i == 5) throw new InvalidOperationException("Part of the test.");
-						return i*2;
-					});
+			try
+			{
+				Range.Array(10)
+					.SelectInParallel(i =>
+						{
+							if (i == 5) throw new InvalidOperationException("Part of the test.");
+							return i*2;
+						});
+
+				Assert.Fail();
+			}
+			catch (Exception ex)
+			{
+				Assert.That(ex.InnerException is InvalidOperationException);
+			}
 		}
 
 
