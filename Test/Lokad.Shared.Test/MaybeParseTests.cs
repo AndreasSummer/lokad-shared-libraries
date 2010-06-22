@@ -15,6 +15,7 @@ namespace Lokad
 	[TestFixture]
 	public sealed class MaybeParseTests
 	{
+		public static readonly CultureInfo Invariant = CultureInfo.InvariantCulture;
 		// ReSharper disable InconsistentNaming
 
 		enum Tri
@@ -38,16 +39,16 @@ namespace Lokad
 		[Test]
 		public void Decimal()
 		{
-			MaybeParse.Decimal("12.1").ShouldBe(12.1m);
+			MaybeParse.Decimal(12.1m.ToString()).ShouldBe(12.1m);
 			MaybeParse.Decimal("???").ShouldFail();
 			MaybeParse.Decimal(null).ShouldFail();
 
 			const NumberStyles styles = NumberStyles.Number;
-			var info = CultureInfo.InvariantCulture;
+			
 
-			MaybeParse.Decimal(null, styles, info).ShouldFail();
-			MaybeParse.Decimal("??", styles, info).ShouldFail();
-			MaybeParse.Decimal("12.1", styles, info).ShouldBe(12.1m);
+			MaybeParse.Decimal(null, styles, Invariant).ShouldFail();
+			MaybeParse.Decimal("??", styles, Invariant).ShouldFail();
+			MaybeParse.Decimal("12.1", styles, Invariant).ShouldBe(12.1m);
 
 			MaybeParse.DecimalInvariant(null).ShouldFail();
 			MaybeParse.DecimalInvariant("??").ShouldFail();
@@ -88,7 +89,7 @@ namespace Lokad
 		[Test]
 		public void Single()
 		{
-			MaybeParse.Single("12.1").ShouldBe(12.1f);
+			MaybeParse.Single(12.1f.ToString()).ShouldBe(12.1f);
 			MaybeParse.Single("???").ShouldFail();
 			MaybeParse.Single(null).ShouldFail();
 
@@ -100,7 +101,7 @@ namespace Lokad
 		[Test]
 		public void Double()
 		{
-			MaybeParse.Double("12.1").ShouldBe(12.1d);
+			MaybeParse.Double(12.1d.ToString()).ShouldBe(12.1d);
 			MaybeParse.Double("???").ShouldFail();
 			MaybeParse.Double(null).ShouldFail();
 
