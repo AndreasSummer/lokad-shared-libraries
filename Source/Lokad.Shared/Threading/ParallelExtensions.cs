@@ -7,6 +7,7 @@
 #endregion
 
 using System;
+using System.Diagnostics;
 using System.Threading;
 
 namespace Lokad.Threading
@@ -68,7 +69,14 @@ namespace Lokad.Threading
 			{
 				for (int i = 0; i < input.Length; i++)
 				{
-					results[i] = func(input[i]);
+					try
+					{
+						results[i] = func(input[i]);
+					}
+					catch (Exception ex)
+					{
+						WrapAndThrow(ex);
+					}
 				}
 
 				return results;
@@ -138,10 +146,16 @@ namespace Lokad.Threading
 
 			if (exception != null)
 			{
-				throw new Exception("Exception caught in SelectInParallel", exception);
+				WrapAndThrow(exception);
 			}
 
 			return results;
+		}
+
+		[DebuggerNonUserCode]
+		static void WrapAndThrow(Exception exception)
+		{
+			throw new Exception("Exception caught in SelectInParallel", exception);
 		}
 	}
 }
