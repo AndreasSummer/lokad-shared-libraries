@@ -23,5 +23,19 @@ namespace Lokad
 			copy.Sort(new SqlServerGuidComparer());
 			CollectionAssert.AreEqual(initial, copy);
 		}
+
+		[Test]
+		public void Sortables_are_string_ordered()
+		{
+			var initial = Range.Array(1000, n =>
+				{
+					SystemUtil.Sleep(20.Milliseconds());
+					return GuidUtil.NewStringSortable().ToString();
+				});
+
+			var copy = new List<String>(initial);
+			copy.Sort();
+			CollectionAssert.AreEqual(initial, copy);
+		}
 	}
 }
