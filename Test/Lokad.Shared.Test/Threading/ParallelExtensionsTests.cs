@@ -51,7 +51,7 @@ namespace Lokad.Threading
 			}
 			catch (Exception ex)
 			{
-				Assert.That(ex.InnerException is InvalidOperationException);
+				Assert.IsInstanceOfType(typeof(InvalidOperationException), ex.InnerException);
 			}
 		}
 
