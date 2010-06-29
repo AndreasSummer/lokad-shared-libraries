@@ -20,10 +20,20 @@ namespace Lokad.Quality
 		/// 	Converts the tag to string.
 		/// </summary>
 		/// <param name="tag">The tag.</param>
-		/// <returns></returns>
+		/// <returns>string representation for the tag</returns>
 		public static string ConvertTagToString(DesignTag tag)
 		{
 			return "Lokad.Class." + tag;
+		}
+
+		/// <summary>
+		/// Converts multiple tags to strings.
+		/// </summary>
+		/// <param name="tags">The tags to convert.</param>
+		/// <returns>array of string representations for the design tags</returns>
+		public static string[] ConvertTagsToStrings(params DesignTag[] tags)
+		{
+			return tags.Convert(ConvertTagToString);
 		}
 
 		/// <summary>

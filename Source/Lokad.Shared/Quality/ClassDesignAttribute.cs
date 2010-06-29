@@ -32,11 +32,10 @@ namespace Lokad.Quality
 		/// <summary>
 		/// Initializes a new instance of the <see cref="ClassDesignAttribute"/> class.
 		/// </summary>
-		/// <param name="firstDesignTag">The first design tag.</param>
-		/// <param name="otherDesignTags">The other design tags.</param>
-		public ClassDesignAttribute(string firstDesignTag, params string[] otherDesignTags)
+		/// <param name="designTags">The design tags.</param>
+		public ClassDesignAttribute(params string[] designTags)
 		{
-			_classDesignTags = otherDesignTags.Prepend(firstDesignTag).ToArray();
+			_classDesignTags = designTags;
 		}
 
 		/// <summary>
@@ -45,19 +44,29 @@ namespace Lokad.Quality
 		/// <param name="classDesignTag">The class design tag.</param>
 		public ClassDesignAttribute(string classDesignTag)
 		{
-			_classDesignTags = new string[] { classDesignTag};
+			Enforce.ArgumentNotEmpty(() => classDesignTag);
+
+			_classDesignTags = new [] { classDesignTag };
+		}
+
+
+		/// <summary>
+		/// Initializes a new instance of the <see cref="ClassDesignAttribute"/> class.
+		/// </summary>
+		/// <param name="designTag">The design tag.</param>
+		public ClassDesignAttribute(DesignTag designTag)
+		{
+			_classDesignTags = new[] {DesignUtil.ConvertTagToString(designTag)};
 		}
 
 		/// <summary>
 		/// Initializes a new instance of the <see cref="ClassDesignAttribute"/> class.
 		/// </summary>
-		/// <param name="firstDesignTag">The first design tag.</param>
-		/// <param name="otherDesignTags">The other design tags.</param>
-		public ClassDesignAttribute(DesignTag firstDesignTag, params DesignTag[] otherDesignTags)
+		/// <param name="designTags">The design tags.</param>
+		public ClassDesignAttribute(params DesignTag[] designTags)
 		{
-			_classDesignTags = otherDesignTags
-				.Prepend(firstDesignTag)
-				.ToArray(p => DesignUtil.ConvertTagToString(p));
+			_classDesignTags = designTags
+				.ToArray(DesignUtil.ConvertTagToString);
 		}
 	}
 }
