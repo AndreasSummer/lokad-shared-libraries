@@ -61,6 +61,13 @@ namespace Lokad
 
 			Assert.AreEqual(4, MaybeEmpty.GetValue(() => 4));
 			Assert.AreEqual(10, Maybe10.GetValue(() => 4));
+
+
+			Assert.AreEqual(4, MaybeEmpty.GetValue(MaybeEmpty).GetValue(4));
+			Assert.AreEqual(10, Maybe10.GetValue(Maybe10).GetValue(4));
+
+			Assert.AreEqual(4, MaybeEmpty.GetValue(() => MaybeEmpty).GetValue(() => 4));
+			Assert.AreEqual(10, Maybe10.GetValue(() => Maybe10).GetValue(() => 4));
 		}
 
 		[Test]
