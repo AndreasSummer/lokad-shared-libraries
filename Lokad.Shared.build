@@ -103,7 +103,7 @@
 		<Exec Command="$(ILMerge) &quot;$(RawPath)\Lokad.Stack.dll&quot; &quot;$(RawPath)/Autofac.dll&quot; &quot;$(RawPath)/log4net.dll&quot; /out:&quot;$(StackPath)/Lokad.Stack.dll&quot; /keyfile:SharedKey.snk /xmldocs=true /ver:$(Version)  /attr:&quot;$(RawPath)/Lokad.Stack.dll&quot;" />
 		<Exec Command="$(ILMerge) &quot;$(RawPath)\Autofac.Integration.Mef.dll&quot; &quot;$(RawPath)/System.ComponentModel.Composition.dll&quot; /out:&quot;$(StackPath)/Lokad.Stack.Mef.dll&quot; /keyfile:SharedKey.snk /xmldocs=true /ver:$(Version)  /attr:&quot;$(RawPath)/Lokad.Stack.dll&quot;"  />
 		
-		<Exec Command="$(ILMerge) &quot;$(RawPath)\Lokad.Testing.dll&quot; &quot;$(RawPath)/Rhino.Mocks.dll&quot; /out:&quot;$(StackPath)/Lokad.Testing.dll&quot; /keyfile:SharedKey.snk /xmldocs=true /ver:$(Version)  /attr:&quot;$(RawPath)/Lokad.Testing.dll&quot;" />
+		<Exec Command='$(ILMerge) "$(RawPath)\Lokad.Testing.dll" "$(RawPath)/Rhino.Mocks.dll" "$(RawPath)/nunit.framework.dll" /out:"$(StackPath)/Lokad.Testing.dll" /keyfile:SharedKey.snk /xmldocs=true /ver:$(Version)  /attr:"$(RawPath)/Lokad.Testing.dll"' />
 		<!--Update references-->
 		<Exec Command="$(Linker) &quot;$(StackPath)\Lokad.Stack.dll&quot; &quot;$(RawPath)\Lokad.Logging.dll&quot; &quot;$(StackPath)\Lokad.Shared.dll&quot; &quot;$(StackPath)\Lokad.Stack.dll&quot;" />
 		<Exec Command="$(Linker) &quot;$(StackPath)\Lokad.Stack.dll&quot; &quot;$(RawPath)\Lokad.ActionPolicy.dll&quot; &quot;$(StackPath)\Lokad.Shared.dll&quot; &quot;$(StackPath)\Lokad.Stack.dll&quot;" />
