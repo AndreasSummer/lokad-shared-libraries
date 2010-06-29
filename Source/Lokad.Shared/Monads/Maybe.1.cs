@@ -94,6 +94,28 @@ namespace Lokad
 		}
 
 		/// <summary>
+		/// Retrieves value from this instance, using a <paramref name="defaultValue"/>
+		/// factory, if it is absent
+		/// </summary>
+		/// <param name="defaultValue">The default value to provide.</param>
+		/// <returns>maybe value</returns>
+		public Maybe<T> GetValue(Func<Maybe<T>> defaultValue)
+		{
+			return _hasValue ? this : defaultValue();
+		}
+
+		/// <summary>
+		/// Retrieves value from this instance, using a <paramref name="defaultValue"/>
+		/// if it is absent
+		/// </summary>
+		/// <param name="defaultValue">The default value to provide.</param>
+		/// <returns>maybe value</returns>
+		public Maybe<T> GetValue(Maybe<T> defaultValue)
+		{
+			return _hasValue ? this : defaultValue;
+		}
+
+		/// <summary>
 		/// Applies the specified action to the value, if it is present.
 		/// </summary>
 		/// <param name="action">The action.</param>
