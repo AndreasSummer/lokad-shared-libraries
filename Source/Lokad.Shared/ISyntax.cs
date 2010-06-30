@@ -70,7 +70,7 @@ namespace Lokad
 	/// </summary>
 	/// <typeparam name="TTarget">The type of the target.</typeparam>
 	/// <typeparam name="TSubject">The type of the subject to extend.</typeparam>
-	public interface ISyntax<TTarget, out TSubject> : ISyntax<TSubject>
+	public interface ISyntax<out TTarget, out TSubject> : ISyntax<TTarget>
 	{
 		
 	}
