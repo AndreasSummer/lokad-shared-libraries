@@ -63,4 +63,15 @@ namespace Lokad
 		[EditorBrowsable(EditorBrowsableState.Never)]
 		Type GetType();
 	}
+
+	/// <summary>
+	/// Interface for implementing decoupled configuration extensions 
+	/// that are limited by the subject.
+	/// </summary>
+	/// <typeparam name="TTarget">The type of the target.</typeparam>
+	/// <typeparam name="TSubject">The type of the subject to extend.</typeparam>
+	public interface ISyntax<TTarget, out TSubject> : ISyntax<TSubject>
+	{
+		
+	}
 }

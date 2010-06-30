@@ -90,6 +90,7 @@
     <Compile Include="Collections\Generic\ProjectionComparer.cs" />
     <Compile Include="IStartable.cs" />
     <Compile Include="ISyntax.cs" />
+    <Compile Include="Serialization\IDataSerializer.cs" />
     <Compile Include="Monads\Maybe.1.cs" />
     <Compile Include="Monads\MaybeParse.cs" />
     <Compile Include="Quality\ClassDesignAttribute.cs" />
