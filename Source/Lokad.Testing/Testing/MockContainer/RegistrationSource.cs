@@ -7,49 +7,58 @@
 #endregion
 
 using System;
+using System.Collections.Generic;
 using Autofac;
-using Autofac.Component;
-using Autofac.Component.Activation;
-using Autofac.Component.Scope;
+using Autofac.Core;
+using Autofac.Core.Activators.Delegate;
+using Autofac.Core.Lifetime;
+using Autofac.Core.Registration;
 using Rhino.Mocks;
 
 namespace Lokad.Testing
 {
 	sealed class RhinoRegistrationSource : IRegistrationSource
 	{
-		public bool TryGetRegistration(Service service, out IComponentRegistration registration)
+		public IEnumerable<IComponentRegistration> RegistrationsFor(Service service, Func<Service, IEnumerable<IComponentRegistration>> registrationAccessor)
 		{
+
 			if (service == null)
 				throw new ArgumentNullException("service");
 
-			registration = null;
+			
 
 			var typedService = service as TypedService;
 			if ((typedService == null))
-				return false;
+				yield break;
 
-			var descriptor = new Descriptor(
-				new UniqueService(),
-				new[] {service},
-				typedService.ServiceType);
 
-			registration = new Registration(
-				descriptor,
-				new DelegateActivator((c, p) =>
+			var newGuid = Guid.NewGuid();
+			var registration = new ComponentRegistration(
+				newGuid,
+
+				new DelegateActivator(typedService.ServiceType, (c, p) =>
+				{
+					try
 					{
-						try
-						{
-							return MockRepository.GenerateStub(typedService.ServiceType);
-						}
-						catch (Exception ex)
-						{
-							throw Errors.Resolution(typedService.ServiceType, ex);
-						}
-					}),
-				new ContainerScope(),
-				InstanceOwnership.Container);
+						return MockRepository.GenerateStub(typedService.ServiceType);
+					}
+					catch (Exception ex)
+					{
+						throw Errors.Resolution(typedService.ServiceType, ex);
+					}
+				}),
+				new RootScopeLifetime(),
+				InstanceSharing.Shared,
+				InstanceOwnership.OwnedByLifetimeScope,
+				new Service[] { new UniqueService(newGuid), typedService},
+				new Dictionary<string, object>());
 
-			return true;
+			yield return registration;
+		}
+
+		public bool IsAdapterForIndividualComponents
+		{
+			get { return false; }
 		}
 	}
 }

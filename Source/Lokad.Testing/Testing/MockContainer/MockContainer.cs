@@ -9,6 +9,7 @@
 using System;
 using Autofac;
 using Autofac.Builder;
+using Autofac.Core;
 using Lokad.Quality;
 using Rhino.Mocks;
 using Rhino.Mocks.Interfaces;
@@ -21,7 +22,7 @@ namespace Lokad.Testing
 	[Immutable, UsedImplicitly]
 	public class MockContainer : IDisposable
 	{
-		readonly IContainer _container = new Autofac.Container();
+		readonly IContainer _container = new Container();
 
 
 		/// <summary>
@@ -48,8 +49,11 @@ namespace Lokad.Testing
 		/// </summary>
 		public MockContainer()
 		{
-			_container = new Autofac.Container();
-			_container.AddRegistrationSource(new RhinoRegistrationSource());
+			
+
+			var builder = new ContainerBuilder();
+			builder.RegisterSource(new RhinoRegistrationSource());
+			_container = builder.Build();
 		}
 
 		/// <summary>
@@ -58,7 +62,7 @@ namespace Lokad.Testing
 		/// <typeparam name="TComponent">The type of the component.</typeparam>
 		public void Register<TComponent>()
 		{
-			Build(builder => builder.Register<TComponent>());
+			Build(builder => builder.RegisterType<TComponent>());
 		}
 
 		/// <summary>
@@ -67,8 +71,9 @@ namespace Lokad.Testing
 		/// <typeparam name="TComponent">The type of the component.</typeparam>
 		/// <param name="instance">The actual instance.</param>
 		public void Register<TComponent>(TComponent instance)
+			where TComponent : class
 		{
-			Build(builder => builder.Register(instance).ExternallyOwned());
+			Build(builder => builder.RegisterInstance(instance).ExternallyOwned());
 		}
 
 		/// <summary>
@@ -79,7 +84,7 @@ namespace Lokad.Testing
 		{
 			var builder = new ContainerBuilder();
 			registration(builder);
-			builder.Build(_container);
+			builder.Update(_container);
 		}
 
 		/// <summary>

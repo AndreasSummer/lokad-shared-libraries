@@ -9,6 +9,7 @@
 using System;
 using Autofac;
 using Autofac.Builder;
+using Autofac.Core;
 
 namespace Lokad.Logging
 {
@@ -51,7 +52,7 @@ namespace Lokad.Logging
 		/// <see cref="IModule.Configure"/>
 		/// </summary>
 		/// <param name="container"></param>
-		public void Configure(IContainer container)
+		public void Configure(IComponentRegistry container)
 		{
 			switch (_mode)
 			{
@@ -71,9 +72,9 @@ namespace Lokad.Logging
 			var builder = new ContainerBuilder();
 
 			// register log provider
-			builder.Register(LoggingStack.GetLogProvider()).As<ILogProvider, INamedProvider<ILog>>();
+			builder.RegisterInstance(LoggingStack.GetLogProvider()).As<ILogProvider, INamedProvider<ILog>>();
 			builder.Register(c => c.Resolve<INamedProvider<ILog>>().Get("Default"));
-			builder.Build(container);
+			builder.Update(container);
 		}
 	}
 }
