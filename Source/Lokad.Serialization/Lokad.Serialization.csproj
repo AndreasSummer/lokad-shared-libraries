@@ -41,7 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AttributeHelper.cs" />
-    <Compile Include="ProtoBufMessageSerializer.cs" />
+    <Compile Include="ProtoBufSerializer.cs" />
     <Compile Include="ProtoBufUtil.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
