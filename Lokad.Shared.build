@@ -100,7 +100,9 @@
 		<!--Merge-->
 		<Exec Command="$(ILMerge) &quot;$(RawPath)\Lokad.Shared.dll&quot; &quot;$(RawPath)/Lokad.Logging.dll&quot; &quot;$(RawPath)/Lokad.ActionPolicy.dll&quot; /out:&quot;$(StackPath)/Lokad.Shared.dll&quot; /keyfile:SharedKey.snk /xmldocs=true /ver:$(Version) /attr:&quot;$(RawPath)/Lokad.Shared.dll&quot;" />
 		<Exec Command="$(ILMerge) &quot;$(RawPath)\Lokad.Quality.dll&quot; &quot;$(RawPath)/Mono.Cecil.dll&quot; /out:&quot;$(StackPath)/Lokad.Quality.dll&quot; /keyfile:SharedKey.snk /xmldocs=true /ver:$(Version) /attr:&quot;$(RawPath)/Lokad.Quality.dll&quot;" />
-		<Exec Command="$(ILMerge) &quot;$(RawPath)\Lokad.Stack.dll&quot; &quot;$(RawPath)/Autofac.dll&quot; &quot;$(RawPath)/protobuf-net.dll&quot; &quot;$(RawPath)/log4net.dll&quot; /out:&quot;$(StackPath)/Lokad.Stack.dll&quot; /keyfile:SharedKey.snk /xmldocs=true /ver:$(Version)  /attr:&quot;$(RawPath)/Lokad.Stack.dll&quot;" />
+		<Exec Command="$(ILMerge) &quot;$(RawPath)\Lokad.Stack.dll&quot; &quot;$(RawPath)/Autofac.dll&quot; &quot;$(RawPath)/log4net.dll&quot; /out:&quot;$(StackPath)/Lokad.Stack.dll&quot; /keyfile:SharedKey.snk /xmldocs=true /ver:$(Version)  /attr:&quot;$(RawPath)/Lokad.Stack.dll&quot;" />
+
+    <Exec Command="$(ILMerge) &quot;$(RawPath)\Lokad.Serialization.dll&quot; &quot;$(RawPath)/protobuf-net.dll&quot; /out:&quot;$(StackPath)/Lokad.Serialization.dll&quot; /keyfile:SharedKey.snk /xmldocs=true /ver:$(Version)  /attr:&quot;$(RawPath)/Lokad.Serialization.dll&quot;" />
 		
 		<Exec Command='$(ILMerge) "$(RawPath)\Lokad.Testing.dll" "$(RawPath)/Rhino.Mocks.dll" "$(RawPath)/nunit.framework.dll" /out:"$(StackPath)/Lokad.Testing.dll" /keyfile:SharedKey.snk /xmldocs=true /ver:$(Version)  /attr:"$(RawPath)/Lokad.Testing.dll"' />
 		<!--Update references-->

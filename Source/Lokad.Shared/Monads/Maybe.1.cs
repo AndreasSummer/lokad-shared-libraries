@@ -182,6 +182,7 @@ namespace Lokad
 		/// </summary>
 		/// <returns>actual value</returns>
 		/// <exception cref="InvalidOperationException">if maybe does not have value</exception>
+		[StringFormatMethod("message")]
 		public T ExposeException([NotNull] string message, params object[] args)
 		{
 			if (message == null) throw new ArgumentNullException(@"message");
