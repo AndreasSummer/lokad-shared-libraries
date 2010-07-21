@@ -114,7 +114,7 @@ namespace Lokad
 		{
 			return _hasValue ? this : defaultValue;
 		}
-
+		
 		/// <summary>
 		/// Applies the specified action to the value, if it is present.
 		/// </summary>
