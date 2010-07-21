@@ -95,8 +95,6 @@
 			<Output ItemName="rawFiles" TaskParameter="Include"/>
 		</CreateItem>
 		<Copy SourceFiles="@(rawFiles)" DestinationFolder="$(RawPath)" />
-		
-		
 		<!--Merge-->
 		<Exec Command="$(ILMerge) &quot;$(RawPath)\Lokad.Shared.dll&quot; &quot;$(RawPath)/Lokad.Logging.dll&quot; &quot;$(RawPath)/Lokad.ActionPolicy.dll&quot; /out:&quot;$(StackPath)/Lokad.Shared.dll&quot; /keyfile:SharedKey.snk /xmldocs=true /ver:$(Version) /attr:&quot;$(RawPath)/Lokad.Shared.dll&quot;" />
 		<Exec Command="$(ILMerge) &quot;$(RawPath)\Lokad.Quality.dll&quot; &quot;$(RawPath)/Mono.Cecil.dll&quot; /out:&quot;$(StackPath)/Lokad.Quality.dll&quot; /keyfile:SharedKey.snk /xmldocs=true /ver:$(Version) /attr:&quot;$(RawPath)/Lokad.Quality.dll&quot;" />
@@ -106,11 +104,20 @@
 		
 		<Exec Command='$(ILMerge) "$(RawPath)\Lokad.Testing.dll" "$(RawPath)/Rhino.Mocks.dll" "$(RawPath)/nunit.framework.dll" /out:"$(StackPath)/Lokad.Testing.dll" /keyfile:SharedKey.snk /xmldocs=true /ver:$(Version)  /attr:"$(RawPath)/Lokad.Testing.dll"' />
 		<!--Update references-->
+		<!--Stack-->
 		<Exec Command="$(Linker) &quot;$(StackPath)\Lokad.Stack.dll&quot; &quot;$(RawPath)\Lokad.Logging.dll&quot; &quot;$(StackPath)\Lokad.Shared.dll&quot; &quot;$(StackPath)\Lokad.Stack.dll&quot;" />
 		<Exec Command="$(Linker) &quot;$(StackPath)\Lokad.Stack.dll&quot; &quot;$(RawPath)\Lokad.ActionPolicy.dll&quot; &quot;$(StackPath)\Lokad.Shared.dll&quot; &quot;$(StackPath)\Lokad.Stack.dll&quot;" />
 		<Exec Command="sn.exe -Ra &quot;$(StackPath)\Lokad.Stack.dll&quot; SharedKey.snk" />
+		<!--Testing-->
 		<Exec Command="$(Linker) &quot;$(StackPath)\Lokad.Testing.dll&quot; &quot;$(RawPath)\Autofac.dll&quot; &quot;$(StackPath)\Lokad.Stack.dll&quot; &quot;$(StackPath)\Lokad.Testing.dll&quot;" />
+		<Exec Command="$(Linker) &quot;$(StackPath)\Lokad.Testing.dll&quot; &quot;$(RawPath)\Lokad.Shared.dll&quot; &quot;$(StackPath)\Lokad.Shared.dll&quot; &quot;$(StackPath)\Lokad.Testing.dll&quot;" />
 		<Exec Command="sn.exe -Ra &quot;$(StackPath)\Lokad.Testing.dll&quot; SharedKey.snk" />
+		<!--Serialization-->
+		<Exec Command="$(Linker) &quot;$(StackPath)\Lokad.Serialization.dll&quot; &quot;$(RawPath)\Lokad.Shared.dll&quot; &quot;$(StackPath)\Lokad.Shared.dll&quot; &quot;$(StackPath)\Lokad.Serialization.dll&quot;" />
+		<Exec Command="sn.exe -Ra &quot;$(StackPath)\Lokad.Serialization.dll&quot; SharedKey.snk" />
+		<!--Quality-->
+		<Exec Command="$(Linker) &quot;$(StackPath)\Lokad.Quality.dll&quot; &quot;$(RawPath)\Lokad.Shared.dll&quot; &quot;$(StackPath)\Lokad.Shared.dll&quot; &quot;$(StackPath)\Lokad.Quality.dll&quot;" />
+		<Exec Command="sn.exe -Ra &quot;$(StackPath)\Lokad.Quality.dll&quot; SharedKey.snk" />
 		
 		<!--All Tests-->
 		<CreateItem Include="Test\**\bin\$(Configuration)\*.*" Exclude="Test\**\bin\$(Configuration)\*.xml;Test\**\bin\$(Configuration)\*.pdb;">
