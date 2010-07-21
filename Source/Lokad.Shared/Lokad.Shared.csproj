@@ -79,15 +79,6 @@
     <Compile Include="..\VersionAssemblyInfo.cs">
       <Link>Properties\VersionAssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="Cqrs\ConstraintOperand.cs" />
-    <Compile Include="Cqrs\ExtendIPublishViews.cs" />
-    <Compile Include="Cqrs\ExtendIQueryViews.cs" />
-    <Compile Include="Cqrs\IdentityConstraint.cs" />
-    <Compile Include="Cqrs\IQueryViews.cs" />
-    <Compile Include="Cqrs\IViewQuery.cs" />
-    <Compile Include="Cqrs\ViewEntity.1.cs" />
-    <Compile Include="Cqrs\ViewEntity.cs" />
-    <Compile Include="Cqrs\ViewQuery.cs" />
     <Compile Include="Currency\CurrencyAmount.cs" />
     <Compile Include="Currency\CurrencyMismatchException.cs" />
     <Compile Include="Currency\CurrencyType.cs" />
@@ -97,7 +88,6 @@
     <Compile Include="Extensions\ExtendAction.cs" />
     <Compile Include="Extensions\ExtendArray.cs" />
     <Compile Include="Collections\Generic\ProjectionComparer.cs" />
-    <Compile Include="Cqrs\IPublishViews.cs" />
     <Compile Include="IStartable.cs" />
     <Compile Include="ISyntax.cs" />
     <Compile Include="Serialization\BinaryDataSerializer.cs" />
@@ -271,7 +261,9 @@
       <Install>true</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Cqrs\" />
+  </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" Condition="($(MSBuildTargets) == '') Or ($(MSBuildTargets) == 'CSharp')" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\Silverlight\v2.0\Microsoft.Silverlight.CSharp.targets" Condition="$(MSBuildTargets) == 'Silverlight 2.0'" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
