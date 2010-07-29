@@ -78,7 +78,7 @@ namespace Lokad.Serialization
 		public object Deserialize(Stream sourceStream, Type type)
 		{
 			var serializer = new DataContractSerializer(type, _knownTypes);
-
+			
 			using (var reader = XmlDictionaryReader.CreateBinaryReader(sourceStream, XmlDictionaryReaderQuotas.Max))
 			{
 				return serializer.ReadObject(reader);

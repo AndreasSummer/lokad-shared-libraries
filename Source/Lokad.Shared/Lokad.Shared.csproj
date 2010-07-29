@@ -100,7 +100,6 @@
     <Compile Include="Messaging\ICommunicator.cs" />
     <Compile Include="Messaging\NullCommunicator.cs" />
     <Compile Include="Messaging\CommunicationType.cs" />
-    <Compile Include="Serialization\BinaryDataSerializer.cs" />
     <Compile Include="Serialization\IDataContractMapper.cs" />
     <Compile Include="Serialization\IDataSerializer.cs" />
     <Compile Include="Monads\Maybe.1.cs" />

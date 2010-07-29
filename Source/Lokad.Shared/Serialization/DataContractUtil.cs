@@ -29,7 +29,7 @@ namespace Lokad.Serialization
 		}
 
 		/// <summary>
-		/// Gets the contract reference.
+		/// Gets the contract reference, combining contract properties.
 		/// </summary>
 		/// <param name="type">The type.</param>
 		/// <returns></returns>
@@ -37,10 +37,11 @@ namespace Lokad.Serialization
 		{
 			var contract = (DataContractAttribute)type.GetCustomAttributes(typeof(DataContractAttribute), false).First();
 
-			string ns = string.IsNullOrEmpty(contract.Namespace) ? "" : contract.Namespace.TrimEnd();
-			string name = string.IsNullOrEmpty(contract.Name) ? type.Name : contract.Name;
+			var name = string.IsNullOrEmpty(contract.Name) ? type.Name : contract.Name;
+			if (string.IsNullOrEmpty(contract.Namespace))
+				return name;
 
-			return ns + "/" + name;
+			return contract.Namespace + "/" + name;
 		}
 	}
 }
