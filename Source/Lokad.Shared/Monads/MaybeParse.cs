@@ -18,7 +18,7 @@ namespace Lokad
 	{
 		/// <summary>
 		/// 	Tries to parse the specified string into the enum, returning empty result
-		/// 	on failure
+		/// 	on failure. We ignore case in this scenario.
 		/// </summary>
 		/// <typeparam name="TEnum">
 		/// 	The type of the enum.

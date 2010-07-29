@@ -184,6 +184,8 @@
     <Compile Include="Reflection\ILHelper.cs" />
     <Compile Include="ResolutionException.cs" />
     <Compile Include="Resolver.cs" />
+    <Compile Include="Utils\EnumUtil.TEnum.cs" />
+    <Compile Include="Utils\EnumUtil.TFromEnum.TToEnum.cs" />
     <Compile Include="Utils\FormatUtil.cs" />
     <Compile Include="Utils\GuidUtil.cs" />
     <Compile Include="Utils\ResourceUtil.cs" />

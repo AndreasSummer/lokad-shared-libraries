@@ -7,9 +7,6 @@
 #endregion
 
 using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
 
 namespace Lokad
 {
@@ -74,121 +71,6 @@ namespace Lokad
 		public static TEnum[] GetValuesWithoutDefault<TEnum>() where TEnum : struct, IComparable
 		{
 			return EnumUtil<TEnum>.ValuesWithoutDefault;
-		}
-	}
-
-	/// <summary>
-	/// Ensures that enums can be converted between each other
-	/// </summary>
-	/// <typeparam name="TFromEnum">The type of from enum.</typeparam>
-	/// <typeparam name="TToEnum">The type of to enum.</typeparam>
-	static class EnumUtil<TFromEnum,TToEnum> 
-		where TFromEnum : struct, IComparable
-		where TToEnum : struct,IComparable
-	{
-		static readonly IDictionary<TFromEnum, TToEnum> Enums;
-		static readonly TFromEnum[] Unmatched;
-		static EnumUtil()
-		{
-			var fromEnums = EnumUtil.GetValues<TFromEnum>();
-			Enums = new Dictionary<TFromEnum, TToEnum>(fromEnums.Length, EnumUtil<TFromEnum>.Comparer);
-			var unmatched = new List<TFromEnum>();
-
-			foreach (var fromEnum in fromEnums)
-			{
-				var @enum = fromEnum;
-				MaybeParse
-					.Enum<TToEnum>(fromEnum.ToString())
-					.Handle(() => unmatched.Add(@enum))
-					.Apply(match => Enums.Add(@enum, match));
-			}
-
-			Unmatched = unmatched.ToArray();
-		}
-
-		public static TToEnum Convert(TFromEnum  from)
-		{
-			ThrowIfInvalid();
-			return Enums[from];
-		}
-
-		static void ThrowIfInvalid()
-		{
-			if (Unmatched.Length > 0)
-			{
-				var list = Unmatched.Select(e => e.ToString()).Join(", ");
-				var message = string.Format(CultureInfo.InvariantCulture,
-					"Can't convert from {0} to {1} because of unmatched entries: {2}",
-					typeof (TFromEnum), typeof (TToEnum), list);
-				throw new ArgumentException(message);
-			}
-		}
-	}
-
-	/// <summary>
-	/// Strongly-typed enumeration util
-	/// </summary>
-	/// <typeparam name="TEnum">The type of the enum.</typeparam>
-	public static class EnumUtil<TEnum> where TEnum : 
-		struct, IComparable
-	{
-		/// <summary>
-		/// Values of the <typeparamref name="TEnum"/>
-		/// </summary>
-		public static readonly TEnum[] Values;
-		/// <summary>
-		/// Values of the <typeparamref name="TEnum"/> without the default value.
-		/// </summary>
-		public static readonly TEnum[] ValuesWithoutDefault;
-		internal static readonly string EnumPrefix = typeof (TEnum).Name + "_";
-
-		/// <summary>
-		/// Efficient comparer for the enum
-		/// </summary>
-		public static readonly IEqualityComparer<TEnum> Comparer;
-
-		static EnumUtil()
-		{
-			Values = GetValues();
-			var def = default(TEnum);
-			ValuesWithoutDefault = Values.Where(x => !def.Equals(x)).ToArray();
-			Comparer = EnumComparer<TEnum>.Instance;
-		}
-
-		/// <summary>
-		/// Converts the safely from.
-		/// </summary>
-		/// <typeparam name="TSourceEnum">The type of the source enum.</typeparam>
-		/// <param name="enum">The @enum to convert from.</param>
-		/// <returns>converted enum</returns>
-		/// <exception cref="ArgumentException"> when conversion is not possible</exception>
-		public static TEnum ConvertSafelyFrom<TSourceEnum>(TSourceEnum @enum)
-			where TSourceEnum : struct, IComparable
-		{
-			return EnumUtil<TSourceEnum, TEnum>.Convert(@enum);
-		}
-
-		static TEnum[] GetValues()
-		{
-			Type enumType = typeof (TEnum);
-
-			if (!enumType.IsEnum)
-			{
-				throw new ArgumentException("Type is not an enum: '" + enumType.Name);
-			}
-
-#if !SILVERLIGHT2
-
-			return Enum
-				.GetValues(enumType)
-				.Cast<TEnum>()
-				.ToArray();
-#else
-			return enumType
-				.GetFields()
-				.Where(field => field.IsLiteral)
-				.ToArray(f => (TEnum) f.GetValue(enumType));
-#endif
 		}
 	}
 }
