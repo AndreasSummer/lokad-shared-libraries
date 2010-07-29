@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Runtime.Serialization;
 using Lokad.Quality;
+using System.Linq;
 
 namespace Lokad.Serialization
 {
@@ -22,8 +23,10 @@ namespace Lokad.Serialization
 		readonly IDictionary<Type, IFormatter> _type2Formatter = new Dictionary<Type, IFormatter>();
 
 		[UsedImplicitly]
-		public ProtoBufMessageSerializer(IEnumerable<Type> knownTypes)
+		public ProtoBufMessageSerializer(ICollection<Type> knownTypes)
 		{
+			if (knownTypes.Count == 0)
+				throw new InvalidOperationException("ProtoBuf requires some known types to serialize. Have you forgot to supply them?");
 			foreach (var type in knownTypes)
 			{
 				var reference = ProtoBufUtil.GetContractReference(type);
@@ -40,7 +43,7 @@ namespace Lokad.Serialization
 		/// </summary>
 		/// <param name="types">The types.</param>
 		[UsedImplicitly]
-		public ProtoBufMessageSerializer(IKnowSerializationTypes types) : this (types.GetKnownTypes())
+		public ProtoBufMessageSerializer(IKnowSerializationTypes types) : this (types.GetKnownTypes().ToSet())
 		{
 		}
 
@@ -48,7 +51,7 @@ namespace Lokad.Serialization
 		{
 			_type2Formatter
 				.GetValue(instance.GetType())
-				.ExposeException("Unknown object type {0}", instance.GetType())
+				.ExposeException("Can't find serializer for unknown object type '{0}'. Have you passed all known types to the constructor?", instance.GetType())
 				.Serialize(destination, instance);
 		}
 
@@ -56,7 +59,7 @@ namespace Lokad.Serialization
 		{
 			return _type2Formatter
 				.GetValue(type)
-				.ExposeException("Unknown object type {0}", type)
+				.ExposeException("Can't find serializer for unknown object type '{0}'. Have you passed all known types to the constructor?", type)
 				.Deserialize(source);
 		}
 

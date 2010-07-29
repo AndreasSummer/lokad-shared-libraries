@@ -33,6 +33,9 @@ namespace Lokad.Serialization
 		/// <param name="knownTypes">The known types.</param>
 		public DataContractMessageSerializer(ICollection<Type> knownTypes)
 		{
+			if (knownTypes.Count == 0)
+				throw new InvalidOperationException("DataContractMessageSerializer requires some known types to serialize. Have you forgot to supply them?");
+
 			_knownTypes = knownTypes;
 
 			DataContractUtil.ThrowOnMessagesWithoutDataContracts(_knownTypes);
@@ -49,7 +52,7 @@ namespace Lokad.Serialization
 		/// Initializes a new instance of the <see cref="DataContractMessageSerializer"/> class.
 		/// </summary>
 		/// <param name="know">The know.</param>
-		public DataContractMessageSerializer(IKnowSerializationTypes know) : this(know.GetKnownTypes().ToList())
+		public DataContractMessageSerializer(IKnowSerializationTypes know) : this(know.GetKnownTypes().ToSet())
 		{
 		}
 
