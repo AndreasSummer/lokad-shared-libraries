@@ -8,6 +8,7 @@
 
 using System;
 using System.Globalization;
+using System.Reflection;
 using Lokad.Quality;
 using Lokad.Reflection;
 
@@ -96,6 +97,20 @@ namespace Lokad
 			return new InvalidOperationException(string.Format(CultureInfo.InvariantCulture, message, args));
 		}
 
+
+		/// <summary>
+		/// Creates new instance of <see cref="NotSupportedException"/>
+		/// </summary>
+		/// <param name="message">The message.</param>
+		/// <param name="args">The arguments of the format string.</param>
+		/// <returns>new exception instance</returns>
+		[NotNull, StringFormatMethod("message")]
+		public static Exception NotSupported([NotNull] string message, params object[] args)
+		{
+			return new NotSupportedException(string.Format(CultureInfo.InvariantCulture, message, args));
+		}
+		
+
 		[NotNull]
 		internal static Exception ArgumentNullOrEmpty([InvokerParameterName] string paramName)
 		{
@@ -105,7 +120,7 @@ namespace Lokad
 		[NotNull]
 		internal static Exception InvalidOperation<T>([NotNull] string message, [NotNull] Func<T> variableReference)
 		{
-			return new InvalidOperationException(string.Format(message, Reflect.VariableName(variableReference)));
+			return new InvalidOperationException(string.Format(CultureInfo.InvariantCulture, message, Reflect.VariableName(variableReference)));
 		}
 
 		[NotNull]
@@ -121,6 +136,28 @@ namespace Lokad
 		{
 			var paramName = Reflect.VariableName(argumentReference);
 			return new ArgumentException(message, paramName);
+		}
+
+
+		static readonly MethodInfo InternalPreserveStackTraceMethod;
+
+		static Errors()
+		{
+			InternalPreserveStackTraceMethod = typeof(Exception).GetMethod("InternalPreserveStackTrace",
+				BindingFlags.Instance | BindingFlags.NonPublic);
+		}
+
+		/// <summary>
+		/// Returns inner exception, while preserving the stack trace
+		/// </summary>
+		/// <param name="e">The target invocation exception to unwrap.</param>
+		/// <returns>inner exception</returns>
+		[NotNull]
+		public static Exception Inner([NotNull] TargetInvocationException e)
+		{
+			if (e == null) throw new ArgumentNullException("e");
+			InternalPreserveStackTraceMethod.Invoke(e.InnerException, new object[0]);
+			return e.InnerException;
 		}
 	}
 }
