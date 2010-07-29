@@ -11,14 +11,14 @@ namespace Lokad.Messaging
 	/// <summary>
 	/// Realtime notifier, that does not do anything
 	/// </summary>
-	public sealed class NullRealtimeNotifier : IRealtimeNotifier
+	public sealed class NullCommunicator : ICommunicator
 	{
 		/// <summary>
-		/// Singleton instance of the <see cref="IRealtimeNotifier"/>
+		/// Singleton instance of the <see cref="ICommunicator"/>
 		/// </summary>
-		public static readonly IRealtimeNotifier Instance = new NullRealtimeNotifier();
+		public static readonly ICommunicator Instance = new NullCommunicator();
 
-		NullRealtimeNotifier()
+		NullCommunicator()
 		{
 		}
 
@@ -28,7 +28,7 @@ namespace Lokad.Messaging
 		/// <param name="recipient">The recipient.</param>
 		/// <param name="body">The body.</param>
 		/// <param name="options">The options.</param>
-		public void Notify(string recipient, string body, RealtimeNotificationType options)
+		public void Notify(string recipient, string body, CommunicationType options)
 		{
 		}
 	}

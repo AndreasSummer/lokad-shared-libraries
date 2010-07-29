@@ -90,9 +90,9 @@
     <Compile Include="Collections\Generic\ProjectionComparer.cs" />
     <Compile Include="IStartable.cs" />
     <Compile Include="ISyntax.cs" />
-    <Compile Include="Messaging\IRealtimeNotifier.cs" />
-    <Compile Include="Messaging\NullRealtimeNotifier.cs" />
-    <Compile Include="Messaging\RealtimeNotificationType.cs" />
+    <Compile Include="Messaging\ICommunicator.cs" />
+    <Compile Include="Messaging\NullCommunicator.cs" />
+    <Compile Include="Messaging\CommunicationType.cs" />
     <Compile Include="Serialization\BinaryDataSerializer.cs" />
     <Compile Include="Serialization\IDataContractMapper.cs" />
     <Compile Include="Serialization\IDataSerializer.cs" />
