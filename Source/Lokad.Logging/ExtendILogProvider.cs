@@ -15,7 +15,7 @@ namespace Lokad
 	/// of <see cref="ILog"/>
 	/// </summary>
 	[NoCodeCoverage, UsedImplicitly]
-	public static class ILogProviderExtensions
+	public static class ExtendILogProvider
 	{
 		/// <summary>
 		/// Creates new log using the type as name.

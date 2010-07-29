@@ -74,10 +74,12 @@
     <Compile Include="Diagnostics\LambdaLogProvider.cs" />
     <Compile Include="Diagnostics\NullLog.cs" />
     <Compile Include="Diagnostics\TraceLog.cs" />
+    <Compile Include="ExtendISupportSyntaxForLogging.cs" />
     <Compile Include="ILog.cs" />
     <Compile Include="ILogExtensions.cs" />
     <Compile Include="ILogProvider.cs" />
-    <Compile Include="ILogProviderExtensions.cs" />
+    <Compile Include="ExtendILogProvider.cs" />
+    <Compile Include="ISupportSyntaxForLogging.cs" />
     <Compile Include="LogLevel.cs" />
     <Compile Include="Rules\LogScope.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

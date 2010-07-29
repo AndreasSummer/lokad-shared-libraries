@@ -6,11 +6,14 @@
 
 #endregion
 
+using Lokad.Quality;
+
 namespace Lokad.Messaging
 {
 	/// <summary>
 	/// Realtime notifier, that does not do anything
 	/// </summary>
+	[UsedImplicitly]
 	public sealed class NullCommunicator : ICommunicator
 	{
 		/// <summary>

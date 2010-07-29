@@ -8,7 +8,7 @@
     <ProjectGuid>{C4B0E830-1E97-4E0C-89C0-1F9929CF65C2}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Lokad.Serialization</RootNamespace>
+    <RootNamespace>Lokad</RootNamespace>
     <AssemblyName>Lokad.Serialization</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -40,9 +40,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AttributeHelper.cs" />
-    <Compile Include="ProtoBufSerializer.cs" />
-    <Compile Include="ProtoBufUtil.cs" />
+    <Compile Include="Serialization\AttributeHelper.cs" />
+    <Compile Include="ExtendISupportSyntaxForSerialization.cs" />
+    <Compile Include="Serialization\ProtoBufMessageSerializer.cs" />
+    <Compile Include="Serialization\ProtoBufUtil.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

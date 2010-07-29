@@ -80,6 +80,7 @@
       <Link>Properties\VersionAssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="Logging\ConfiguratorHelper.cs" />
+    <Compile Include="ExtendISupportSyntaxForLogging.cs" />
     <Compile Include="Logging\ListeningLogOptions.cs" />
     <Compile Include="Logging\LoggingModule.cs" />
     <Compile Include="Logging\LoggingMode.cs" />

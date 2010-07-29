@@ -21,7 +21,6 @@ namespace Lokad.Serialization
 		/// </summary>
 		/// <param name="instance">The instance.</param>
 		/// <param name="destinationStream">The destination stream.</param>
-		
 		void Serialize(object instance, Stream destinationStream);
 		/// <summary>
 		/// Deserializes the object from specified source stream.

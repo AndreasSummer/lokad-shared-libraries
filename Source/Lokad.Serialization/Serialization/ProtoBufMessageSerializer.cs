@@ -15,14 +15,14 @@ using Lokad.Quality;
 namespace Lokad.Serialization
 {
 	[UsedImplicitly]
-	public class ProtoBufSerializer : IDataSerializer, IDataContractMapper
+	public class ProtoBufMessageSerializer : IMessageSerializer
 	{
 		readonly IDictionary<string, Type> _contract2Type = new Dictionary<string, Type>();
 		readonly IDictionary<Type, string> _type2Contract = new Dictionary<Type, string>();
 		readonly IDictionary<Type, IFormatter> _type2Formatter = new Dictionary<Type, IFormatter>();
 
 		[UsedImplicitly]
-		public ProtoBufSerializer(ICollection<Type> knownTypes)
+		public ProtoBufMessageSerializer(IEnumerable<Type> knownTypes)
 		{
 			foreach (var type in knownTypes)
 			{
@@ -33,6 +33,15 @@ namespace Lokad.Serialization
 				_type2Contract.Add(type, reference);
 				_type2Formatter.Add(type, formatter);
 			}
+		}
+
+		/// <summary>
+		/// Initializes a new instance of the <see cref="ProtoBufMessageSerializer"/> class.
+		/// </summary>
+		/// <param name="types">The types.</param>
+		[UsedImplicitly]
+		public ProtoBufMessageSerializer(IKnowSerializationTypes types) : this (types.GetKnownTypes())
+		{
 		}
 
 		public void Serialize(object instance, Stream destination)

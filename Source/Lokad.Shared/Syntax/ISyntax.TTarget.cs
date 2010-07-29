@@ -15,15 +15,16 @@ namespace Lokad
 	/// Interface for implementing decoupled configuration extensions. It hides
 	/// unnecessary members from the IntelliSense.
 	/// </summary>
-	/// <typeparam name="TSyntaxTarget">syntax target</typeparam>
-	public interface ISyntax<out TSyntaxTarget>
+	/// <typeparam name="TTarget">syntax target</typeparam>
+	public interface ISyntax<out TTarget>
 	{
 		/// <summary>
 		/// Gets the underlying object.
 		/// </summary>
 		/// <value>The underlying object.</value>
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		TSyntaxTarget Target { get; }
+		TTarget Target { get; }
+
 		/// <summary>
 		/// Returns a <see cref="T:System.String"/> that represents the current <see cref="T:System.Object"/>.
 		/// </summary>
@@ -32,6 +33,7 @@ namespace Lokad
 		/// </returns>
 		[EditorBrowsable(EditorBrowsableState.Never)]
 		string ToString();
+
 		/// <summary>
 		/// Determines whether the specified <see cref="T:System.Object"/> is equal to the current <see cref="T:System.Object"/>.
 		/// </summary>
@@ -62,16 +64,5 @@ namespace Lokad
 		/// </returns>
 		[EditorBrowsable(EditorBrowsableState.Never)]
 		Type GetType();
-	}
-
-	/// <summary>
-	/// Interface for implementing decoupled configuration extensions 
-	/// that are limited by the subject.
-	/// </summary>
-	/// <typeparam name="TTarget">The type of the target.</typeparam>
-	/// <typeparam name="TSubject">The type of the subject to extend.</typeparam>
-	public interface ISyntax<out TTarget, out TSubject> : ISyntax<TTarget>
-	{
-		
 	}
 }

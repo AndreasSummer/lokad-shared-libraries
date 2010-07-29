@@ -89,7 +89,14 @@
     <Compile Include="Extensions\ExtendArray.cs" />
     <Compile Include="Collections\Generic\ProjectionComparer.cs" />
     <Compile Include="IStartable.cs" />
-    <Compile Include="ISyntax.cs" />
+    <Compile Include="Serialization\BinaryMessageSerializer.cs" />
+    <Compile Include="Serialization\DataContractMessageSerializer.cs" />
+    <Compile Include="Serialization\DataContractUtil.cs" />
+    <Compile Include="ExtendISupportSyntaxForSerialization.cs" />
+    <Compile Include="Serialization\IKnowSerializationTypes.cs" />
+    <Compile Include="Serialization\IMessageSerializer.cs" />
+    <Compile Include="Serialization\ISupportSyntaxForSerialization.cs" />
+    <Compile Include="Syntax\ISyntax.TTarget.cs" />
     <Compile Include="Messaging\ICommunicator.cs" />
     <Compile Include="Messaging\NullCommunicator.cs" />
     <Compile Include="Messaging\CommunicationType.cs" />
@@ -124,7 +131,7 @@
     <Compile Include="Settings\PrefixTruncatingKeyFilter.cs" />
     <Compile Include="Silverlight\ExtendString.cs" />
     <Compile Include="Silverlight\Stopwatch.cs" />
-    <Compile Include="Syntax.1.cs" />
+    <Compile Include="Syntax\Syntax.TTarget.cs" />
     <Compile Include="Testing\Equatable.cs" />
     <Compile Include="Linq\ArrayExtensionsForLinq.cs" />
     <Compile Include="Linq\Indexer.cs" />
@@ -208,7 +215,7 @@
     <Compile Include="Rules\ExtendIScope.cs" />
     <Compile Include="Rules\Scopes\TrackScope.cs" />
     <Compile Include="Utils\StringUtil.cs" />
-    <Compile Include="Syntax.cs" />
+    <Compile Include="Syntax\Syntax.cs" />
     <Compile Include="Threading\ReaderWriterLockSlimExtensions.cs" />
     <Compile Include="Tuples\Pair.cs" />
     <Compile Include="Reflection\Reflect.cs" />
