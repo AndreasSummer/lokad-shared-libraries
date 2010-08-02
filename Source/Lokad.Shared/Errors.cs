@@ -152,7 +152,7 @@ namespace Lokad
 		/// </summary>
 		/// <param name="e">The target invocation exception to unwrap.</param>
 		/// <returns>inner exception</returns>
-		[NotNull]
+		[NotNull, UsedImplicitly]
 		public static Exception Inner([NotNull] TargetInvocationException e)
 		{
 			if (e == null) throw new ArgumentNullException("e");

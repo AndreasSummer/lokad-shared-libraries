@@ -41,20 +41,13 @@
     <Compile Include="..\VersionAssemblyInfo.cs">
       <Link>Properties\VersionAssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="ConstraintOperand.cs" />
     <Compile Include="Default\IConsume.cs" />
     <Compile Include="Default\IMessage.cs" />
     <Compile Include="Default\IScheduledTask.cs" />
-    <Compile Include="ExtendIPublishViews.cs" />
-    <Compile Include="ExtendIQueryViews.cs" />
-    <Compile Include="IdentityConstraint.cs" />
-    <Compile Include="IPublishViews.cs" />
-    <Compile Include="IQueryViews.cs" />
-    <Compile Include="IViewQuery.cs" />
+    <Compile Include="IReadState.cs" />
+    <Compile Include="IStateStore.cs" />
+    <Compile Include="IWriteState.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ViewEntity.1.cs" />
-    <Compile Include="ViewEntity.cs" />
-    <Compile Include="ViewQuery.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Lokad.Shared\Lokad.Shared.csproj">
