@@ -18,27 +18,19 @@ namespace Lokad
 		/// <summary>
 		/// Uses the binary formatter.
 		/// </summary>
-		/// <typeparam name="TModule">The type of the module.</typeparam>
-		/// <param name="module">The module.</param>
-		/// <returns></returns>
-		public static TModule UseBinaryFormatter<TModule>(this TModule module)
-			where TModule : ISupportSyntaxForSerialization
+		/// <param name="module">The module to extend.</param>
+		public static void UseBinaryFormatter(this ISupportSyntaxForSerialization module)
 		{
 			module.RegisterSerializer<BinaryMessageSerializer>();
-			return module;
 		}
 
 		/// <summary>
 		/// Uses the data contract serializer.
 		/// </summary>
-		/// <typeparam name="TModule">The type of the module.</typeparam>
-		/// <param name="module">The module.</param>
-		/// <returns></returns>
-		public static TModule UseDataContractSerializer<TModule>(this TModule module)
-			where TModule : ISupportSyntaxForSerialization
+		/// <param name="module">The module to extend.</param>
+		public static void UseDataContractSerializer(this ISupportSyntaxForSerialization module)
 		{
 			module.RegisterSerializer<DataContractMessageSerializer>();
-			return module;
 		}
 	}
 }

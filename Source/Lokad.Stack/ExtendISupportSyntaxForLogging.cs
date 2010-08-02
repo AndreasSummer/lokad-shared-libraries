@@ -20,15 +20,11 @@ namespace Lokad
 		/// Registers the log provider from the current log4net stack <see cref="LoggingStack.GetLogProvider"/>.
 		/// See <see cref="LoggingStack"/> for options on configuring Apache log4net options.
 		/// </summary>
-		/// <typeparam name="TModule">The type of the module.</typeparam>
-		/// <param name="module">The module.</param>
-		/// <returns>same module for the inlining</returns>
+		/// <param name="module">The module to extend.</param>
 		[UsedImplicitly]
-		public static TModule LogToStack<TModule>(this TModule module)
-			where TModule : ISupportSyntaxForLogging
+		public static void LogToStack(this ISupportSyntaxForLogging module)
 		{
 			module.RegisterLogProvider(LoggingStack.GetLogProvider());
-			return module;
 		}
 	}
 }
