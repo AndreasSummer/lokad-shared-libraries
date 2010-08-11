@@ -19,9 +19,4 @@ namespace Lokad.Cqrs.Default
 		/// <param name="message">The message.</param>
 		void Consume(TMessage message);
 	}
-
-	/// <summary>
-	/// Default CQRS interface for interface-base domain setup
-	/// </summary>
-	public interface IConsumeMessage{}
 }

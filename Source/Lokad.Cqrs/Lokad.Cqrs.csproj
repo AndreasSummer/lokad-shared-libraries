@@ -42,11 +42,15 @@
       <Link>Properties\VersionAssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="Default\IConsume.cs" />
+    <Compile Include="Default\IConsumeMessage.cs" />
     <Compile Include="Default\IMessage.cs" />
     <Compile Include="Default\IScheduledTask.cs" />
-    <Compile Include="IReadState.cs" />
-    <Compile Include="IStateStore.cs" />
-    <Compile Include="IWriteState.cs" />
+    <Compile Include="EntityNotFoundException.cs" />
+    <Compile Include="ExtendIReadEntity.cs" />
+    <Compile Include="ExtendIWriteEntity.cs" />
+    <Compile Include="IReadEntity.cs" />
+    <Compile Include="IWriteEntity.cs" />
+    <Compile Include="OptimisticConcurrencyException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

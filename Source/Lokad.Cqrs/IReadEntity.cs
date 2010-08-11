@@ -11,16 +11,17 @@ using System;
 namespace Lokad.Cqrs
 {
 	/// <summary>
-	/// Handles read operations for the state storage
+	/// Handles read-side operations for the entity storage
 	/// </summary>
-	public interface IReadState
+	public interface IReadEntity
 	{
 		/// <summary>
-		/// Retrieves the specified state from the store, if it is found
+		/// Retrieves the specified entity from the store, if it is found.
+		/// Underlying storage could be event, cloud blob or whatever
 		/// </summary>
 		/// <param name="type">The type of the state (needed to deserialize).</param>
 		/// <param name="identity">The identity.</param>
-		/// <returns>state</returns>
-		Maybe<object> Load(Type type, string identity);
+		/// <returns>loaded entity (if found)</returns>
+		Maybe<object> Load(Type type, object identity);
 	}
 }
