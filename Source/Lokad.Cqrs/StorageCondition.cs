@@ -1,4 +1,12 @@
-﻿using System;
+﻿#region Copyright (c) 2009-2010 LOKAD SAS. All rights reserved.
+
+// Copyright (c) 2009-2010 LOKAD SAS. All rights reserved.
+// You must not remove this notice, or any other, from this software.
+// This document is the property of LOKAD SAS and must not be disclosed.
+
+#endregion
+
+using System;
 using System.Globalization;
 using System.Linq;
 using Lokad.Rules;
@@ -7,13 +15,9 @@ namespace Lokad.Cqrs
 {
 	public struct StorageCondition
 	{
+		public static StorageCondition None = default(StorageCondition);
 		readonly string _etag;
 		readonly DateTime? _lastModifiedUtc;
-
-		public StorageConditionType Type { get; private set; }
-		public Maybe<string> ETag { get { return _etag ?? Maybe<string>.Empty;} }
-		public Maybe<DateTime> LastModifiedUtc { get { return _lastModifiedUtc ?? Maybe<DateTime>.Empty; } }
-		
 
 		public StorageCondition(StorageConditionType type, string eTag) : this()
 		{
@@ -34,7 +38,17 @@ namespace Lokad.Cqrs
 			_lastModifiedUtc = lastModifiedUtc;
 		}
 
-		public static StorageCondition None = default(StorageCondition);
+		public StorageConditionType Type { get; private set; }
+
+		public Maybe<string> ETag
+		{
+			get { return _etag ?? Maybe<string>.Empty; }
+		}
+
+		public Maybe<DateTime> LastModifiedUtc
+		{
+			get { return _lastModifiedUtc ?? Maybe<DateTime>.Empty; }
+		}
 
 
 		/// <summary>

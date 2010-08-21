@@ -25,7 +25,7 @@ namespace Lokad.Cqrs
 		/// <param name="addEntityDelegate">The function used to generate an entity for an absent key.</param>
 		/// <param name="updateEntityDelegate">The function used to generate a new entity for an existing key based on the existing entity.</param>
 		/// <exception cref="OptimisticConcurrencyException">when updated entity had been changed concurrently</exception>
-		void AddOrUpdate(Type type, object key, AddEntityDelegate addEntityDelegate, UpdateEntityDelegate updateEntityDelegate);
+		void Write(Type type, object key, AddEntityDelegate addEntityDelegate, UpdateEntityDelegate updateEntityDelegate);
 
 		/// <summary>
 		/// Deletes the specified entity, given it's type and key

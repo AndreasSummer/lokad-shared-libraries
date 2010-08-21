@@ -23,54 +23,98 @@ namespace Lokad.Cqrs
 		/// <typeparam name="TEntity">The type of the entity to update.</typeparam>
 		/// <param name="store">The store.</param>
 		/// <param name="key">The key of the entity to update.</param>
-		/// <param name="patch">The update function.</param>
+		/// <param name="updateFunction">The update function.</param>
 		/// <exception cref="OptimisticConcurrencyException">when entity being updated had been changed concurrently</exception>
 		/// <exception cref="EntityNotFoundException">when entity to update was not found</exception>
-		public static void Update<TEntity>(this IEntityWriter store, object key, Action<TEntity> patch)
+		public static void Update<TEntity>(this IEntityWriter store, object key, Action<TEntity> updateFunction)
 		{
-			store.AddOrUpdate(typeof (TEntity), key,
+			store.Write(typeof (TEntity), key,
 				k => { throw CqrsErrors.EntityNotFound(typeof (TEntity), k); },
 				(k, value) =>
 					{
-						patch((TEntity) value);
+						updateFunction((TEntity) value);
 						return value;
 					});
 		}
 
 		/// <summary>
-		/// Updates an entity of the key already exists or creates a new entity otherwise.
+		/// Creates an entity if the key does not already exist, or throws <see cref="EntityAlreadyExistsException"/> otherwise.
 		/// </summary>
-		/// <typeparam name="TEntity">The type of the entity.</typeparam>
+		/// <typeparam name="TEntity">The type of the entity to create.</typeparam>
 		/// <param name="store">The store.</param>
-		/// <param name="key">The identity of the entity to patch.</param>
-		/// <param name="updateValue">The function used to generate a new entity for an existing key based on the key's existing value.</param>
-		/// <param name="addValue">Entity factory, if it were not found.</param>
-		/// <exception cref="OptimisticConcurrencyException">when update entity had been changed concurrently</exception>
-		public static void AddOrUpdate<TEntity>(this IEntityWriter store, object key, Func<TEntity> addValue,
-			Action<TEntity> updateValue)
+		/// <param name="key">The key of the entity to create.</param>
+		/// <param name="newEntityInit">The initialization function.</param>
+		/// <exception cref="EntityAlreadyExistsException">when entity with the same key already exists</exception>
+		public static void Add<TEntity>(this IEntityWriter store, object key, Action<TEntity> newEntityInit)
+			where TEntity : new()
 		{
-			store.AddOrUpdate(typeof (TEntity),
-				key,
-				x => addValue(),
-				(o, value) =>
+			store.Write(typeof(TEntity), key,
+				k =>
 					{
-						updateValue((TEntity) value);
-						return value;
-					}
-				);
+						var entity = new TEntity();
+						newEntityInit(entity);
+						return entity;
+					},
+				(k, value) => { throw CqrsErrors.EntityAlreadyExists(typeof (TEntity), k); });
+		}
+		/// <summary>
+		/// Creates an entity if the key does not already exist, or throws <see cref="EntityAlreadyExistsException"/> otherwise.
+		/// </summary>
+		/// <typeparam name="TEntity">The type of the entity to create.</typeparam>
+		/// <param name="store">The store.</param>
+		/// <param name="key">The key of the entity to create.</param>
+		/// <param name="entity">The entity to add.</param>
+		/// <exception cref="EntityAlreadyExistsException">when entity with the same key already exists</exception>
+		public static void Add<TEntity>(this IEntityWriter store, object key, TEntity entity)
+		{
+			store.Write(typeof(TEntity), key,
+				k => entity,
+				(k, value) => { throw CqrsErrors.EntityAlreadyExists(typeof(TEntity), k); });
 		}
 
 		/// <summary>
-		/// If the entity exists for a given key, updates it; otherwise - inserts a new one.
+		/// Update the entity with a given key, creating a new one before that, if needed.
 		/// </summary>
 		/// <typeparam name="TEntity">The type of the entity.</typeparam>
 		/// <param name="store">The store.</param>
 		/// <param name="key">The key.</param>
-		/// <param name="entity">The entity to upsert.</param>
-		/// <exception cref="OptimisticConcurrencyException">when updated entity had been changed concurrently</exception>
-		public static void AddOrUpdate<TEntity>(this IEntityWriter store, object key, TEntity entity)
+		/// <param name="updateEntity">The function used to update entity.</param>
+		/// <param name="entityFactory">The function used to create new entity before updating, if it does not exist.</param>
+		public static void UpdateOrAdd<TEntity>(this IEntityWriter store, Func<TEntity> entityFactory, object key, Action<TEntity> updateEntity)
 		{
-			store.AddOrUpdate(typeof (TEntity), key, o => entity, (key1, value) => entity);
+			store.Write(typeof(TEntity), key, o =>
+				{
+					var entity = entityFactory();
+					updateEntity(entity);
+					return entity;
+				}, (key1, value) =>
+					{
+						updateEntity((TEntity) value);
+						return value;
+					});
+		}
+
+		/// <summary>
+		/// Update the entity with a given key, creating a new one before that, if needed.
+		/// </summary>
+		/// <typeparam name="TEntity">The type of the entity.</typeparam>
+		/// <typeparam name="TKey">The type of the key.</typeparam>
+		/// <param name="store">The store.</param>
+		/// <param name="key">The key.</param>
+		/// <param name="updateEntity">The function used to update entity.</param>
+		/// <param name="entityFactory">The function used to create new entity before updating, if it does not exist.</param>
+		public static void UpdateOrAdd<TEntity, TKey>(this IEntityWriter store, Func<TKey,TEntity> entityFactory, TKey key, Action<TEntity> updateEntity)
+		{
+			store.Write(typeof(TEntity), key, o =>
+			{
+				var entity = entityFactory(key);
+				updateEntity(entity);
+				return entity;
+			}, (key1, value) =>
+			{
+				updateEntity((TEntity)value);
+				return value;
+			});
 		}
 
 		/// <summary>
@@ -80,20 +124,13 @@ namespace Lokad.Cqrs
 		/// <param name="store">The store.</param>
 		/// <param name="key">The key.</param>
 		/// <param name="updateValue">The function used to update entity.</param>
-		/// <param name="ifNotExist">The function used to create new entity before updating, if it does not exist.</param>
-		public static void Upsert<TEntity>(this IEntityWriter store, object key, Action<TEntity> updateValue, Func<TEntity> ifNotExist)
+		public static void UpdateOrAdd<TEntity>(this IEntityWriter store, object key, Action<TEntity> updateValue)
+			where TEntity : new()
 		{
-			store.AddOrUpdate(typeof(TEntity), key, o =>
-				{
-					var entity = ifNotExist();
-					updateValue(entity);
-					return entity;
-				}, (key1, value) =>
-					{
-						updateValue((TEntity) value);
-						return value;
-					});
+			store.UpdateOrAdd(() => new TEntity(), key, updateValue);
 		}
+
+
 		
 
 		/// <summary>

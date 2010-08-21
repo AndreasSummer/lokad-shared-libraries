@@ -6,16 +6,33 @@
 #endregion
 
 using System.IO;
+using Lokad.Quality;
 
 namespace Lokad.Cqrs
 {
+	/// <summary>
+	/// Storage container using <see cref="System.IO"/> for persisting data
+	/// </summary>
+	[UsedImplicitly]
 	public sealed class FileStorageContainer : IStorageContainer
 	{
 		readonly DirectoryInfo _root;
 
+		/// <summary>
+		/// Initializes a new instance of the <see cref="FileStorageContainer"/> class.
+		/// </summary>
+		/// <param name="root">The root.</param>
 		public FileStorageContainer(DirectoryInfo root)
 		{
 			_root = root;
+		}
+
+		/// <summary>
+		/// Initializes a new instance of the <see cref="FileStorageContainer"/> class.
+		/// </summary>
+		/// <param name="path">The path.</param>
+		public FileStorageContainer(string path) : this(new DirectoryInfo(path))
+		{
 		}
 
 		public IStorageContainer GetContainer(string name)

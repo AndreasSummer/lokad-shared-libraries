@@ -45,12 +45,39 @@ namespace Lokad.Cqrs
 		}
 	}
 
+	[Serializable]
+	public class EntityAlreadyExistsException : Exception
+	{
+		public EntityAlreadyExistsException()
+		{
+		}
+
+		public EntityAlreadyExistsException(string message) : base(message)
+		{
+		}
+
+		public EntityAlreadyExistsException(string message, Exception inner) : base(message, inner)
+		{
+		}
+
+		protected EntityAlreadyExistsException(
+			SerializationInfo info,
+			StreamingContext context) : base(info, context)
+		{
+		}
+	}
+
 	public static class CqrsErrors
 	{
 		public static Exception EntityNotFound(Type type, object identity)
 		{
 			var message = string.Format("Failed to find '{0}' with identity '{1}'", type, identity);
 			return new EntityNotFoundException(message);
+		}
+		public static Exception EntityAlreadyExists(Type type, object  identity)
+		{
+			var message = string.Format("Failed to create '{0}' with identity '{1}'", type, identity);
+			return new EntityAlreadyExistsException(message);
 		}
 	}
 }
