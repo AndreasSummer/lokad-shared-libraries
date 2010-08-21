@@ -43,18 +43,18 @@ namespace Lokad.Cqrs
 		/// <typeparam name="TEntity">The type of the entity.</typeparam>
 		/// <param name="store">The store.</param>
 		/// <param name="key">The identity of the entity to patch.</param>
-		/// <param name="patch">The patch function.</param>
-		/// <param name="whenNotFound">Entity factory, if it were not found.</param>
+		/// <param name="updateValue">The function used to generate a new entity for an existing key based on the key's existing value.</param>
+		/// <param name="addValue">Entity factory, if it were not found.</param>
 		/// <exception cref="OptimisticConcurrencyException">when update entity had been changed concurrently</exception>
-		public static void AddOrUpdate<TEntity>(this IEntityWriter store, object key, Func<TEntity> whenNotFound,
-			Action<TEntity> patch)
+		public static void AddOrUpdate<TEntity>(this IEntityWriter store, object key, Func<TEntity> addValue,
+			Action<TEntity> updateValue)
 		{
 			store.AddOrUpdate(typeof (TEntity),
 				key,
-				x => whenNotFound(),
+				x => addValue(),
 				(o, value) =>
 					{
-						patch((TEntity) value);
+						updateValue((TEntity) value);
 						return value;
 					}
 				);
@@ -68,10 +68,33 @@ namespace Lokad.Cqrs
 		/// <param name="key">The key.</param>
 		/// <param name="entity">The entity to upsert.</param>
 		/// <exception cref="OptimisticConcurrencyException">when updated entity had been changed concurrently</exception>
-		public static void Upsert<TEntity>(this IEntityWriter store, object key, TEntity entity)
+		public static void AddOrUpdate<TEntity>(this IEntityWriter store, object key, TEntity entity)
 		{
 			store.AddOrUpdate(typeof (TEntity), key, o => entity, (key1, value) => entity);
 		}
+
+		/// <summary>
+		/// Update the entity with a given key, creating a new one before that, if needed.
+		/// </summary>
+		/// <typeparam name="TEntity">The type of the entity.</typeparam>
+		/// <param name="store">The store.</param>
+		/// <param name="key">The key.</param>
+		/// <param name="updateValue">The function used to update entity.</param>
+		/// <param name="ifNotExist">The function used to create new entity before updating, if it does not exist.</param>
+		public static void Upsert<TEntity>(this IEntityWriter store, object key, Action<TEntity> updateValue, Func<TEntity> ifNotExist)
+		{
+			store.AddOrUpdate(typeof(TEntity), key, o =>
+				{
+					var entity = ifNotExist();
+					updateValue(entity);
+					return entity;
+				}, (key1, value) =>
+					{
+						updateValue((TEntity) value);
+						return value;
+					});
+		}
+		
 
 		/// <summary>
 		/// Deletes the specified entity, given it's type and identity
@@ -79,7 +102,7 @@ namespace Lokad.Cqrs
 		/// <typeparam name="TEntity">The type of the entity.</typeparam>
 		/// <param name="store">The store.</param>
 		/// <param name="identity">The identity.</param>
-		public static void Delete<TEntity>(this IEntityWriter store, string identity)
+		public static void Remove<TEntity>(this IEntityWriter store, string identity)
 		{
 			store.Remove(typeof (TEntity), identity);
 		}
