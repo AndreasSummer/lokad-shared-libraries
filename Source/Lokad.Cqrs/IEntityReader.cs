@@ -13,7 +13,7 @@ namespace Lokad.Cqrs
 	/// <summary>
 	/// Handles read-side operations for the entity storage
 	/// </summary>
-	public interface IReadEntity
+	public interface IEntityReader
 	{
 		/// <summary>
 		/// Retrieves the specified entity from the store, if it is found.
@@ -22,6 +22,6 @@ namespace Lokad.Cqrs
 		/// <param name="type">The type of the state (needed to deserialize).</param>
 		/// <param name="identity">The identity.</param>
 		/// <returns>loaded entity (if found)</returns>
-		Maybe<object> Load(Type type, object identity);
+		Maybe<object> Read(Type type, object identity);
 	}
 }

@@ -44,4 +44,13 @@ namespace Lokad.Cqrs
 		{
 		}
 	}
+
+	public static class CqrsErrors
+	{
+		public static Exception EntityNotFound(Type type, object identity)
+		{
+			var message = string.Format("Failed to find '{0}' with identity '{1}'", type, identity);
+			return new EntityNotFoundException(message);
+		}
+	}
 }
