@@ -97,9 +97,6 @@
     <Compile Include="Serialization\IMessageSerializer.cs" />
     <Compile Include="Serialization\ISupportSyntaxForSerialization.cs" />
     <Compile Include="Syntax\ISyntax.TTarget.cs" />
-    <Compile Include="Messaging\ICommunicator.cs" />
-    <Compile Include="Messaging\NullCommunicator.cs" />
-    <Compile Include="Messaging\CommunicationType.cs" />
     <Compile Include="Serialization\IDataContractMapper.cs" />
     <Compile Include="Serialization\IDataSerializer.cs" />
     <Compile Include="Monads\Maybe.1.cs" />
@@ -272,9 +269,7 @@
       <Install>true</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Cqrs\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" Condition="($(MSBuildTargets) == '') Or ($(MSBuildTargets) == 'CSharp')" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\Silverlight\v2.0\Microsoft.Silverlight.CSharp.targets" Condition="$(MSBuildTargets) == 'Silverlight 2.0'" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
