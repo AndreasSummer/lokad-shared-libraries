@@ -52,6 +52,4 @@ namespace Lokad.Rules
 		// used for complex multi-step integration scenarios 
 		// IScope CreateDetached(string name)
 	}
-
-
 }

@@ -86,6 +86,7 @@
     <Compile Include="Result2Tests.cs" />
     <Compile Include="Rules\Common\BufferIsTests.cs" />
     <Compile Include="Rules\Common\MaybeIsTests.cs" />
+    <Compile Include="Rules\ExtendIScopeForMediumTrustTests.cs" />
     <Compile Include="Settings\SettingsTests.cs" />
     <Compile Include="Testing\IEquatableExtensionsTests.cs" />
     <Compile Include="Linq\ArrayExtensionsTests.cs" />

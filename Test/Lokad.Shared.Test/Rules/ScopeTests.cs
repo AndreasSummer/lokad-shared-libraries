@@ -6,8 +6,9 @@
 
 #endregion
 
-using Lokad.Testing;
 using NUnit.Framework;
+
+// ReSharper disable InconsistentNaming
 
 namespace Lokad.Rules
 {

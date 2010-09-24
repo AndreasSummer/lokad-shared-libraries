@@ -9,6 +9,8 @@
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Linq.Expressions;
+using System.Reflection;
 using Lokad.Quality;
 using Lokad.Reflection;
 
@@ -172,6 +174,7 @@ namespace Lokad.Rules
 		/// <param name="parentScope">The parent scope.</param>
 		/// <param name="property">The property reference.</param>
 		/// <param name="rules">The rules to run.</param>
+		/// <remarks>For the medium-trust use: <see cref="Validate{TModel,TProperty}"/></remarks>
 		public static void Validate<T>(this IScope parentScope,
 			[NotNull] Func<T> property, params Rule<T>[] rules)
 		{
@@ -186,6 +189,54 @@ namespace Lokad.Rules
 			}
 		}
 
+		/// <summary>
+		/// Validates the member (field or property) using the expressions (compiled and cached statically by runtime). This should work for the medium trust environments (i.e.: ASP.NET MVC).
+		/// </summary>
+		/// <typeparam name="TModel">The type of the model.</typeparam>
+		/// <typeparam name="TMember">The type of the member.</typeparam>
+		/// <param name="parentScope">The parent scope.</param>
+		/// <param name="model">The model to validate.</param>
+		/// <param name="memberAccessor">The member accessor expression.</param>
+		/// <param name="rules">The rules.</param>
+		public static void Validate<TModel, TMember>(this IScope parentScope, TModel model, Expression<Func<TModel, TMember>> memberAccessor, params Rule<TMember>[] rules)
+		{
+			if (parentScope == null) throw new ArgumentNullException("parentScope");
+			if (memberAccessor == null) throw new ArgumentNullException("memberAccessor");
+
+			var info = Express.MemberWithLambda(memberAccessor);
+			using (var scope = parentScope.Create(info.Name))
+			{
+				scope.CheckObject(TypeCache<TModel>.GetMemberValue(model, memberAccessor), rules);
+			}
+		}
+
+		/// <summary>
+		/// Validates some <see cref="IEnumerable{T}"/> member using the provided <paramref name="parentScope"/>.
+		/// This variant uses expressions (compiled and statically cached for the performance).
+		/// </summary>
+		/// <typeparam name="TModel">The type of the model.</typeparam>
+		/// <typeparam name="TMember">The type of the member.</typeparam>
+		/// <param name="parentScope">The parent scope.</param>
+		/// <param name="model">The model to validate.</param>
+		/// <param name="memberAccessor">The member accessor.</param>
+		/// <param name="rules">The rules to run.</param>
+		public static void ValidateMany<TModel, TMember>(this IScope parentScope, TModel model, Expression<Func<TModel,IEnumerable<TMember>>> memberAccessor,
+			params Rule<TMember>[] rules)
+		{
+			if (parentScope == null) throw new ArgumentNullException("parentScope");
+			if (memberAccessor == null) throw new ArgumentNullException("memberAccessor");
+
+			// item can be null, it will be checked by the validation
+			var info = Express.MemberWithLambda(memberAccessor);
+			using (var scope = parentScope.Create(info.Name))
+			{
+				scope.ValidateInScope(TypeCache<TModel>.GetMemberValue(model, memberAccessor), rules);
+			}
+		}
+
+
+
+
 
 		/// <summary>
 		/// Validates some <see cref="IEnumerable{T}"/> member using the provided <paramref name="parentScope"/>.
@@ -194,6 +245,7 @@ namespace Lokad.Rules
 		/// <param name="parentScope">The parent scope.</param>
 		/// <param name="propertyReference">Reference to collection property to validate.</param>
 		/// <param name="rules">The rules to run.</param>
+		/// <remarks>For the medium-trust use: <see cref="ValidateMany{TModel,TMember}"/></remarks>
 		public static void ValidateMany<T>(this IScope parentScope, Func<IEnumerable<T>> propertyReference,
 			params Rule<T>[] rules)
 		{

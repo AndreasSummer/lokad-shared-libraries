@@ -11,6 +11,8 @@ using System.Linq;
 using Lokad.Testing;
 using NUnit.Framework;
 
+// ReSharper disable InconsistentNaming
+
 namespace Lokad.Rules
 {
 	[TestFixture]
@@ -91,8 +93,16 @@ namespace Lokad.Rules
 			scope.Validate(() => domain.Property, StringIs.NotEmpty);
 			scope.Validate(() => domain.Value, Is.NotDefault);
 
+			// medium trust
+			scope.Validate(domain, d => d.Property, StringIs.NotEmpty);
+			scope.Validate(domain, d => d.Value, Is.NotDefault);
+
 			scope.ValidateMany(() => domain.Properties, StringIs.NotEmpty);
 			scope.ValidateMany(() => domain.Values, Is.NotDefault);
+
+			// medium trust
+			scope.ValidateMany(domain, d => d.Properties, StringIs.NotEmpty);
+			scope.ValidateMany(domain, d => d.Values, Is.NotDefault);
 
 			scope.ValidateInScope(domain, (domain1, scope1) => { });
 			scope.ValidateInScope(new[] {domain}, (domain1, scope1) => { });
