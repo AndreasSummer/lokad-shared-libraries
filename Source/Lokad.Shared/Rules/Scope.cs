@@ -170,6 +170,17 @@ namespace Lokad.Rules
 			return SimpleScope.GetMessages(name, scope => scope.ValidateInScope(item, rules));
 		}
 
+		/// <summary> Collects all rule messages associated with the 
+		/// specified <paramref name="item"/> </summary>
+		/// <typeparam name="TItem">The type of the item to run the rules against.</typeparam>
+		/// <param name="item">The item to run the rules against.</param>
+		/// <param name="rules">The rules to execute.</param>
+		/// <returns>read-only collection of <see cref="RuleMessage"/></returns>
+		public static RuleMessages GetMessages<TItem>(TItem item, params Rule<TItem>[] rules)
+		{
+			return SimpleScope.GetMessages(typeof(TItem).Name, scope => scope.ValidateInScope(item, rules));
+		}
+
 		/// <summary>
 		/// Gets the messages created by action being executed against the scope.
 		/// </summary>

@@ -26,7 +26,7 @@ namespace Lokad.Reflection
 			return (TValue)Getters[info](instance);
 		}
 
-		static readonly IDictionary<MemberInfo, Func<TModel, object>> Getters =new Dictionary<MemberInfo, Func<TModel, object>>();
+		static readonly IDictionary<MemberInfo, Func<TModel, object>> Getters = new Dictionary<MemberInfo, Func<TModel, object>>();
 
 		static void CompilePropertyGetter(PropertyInfo propertyInfo)
 		{
