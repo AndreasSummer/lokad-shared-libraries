@@ -28,6 +28,10 @@ namespace Lokad
 		/// </summary>
 		public static readonly TEnum[] ValuesWithoutDefault;
 
+		// enum parsing performance is horrible!
+		internal static readonly IDictionary<string, TEnum> CaseDict;
+		internal static readonly IDictionary<string, TEnum> IgnoreCaseDict;
+
 		internal static readonly string EnumPrefix = typeof (TEnum).Name + "_";
 
 		/// <summary>
@@ -41,6 +45,16 @@ namespace Lokad
 			var def = default(TEnum);
 			ValuesWithoutDefault = Values.Where(x => !def.Equals(x)).ToArray();
 			Comparer = EnumComparer<TEnum>.Instance;
+
+			IgnoreCaseDict = new Dictionary<string, TEnum>(StringComparer.InvariantCultureIgnoreCase);
+			CaseDict = new Dictionary<string, TEnum>(StringComparer.InvariantCulture);
+
+			foreach (var value in Values)
+			{
+				var item = value.ToString();
+				IgnoreCaseDict[item] = value;
+				CaseDict[item] = value;
+			}
 		}
 
 		/// <summary>
