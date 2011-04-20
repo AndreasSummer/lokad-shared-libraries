@@ -1,4 +1,4 @@
-#region (c)2009 Lokad - New BSD license
+#region (c)2009-2011 Lokad - New BSD license
 
 // Copyright (c) Lokad 2009 
 // Company: http://www.lokad.com
@@ -34,7 +34,7 @@ namespace Lokad.Threading
 		}
 
 		/// <summary>
-		/// Executes the spcified function within the current thread, aborting it
+		/// Executes the specified function within the current thread, aborting it
 		/// if it does not complete within the specified timeout interval. 
 		/// </summary>
 		/// <param name="function">The function.</param>
@@ -64,12 +64,12 @@ namespace Lokad.Threading
 						{
 							Monitor.Wait(sync, _timeout);
 						}
-
-						if (!isCompleted)
-						{
-							watchedThread.Abort();
-						}
 					}
+
+                    if (!isCompleted)
+                    {
+                        watchedThread.Abort();
+                    }
 				};
 
 			try
@@ -95,7 +95,7 @@ namespace Lokad.Threading
 		}
 
 		/// <summary>
-		/// Executes the spcified function within the current thread, aborting it
+		/// Executes the specified function within the current thread, aborting it
 		/// if it does not complete within the specified timeout interval.
 		/// </summary>
 		/// <param name="timeout">The timeout.</param>
