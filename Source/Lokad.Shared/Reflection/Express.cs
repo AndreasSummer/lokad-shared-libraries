@@ -69,7 +69,7 @@ namespace Lokad.Reflection
 		{
 			var value = MemberWithLambda(property);
 			if (value.MemberType != MemberTypes.Property)
-				throw Errors.InvalidOperation("Member must be a property reference");
+				throw new InvalidOperationException("Member must be a property reference");
 
 			return (PropertyInfo) value;
 		}
@@ -82,7 +82,7 @@ namespace Lokad.Reflection
 		{
 			var value = MemberWithLambda(field);
 			if (value.MemberType != MemberTypes.Field)
-				throw Errors.InvalidOperation("Member must be a field reference");
+				throw new InvalidOperationException("Member must be a field reference");
 
 			return (FieldInfo) value;
 		}

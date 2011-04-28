@@ -71,57 +71,13 @@ namespace Lokad
 			return new ResolutionException(s, inner);
 		}
 
-		/// <summary>
-		/// Creates new instance of <see cref="KeyInvalidException"/>
-		/// </summary>
-		/// <param name="value">The value.</param>
-		/// <param name="inner">The inner.</param>
-		/// <returns>new exception instance</returns>
-		[NotNull]
-		public static Exception KeyInvalid(object value, [NotNull] Exception inner)
-		{
-			var s = string.Format(CultureInfo.InvariantCulture, "Key has invalid value '{0}'", value);
-			return new KeyInvalidException(s, inner);
-		}
 
-
-		/// <summary>
-		/// Creates new instance of <see cref="InvalidOperationException"/>
-		/// </summary>
-		/// <param name="message">The message.</param>
-		/// <param name="args">The arguments of the format string.</param>
-		/// <returns>new exception instance</returns>
-		[NotNull, StringFormatMethod("message")]
-		public static Exception InvalidOperation([NotNull] string message, params object[] args)
-		{
-			return new InvalidOperationException(string.Format(CultureInfo.InvariantCulture, message, args));
-		}
-
-
-		/// <summary>
-		/// Creates new instance of <see cref="NotSupportedException"/>
-		/// </summary>
-		/// <param name="message">The message.</param>
-		/// <param name="args">The arguments of the format string.</param>
-		/// <returns>new exception instance</returns>
-		[NotNull, StringFormatMethod("message")]
-		public static Exception NotSupported([NotNull] string message, params object[] args)
-		{
-			return new NotSupportedException(string.Format(CultureInfo.InvariantCulture, message, args));
-		}
-		
-
-		[NotNull]
+	    [NotNull]
 		internal static Exception ArgumentNullOrEmpty([InvokerParameterName] string paramName)
 		{
 			return new ArgumentException("Provided string can't be null or empty", paramName);
 		}
 
-		[NotNull]
-		internal static Exception InvalidOperation<T>([NotNull] string message, [NotNull] Func<T> variableReference)
-		{
-			return new InvalidOperationException(string.Format(CultureInfo.InvariantCulture, message, Reflect.VariableName(variableReference)));
-		}
 
 		[NotNull]
 		internal static Exception ArgumentNull<T>([NotNull] Func<T> argumentReference)

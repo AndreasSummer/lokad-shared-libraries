@@ -55,7 +55,7 @@ namespace Lokad
 			{
 				if (!_hasValue)
 				{
-					throw Errors.InvalidOperation(ResultResources.Dont_access_value_when_maybe_is_empty);
+					throw new InvalidOperationException(ResultResources.Dont_access_value_when_maybe_is_empty);
 				}
 
 				return _value;

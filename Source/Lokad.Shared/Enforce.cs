@@ -192,7 +192,7 @@ namespace Lokad
 		{
 			if (!check)
 			{
-				throw Errors.InvalidOperation("Failed assertion '{0}'", name);
+				throw new InvalidOperationException(string.Format("Failed assertion '{0}'", name));
 			}
 		}
 
@@ -210,7 +210,7 @@ namespace Lokad
 		{
 			if (!check)
 			{
-				throw Errors.InvalidOperation(message, arguments);
+				throw new InvalidOperationException(string.Format(message, arguments));
 			}
 		}
 
@@ -283,7 +283,7 @@ namespace Lokad
 		{
 			if (value() == null)
 			{
-				throw Errors.InvalidOperation("'{0}' can not be null.", Reflect.VariableName(value));
+				throw new InvalidOperationException(string.Format("'{0}' can not be null.", Reflect.VariableName(value)));
 			}
 		}
 
@@ -299,7 +299,7 @@ namespace Lokad
 		{
 			if (value == null)
 			{
-				throw Errors.InvalidOperation("Value of type '{0}' can not be null.", typeof(TValue).Name);
+				throw new InvalidOperationException(string.Format("Value of type '{0}' can not be null.", typeof(TValue).Name));
 			}
 		}
 
@@ -317,7 +317,8 @@ namespace Lokad
 			if (name == null) throw new ArgumentNullException("name");
 			if (value == null)
 			{
-				throw Errors.InvalidOperation("Value '{1}' of type '{0}' can not be null.", typeof(TValue).Name, name);
+			    var message = string.Format("Value '{1}' of type '{0}' can not be null.", typeof(TValue).Name, name);
+			    throw new InvalidOperationException(message);
 			}
 		}
 

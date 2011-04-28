@@ -69,7 +69,7 @@ namespace Lokad
 			get
 			{
 				if (!_isSuccess)
-					throw Errors.InvalidOperation(ResultResources.Dont_access_result_on_error_X, _error);
+					throw new InvalidOperationException(string.Format(ResultResources.Dont_access_result_on_error_X, _error));
 
 				return _value;
 			}
