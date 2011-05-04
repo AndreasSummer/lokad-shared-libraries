@@ -327,4 +327,17 @@ This document is the property of LOKAD SAS and must not be disclosed.]]></FileHe
     <Namespace>System.Diagnostics.CodeAnalysis</Namespace>
     <DefaultNamespace>Lokad.Quality</DefaultNamespace>
   </CodeAnnotations>
+  <CustomStructuralPatterns>
+    <Pattern Severity="ERROR">
+      <Comment>Replace with explicit</Comment>
+      <ReplaceComment>Replace with explicit exception</ReplaceComment>
+      <ReplacePattern>new InvalidOperationException(string.Format($str$,$arg$));</ReplacePattern>
+      <SearchPattern>Errors.InvalidOperation($str$, $arg$)</SearchPattern>
+      <Params />
+      <Placeholders>
+        <ExpressionPlaceholder Name="str" ExpressionType="System.String" ExactType="True" />
+        <ExpressionPlaceholder Name="arg" ExpressionType="System.Object" ExactType="False" />
+      </Placeholders>
+    </Pattern>
+  </CustomStructuralPatterns>
 </Configuration>
