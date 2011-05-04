@@ -35,7 +35,7 @@ namespace Lokad.Rules
 		public static Rule<Maybe<TValue>> ValidAnd<TValue>(params Rule<TValue>[] valueRules)
 		{
 			return (maybe, scope) => maybe
-				.Handle(() => scope.Error(RuleResources.Maybe_X_cant_be_empty, typeof (Maybe<TValue>).Name))
+				.Handle(() => scope.Error("Optional \'{0}\' should not be empty.", typeof (Maybe<TValue>).Name))
 				.Apply(value => scope.ValidateInScope(value, valueRules));
 		}
 	}

@@ -23,7 +23,7 @@ namespace Lokad.Rules
 		public static void SqlCompatible(DateTime dateTime, IScope scope)
 		{
 			if (dateTime < SqlMinDateTime)
-				scope.Error(RuleResources.Date_must_be_greater_than_X, SqlMinDateTime);
+				scope.Error("Date must be greater than \'{0}\'.", SqlMinDateTime);
 		}
 	}
 }

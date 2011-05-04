@@ -25,7 +25,7 @@ namespace Lokad.Rules
 				{
 					if (bytes.Length > length)
 					{
-						scope.Error(RuleResources.Buffer_cant_be_longer_than_X, length);
+						scope.Error("Byte array should not be longer than {0} bytes.", length);
 					}
 				};
 		}
@@ -43,7 +43,7 @@ namespace Lokad.Rules
 					var result = BufferUtil.CalculateSimpleHashCode(bytes);
 					if (result != hash)
 					{
-						scope.Error(RuleResources.Buffer_must_have_valid_hash);
+						scope.Error("Byte array should have valid hash.");
 					}
 				};
 		}

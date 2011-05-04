@@ -143,11 +143,6 @@
     <Compile Include="Quality\ReSharper\TerminatesProgramAttribute.cs" />
     <Compile Include="Quality\ReSharper\UsedImplicitlyAttribute.cs" />
     <Compile Include="Reflection\Express.cs" />
-    <Compile Include="Rules\RuleResources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>RuleResources.resx</DependentUpon>
-    </Compile>
     <Compile Include="Rules\Scopes\ModifierScope.cs" />
     <Compile Include="Rules\Scopes\DelayedScope.cs" />
     <Compile Include="Rules\Scopes\SimpleScope.cs" />
@@ -236,12 +231,6 @@
   <ItemGroup>
     <Content Include="Quality\ReSharper\_ReadMe.txt" />
     <Content Include="ReadMe.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Rules\RuleResources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>RuleResources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">

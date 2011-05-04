@@ -46,7 +46,7 @@ namespace Lokad.Rules
 		public static void ValidEmail(string email, IScope scope)
 		{
 			if (!EmailRegex.IsMatch(email))
-				scope.Error(RuleResources.String_must_be_valid_email);
+				scope.Error("String should be a valid email address.");
 		}
 
 		/// <summary>
@@ -57,7 +57,7 @@ namespace Lokad.Rules
 		public static void ValidServerConnection(string host, IScope scope)
 		{
 			if (!ServerConnectionRegex.IsMatch(host))
-				scope.Error(RuleResources.String_must_be_valid_host);
+				scope.Error("String should be a valid host name.");
 		}
 
 		/// <summary>
@@ -74,9 +74,9 @@ namespace Lokad.Rules
 			return (s, scope) =>
 				{
 					if (s.Length < minLength)
-						scope.Error(RuleResources.String_cant_be_shorter_than_X, minLength);
+						scope.Error("String should not be shorter than {0} characters.", minLength);
 					if (s.Length > maxLength)
-						scope.Error(RuleResources.String_cant_be_longer_than_X, maxLength);
+						scope.Error("String should not be longer than {0} characters.", maxLength);
 				};
 		}
 
@@ -94,7 +94,7 @@ namespace Lokad.Rules
 			return (s, scope) =>
 				{
 					if (s.Length > maxLength)
-						scope.Error(RuleResources.String_cant_be_longer_than_X, maxLength);
+						scope.Error("String should not be longer than {0} characters.", maxLength);
 				};
 		}
 
@@ -104,7 +104,7 @@ namespace Lokad.Rules
 		public static readonly Rule<string> NotEmpty = (s, scope) =>
 			{
 				if (string.IsNullOrEmpty(s))
-					scope.Error(RuleResources.String_cant_be_empty);
+					scope.Error("String should not be empty.");
 			};
 
 		/// <summary>
@@ -118,7 +118,7 @@ namespace Lokad.Rules
 			return (s, scope) =>
 				{
 					if (s.IndexOfAny(illegalCharacters) >= 0)
-						scope.Error(RuleResources.String_cant_contain_X_characters, joined);
+						scope.Error("String should not contain following characters: {0}.", joined);
 				};
 		}
 
@@ -131,7 +131,7 @@ namespace Lokad.Rules
 				for (int i = 0; i < s.Length; i++)
 				{
 					if (char.IsControl(s[i]))
-						scope.Error(RuleResources.String_cant_contain_unicode_control_characters);
+						scope.Error("String should not contain unicode control characters.");
 				}
 			};
 
@@ -140,7 +140,7 @@ namespace Lokad.Rules
 		public static readonly Rule<string> WithoutLeadingWhiteSpace = (s, scope) =>
 			{
 				if (s.Length > 0 && char.IsWhiteSpace(s[0]))
-					scope.Error(RuleResources.String_cant_start_with_whitespace);
+					scope.Error("String should not start with white-space character.");
 			};
 
 		/// <summary> String validator checking for presence of 
@@ -148,7 +148,7 @@ namespace Lokad.Rules
 		public static readonly Rule<string> WithoutTrailingWhiteSpace = (s, scope) =>
 			{
 				if (s.Length > 0 && char.IsWhiteSpace(s.Last()))
-					scope.Error(RuleResources.String_cant_end_with_whitespace);
+					scope.Error("String should not end with trailing white-space character.");
 			};
 
 
@@ -160,7 +160,7 @@ namespace Lokad.Rules
 			{
 				if (char.IsUpper(s, i))
 				{
-					scope.Error(RuleResources.String_cant_contain_uppercase);
+					scope.Error("String should not have uppercase characters.");
 					return;
 				}
 			}

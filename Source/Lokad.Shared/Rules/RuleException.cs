@@ -55,7 +55,7 @@ namespace Lokad.Rules
 			if (collection.Length == 1)
 				return collection[0].ToString();
 
-			var builder = new StringBuilder(RuleResources.RuleException_header);
+			var builder = new StringBuilder("Rule messages:");
 			foreach (var message in messages)
 			{
 				builder

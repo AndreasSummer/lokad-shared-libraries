@@ -325,7 +325,7 @@ namespace Lokad.Rules
 			if (item == null)
 				// ReSharper restore CompareNonConstrainedGenericWithNull
 			{
-				self.Error(RuleResources.Object_X_cant_be_null, typeof (T).Name);
+				self.Error("Object of type \'{0}\' should not be null.", typeof (T).Name);
 			}
 			else
 			{
@@ -350,7 +350,7 @@ namespace Lokad.Rules
 
 			if (items == null)
 			{
-				parentScope.Error(RuleResources.Collection_X_cant_be_null, typeof (T).Name);
+				parentScope.Error("Collection of type \'{0}\' should not be null.", typeof (T).Name);
 			}
 			else
 			{

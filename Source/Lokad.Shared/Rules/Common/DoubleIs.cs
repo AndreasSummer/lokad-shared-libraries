@@ -23,7 +23,7 @@ namespace Lokad.Rules
 		public static void Valid(double value, IScope scope)
 		{
 			if (Double.IsNaN(value) || Double.IsInfinity(value))
-				scope.Error(RuleResources.Double_must_represent_valid_value);
+				scope.Error("Double should represent a valid value.");
 		}
 	}
 }

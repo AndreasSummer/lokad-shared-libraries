@@ -27,7 +27,7 @@ namespace Lokad.Rules
 			return (t, scope) =>
 				{
 					if (item.Equals(t))
-						scope.Error(RuleResources.Value_cant_be_equal_to_X, item);
+						scope.Error("Value should not be equal to \'{0}\'.", item);
 				};
 		}
 
@@ -42,7 +42,7 @@ namespace Lokad.Rules
 			return (t, scope) =>
 				{
 					if (!item.Equals(t))
-						scope.Error(RuleResources.Value_must_be_equal_to_X, item);
+						scope.Error("Value should be equal to \'{0}\'.", item);
 				};
 		}
 
@@ -57,7 +57,7 @@ namespace Lokad.Rules
 			return (t, scope) =>
 				{
 					if (!item.Equals(t))
-						scope.Error(RuleResources.Value_must_be_equal_to_X, item);
+						scope.Error("Value should be equal to \'{0}\'.", item);
 				};
 		}
 
@@ -72,7 +72,7 @@ namespace Lokad.Rules
 			return (t, scope) =>
 				{
 					if (!ReferenceEquals(item, t))
-						scope.Error(RuleResources.Object_must_be_same_as_reference);
+						scope.Error("Object should be same as the provided reference.");
 				};
 		}
 
@@ -86,7 +86,7 @@ namespace Lokad.Rules
 		{
 			if (default(T).Equals(item))
 			{
-				scope.Error(RuleResources.Value_cant_be_equal_to_X, default(T));
+				scope.Error("Value should not be equal to \'{0}\'.", default(T));
 			}
 		}
 
@@ -100,7 +100,7 @@ namespace Lokad.Rules
 		{
 			if (!default(T).Equals(item))
 			{
-				scope.Error(RuleResources.Value_must_be_equal_to_X, default(T));
+				scope.Error("Value should be equal to \'{0}\'.", default(T));
 			}
 		}
 
@@ -118,9 +118,9 @@ namespace Lokad.Rules
 			return (value, scope) =>
 				{
 					if (minValue.CompareTo(value) > 0)
-						scope.Error(RuleResources.Value_cant_be_less_than_X, minValue);
+						scope.Error("Value should not be less than \'{0}\'.", minValue);
 					if (maxValue.CompareTo(value) < 0)
-						scope.Error(RuleResources.Value_cant_be_greater_than_X, maxValue);
+						scope.Error("Value should not be greater than \'{0}\'.", maxValue);
 				};
 		}
 
@@ -138,9 +138,9 @@ namespace Lokad.Rules
 			return (value, scope) =>
 				{
 					if (lowerBound.CompareTo(value) >= 0)
-						scope.Error(RuleResources.Value_must_be_greater_than_X, lowerBound);
+						scope.Error("Value should be greater than \'{0}\'.", lowerBound);
 					if (upperBound.CompareTo(value) <= 0)
-						scope.Error(RuleResources.Value_must_be_less_than_X, upperBound);
+						scope.Error("Value should be less than \'{0}\'.", upperBound);
 				};
 		}
 
@@ -156,7 +156,7 @@ namespace Lokad.Rules
 			return (t, scope) =>
 				{
 					if (comparable.CompareTo(t) >= 0)
-						scope.Error(RuleResources.Value_must_be_greater_than_X, comparable);
+						scope.Error("Value should be greater than \'{0}\'.", comparable);
 				};
 		}
 
@@ -172,7 +172,7 @@ namespace Lokad.Rules
 			return (t, scope) =>
 				{
 					if (comparable.CompareTo(t) > 0)
-						scope.Error(RuleResources.Value_cant_be_less_than_X, comparable);
+						scope.Error("Value should not be less than \'{0}\'.", comparable);
 				};
 		}
 
@@ -188,7 +188,7 @@ namespace Lokad.Rules
 			return (t, scope) =>
 				{
 					if (comparable.CompareTo(t) < 0)
-						scope.Error(RuleResources.Value_cant_be_greater_than_X, comparable);
+						scope.Error("Value should not be greater than \'{0}\'.", comparable);
 				};
 		}
 
@@ -204,7 +204,7 @@ namespace Lokad.Rules
 			return (t, scope) =>
 				{
 					if (comparable.CompareTo(t) <= 0)
-						scope.Error(RuleResources.Value_must_be_less_than_X, comparable);
+						scope.Error("Value should be less than \'{0}\'.", comparable);
 				};
 		}
 
@@ -222,7 +222,7 @@ namespace Lokad.Rules
 			return (t, scope) =>
 				{
 					if (!check(t))
-						scope.Error(RuleResources.Expression_X_must_be_true, stringRepresentation);
+						scope.Error("Expression should be true: {0}.", stringRepresentation);
 				};
 		}
 	}
