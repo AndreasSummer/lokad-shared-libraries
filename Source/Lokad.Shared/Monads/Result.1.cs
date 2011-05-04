@@ -223,7 +223,7 @@ namespace Lokad
 			get
 			{
 				if (!_isSuccess)
-					throw new InvalidOperationException(string.Format(ResultResources.Dont_access_result_on_error_X, _error));
+					throw new InvalidOperationException(string.Format("Code should not access value when the result has failed. Error is: \'{0}\'.", _error));
 
 				return _value;
 			}
@@ -237,7 +237,7 @@ namespace Lokad
 			get
 			{
 				if (_isSuccess)
-                    throw new InvalidOperationException(ResultResources.Dont_access_error_on_valid_result); 
+                    throw new InvalidOperationException("Code should not access error message when the result is valid."); 
 
 				return _error;
 			}
