@@ -8,6 +8,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 
 namespace Lokad.Testing
 {
@@ -22,7 +23,7 @@ namespace Lokad.Testing
 
 		public TestModelEqualityCache()
 		{
-			UnknownType = type => { throw Errors.KeyInvalid(type); };
+			UnknownType = type => { throw new KeyInvalidException(string.Format(CultureInfo.InvariantCulture, "Key has invalid value '{0}'", (object) type)); };
 		}
 
 		public TestModelEqualityDelegate GetEqualityTester(Type type)

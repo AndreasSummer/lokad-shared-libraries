@@ -135,7 +135,7 @@ namespace Lokad.Rules
 		public static void Validate<T>(this INamedProvider<IScope> scopeProvider, T item, string name, params Rule<T>[] rules)
 		{
 			if (scopeProvider == null) throw new ArgumentNullException("scopeProvider");
-			if (string.IsNullOrEmpty(name)) throw Errors.ArgumentNullOrEmpty("name");
+			if (string.IsNullOrEmpty(name)) throw new ArgumentException("Provided string can't be null or empty", "name");
 			// item can be null, it will be checked by the validation
 
 			using (var scope = scopeProvider.Get(name))
@@ -157,7 +157,7 @@ namespace Lokad.Rules
 			[NotNull] string name, params Rule<T>[] rules)
 		{
 			if (parentScope == null) throw new ArgumentNullException("parentScope");
-			if (string.IsNullOrEmpty(name)) throw Errors.ArgumentNullOrEmpty("name");
+			if (string.IsNullOrEmpty(name)) throw new ArgumentException("Provided string can't be null or empty", "name");
 			// item can be null, it will be checked by the validation
 
 			using (var scope = parentScope.Create(name))
@@ -271,7 +271,7 @@ namespace Lokad.Rules
 		public static void ValidateMany<T>(this IScope parentScope, IEnumerable<T> items, string name, params Rule<T>[] rules)
 		{
 			if (parentScope == null) throw new ArgumentNullException("parentScope");
-			if (string.IsNullOrEmpty(name)) throw Errors.ArgumentNullOrEmpty("name");
+			if (string.IsNullOrEmpty(name)) throw new ArgumentException("Provided string can't be null or empty", "name");
 			// item can be null, it will be checked by the validation
 
 			using (var scope = parentScope.Create(name))
@@ -293,7 +293,7 @@ namespace Lokad.Rules
 			params Rule<T>[] rules)
 		{
 			if (parentScope == null) throw new ArgumentNullException("parentScope");
-			if (string.IsNullOrEmpty(name)) throw Errors.ArgumentNullOrEmpty("name");
+			if (string.IsNullOrEmpty(name)) throw new ArgumentException("Provided string can't be null or empty", "name");
 			// item can be null, it will be checked by the validation
 
 			using (var scope = parentScope.Create(name))

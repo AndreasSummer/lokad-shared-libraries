@@ -8,6 +8,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using Mono.Cecil;
@@ -132,7 +133,7 @@ namespace Lokad.Quality
 			TypeDefinition definition;
 			if (!_typeDictionary.TryGetValue(name, out definition))
 			{
-				throw Errors.KeyInvalid(key);
+				throw new KeyInvalidException(string.Format(CultureInfo.InvariantCulture, "Key has invalid value '{0}'", (object) key));
 			}
 			return definition;
 		}

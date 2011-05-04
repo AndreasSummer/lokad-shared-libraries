@@ -136,7 +136,7 @@ namespace Lokad
 		[Test, ExpectedException(typeof(KeyInvalidException))]
 		public void Exposing2()
 		{
-			MaybeEmpty.ExposeException(Errors.KeyInvalid);
+			MaybeEmpty.ExposeException(() => new KeyInvalidException("Key has invalid value"));
 		}
 
 		[Test]
@@ -147,7 +147,7 @@ namespace Lokad
 				.ShouldBeEqualTo(10);
 
 			Maybe10
-				.ExposeException(Errors.KeyInvalid)
+				.ExposeException(() => new KeyInvalidException("Key has invalid value"))
 				.ShouldBeEqualTo(10);
 		}
 

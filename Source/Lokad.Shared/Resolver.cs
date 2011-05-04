@@ -7,6 +7,7 @@
 #endregion
 
 using System;
+using System.Globalization;
 using Lokad.Quality;
 
 namespace Lokad
@@ -53,7 +54,8 @@ namespace Lokad
 			}
 			catch (Exception ex)
 			{
-				throw Errors.Resolution(typeof (TService), ex);
+			    Type valueType = typeof (TService);
+			    throw new ResolutionException(string.Format(CultureInfo.InvariantCulture, "Error while resolving {0}", valueType), ex);
 			}
 		}
 
@@ -74,7 +76,8 @@ namespace Lokad
 			}
 			catch (Exception ex)
 			{
-				throw Errors.Resolution(typeof (TService), name, ex);
+			    Type valueType = typeof (TService);
+			    throw new ResolutionException(string.Format(CultureInfo.InvariantCulture, "Error while resolving {0} with key '{1}'", valueType, (object) name), ex);
 			}
 		}
 	}

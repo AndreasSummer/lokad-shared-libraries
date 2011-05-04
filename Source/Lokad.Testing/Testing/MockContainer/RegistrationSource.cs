@@ -8,6 +8,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using Autofac;
 using Autofac.Core;
 using Autofac.Core.Activators.Delegate;
@@ -44,7 +45,8 @@ namespace Lokad.Testing
 					}
 					catch (Exception ex)
 					{
-						throw Errors.Resolution(typedService.ServiceType, ex);
+					    Type valueType = typedService.ServiceType;
+					    throw new ResolutionException(string.Format(CultureInfo.InvariantCulture, "Error while resolving {0}", valueType), ex);
 					}
 				}),
 				new RootScopeLifetime(),
