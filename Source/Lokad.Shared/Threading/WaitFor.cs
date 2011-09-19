@@ -114,6 +114,38 @@ namespace Lokad.Threading
 			return new WaitFor<TResult>(timeout).Run(function);
 		}
 	}
+
+    /// <summary>
+    /// Helper class for invoking tasks with timeout. Overhead is 0,005 ms.
+    /// </summary>
+    public static class WaitFor
+    {
+        /// <summary>
+        /// Executes the specified action within the current thread, aborting it
+        /// if it does not complete within the specified timeout interval.
+        /// </summary>
+        /// <param name="timeout">The timeout.</param>
+        /// <param name="action">The action.</param>
+        /// <returns>result of the function</returns>
+        /// <remarks>
+        /// The performance trick is that we do not interrupt the current
+        /// running thread. Instead, we just create a watcher that will sleep
+        /// until the originating thread terminates or until the timeout is
+        /// elapsed.
+        /// </remarks>
+        /// <exception cref="ArgumentNullException">if action is null</exception>
+        /// <exception cref="TimeoutException">if the action does not finish in time </exception>
+        public static void Run(TimeSpan timeout, Action action)
+        {
+            Func<object> function = () =>
+            {
+                action();
+                return default(object);
+            };
+
+            WaitFor<object>.Run(timeout, function);
+        }
+    }
 }
 
 #endif

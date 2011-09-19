@@ -49,6 +49,20 @@ namespace Lokad.Threading
 			new WaitFor<int>(1.Minutes()).Run(request);
 		}
 
+        [Test]
+        public void Proper_Action_Request_Invokes_Action()
+        {
+            bool wasCalled = false;
+            Action request = () =>
+                {
+                    wasCalled = true;
+                    Thread.Sleep(1);
+                };
+
+            WaitFor.Run(1.Minutes(), request);
+            Assert.IsTrue(wasCalled);
+        }
+
 		[Test]
 		public void Proper_Request_Returns_Value()
 		{
