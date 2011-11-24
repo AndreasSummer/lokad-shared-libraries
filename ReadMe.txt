@@ -1,3 +1,8 @@
+
+IMPORTANT: The project has been discontinued!
+Feel free to copy code but avoid taking binary dependencies.
+
+
 ﻿New BSD License
 ===============
 
